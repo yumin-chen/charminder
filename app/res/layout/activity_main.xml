@@ -40,7 +40,7 @@
 <View
      android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="12dp"
+            android:layout_height="16dp"
             android:layout_above="@+id/running_layout"
             android:background="#a8d4f2"
              />
@@ -49,22 +49,22 @@
     <RelativeLayout
         android:id="@+id/running_layout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="56dp"
         android:layout_alignParentLeft="true"
         android:layout_above="@+id/reminderlist_layout"
         android:background="#e4f2fe" >
 
         <ImageView
             android:id="@+id/icon_floatingwindow"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="false"
             android:layout_centerInParent="false"
             android:layout_centerVertical="true"
             android:contentDescription="@string/floatingwindow"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:src="@drawable/floatingwindow" />
 
         <TextView
@@ -77,20 +77,20 @@
             android:layout_toRightOf="@+id/icon_floatingwindow"
             android:gravity="center_vertical"
             android:text="@string/floatingwindow"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:color="#304e62" />
 
         <ImageView
             android:id="@+id/floatingwindow_tick"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="86dp"
+            android:layout_height="32dp"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="false"
             android:layout_centerInParent="false"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="12dp"
             android:contentDescription="@string/floatingwindow"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="12dp"
             android:src="@drawable/tick_0" />
 
         <View
@@ -104,21 +104,21 @@
    <RelativeLayout
         android:id="@+id/reminderlist_layout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="56dp"
         android:layout_alignParentLeft="true"
         android:layout_above="@+id/settings_layout"
         android:background="#e4f2fe" >
 
         <ImageView
             android:id="@+id/icon_reminder_list"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="false"
             android:layout_centerInParent="false"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:contentDescription= "@string/reminder_list"
             android:src="@drawable/reminderlist" />
 
@@ -132,7 +132,7 @@
             android:layout_toRightOf="@+id/icon_reminder_list"
             android:gravity="center_vertical"
             android:text="@string/reminder_list"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:color="#304e62" />
 
 
@@ -147,21 +147,21 @@
     <RelativeLayout
         android:id="@+id/settings_layout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="56dp"
         android:layout_alignParentLeft="true"
         android:layout_above="@+id/footer"
         android:background="#e4f2fe" >
 
         <ImageView
             android:id="@+id/icon_settings"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="false"
             android:layout_centerInParent="false"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:contentDescription="@string/settings"
             android:src="@drawable/settings" />
 
@@ -175,7 +175,7 @@
             android:layout_toRightOf="@+id/icon_settings"
             android:gravity="center_vertical"
             android:text="@string/settings"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:color="#304e62" />
 
 
@@ -189,28 +189,29 @@
     <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:layout_alignParentLeft="true"
 		android:layout_alignParentBottom="true"
+		android:layout_marginBottom="1dp"
         android:background="#a8d4f2" >
             <ImageView
             android:id="@+id/item_rate"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="false"
             android:layout_centerInParent="false"
             android:layout_centerVertical="true"
             android:layout_marginLeft= "4dp"
             android:contentDescription="@string/rate"
-            android:layout_marginRight= "12dp"
+            android:layout_marginRight= "16dp"
             android:src="@drawable/rate"
              />
                 
             <ImageView
             android:id="@+id/item_feedback"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
             android:layout_toLeftOf="@+id/item_rate"
             android:layout_centerHorizontal="false"
             android:layout_centerInParent="false"

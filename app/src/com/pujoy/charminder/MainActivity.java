@@ -3,6 +3,8 @@ package com.pujoy.charminder;
 import java.io.Console;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -23,17 +25,17 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	Point pScreenSize = new Point();
-	float fScaleY;
-	float fScaleX;
-	float fScale;
-	float fCircleScale;
-	boolean bCircleVisible = false;
-	boolean bBubbleVisible = false;
-	boolean bFloatingWindowRunning = false;
-	ImageView ivFloating;
-	ImageView ivCircle;
-	ImageView ivBubble;
-	WindowManager wm; 
+	static float fScaleY;
+	static float fScaleX;
+	static float fScale;
+	static float fCircleScale;
+	static boolean bCircleVisible;
+	static boolean bBubbleVisible;
+	static boolean bFloatingWindowRunning;
+	static ImageView ivFloating;
+	static ImageView ivCircle;
+	static ImageView ivBubble;
+	static WindowManager wm; 
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +91,7 @@ public class MainActivity extends Activity {
     private void CreateFloatingWindow(){
     	ivFloating = new ImageView(this);
     	ivCircle = new ImageView(this);
-        ivCircle.setImageResource(R.drawable.circle);
+        ivCircle.setImageResource(R.drawable.circle_ui);
         final WindowManager.LayoutParams wmParamsC = new WindowManager.LayoutParams();
         wmParamsC.type = 2002;   
         wmParamsC.format = 1; 
@@ -175,13 +177,69 @@ public class MainActivity extends Activity {
 			@Override
     	    public boolean onTouch(View view, MotionEvent motionEvent) {
 				if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-					// If Mouse Is Inside The Close Area
+					// If Mouse Is Inside The Closing Area
 					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
-							796 * fCircleScale, 46 * fCircleScale,
-							96 * fCircleScale, 96 * fCircleScale)){
+							780 * fCircleScale, 30 * fCircleScale,
+							128 * fCircleScale, 128 * fCircleScale)){
 						wm.removeView(ivCircle); 
 						bCircleVisible = false;
 					}
+					// If Mouse Is Inside The Center Area
+					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
+							352 * fCircleScale, 352 * fCircleScale,
+							256 * fCircleScale, 256 * fCircleScale)){
+						GoToActivity("MainActivity");
+						return true;
+						
+					}
+					// If Mouse Is Inside The First Icon
+					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
+							168 * fCircleScale, 92 * fCircleScale,
+							256 * fCircleScale, 256 * fCircleScale)){
+						GoToActivity("Timer1");
+						return true;
+					}
+					
+					// If Mouse Is Inside The Second Icon
+					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
+							470 * fCircleScale, 64 * fCircleScale,
+							256 * fCircleScale, 256 * fCircleScale)){
+						GoToActivity("Timer2");
+						return true;
+					}
+					
+					// If Mouse Is Inside The Third Icon
+					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
+							674 * fCircleScale, 320 * fCircleScale,
+							256 * fCircleScale, 256 * fCircleScale)){
+						GoToActivity("Timer3");
+						return true;
+					}
+					
+					// If Mouse Is Inside The Forth Icon
+					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
+							546 * fCircleScale, 622 * fCircleScale,
+							256 * fCircleScale, 256 * fCircleScale)){
+						GoToActivity("Timer4");
+						return true;
+					}
+					
+					// If Mouse Is Inside The Fifth Icon
+					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
+							222 * fCircleScale, 634 * fCircleScale,
+							256 * fCircleScale, 256 * fCircleScale)){
+						GoToActivity("Timer5");
+						return true;
+					}
+					
+					// If Mouse Is Inside The Sixth Icon
+					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
+							18 * fCircleScale, 378 * fCircleScale,
+							256 * fCircleScale, 256 * fCircleScale)){
+						GoToActivity("Timer6");
+						return true;
+					}
+					
 					return true;
 				}
 		        return false;
@@ -212,4 +270,17 @@ public class MainActivity extends Activity {
     			&& (PointY >= RectY) && (PointY < RectY + RectHeight) ;
 
     }
+    
+    public void GoToActivity(String ActivityName){
+    	Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setComponent(new ComponentName("com.pujoy.charminder","com.pujoy.charminder."+ActivityName));
+		intent.setPackage("com.pujoy.charminder");
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+	}
+
+
+
 }
+    
+

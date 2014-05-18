@@ -7,4 +7,10 @@
 <string name="settings">设置</string>
 <string name="rate">评价</string>
 <string name="feedback">反馈</string>
+<string name="title_timer1">计时提醒</string>
+<string name="title_timer2">定时提醒</string>
+<string name="title_timer3">整点提醒</string>
+<string name="title_timer4">定点提醒</string>
+<string name="title_timer5">日程提醒</string>
+<string name="title_timer6">记事提醒</string>
 </resources>
