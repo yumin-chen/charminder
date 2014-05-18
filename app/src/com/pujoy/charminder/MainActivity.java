@@ -4,6 +4,7 @@ import java.io.Console;
 
 import android.app.Activity;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.Gravity;
@@ -27,9 +28,11 @@ public class MainActivity extends Activity {
 	float fScale;
 	float fCircleScale;
 	boolean bCircleVisible = false;
+	boolean bBubbleVisible = false;
 	boolean bFloatingWindowRunning = false;
 	ImageView ivFloating;
 	ImageView ivCircle;
+	ImageView ivBubble;
 	WindowManager wm; 
 	
     @Override
@@ -44,9 +47,9 @@ public class MainActivity extends Activity {
         
         wm =(WindowManager)getApplicationContext().getSystemService("window");
         
-        final ImageView ivHeader = (ImageView)findViewById(R.id.floatingwindow_tick);
-        ivHeader.setImageResource(bFloatingWindowRunning? R.drawable.tick_1: R.drawable.tick_0);
-        ivHeader.setOnClickListener(new View.OnClickListener() {
+        final ImageView ivTick = (ImageView)findViewById(R.id.floatingwindow_tick);
+        ivTick.setImageResource(bFloatingWindowRunning? R.drawable.tick_1: R.drawable.tick_0);
+        ivTick.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -61,13 +64,19 @@ public class MainActivity extends Activity {
 						}
 						
 					}
+					if(ivBubble != null){
+						if (bBubbleVisible){
+							wm.removeView(ivBubble); 
+							bBubbleVisible = false;
+						}
+					}
 					
-					ivHeader.setImageResource(R.drawable.tick_0);
+					ivTick.setImageResource(R.drawable.tick_0);
 					bFloatingWindowRunning = false;
 				}
 				else{
 					CreateFloatingWindow();
-					ivHeader.setImageResource(R.drawable.tick_1);
+					ivTick.setImageResource(R.drawable.tick_1);
 					bFloatingWindowRunning = true;
 				}
 
@@ -93,6 +102,9 @@ public class MainActivity extends Activity {
         wmParamsC.y = (pScreenSize.y - wmParamsC.height)/2;
         		
         fCircleScale = wmParamsC.width/960f;
+        
+        //Get Header Y Position
+        View vHeader = (View)findViewById(R.id.header);
 
         final WindowManager.LayoutParams wmParamsI = new WindowManager.LayoutParams();
         wmParamsI.type = 2002;   
@@ -102,7 +114,20 @@ public class MainActivity extends Activity {
         wmParamsI.height = (int)(128 * fScale);  
         wmParamsI.gravity = Gravity.LEFT | Gravity.TOP;
         wmParamsI.x = (int)(pScreenSize.x - 128 * fScale);
-        wmParamsI.y = (int)(pScreenSize.y - 128 * fScale);
+        wmParamsI.y = (int)(vHeader.getY() - 128 * fScale);
+        
+        
+        final WindowManager.LayoutParams wmParamsB = new WindowManager.LayoutParams();
+        wmParamsB.type = 2002;   
+        wmParamsB.format = 1; 
+        wmParamsB.flags = 40;  
+        wmParamsB.width = (int)(640 * fScale);
+        wmParamsB.height = (int)(340 * fScale);  
+        wmParamsB.gravity = Gravity.LEFT | Gravity.TOP;
+        wmParamsB.x = wmParamsI.x - wmParamsB.width;
+        wmParamsB.y = wmParamsI.y - wmParamsB.height;
+        
+        
         ivFloating.setImageResource(R.drawable.floating_icon);
         ivFloating.setOnTouchListener(new View.OnTouchListener() {
 				@Override
@@ -111,6 +136,11 @@ public class MainActivity extends Activity {
 				        wmParamsI.x = (int)(motionEvent.getRawX() - wmParamsI.width/2);
 				        wmParamsI.y = (int)(motionEvent.getRawY() - wmParamsI.height/2);
 						wm.updateViewLayout(ivFloating, wmParamsI);	
+						if(bBubbleVisible){
+							wmParamsB.x = wmParamsI.x - wmParamsB.width;
+					        wmParamsB.y = wmParamsI.y - wmParamsB.height;
+					        wm.updateViewLayout(ivBubble, wmParamsB);	
+						}
 						return true;
 					}
     		        return false;
@@ -120,6 +150,13 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				if(ivBubble != null){
+					if (bBubbleVisible){
+						wm.removeView(ivBubble); 
+						bBubbleVisible = false;
+					}
+				}
+				
 				if(bCircleVisible){
 					wm.removeView(ivCircle); 
 					bCircleVisible = false;
@@ -151,6 +188,22 @@ public class MainActivity extends Activity {
     	    }
     });
         
+     ivBubble = new ImageView(this);
+     ivBubble.setImageResource(R.drawable.bubble);
+     ivBubble.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(bBubbleVisible){
+					wm.removeView(ivBubble); 
+					bBubbleVisible = false;
+				}
+
+			}
+		});
+     
+     bBubbleVisible = true;
+     wm.addView(ivBubble, wmParamsB); 
     }
     
     public boolean IsPointInsideRect(float PointX, float PointY, 
