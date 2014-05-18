@@ -2,12 +2,223 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main_page"
     tools:context="${packageName}.${activityClass}" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+<RelativeLayout
+    android:id="@+id/head_p"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/header"
+    android:layout_alignParentTop="true"
+    android:layout_marginBottom="1dp"
+    android:background="#304e62" >
+    
+    <ImageView
+       		android:id="@+id/head_circle"
+       		android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/circle"
+       		android:scaleX="1.2"
+       		android:scaleY="1.2"
+            android:alpha="0.1"
+             />
+    
+    <ImageView
+       		android:id="@+id/head_bg"
+       		android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/wallpaper"
+            android:alpha="0.2"
+             />
+    
+    
+</RelativeLayout>
+
+<View
+     android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_above="@+id/running_layout"
+            android:background="#a8d4f2"
+             />
+ 
+
+    <RelativeLayout
+        android:id="@+id/running_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/reminderlist_layout"
+        android:background="#e4f2fe" >
+
+        <ImageView
+            android:id="@+id/icon_floatingwindow"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/floatingwindow"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/floatingwindow" />
+
+        <TextView
+            android:id="@+id/title_floatingwindow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon_floatingwindow"
+            android:gravity="center_vertical"
+            android:text="@string/floatingwindow"
+            android:textSize="18sp"
+            android:color="#304e62" />
+
+        <ImageView
+            android:id="@+id/floatingwindow_tick"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:contentDescription="@string/floatingwindow"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/tick_0" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="1dp"
+            android:background="#304e62" />
+    </RelativeLayout>
+
+   <RelativeLayout
+        android:id="@+id/reminderlist_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/settings_layout"
+        android:background="#e4f2fe" >
+
+        <ImageView
+            android:id="@+id/icon_reminder_list"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:contentDescription= "@string/reminder_list"
+            android:src="@drawable/reminderlist" />
+
+        <TextView
+            android:id="@+id/title_reminder_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon_reminder_list"
+            android:gravity="center_vertical"
+            android:text="@string/reminder_list"
+            android:textSize="18sp"
+            android:color="#304e62" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="1dp"
+            android:background="#304e62" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/settings_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/footer"
+        android:background="#e4f2fe" >
+
+        <ImageView
+            android:id="@+id/icon_settings"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:contentDescription="@string/settings"
+            android:src="@drawable/settings" />
+
+        <TextView
+            android:id="@+id/title_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon_settings"
+            android:gravity="center_vertical"
+            android:text="@string/settings"
+            android:textSize="18sp"
+            android:color="#304e62" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#304e62" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true"
+        android:background="#a8d4f2" >
+            <ImageView
+            android:id="@+id/item_rate"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft= "4dp"
+            android:contentDescription="@string/rate"
+            android:layout_marginRight= "12dp"
+            android:src="@drawable/rate"
+             />
+                
+            <ImageView
+            android:id="@+id/item_feedback"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_toLeftOf="@+id/item_rate"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/feedback"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/feedback" />
+        </RelativeLayout>
 
 </RelativeLayout>

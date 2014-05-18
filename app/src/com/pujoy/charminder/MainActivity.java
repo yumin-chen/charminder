@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -26,6 +27,11 @@ public class MainActivity extends Activity {
 	float fScale;
 	float fCircleScale;
 	boolean bCircleVisible = false;
+	boolean bFloatingWindowRunning = false;
+	ImageView ivFloating;
+	ImageView ivCircle;
+	WindowManager wm; 
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +41,45 @@ public class MainActivity extends Activity {
         fScaleY = pScreenSize.y > 960? 1: pScreenSize.y / 960;
         fScaleX = pScreenSize.x > 680? 1: pScreenSize.x / 680;
         fScale = fScaleX > fScaleY? fScaleY: fScaleX;
-        CreateFloatingWindow();
+        
+        wm =(WindowManager)getApplicationContext().getSystemService("window");
+        
+        final ImageView ivHeader = (ImageView)findViewById(R.id.floatingwindow_tick);
+        ivHeader.setImageResource(bFloatingWindowRunning? R.drawable.tick_1: R.drawable.tick_0);
+        ivHeader.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(bFloatingWindowRunning){
+					if(ivFloating != null){
+						wm.removeView(ivFloating); 
+					}
+					if(ivCircle != null){
+						if (bCircleVisible){
+							wm.removeView(ivCircle); 
+							bCircleVisible = false;
+						}
+						
+					}
+					
+					ivHeader.setImageResource(R.drawable.tick_0);
+					bFloatingWindowRunning = false;
+				}
+				else{
+					CreateFloatingWindow();
+					ivHeader.setImageResource(R.drawable.tick_1);
+					bFloatingWindowRunning = true;
+				}
+
+			}
+		});
+        
+        
     }
 
     private void CreateFloatingWindow(){
-        final ImageView ivFloating = new ImageView(this);
-        final ImageView ivCircle = new ImageView(this);
+    	ivFloating = new ImageView(this);
+    	ivCircle = new ImageView(this);
         ivCircle.setImageResource(R.drawable.circle);
         final WindowManager.LayoutParams wmParamsC = new WindowManager.LayoutParams();
         wmParamsC.type = 2002;   
@@ -53,10 +92,8 @@ public class MainActivity extends Activity {
         wmParamsC.x = (pScreenSize.x - wmParamsC.width)/2;
         wmParamsC.y = (pScreenSize.y - wmParamsC.height)/2;
         		
-        		
         fCircleScale = wmParamsC.width/960f;
-        
-        final WindowManager wm=(WindowManager)getApplicationContext().getSystemService("window"); 
+
         final WindowManager.LayoutParams wmParamsI = new WindowManager.LayoutParams();
         wmParamsI.type = 2002;   
         wmParamsI.format = 1; 

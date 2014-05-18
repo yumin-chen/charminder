@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Charminder</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="app_name">风吹吹醒</string>
+    <string name="floatingwindow">启用风吹吹醒</string>
+    <string name="reminder_list">提醒清单</string>
+<string name="settings">设置</string>
+<string name="rate">评价</string>
+<string name="feedback">反馈</string>
 </resources>
