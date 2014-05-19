@@ -77,9 +77,25 @@ public class MainActivity extends Activity {
         mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
         if(wm == null) wm =(WindowManager)getApplicationContext().getSystemService("window");
         
+		View.OnTouchListener mainKeyTouchListener = new View.OnTouchListener() {
+			@Override
+    	    public boolean onTouch(View v, MotionEvent motionEvent) {
+				switch (motionEvent.getAction())
+				{
+				case MotionEvent.ACTION_DOWN:
+					v.setBackgroundColor(android.graphics.Color.rgb(128, 178, 212));
+					break;
+				case MotionEvent.ACTION_UP:
+					v.setBackgroundColor(android.graphics.Color.rgb(228, 242, 254));
+					break;
+				}
+				return false;
+    	    }
+		};
+        
         final ImageView ivTick = (ImageView)findViewById(R.id.floatingwindow_tick);
         ivTick.setImageResource(bFloatingWindowRunning? R.drawable.tick_1: R.drawable.tick_0);
-        ivTick.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener startRunningListener = new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -106,7 +122,29 @@ public class MainActivity extends Activity {
 				}
 
 			}
-		});
+		};
+        ivTick.setOnClickListener(startRunningListener);
+        RelativeLayout running_layout = (RelativeLayout)findViewById(R.id.running_layout);
+        running_layout.setOnTouchListener(mainKeyTouchListener);
+        running_layout.setOnClickListener(startRunningListener);
+        RelativeLayout reminderlist_layout = (RelativeLayout)findViewById(R.id.reminderlist_layout);
+        reminderlist_layout.setOnTouchListener(mainKeyTouchListener);
+        reminderlist_layout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			GoToActivity("RemindersList");	
+			}
+        });
+        RelativeLayout settings_layout = (RelativeLayout)findViewById(R.id.settings_layout);
+        settings_layout.setOnTouchListener(mainKeyTouchListener);
+        settings_layout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			GoToActivity("Settings");	
+			}
+        });
         
         if(wmParamsC == null) wmParamsC = new WindowManager.LayoutParams();
         if(wmParamsI == null) wmParamsI = new WindowManager.LayoutParams();

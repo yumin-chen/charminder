@@ -29,7 +29,10 @@ public class Timer3 extends Activity {
 				TextView tvKey = (TextView)v;
 				if(TimeDigits.size()>=2)
 					TimeDigits.clear();
-				TimeDigits.add(Integer.parseInt(tvKey.getText().toString()));
+				int i = Integer.parseInt(tvKey.getText().toString());
+				if(TimeDigits.size() == 0 && i>5)
+					TimeDigits.add(0);
+				TimeDigits.add(i);
 				UpdateTimerDisplay();
 			}
 		};

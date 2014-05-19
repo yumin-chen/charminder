@@ -38,8 +38,11 @@ public class Timer2 extends Activity {
 						TimeDigits.add(intToBeAdded);
 						break;
 					case 2:
-						if(intToBeAdded<3)
-							TimeDigits.add(intToBeAdded);
+						if(intToBeAdded == 0 && TimeDigits.get(1) == 0)
+							break;
+						if(intToBeAdded >=3 && TimeDigits.get(1) == 1)
+							break;
+						TimeDigits.add(intToBeAdded);
 						break;
 					case 3:
 						if(intToBeAdded>3)
@@ -47,6 +50,8 @@ public class Timer2 extends Activity {
 						TimeDigits.add(intToBeAdded);
 						break;
 					case 4:
+						if(intToBeAdded == 0 && TimeDigits.get(3) == 0)
+							break;
 						if(!((TimeDigits.get(3) >=3) && intToBeAdded>1))
 							TimeDigits.add(intToBeAdded);
 						break;

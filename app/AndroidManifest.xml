@@ -78,6 +78,24 @@
             android:value="com.pujoy.charminder.MainActivity" />
     </activity>
     
+             <activity
+        android:name="com.pujoy.charminder.RemindersList"
+        android:label="@string/reminder_list"
+        android:parentActivityName="com.pujoy.charminder.MainActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.pujoy.charminder.MainActivity" />
+    </activity>
+    
+    <activity
+        android:name="com.pujoy.charminder.Settings"
+        android:label="@string/settings"
+        android:parentActivityName="com.pujoy.charminder.MainActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.pujoy.charminder.MainActivity" />
+    </activity>
+    
     </application>
 
 </manifest>

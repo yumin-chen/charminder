@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Charminder</string>
-    <string name="floatingwindow">Show Charminder floating icon</string>
-    <string name="reminder_list">Reminder Lists</string>
-<string name="settings">Settings</string>
-<string name="rate">Rate</string>
-<string name="feedback">Feedback</string>
-<string name="title_timer1">Countdown Reminder</string>
-<string name="title_timer2">Time-Specified Reminder</string>
-<string name="title_timer3">Hourly Reminder</string>
-<string name="title_timer4">reserved</string>
-<string name="title_timer5">Event Reminder</string>
-<string name="title_timer6">To-dos Reminder</string>
+    <string name="app_name">风吹吹醒</string>
+    <string name="floatingwindow">启用风吹吹醒</string>
+    <string name="reminder_list">提醒清单</string>
+<string name="settings">设置</string>
+<string name="rate">评价</string>
+<string name="feedback">反馈</string>
+<string name="title_timer1">计时提醒</string>
+<string name="title_timer2">定时提醒</string>
+<string name="title_timer3">整点提醒</string>
+<string name="title_timer4">定点提醒</string>
+<string name="title_timer5">日程提醒</string>
+<string name="title_timer6">记事提醒</string>
 
 
 <string name="single0">0</string>
 <string name="unknown_digit">_</string>
-<string name="year">Year</string>
-<string name="month">Month</string>
-<string name="day">Day</string>
-<string name="hour">Hour</string>
-<string name="minute">Minute</string>
-<string name="second">Second</string>
+<string name="year">年</string>
+<string name="month">月</string>
+<string name="day">日</string>
+<string name="hour">时</string>
+<string name="minute">分</string>
+<string name="second">秒</string>
 <string name="everyhour">每小时</string>
 <string name="reminderslist_prompt">您的提醒清单列表：</string>
 <string name="timer1_prompt">您将在过完以下时间后收到提醒：</string>

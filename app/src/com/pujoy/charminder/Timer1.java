@@ -30,9 +30,24 @@ public class Timer1 extends Activity {
 			@Override
 			public void onClick(View v) {
 				TextView tvKey = (TextView)v;
+				int intToBeAdded = Integer.parseInt(tvKey.getText().toString());
 				if(TimeDigits.size()< 5)
 				{
-				TimeDigits.add(Integer.parseInt(tvKey.getText().toString()));
+					switch (TimeDigits.size()){
+					case 1:
+						if(intToBeAdded>5)
+							TimeDigits.add(0);
+						TimeDigits.add(intToBeAdded);
+						break;
+					case 3:
+						if(intToBeAdded>5)
+							TimeDigits.add(0);
+						TimeDigits.add(intToBeAdded);
+						break;
+					default:
+						TimeDigits.add(intToBeAdded);
+						break;
+					}
 				UpdateTimerDisplay();
 				}
 				
