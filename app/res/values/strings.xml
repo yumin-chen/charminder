@@ -23,8 +23,10 @@
 <string name="hour">时</string>
 <string name="minute">分</string>
 <string name="second">秒</string>
+<string name="everyhour">每小时</string>
 <string name="timer1_prompt">您将在过完以下时间后收到提醒：</string>
 <string name="timer2_prompt">您将在该时刻收到提醒：</string>
+<string name="timer3_prompt">您将在每个小时的以下时刻收到提醒：</string>
 <string name="timer_start">添加提醒</string>
 
 
@@ -38,4 +40,10 @@
 <string name="key8">8</string>
 <string name="key9">9</string>
 <string name="key0">0</string>
+
+<string name="bubble_on_created">点我试试吧~</string>
+<string name="bubble_info_needed">请先输入好要我提醒的信息吧~</string>
+<string name="bubble_add_reminder">好的，我会在</string>
+<string name="bubble_timer">之后提醒你~</string>
+
 </resources>

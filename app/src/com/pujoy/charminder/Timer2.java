@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class Timer2 extends Activity {
 	ArrayList<Integer> TimeDigits = new ArrayList<Integer>();
-	static TextView[] TimerDisplay = new TextView[10];
+	static TextView[] TimerDisplay = new TextView[9];
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +24,7 @@ public class Timer2 extends Activity {
 			@Override
 			public void onClick(View v) {
 				TextView tvKey = (TextView)v;
-				if(TimeDigits.size()< 10)
+				if(TimeDigits.size()< 9)
 				{
 				TimeDigits.add(Integer.parseInt(tvKey.getText().toString()));
 				UpdateTimerDisplay();
@@ -48,11 +48,11 @@ public class Timer2 extends Activity {
 				return false;
     	    }
 		};
-		TimerDisplay[9] = (TextView)findViewById(R.id.timer2_display_second2);
-		TimerDisplay[8] = (TextView)findViewById(R.id.timer2_display_second1);
-		TimerDisplay[7] = (TextView)findViewById(R.id.timer2_display_minute2);
-		TimerDisplay[6] = (TextView)findViewById(R.id.timer2_display_minute1);
-		TimerDisplay[5] = (TextView)findViewById(R.id.timer2_display_hour);
+
+		TimerDisplay[8] = (TextView)findViewById(R.id.timer2_display_minute2);
+		TimerDisplay[7] = (TextView)findViewById(R.id.timer2_display_minute1);
+		TimerDisplay[6] = (TextView)findViewById(R.id.timer2_display_hour2);
+		TimerDisplay[5] = (TextView)findViewById(R.id.timer2_display_hour1);
 		TimerDisplay[4] = (TextView)findViewById(R.id.timer2_display_day2);
 		TimerDisplay[3] = (TextView)findViewById(R.id.timer2_display_day1);
 		TimerDisplay[2] = (TextView)findViewById(R.id.timer2_display_month2);
@@ -146,7 +146,7 @@ public class Timer2 extends Activity {
 	}
 	
 	private void UpdateTimerDisplay(){
-		for(int i=0; i<10; i++){
+		for(int i=0; i<9; i++){
             if(i>=TimeDigits.size())
             {
             	TimerDisplay[i].setText(R.string.unknown_digit);

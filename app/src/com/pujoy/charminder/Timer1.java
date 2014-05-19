@@ -135,11 +135,31 @@ public class Timer1 extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				
+				if (TimeDigits.size()<5)
+				{
+					MainActivity.PushFloatingBubble(getString(R.string.bubble_info_needed));
+				}
+				else{
+					MainActivity.PushFloatingBubble(getString(R.string.bubble_add_reminder) +
+							FormatTimeText() + getString(R.string.bubble_timer));
+				}
 			}
 		});
 	}
-	
+	private String FormatTimeText(){
+		String ret = "";
+		if(TimeDigits.get(0)!=0){
+			ret += TimeDigits.get(0).toString() + getString(R.string.hour);
+		}
+		if(!(TimeDigits.get(1)==0 && TimeDigits.get(2)==0)){
+			ret += TimeDigits.get(1).toString() + TimeDigits.get(2).toString() + getString(R.string.minute);
+		}
+		if(!(TimeDigits.get(3)==0 && TimeDigits.get(4)==0) || ret == ""){
+			ret += TimeDigits.get(3).toString() + TimeDigits.get(4).toString() + getString(R.string.second);
+		}
+		return ret;
+		
+	}
 	private void UpdateTimerDisplay(){
 		for(int i=0; i<5; i++){
             if(i>=TimeDigits.size())
