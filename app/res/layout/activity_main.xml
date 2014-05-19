@@ -78,7 +78,7 @@
             android:gravity="center_vertical"
             android:text="@string/floatingwindow"
             android:textSize="20sp"
-            android:color="#304e62" />
+            android:textColor="#304e62" />
 
         <ImageView
             android:id="@+id/floatingwindow_tick"
@@ -133,7 +133,7 @@
             android:gravity="center_vertical"
             android:text="@string/reminder_list"
             android:textSize="20sp"
-            android:color="#304e62" />
+            android:textColor="#304e62" />
 
 
         <View
@@ -176,7 +176,7 @@
             android:gravity="center_vertical"
             android:text="@string/settings"
             android:textSize="20sp"
-            android:color="#304e62" />
+            android:textColor="#304e62" />
 
 
         <View
