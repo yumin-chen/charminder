@@ -1,6 +1,10 @@
 package com.pujoy.charminder;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -24,9 +28,63 @@ public class Timer2 extends Activity {
 			@Override
 			public void onClick(View v) {
 				TextView tvKey = (TextView)v;
+				int intToBeAdded = Integer.parseInt(tvKey.getText().toString());
 				if(TimeDigits.size()< 9)
 				{
-				TimeDigits.add(Integer.parseInt(tvKey.getText().toString()));
+					switch (TimeDigits.size()){
+					case 1:
+						if(intToBeAdded>1)
+							TimeDigits.add(0);
+						TimeDigits.add(intToBeAdded);
+						break;
+					case 2:
+						if(intToBeAdded<3)
+							TimeDigits.add(intToBeAdded);
+						break;
+					case 3:
+						if(intToBeAdded>3)
+							TimeDigits.add(0);
+						TimeDigits.add(intToBeAdded);
+						break;
+					case 4:
+						if(!((TimeDigits.get(3) >=3) && intToBeAdded>1))
+							TimeDigits.add(intToBeAdded);
+						break;
+					case 5:
+						if(intToBeAdded>2){
+							TimeDigits.add(0);
+							TimeDigits.add(intToBeAdded);
+							TextView amOrPm = (TextView)findViewById(R.id.timer2_amorpm);
+							amOrPm.setText(R.string.am);
+						}else{
+							TimeDigits.add(intToBeAdded);
+						}
+
+						break;
+					case 6:
+						if(TimeDigits.get(5) >=2 && intToBeAdded == 4){
+							TimeDigits.set(5, 0);
+							TimeDigits.add(0);
+						}else if(!((TimeDigits.get(5) >=2) && intToBeAdded>3)){
+							TimeDigits.add(intToBeAdded);
+						}	
+						TextView amOrPm = (TextView)findViewById(R.id.timer2_amorpm);
+						if((TimeDigits.get(5) * 10 + intToBeAdded) < 12){
+							amOrPm.setText(R.string.am);
+						}else{
+							amOrPm.setText(R.string.pm);
+						}
+						
+						break;
+					case 7:
+						if(intToBeAdded>5)
+							TimeDigits.add(0);
+						TimeDigits.add(intToBeAdded);
+						break;
+					default:
+						TimeDigits.add(intToBeAdded);
+						break;
+					}
 				UpdateTimerDisplay();
 				}
 				
@@ -99,6 +157,10 @@ public class Timer2 extends Activity {
 				{
 				TimeDigits.remove(TimeDigits.size()-1);
 				UpdateTimerDisplay();
+				if (TimeDigits.size() == 6){
+					TextView amOrPm = (TextView)findViewById(R.id.timer2_amorpm);
+					amOrPm.setText("");
+				}
 				}
 			}
 		});
@@ -140,9 +202,56 @@ public class Timer2 extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				
+				if (TimeDigits.size()<9)
+				{
+					MainActivity.PushFloatingBubble(getString(R.string.bubble_info_needed));
+				}
+				else{
+					try {
+						Reminder newReminder = new Reminder(2);
+						String sTimeToRemind = "1"+ TimeDigits.get(0).toString() + ":" + 
+						TimeDigits.get(1).toString() + TimeDigits.get(2).toString() + ":" +
+						TimeDigits.get(3).toString() + TimeDigits.get(4).toString() + ":" +
+						TimeDigits.get(5).toString() + TimeDigits.get(6).toString() + ":" +
+						TimeDigits.get(7).toString() + TimeDigits.get(8).toString();
+						System.out.println(sTimeToRemind);
+						SimpleDateFormat df = new SimpleDateFormat("yy:MM:dd:HH:mm");
+						Date d = df.parse(sTimeToRemind);
+						newReminder.time_to_remind = Calendar.getInstance();
+						newReminder.time_to_remind.setTime(d);
+						newReminder.note = FormatTimeText();
+						MainActivity.AddReminder(newReminder);
+						MainActivity.PushFloatingBubble(getString(R.string.bubble_add_reminder) +
+								newReminder.note + getString(R.string.bubble_timer2));
+					} catch (ParseException e) {
+						e.printStackTrace();
+						MainActivity.PushFloatingBubble(getString(R.string.bubble_error));
+					} 
+					
+				}
 			}
 		});
+	}
+	
+	private String FormatTimeText(){
+		String ret = "";
+		if(TimeDigits.get(1)!=0){
+			ret += TimeDigits.get(1).toString();
+		}
+		ret += TimeDigits.get(2).toString() + getString(R.string.month);
+		if(TimeDigits.get(3)!=0){
+			ret += TimeDigits.get(3).toString();
+		}
+		ret += TimeDigits.get(4).toString() + getString(R.string.day);
+		if(TimeDigits.get(5)!=0){
+			ret += TimeDigits.get(5).toString();
+		}
+		ret += TimeDigits.get(6).toString() + getString(R.string.hour);
+		if(!(TimeDigits.get(7)==0 && TimeDigits.get(8)==0) || ret == ""){
+			ret += TimeDigits.get(7).toString() + TimeDigits.get(8).toString() + getString(R.string.minute);
+		}
+		return ret;
+		
 	}
 	
 	private void UpdateTimerDisplay(){

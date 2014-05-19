@@ -1,6 +1,12 @@
 package com.pujoy.charminder;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -140,8 +146,28 @@ public class Timer1 extends Activity {
 					MainActivity.PushFloatingBubble(getString(R.string.bubble_info_needed));
 				}
 				else{
-					MainActivity.PushFloatingBubble(getString(R.string.bubble_add_reminder) +
-							FormatTimeText() + getString(R.string.bubble_timer));
+					try {
+						Reminder newReminder = new Reminder(1);
+						String sTimeToRemind = TimeDigits.get(0).toString() + ":" + 
+						TimeDigits.get(1).toString() + TimeDigits.get(2).toString() + ":" +
+						TimeDigits.get(3).toString() + TimeDigits.get(4).toString();
+						SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+						Date d = df.parse(sTimeToRemind);
+						Calendar cal =Calendar.getInstance();
+						cal.setTime(d);
+						newReminder.time_to_remind = Calendar.getInstance();
+						newReminder.time_to_remind.add(Calendar.SECOND, cal.get(Calendar.SECOND));
+						newReminder.time_to_remind.add(Calendar.MINUTE, cal.get(Calendar.MINUTE));
+						newReminder.time_to_remind.add(Calendar.HOUR, cal.get(Calendar.HOUR));
+						newReminder.note = FormatTimeText();
+						MainActivity.AddReminder(newReminder);
+						MainActivity.PushFloatingBubble(getString(R.string.bubble_add_reminder) +
+						newReminder.note + getString(R.string.bubble_timer1));
+					} catch (ParseException e) {
+						e.printStackTrace();
+						MainActivity.PushFloatingBubble(getString(R.string.bubble_error));
+					} 
+					
 				}
 			}
 		});

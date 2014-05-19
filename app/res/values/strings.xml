@@ -30,6 +30,9 @@
 <string name="timer_start">添加提醒</string>
 
 
+<string name="am">早上(a.m.)</string>
+<string name="pm">下午(p.m.)</string>
+
 <string name="key1">1</string>
 <string name="key2">2</string>
 <string name="key3">3</string>
@@ -44,6 +47,10 @@
 <string name="bubble_on_created">点我试试吧~</string>
 <string name="bubble_info_needed">请先输入好要我提醒的信息吧~</string>
 <string name="bubble_add_reminder">好的，我会在</string>
-<string name="bubble_timer">之后提醒你~</string>
+<string name="bubble_timer1">之后提醒你~</string>
+<string name="bubble_timer2">准时提醒你~</string>
+<string name="bubble_timer3">每个小时的</string>
+<string name="bubble_error">我不知道怎么提醒你~</string>
+<string name="bubble_reminder1">已经到了!</string>
 
 </resources>

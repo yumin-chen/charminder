@@ -120,6 +120,17 @@
     android:layout_alignParentLeft="true"
     android:layout_below="@+id/timer2_display_date_layout"
     android:background="#e4f2fe" >
+  <TextView
+        android:id="@+id/timer2_amorpm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/timer2_display_hour1"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="26dp"
+        android:text=""
+        android:textSize="14sp"
+        android:textColor="#304e62" />
  <TextView
         android:id="@+id/timer2_display_hour1"
         android:layout_width="wrap_content"

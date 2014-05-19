@@ -1,6 +1,8 @@
 package com.pujoy.charminder;
 
 import java.io.Console;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -8,6 +10,8 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.Menu;
@@ -25,6 +29,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	Point pScreenSize = new Point();
+	public static ArrayList<Reminder> ReminderList = new ArrayList<Reminder>();
 	static float fScaleY;
 	static float fScaleX;
 	static float fScale;
@@ -42,6 +47,23 @@ public class MainActivity extends Activity {
 	static WindowManager.LayoutParams wmParamsB;
 	static WindowManager.LayoutParams wmParamsBt;
 	
+	private static final int REMINDING_PROCESS = 1;
+	
+	   private Handler mHandler = new Handler() {
+	        @Override
+			public void handleMessage(Message msg) {
+	            if (msg.what == REMINDING_PROCESS){
+        			for(int i=0; i<ReminderList.size(); i++){
+        				System.out.println(ReminderList.get(i).time_to_remind.compareTo(Calendar.getInstance()));
+        				if(ReminderList.get(i).validity && ReminderList.get(i).time_to_remind.compareTo(Calendar.getInstance()) <= 0){
+            				ReminderList.get(i).Notify(getApplicationContext().getResources());
+            				break;
+            			}
+            		}	
+	            	mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
+	            }
+	        }
+	 };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +74,7 @@ public class MainActivity extends Activity {
         fScaleX = pScreenSize.x > 680? 1: pScreenSize.x / 680;
         fScale = fScaleX > fScaleY? fScaleY: fScaleX;
         
+        mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
         if(wm == null) wm =(WindowManager)getApplicationContext().getSystemService("window");
         
         final ImageView ivTick = (ImageView)findViewById(R.id.floatingwindow_tick);
@@ -261,7 +284,6 @@ public class MainActivity extends Activity {
             tvBubble.setGravity(Gravity.CENTER);
         }
         
-        
     }
 
     private void CreateFloatingWindow(){
@@ -324,6 +346,7 @@ public class MainActivity extends Activity {
      tvBubble.setTextSize((18-BubbleText.length()/12)*fScale);
      tvBubble.setText(BubbleText);
      
+
      wm.addView(ivBubble, wmParamsB);
      wm.addView(tvBubble, wmParamsBt);
      
@@ -340,11 +363,15 @@ public class MainActivity extends Activity {
     	Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setComponent(new ComponentName("com.pujoy.charminder","com.pujoy.charminder."+ActivityName));
 		intent.setPackage("com.pujoy.charminder");
-		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 	}
 
-
+    public final static void AddReminder(Reminder reminderToAdd){
+    	ReminderList.add(reminderToAdd);
+    }
+    
+    
 
 }
     

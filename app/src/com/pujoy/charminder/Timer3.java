@@ -1,6 +1,10 @@
 package com.pujoy.charminder;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -23,12 +27,10 @@ public class Timer3 extends Activity {
 			@Override
 			public void onClick(View v) {
 				TextView tvKey = (TextView)v;
-				if(TimeDigits.size()< 2)
-				{
+				if(TimeDigits.size()>=2)
+					TimeDigits.clear();
 				TimeDigits.add(Integer.parseInt(tvKey.getText().toString()));
 				UpdateTimerDisplay();
-				}
-				
 			}
 		};
 		
@@ -133,7 +135,24 @@ public class Timer3 extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				
+				if (TimeDigits.size()<2)
+				{
+					MainActivity.PushFloatingBubble(getString(R.string.bubble_info_needed));
+				}
+				else{
+						Reminder newReminder = new Reminder(3);
+						newReminder.time_to_remind = Calendar.getInstance();
+						newReminder.time_to_remind.set(Calendar.MINUTE, TimeDigits.get(0)*10 + TimeDigits.get(1));
+						newReminder.time_to_remind.set(Calendar.SECOND, 0);
+						if(newReminder.time_to_remind.compareTo(Calendar.getInstance()) <=0) 
+							newReminder.time_to_remind.add(Calendar.HOUR, 1);
+						MainActivity.AddReminder(newReminder);
+						MainActivity.PushFloatingBubble(getString(R.string.bubble_add_reminder) +
+								getString(R.string.bubble_timer3) + TimeDigits.get(0)
+								+TimeDigits.get(1) + getString(R.string.minute) + getString(R.string.bubble_timer2));
+						
+					
+				}
 			}
 		});
         
