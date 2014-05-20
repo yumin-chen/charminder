@@ -12,6 +12,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.Menu;
@@ -69,19 +71,19 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Get Screen Resolution And Calculate Scale
-        getWindowManager().getDefaultDisplay().getSize(pScreenSize);
-        fScaleY = pScreenSize.y > 960? 1: pScreenSize.y / 960;
-        fScaleX = pScreenSize.x > 680? 1: pScreenSize.x / 680;
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        pScreenSize.x = metrics.widthPixels;
+        pScreenSize.y = metrics.heightPixels;
+        fScaleY = pScreenSize.y / 960f;
+        fScaleY = fScaleY > 1? 1: fScaleY == 0? 1: fScaleY;
+        fScaleX = pScreenSize.x / 680f;
+        fScaleX = fScaleX > 1? 1: fScaleX == 0? 1: fScaleX;
         fScale = fScaleX > fScaleY? fScaleY: fScaleX;
-        
         
         
         mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
         if(wm == null) wm =(WindowManager)getApplicationContext().getSystemService("window");
-        
-       //Change The Title Bar
-      //  getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_bg));
-     //   getActionBar().setTitle(Html.fromHtml("<font color=\"red\">" + getString(R.string.app_name) + "</font>"));
         
         
 		View.OnTouchListener mainKeyTouchListener = new View.OnTouchListener() {
@@ -336,31 +338,27 @@ public class MainActivity extends Activity {
         wmParamsC.type = 2002;   
         wmParamsC.format = 1; 
         wmParamsC.flags = 40;  
-        wmParamsC.x = 0;
-        wmParamsC.y = 0;
-        wmParamsC.width = 320;
-
-        wmParamsC.height = 320;
-        //wmParamsC.gravity = Gravity.LEFT | Gravity.TOP;
-        //wmParamsC.width = (int)((pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x) * fScale *0.8);
-        //wmParamsC.width = wmParamsC.width > 960? 960: wmParamsC.width;
-        //wmParamsC.height = wmParamsC.width;  
-        //wmParamsC.x = (pScreenSize.x - wmParamsC.width)/2;
-        //wmParamsC.y = (pScreenSize.y - wmParamsC.height)/2;
+        wmParamsC.gravity = Gravity.LEFT | Gravity.TOP;
+        wmParamsC.width = (int)((pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x) * 0.9);
+        wmParamsC.width = wmParamsC.width > 960? 960: wmParamsC.width;
+        wmParamsC.height = wmParamsC.width;  
+        wmParamsC.x = (pScreenSize.x - wmParamsC.width)/2;
+        wmParamsC.y = (pScreenSize.y - wmParamsC.height)/2;
+        
         		
         fCircleScale = wmParamsC.width/960f;
         
         //Get Header Y Position
-        View vHeader = (View)findViewById(R.id.header);
+        View vHeader = (View)findViewById(R.id.head_p);
 
         wmParamsI.type = 2002;   
         wmParamsI.format = 1; 
         wmParamsI.flags = 40;  
-        wmParamsI.width = (int)(128 * fScale);
-        wmParamsI.height = (int)(128 * fScale);  
+        wmParamsI.width = (int)(96 * fScale);
+        wmParamsI.height = (int)(96 * fScale);  
         wmParamsI.gravity = Gravity.LEFT | Gravity.TOP;
-        wmParamsI.x = (int)(pScreenSize.x - 128 * fScale);
-        wmParamsI.y = (int)(vHeader.getY() - 128 * fScale);      
+        wmParamsI.x = (int)(pScreenSize.x - wmParamsI.width);
+        wmParamsI.y = (int)(vHeader.getHeight() - wmParamsI.height);      
         wm.addView(ivFloating, wmParamsI); 
         
         
@@ -380,7 +378,9 @@ public class MainActivity extends Activity {
         wmParamsB.height = (int)(340 * fScale);  
         wmParamsB.gravity = Gravity.LEFT | Gravity.TOP;
         wmParamsB.x = wmParamsI.x - wmParamsB.width;
-        wmParamsB.y = wmParamsI.y - wmParamsB.height;   
+        wmParamsB.x = wmParamsB.x < 0? 0: wmParamsB.x;
+        wmParamsB.y = wmParamsI.y - wmParamsB.height;  
+        wmParamsB.y = wmParamsB.y < 0? 0: wmParamsB.y;
      
         wmParamsBt.type = 2002;   
         wmParamsBt.format = 1; 
@@ -393,7 +393,7 @@ public class MainActivity extends Activity {
         
         
      bBubbleVisible = true;
-     tvBubble.setTextSize((18-BubbleText.length()/12)*fScale);
+     tvBubble.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18-BubbleText.length()/12);
      tvBubble.setText(BubbleText);
      
 

@@ -135,8 +135,8 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
                 			FormatTime(MainActivity.reminderList.get(i).time_when_created));
                 	TextView tvContent = (TextView)findViewById(R.id.text_content);
                 	tvContent.setId(1320+i);
-                	tvContent.setText(getString(R.string.content)+ GetDescriptionHead(i) +
-                			MainActivity.reminderList.get(i).note+ GetDescriptionEnd(i));
+                	tvContent.setText(getString(R.string.content)+ GetDescriptionHead(MainActivity.reminderList.get(i).type) +
+                			MainActivity.reminderList.get(i).note+ GetDescriptionEnd(MainActivity.reminderList.get(i).type));
                 	itemsListExpanded.set(i,true);
         		}
         	}
@@ -217,12 +217,11 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
 	 } 
 	 
 	 private CharSequence GetDescriptionHead(int Index){
-		 Index=Index+1;
 		 switch(Index){
 		 case 1:
 			 return "倒计时";
 		 case 2:
-			 return "到";
+			 return "定时到";
 		 case 3:
 			 return "每个小时的";
 		 }
@@ -230,7 +229,6 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
 	 }
 	 
 	 private CharSequence GetDescriptionEnd(int Index){
-		 Index=Index+1;
 		 switch(Index){
 		 case 1:
 			 return "";

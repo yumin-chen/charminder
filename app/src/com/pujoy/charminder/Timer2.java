@@ -72,7 +72,9 @@ public class Timer2 extends Activity {
 							TimeDigits.add(0);
 						}else if(!((TimeDigits.get(5) >=2) && intToBeAdded>3)){
 							TimeDigits.add(intToBeAdded);
-						}	
+						}else{
+							break;
+						}
 						TextView amOrPm = (TextView)findViewById(R.id.timer2_amorpm);
 						if((TimeDigits.get(5) * 10 + intToBeAdded) < 12){
 							amOrPm.setText(R.string.am);
