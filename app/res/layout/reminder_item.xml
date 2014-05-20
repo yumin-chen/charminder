@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/reminder_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:orientation="vertical" >
+
+                 <RelativeLayout 
+                android:layout_width="match_parent"
+                android:id="@+id/reminder_item_layout"
+                android:layout_height="64dp"
+                android:background="#e4f2fe" >
+
+                <ImageView
+                    android:id="@+id/reminder_type_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/feedback" />
+
+                <TextView
+                    android:id="@+id/reminder_type"
+                    android:layout_width="92dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/reminder_type_icon"
+                    android:gravity="center_vertical"
+                    android:text="@string/title_timer1"
+                    android:textColor="#304e62"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/countdown_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_below="@+id/reminder_type"
+                    android:layout_toRightOf="@+id/reminder_type_icon"
+                    android:layout_marginLeft="32dp"
+                    android:src="@drawable/countdown" />
+
+                <TextView
+                    android:id="@+id/countdown_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_below="@+id/reminder_type"
+                    android:layout_toLeftOf="@+id/expand"
+                    android:layout_toRightOf="@+id/countdown_icon"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#304e62"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/ri_expand"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:scaleX=".4"
+                    android:scaleY=".4"
+                    android:src="@drawable/down_arrow" />
+                <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#304e62" />
+                    </RelativeLayout>
+                    
+                 
+                </LinearLayout>
+
+            

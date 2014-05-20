@@ -22,7 +22,7 @@
             android:src="@drawable/circle"
        		android:scaleX="1.2"
        		android:scaleY="1.2"
-            android:alpha="0.1"
+            android:alpha="0.2"
              />
     
     <ImageView
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/wallpaper"
-            android:alpha="0.2"
+            android:alpha="0.4"
              />
     
     
@@ -40,7 +40,7 @@
 <View
      android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="16dp"
+            android:layout_height="12dp"
             android:layout_above="@+id/running_layout"
             android:background="#a8d4f2"
              />
@@ -49,15 +49,15 @@
     <RelativeLayout
         android:id="@+id/running_layout"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_alignParentLeft="true"
         android:layout_above="@+id/reminderlist_layout"
         android:background="#e4f2fe" >
 
         <ImageView
             android:id="@+id/icon_floatingwindow"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="false"
             android:layout_centerInParent="false"
@@ -77,7 +77,7 @@
             android:layout_toRightOf="@+id/icon_floatingwindow"
             android:gravity="center_vertical"
             android:text="@string/floatingwindow"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="#304e62" />
 
         <ImageView
@@ -103,15 +103,15 @@
    <RelativeLayout
         android:id="@+id/reminderlist_layout"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_alignParentLeft="true"
         android:layout_above="@+id/settings_layout"
         android:background="#e4f2fe" >
 
         <ImageView
             android:id="@+id/icon_reminder_list"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="false"
             android:layout_centerInParent="false"
@@ -131,7 +131,7 @@
             android:layout_toRightOf="@+id/icon_reminder_list"
             android:gravity="center_vertical"
             android:text="@string/reminder_list"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="#304e62" />
 
 
@@ -145,15 +145,15 @@
     <RelativeLayout
         android:id="@+id/settings_layout"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_alignParentLeft="true"
         android:layout_above="@+id/footer"
         android:background="#e4f2fe" >
 
         <ImageView
             android:id="@+id/icon_settings"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="false"
             android:layout_centerInParent="false"
@@ -173,7 +173,7 @@
             android:layout_toRightOf="@+id/icon_settings"
             android:gravity="center_vertical"
             android:text="@string/settings"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="#304e62" />
 
 
@@ -187,7 +187,7 @@
     <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="40dp"
         android:layout_alignParentLeft="true"
 		android:layout_alignParentBottom="true"
 		android:layout_marginBottom="1dp"

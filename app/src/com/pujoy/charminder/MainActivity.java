@@ -29,7 +29,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	Point pScreenSize = new Point();
-	public static ArrayList<Reminder> ReminderList = new ArrayList<Reminder>();
+	public static ArrayList<Reminder> reminderList = new ArrayList<Reminder>();
 	static float fScaleY;
 	static float fScaleX;
 	static float fScale;
@@ -53,10 +53,10 @@ public class MainActivity extends Activity {
 	        @Override
 			public void handleMessage(Message msg) {
 	            if (msg.what == REMINDING_PROCESS){
-        			for(int i=0; i<ReminderList.size(); i++){
-        				System.out.println(ReminderList.get(i).time_to_remind.compareTo(Calendar.getInstance()));
-        				if(ReminderList.get(i).validity && ReminderList.get(i).time_to_remind.compareTo(Calendar.getInstance()) <= 0){
-            				ReminderList.get(i).Notify(getApplicationContext().getResources());
+        			for(int i=0; i<reminderList.size(); i++){
+        				System.out.println(reminderList.get(i).time_to_remind.compareTo(Calendar.getInstance()));
+        				if(reminderList.get(i).validity && reminderList.get(i).time_to_remind.compareTo(Calendar.getInstance()) <= 0){
+            				reminderList.get(i).Notify(getApplicationContext().getResources());
             				break;
             			}
             		}	
@@ -74,8 +74,15 @@ public class MainActivity extends Activity {
         fScaleX = pScreenSize.x > 680? 1: pScreenSize.x / 680;
         fScale = fScaleX > fScaleY? fScaleY: fScaleX;
         
+        
+        
         mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
         if(wm == null) wm =(WindowManager)getApplicationContext().getSystemService("window");
+        
+       //Change The Title Bar
+      //  getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_bg));
+     //   getActionBar().setTitle(Html.fromHtml("<font color=\"red\">" + getString(R.string.app_name) + "</font>"));
+        
         
 		View.OnTouchListener mainKeyTouchListener = new View.OnTouchListener() {
 			@Override
@@ -83,7 +90,7 @@ public class MainActivity extends Activity {
 				switch (motionEvent.getAction())
 				{
 				case MotionEvent.ACTION_DOWN:
-					v.setBackgroundColor(android.graphics.Color.rgb(128, 178, 212));
+					v.setBackgroundColor(android.graphics.Color.rgb(32, 170, 170));
 					break;
 				case MotionEvent.ACTION_UP:
 					v.setBackgroundColor(android.graphics.Color.rgb(228, 242, 254));
@@ -406,7 +413,7 @@ public class MainActivity extends Activity {
 	}
 
     public final static void AddReminder(Reminder reminderToAdd){
-    	ReminderList.add(reminderToAdd);
+    	reminderList.add(reminderToAdd);
     }
     
     

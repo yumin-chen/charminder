@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <LinearLayout android:layout_width="match_parent"
+        android:orientation="horizontal"
+    android:layout_height="32dp"
+    android:weightSum="2">
+    <LinearLayout android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+    android:layout_height="match_parent"
+     android:weightSum="13"
+    android:background="#c02020" >
+
+    <ImageView
+        android:id="@+id/delete_icon"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
+        android:scaleType="fitEnd"
+        android:layout_weight="6"
+        android:src="@drawable/delete" />
+    
+    <TextView
+	    android:id="@+id/delete_text"
+	    android:layout_width="0dp"
+	    android:layout_height="24dp"
+        android:layout_marginTop="4dp"
+	    android:gravity="center_vertical"
+	    android:layout_weight="7"
+	    android:text="@string/delete"
+	    android:textColor="#e4f2fe"
+	    android:textSize="14sp" />
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+    android:layout_height="match_parent"
+     android:weightSum="13"
+    android:background="#304e62" > 
+
+    <ImageView
+        android:id="@+id/edit_icon"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
+        android:scaleType="fitEnd"
+        android:layout_weight="6"
+        android:src="@drawable/edit" />
+    
+    <TextView
+	    android:id="@+id/edit_text"
+	    android:layout_width="0dp"
+	    android:layout_height="24dp"
+        android:layout_marginTop="4dp"
+	    android:gravity="center_vertical"
+	    android:layout_weight="7"
+	    android:text="@string/edit"
+	    android:textColor="#e4f2fe"
+	    android:textSize="14sp" />
+
+    </LinearLayout>
+</LinearLayout>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#188080" >
+	<ImageView
+                    android:id="@+id/calendar_icon"
+                    android:layout_width="24dp"
+    				android:layout_height="24dp"
+                    android:layout_alignParentLeft="true"
+    				android:layout_marginLeft="8dp"
+   					android:layout_marginTop="8dp"
+                    android:src="@drawable/calendar" />
+	<TextView
+	    android:id="@+id/text_date"
+	    android:layout_width="wrap_content"
+	    android:layout_height="24dp"
+	    android:layout_alignTop="@+id/calendar_icon"
+	    android:layout_toRightOf="@+id/calendar_icon"
+	    android:gravity="center_vertical"
+	    android:text="@string/date_added"
+	    android:textColor="#e4f2fe"
+	    android:textSize="14sp" />
+	
+	<ImageView
+                    android:id="@+id/time_icon"
+                    android:layout_width="24dp"
+    				android:layout_height="24dp"
+                    android:layout_alignParentLeft="true"
+    				android:layout_marginLeft="8dp"
+				    android:layout_below="@+id/calendar_icon"
+                    android:src="@drawable/time" />
+	<TextView
+	    android:id="@+id/text_date"
+	    android:layout_width="wrap_content"
+	    android:layout_height="24dp"
+	    android:layout_alignTop="@+id/time_icon"
+	    android:layout_toRightOf="@+id/time_icon"
+	    android:gravity="center_vertical"
+	    android:text="@string/time_added"
+	    android:textColor="#e4f2fe"
+	    android:textSize="14sp" />
+	
+	<ImageView
+                    android:id="@+id/content_icon"
+                    android:layout_width="24dp"
+    				android:layout_height="24dp"
+                    android:layout_alignParentLeft="true"
+    				android:layout_marginLeft="8dp"
+				    android:layout_marginBottom="8dp"
+				    android:layout_below="@+id/time_icon"
+                    android:src="@drawable/content" />
+	
+	<TextView
+	    android:id="@+id/text_content"
+	    android:layout_width="wrap_content"
+	    android:layout_height="24dp"
+	    android:layout_alignTop="@+id/content_icon"
+	    android:layout_toRightOf="@+id/content_icon"
+	    android:gravity="center_vertical"
+	    android:text="@string/content"
+	    android:textColor="#e4f2fe"
+	    android:textSize="14sp" />
+
+</RelativeLayout>
+</LinearLayout>
