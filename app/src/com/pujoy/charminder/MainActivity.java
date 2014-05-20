@@ -336,12 +336,17 @@ public class MainActivity extends Activity {
         wmParamsC.type = 2002;   
         wmParamsC.format = 1; 
         wmParamsC.flags = 40;  
-        wmParamsC.gravity = Gravity.LEFT | Gravity.TOP;
-        wmParamsC.width = (int)((pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x) * fScale *0.8);
-        wmParamsC.width = wmParamsC.width > 960? 960: wmParamsC.width;
-        wmParamsC.height = wmParamsC.width;  
-        wmParamsC.x = (pScreenSize.x - wmParamsC.width)/2;
-        wmParamsC.y = (pScreenSize.y - wmParamsC.height)/2;
+        wmParamsC.x = 0;
+        wmParamsC.y = 0;
+        wmParamsC.width = 320;
+
+        wmParamsC.height = 320;
+        //wmParamsC.gravity = Gravity.LEFT | Gravity.TOP;
+        //wmParamsC.width = (int)((pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x) * fScale *0.8);
+        //wmParamsC.width = wmParamsC.width > 960? 960: wmParamsC.width;
+        //wmParamsC.height = wmParamsC.width;  
+        //wmParamsC.x = (pScreenSize.x - wmParamsC.width)/2;
+        //wmParamsC.y = (pScreenSize.y - wmParamsC.height)/2;
         		
         fCircleScale = wmParamsC.width/960f;
         

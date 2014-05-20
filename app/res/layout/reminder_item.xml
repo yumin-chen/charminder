@@ -21,14 +21,15 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/feedback" />
+                    android:background="#304e62"
+                    android:src="@drawable/timer1_icon" />
 
                 <TextView
                     android:id="@+id/reminder_type"
                     android:layout_width="92dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="8dp"
-                    android:layout_toRightOf="@+id/reminder_type_icon"
+                    android:layout_marginLeft="64dp"
                     android:gravity="center_vertical"
                     android:text="@string/title_timer1"
                     android:textColor="#304e62"
@@ -38,17 +39,16 @@
                     android:id="@+id/countdown_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_below="@+id/reminder_type"
-                    android:layout_toRightOf="@+id/reminder_type_icon"
-                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="64dp"
                     android:src="@drawable/countdown" />
 
                 <TextView
                     android:id="@+id/countdown_text"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:layout_below="@+id/reminder_type"
-                    android:layout_toLeftOf="@+id/expand"
+                    android:layout_alignTop="@+id/countdown_icon"
+                    android:layout_toLeftOf="@+id/ri_expand"
                     android:layout_toRightOf="@+id/countdown_icon"
                     android:gravity="center_vertical"
                     android:text=""

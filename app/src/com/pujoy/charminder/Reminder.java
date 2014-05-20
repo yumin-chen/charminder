@@ -13,6 +13,7 @@ public class Reminder {
 	public boolean validity;
 	public Reminder(int type_of_reminder){
 		time_when_created = Calendar.getInstance();
+		time_to_remind = Calendar.getInstance();
 		validity = true;
 		type = type_of_reminder;
 	}

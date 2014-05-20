@@ -147,6 +147,7 @@ public class Timer3 extends Activity {
 						newReminder.time_to_remind = Calendar.getInstance();
 						newReminder.time_to_remind.set(Calendar.MINUTE, TimeDigits.get(0)*10 + TimeDigits.get(1));
 						newReminder.time_to_remind.set(Calendar.SECOND, 0);
+						newReminder.note=TimeDigits.get(0).toString()+TimeDigits.get(1).toString();
 						if(newReminder.time_to_remind.compareTo(Calendar.getInstance()) <=0) 
 							newReminder.time_to_remind.add(Calendar.HOUR, 1);
 						MainActivity.AddReminder(newReminder);

@@ -96,7 +96,7 @@
 				    android:layout_below="@+id/calendar_icon"
                     android:src="@drawable/time" />
 	<TextView
-	    android:id="@+id/text_date"
+	    android:id="@+id/text_time"
 	    android:layout_width="wrap_content"
 	    android:layout_height="24dp"
 	    android:layout_alignTop="@+id/time_icon"
