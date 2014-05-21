@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentLeft="true"
-        android:layout_above="@+id/reminderlist_layout"
+        android:layout_above="@+id/footer"
         android:background="#e4f2fe" >
 
         <ImageView
@@ -92,90 +92,6 @@
             android:contentDescription="@string/floatingwindow"
             android:layout_marginRight="12dp"
             android:src="@drawable/tick_0" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="#304e62" />
-    </RelativeLayout>
-
-   <RelativeLayout
-        android:id="@+id/reminderlist_layout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@+id/settings_layout"
-        android:background="#e4f2fe" >
-
-        <ImageView
-            android:id="@+id/icon_reminder_list"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerHorizontal="false"
-            android:layout_centerInParent="false"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:contentDescription= "@string/reminder_list"
-            android:src="@drawable/reminderlist" />
-
-        <TextView
-            android:id="@+id/title_reminder_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="false"
-            android:layout_centerInParent="false"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/icon_reminder_list"
-            android:gravity="center_vertical"
-            android:text="@string/reminder_list"
-            android:textSize="16sp"
-            android:textColor="#304e62" />
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="#304e62" />
-    </RelativeLayout>
-    
-    <RelativeLayout
-        android:id="@+id/settings_layout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@+id/footer"
-        android:background="#e4f2fe" >
-
-        <ImageView
-            android:id="@+id/icon_settings"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerHorizontal="false"
-            android:layout_centerInParent="false"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:contentDescription="@string/settings"
-            android:src="@drawable/settings" />
-
-        <TextView
-            android:id="@+id/title_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="false"
-            android:layout_centerInParent="false"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/icon_settings"
-            android:gravity="center_vertical"
-            android:text="@string/settings"
-            android:textSize="16sp"
-            android:textColor="#304e62" />
-
 
         <View
             android:layout_width="match_parent"

@@ -9,57 +9,42 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.DragEvent;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.DragShadowBuilder;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
 import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	Point pScreenSize = new Point();
 	public static ArrayList<Reminder> reminderList = new ArrayList<Reminder>();
 	static float fScaleY;
 	static float fScaleX;
 	static float fScale;
-	static float fCircleScale;
 	static boolean bCircleVisible;
 	static boolean bBubbleVisible;
 	static boolean bFloatingWindowRunning;
 	static ImageView ivFloating;
-	static ImageView ivCircle;
 	static RelativeLayout vCircle;
 	static ImageView[] ivCircleItems;
 	static ImageView ivCircleBg;
+	static TextView tvCircleDescription;
 	static ImageView ivBubble;
 	static TextView tvBubble;
 	static WindowManager wm; 
-	static WindowManager.LayoutParams wmParamsC;
+	static TextView tvCircleItemDescription;
 	static WindowManager.LayoutParams wmParamsI;
 	static WindowManager.LayoutParams wmParamsB;
 	static WindowManager.LayoutParams wmParamsBt;
-	static WindowManager.LayoutParams wmParamsCBg;
-	static WindowManager.LayoutParams[] wmParamsCItems;
+	static WindowManager.LayoutParams wmParamsC;
 	static DisplayMetrics metrics;
 
 	private static final int NUM_CIRCLE_ITEMS = 6;
@@ -87,11 +72,9 @@ public class MainActivity extends Activity {
         //Get Screen Resolution And Calculate Scale
         metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        pScreenSize.x = metrics.widthPixels;
-        pScreenSize.y = metrics.heightPixels;
-        fScaleY = pScreenSize.y / 960f;
+        fScaleY = metrics.heightPixels / 960f;
         fScaleY = fScaleY > 1? 1: fScaleY == 0? 1: fScaleY;
-        fScaleX = pScreenSize.x / 680f;
+        fScaleX = metrics.widthPixels / 680f;
         fScaleX = fScaleX > 1? 1: fScaleX == 0? 1: fScaleX;
         fScale = fScaleX > fScaleY? fScaleY: fScaleX;
         
@@ -116,18 +99,15 @@ public class MainActivity extends Activity {
     	    }
 		};
         
-        final ImageView ivTick = (ImageView)findViewById(R.id.floatingwindow_tick);
-        ivTick.setImageResource(bFloatingWindowRunning? R.drawable.tick_1: R.drawable.tick_0);
+        final ImageView ivEnabled = (ImageView)findViewById(R.id.floatingwindow_tick);
+        ivEnabled.setImageResource(bFloatingWindowRunning? R.drawable.tick_1: R.drawable.tick_0);
         View.OnClickListener startRunningListener = new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				if(bFloatingWindowRunning){
 					wm.removeView(ivFloating); 
-					if (bCircleVisible){
-							wm.removeView(ivCircle); 
-							bCircleVisible = false;
-					}
+					RemoveTheCircle();
 
 					if (bBubbleVisible){
 							wm.removeView(ivBubble);
@@ -135,47 +115,26 @@ public class MainActivity extends Activity {
 							bBubbleVisible = false;
 					}
 					
-					ivTick.setImageResource(R.drawable.tick_0);
+					ivEnabled.setImageResource(R.drawable.tick_0);
 					bFloatingWindowRunning = false;
 				}
 				else{
 					CreateFloatingWindow();
-					ivTick.setImageResource(R.drawable.tick_1);
+					ivEnabled.setImageResource(R.drawable.tick_1);
 					bFloatingWindowRunning = true;
 				}
 
 			}
 		};
-        ivTick.setOnClickListener(startRunningListener);
+		ivEnabled.setOnClickListener(startRunningListener);
         RelativeLayout running_layout = (RelativeLayout)findViewById(R.id.running_layout);
         running_layout.setOnTouchListener(mainKeyTouchListener);
         running_layout.setOnClickListener(startRunningListener);
-        RelativeLayout reminderlist_layout = (RelativeLayout)findViewById(R.id.reminderlist_layout);
-        reminderlist_layout.setOnTouchListener(mainKeyTouchListener);
-        reminderlist_layout.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-			GoToActivity("RemindersList");	
-			}
-        });
-        RelativeLayout settings_layout = (RelativeLayout)findViewById(R.id.settings_layout);
-        settings_layout.setOnTouchListener(mainKeyTouchListener);
-        settings_layout.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-			GoToActivity("Settings");	
-			}
-        });
         
-        if(wmParamsC == null) wmParamsC = new WindowManager.LayoutParams();
         if(wmParamsI == null) wmParamsI = new WindowManager.LayoutParams();
         if(wmParamsB == null) wmParamsB = new WindowManager.LayoutParams();
         if(wmParamsBt == null) wmParamsBt = new WindowManager.LayoutParams();
-        if(wmParamsCBg == null) wmParamsCBg = new WindowManager.LayoutParams();
-        
-        
+        if(wmParamsC == null) wmParamsC = new WindowManager.LayoutParams();
     	
         // Create ivFloating Object
         if (ivFloating == null){
@@ -200,9 +159,78 @@ public class MainActivity extends Activity {
     					        wm.updateViewLayout(ivBubble, wmParamsB);	
     					        wm.updateViewLayout(tvBubble, wmParamsBt);	
     						}
+    						for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
+    							if(IsPointInsideRect(motionEvent.getRawX(),motionEvent.getRawY(),
+    									wmParamsC.x+ivCircleItems[i].getX() - dpToPx(8),
+    									wmParamsC.y+ivCircleItems[i].getY() - dpToPx(8),
+    									ivCircleItems[i].getWidth() +  dpToPx(16),
+    									ivCircleItems[i].getHeight() +  dpToPx(16))){
+    								switch(i){
+    								case 0:
+        								tvCircleDescription.setText(getString(R.string.title_timer1));
+        								break;
+    								case 1:
+        								tvCircleDescription.setText(getString(R.string.title_timer2));
+        								break;
+    								case 2:
+        								tvCircleDescription.setText(getString(R.string.title_timer3));
+        								break;
+    								case 3:
+        								tvCircleDescription.setText(getString(R.string.title_timer4));
+        								break;
+    								case 4:
+        								tvCircleDescription.setText(getString(R.string.settings));
+        								break;
+    								case 5:
+        								tvCircleDescription.setText(getString(R.string.reminder_list));
+        								break;
+    								}
+    						    	tvCircleDescription.setBackgroundColor(android.graphics.Color.argb(192, 48, 78, 98));
+    								break;
+    							}else{
+    								if (i==NUM_CIRCLE_ITEMS-1){
+    									tvCircleDescription.setText("");
+    									tvCircleDescription.setBackgroundColor(android.graphics.Color.argb(
+    											0, 48, 78, 98));
+    								}
+    							
+    							}
+    						}
     						return true;
     					case MotionEvent.ACTION_UP:
     						RemoveTheCircle();
+    						for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
+    							if(IsPointInsideRect(motionEvent.getRawX(),motionEvent.getRawY(),
+    									wmParamsC.x+ivCircleItems[i].getX() - dpToPx(8),
+    									wmParamsC.y+ivCircleItems[i].getY() - dpToPx(8),
+    									ivCircleItems[i].getWidth() +  dpToPx(16),
+    									ivCircleItems[i].getHeight() +  dpToPx(16))){
+    								switch(i){
+    								case 0:
+        								GoToActivity("Timer1");
+        								break;
+    								case 1:
+        								GoToActivity("Timer2");
+        								break;
+    								case 2:
+        								GoToActivity("Timer3");
+        								break;
+    								case 3:
+        								GoToActivity("Timer4");
+        								break;
+    								case 4:
+        								GoToActivity("Settings");
+        								break;
+    								case 5:
+        								GoToActivity("RemindersList");
+        								break;
+    								}
+    								break;
+    							}else{
+    								if (i==NUM_CIRCLE_ITEMS-1)
+    									tvCircleDescription.setText("");
+    							}
+    						}
     						return true;
     					}
         		        return false;
@@ -230,95 +258,7 @@ public class MainActivity extends Activity {
 
     			}
     		});
-        }
-        
-        
-        //Create ivCircle Object
-        if(ivCircle == null){
-        	ivCircle = new ImageView(this);
-            ivCircle.setImageResource(R.drawable.circle_ui);
-            ivCircle.setOnTouchListener(new View.OnTouchListener() {
-    			@Override
-        	    public boolean onTouch(View view, MotionEvent motionEvent) {
-    				if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-    					// If Mouse Is Inside The Closing Area
-    					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
-    							780 * fCircleScale, 30 * fCircleScale,
-    							128 * fCircleScale, 128 * fCircleScale)){
-        					RemoveTheCircle();
-    						return true;
-    					}
-    					// If Mouse Is Inside The Center Area
-    					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
-    							352 * fCircleScale, 352 * fCircleScale,
-    							256 * fCircleScale, 256 * fCircleScale)){
-    						GoToActivity("MainActivity");
-        					RemoveTheCircle();
-    						return true;
-    						
-    					}
-    					// If Mouse Is Inside The First Icon
-    					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
-    							168 * fCircleScale, 92 * fCircleScale,
-    							256 * fCircleScale, 256 * fCircleScale)){
-    						GoToActivity("Timer1");
-        					RemoveTheCircle();
-    						return true;
-    					}
-    					
-    					// If Mouse Is Inside The Second Icon
-    					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
-    							470 * fCircleScale, 64 * fCircleScale,
-    							256 * fCircleScale, 256 * fCircleScale)){
-    						GoToActivity("Timer2");
-        					RemoveTheCircle();
-    						return true;
-    					}
-    					
-    					// If Mouse Is Inside The Third Icon
-    					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
-    							674 * fCircleScale, 320 * fCircleScale,
-    							256 * fCircleScale, 256 * fCircleScale)){
-    						GoToActivity("Timer3");
-        					RemoveTheCircle();
-    						return true;
-    					}
-    					
-    					// If Mouse Is Inside The Forth Icon
-    					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
-    							546 * fCircleScale, 622 * fCircleScale,
-    							256 * fCircleScale, 256 * fCircleScale)){
-    						GoToActivity("Timer4");
-    						wm.removeView(ivCircle); 
-    						bCircleVisible = false;
-    						return true;
-    					}
-    					
-    					// If Mouse Is Inside The Fifth Icon
-    					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
-    							222 * fCircleScale, 634 * fCircleScale,
-    							256 * fCircleScale, 256 * fCircleScale)){
-    						GoToActivity("Timer5");
-        					RemoveTheCircle();
-    						return true;
-    					}
-    					
-    					// If Mouse Is Inside The Sixth Icon
-    					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
-    							18 * fCircleScale, 378 * fCircleScale,
-    							256 * fCircleScale, 256 * fCircleScale)){
-    						GoToActivity("Timer6");
-        					RemoveTheCircle();
-    						return true;
-    					}
-    					
-    					return true;
-    				}
-    		        return false;
-        	    }
-            });
-            
-        }
+        }    
         
         // Create Bubble Object
         if(ivBubble == null){
@@ -349,18 +289,6 @@ public class MainActivity extends Activity {
 
     private void CreateFloatingWindow(){
 
-        wmParamsC.type = 2002;   
-        wmParamsC.format = 1; 
-        wmParamsC.flags = 40;  
-        wmParamsC.gravity = Gravity.LEFT | Gravity.TOP;
-        wmParamsC.width = (int)((pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x) * 0.9);
-        wmParamsC.width = wmParamsC.width > 960? 960: wmParamsC.width;
-        wmParamsC.height = wmParamsC.width;  
-        wmParamsC.x = (pScreenSize.x - wmParamsC.width)/2;
-        wmParamsC.y = (pScreenSize.y - wmParamsC.height)/2;
-        
-        		
-        fCircleScale = wmParamsC.width/960f;
         
         //Get Header Y Position
         View vHeader = (View)findViewById(R.id.head_p);
@@ -371,7 +299,7 @@ public class MainActivity extends Activity {
         wmParamsI.width = (int)(0.3 * metrics.densityDpi);
         wmParamsI.height = (int)(0.3 * metrics.densityDpi);  
         wmParamsI.gravity = Gravity.LEFT | Gravity.TOP;
-        wmParamsI.x = (int)(pScreenSize.x - wmParamsI.width);
+        wmParamsI.x = (int)(metrics.widthPixels - wmParamsI.width);
         wmParamsI.y = (int)(vHeader.getHeight() - wmParamsI.height);      
         wm.addView(ivFloating, wmParamsI); 
         
@@ -438,26 +366,38 @@ public class MainActivity extends Activity {
     private void CreateTheCircle(){
     	if (bCircleVisible)
     		return;
-    	wmParamsCItems = new WindowManager.LayoutParams[NUM_CIRCLE_ITEMS];
-    	int max =(pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x);
-    	wmParamsCBg.type = 2002;   
-    	wmParamsCBg.format = 1; 
-    	wmParamsCBg.flags = 40;  
-    	wmParamsCBg.width = (int)(max);
-    	wmParamsCBg.height = (int)(max);
+    	int max =(metrics.widthPixels > metrics.heightPixels? metrics.heightPixels: metrics.widthPixels);
+    	wmParamsC.type = 2002;   
+    	wmParamsC.format = 1; 
+    	wmParamsC.flags = 40;  
+    	wmParamsC.width = (int)(max);
+    	wmParamsC.height = (int)(max);
+        wmParamsC.gravity = Gravity.LEFT | Gravity.TOP;
+        wmParamsC.x = (metrics.widthPixels-wmParamsC.width)/2;
+        wmParamsC.y = (metrics.heightPixels-wmParamsC.height)/2;   
+        
+    	
     	//vCircle = getLayoutInflater().inflate(R.layout.the_circle, rl);
         //Create ivCircleItems Objects
-        if(ivCircleItems == null){
+        if(vCircle == null){
         	vCircle = new RelativeLayout(getApplicationContext());
         	ivCircleBg = new ImageView(this);
-        	RelativeLayout.LayoutParams[] params = new RelativeLayout.LayoutParams[NUM_CIRCLE_ITEMS]; 
+        	ivCircleItems = new ImageView[NUM_CIRCLE_ITEMS];
+        	tvCircleDescription = new TextView(this);
+        	RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(
+        			(int)dpToPx(128), (int)dpToPx(128));
+        	textParams.leftMargin = (wmParamsC.width - (int)dpToPx(128))/2;
+        	textParams.topMargin = (wmParamsC.height - (int)dpToPx(128))/2;
+        	tvCircleDescription.setGravity(Gravity.CENTER);
+        	tvCircleDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        	tvCircleDescription.setTextColor(android.graphics.Color.rgb(228, 242, 254));
+        	vCircle.addView(tvCircleDescription, textParams);
         	ivCircleBg.setImageResource(R.drawable.circle_bg);
         	vCircle.addView(ivCircleBg);
-        	ivCircleItems = new ImageView[NUM_CIRCLE_ITEMS];
+        	RelativeLayout.LayoutParams[] params = new RelativeLayout.LayoutParams[NUM_CIRCLE_ITEMS]; 
         	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
         		ivCircleItems[i] = new ImageView(this);
-        		params[i] = new RelativeLayout.LayoutParams((int) (64 * (metrics.densityDpi / 160f)),
-        				(int) (64* (metrics.densityDpi / 160f)));
+        		params[i] = new RelativeLayout.LayoutParams((int) dpToPx(64), (int) dpToPx(64));
         		params[i].leftMargin = 0;
         		params[i].topMargin = 0;
         	}
@@ -472,19 +412,21 @@ public class MainActivity extends Activity {
         	}
         	
         }
+    	wm.addView(vCircle, wmParamsC);
 
-    	wm.addView(vCircle, wmParamsCBg);
+    	tvCircleDescription.setText("");
+    	tvCircleDescription.setBackgroundColor(android.graphics.Color.argb(0, 48, 78, 98));
     	Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom);
     	ivCircleBg.startAnimation(animation);
     	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
     		float tox = (float) (max/2 + max*0.6/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0) - (64 * (metrics.densityDpi / 160f))/2);
+    				* Math.PI / 180.0) -  dpToPx(64)/2);
     		float toy = (float) (max/2 + max*0.6/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0) - (64 * (metrics.densityDpi / 160f))/2);
+    				* Math.PI / 180.0) -  dpToPx(64)/2);
     		float fromx = (float) (max/2 + max*0.6/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0)/4 - (64 * (metrics.densityDpi / 160f))/2);
+    				* Math.PI / 180.0)/4 -  dpToPx(64)/2);
     		float fromy = (float) (max/2 + max*0.6/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0)/4 - (64 * (metrics.densityDpi / 160f))/2);
+    				* Math.PI / 180.0)/4 -  dpToPx(64)/2);
     		ValueAnimator aCircleItemsY = ObjectAnimator.ofFloat(ivCircleItems[i], "y", fromy, toy);
     		aCircleItemsY.setDuration(200);
     		ValueAnimator aCircleItemsX = ObjectAnimator.ofFloat(ivCircleItems[i], "x", fromx, tox);
@@ -503,6 +445,10 @@ public class MainActivity extends Activity {
     	wm.removeView(vCircle);
     	bCircleVisible = false;
     	
+    }
+    
+    public float dpToPx(float dp){
+    	return dp *(metrics.densityDpi / 160f);
     }
 
 }
