@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
 	static boolean bFloatingWindowRunning;
 	static ImageView ivFloating;
 	static ImageView ivCircle;
+	static ImageView[] ivCircleItems;
 	static ImageView ivBubble;
 	static TextView tvBubble;
 	static WindowManager wm; 
@@ -48,7 +49,10 @@ public class MainActivity extends Activity {
 	static WindowManager.LayoutParams wmParamsI;
 	static WindowManager.LayoutParams wmParamsB;
 	static WindowManager.LayoutParams wmParamsBt;
+	static WindowManager.LayoutParams[] wmParamsCItems;
+	static DisplayMetrics metrics;
 	
+	private static final int NUM_CIRCLE_ITEMS = 6;
 	private static final int REMINDING_PROCESS = 1;
 	
 	   private Handler mHandler = new Handler() {
@@ -71,7 +75,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Get Screen Resolution And Calculate Scale
-        DisplayMetrics metrics = new DisplayMetrics();
+        metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         pScreenSize.x = metrics.widthPixels;
         pScreenSize.y = metrics.heightPixels;
@@ -200,16 +204,30 @@ public class MainActivity extends Activity {
     				}
     				
     				if(bCircleVisible){
-    					wm.removeView(ivCircle); 
-    					bCircleVisible = false;
+    					RemoveTheCircle();
+
     				}
     				else{
-    					wm.addView(ivCircle, wmParamsC); 
-    					bCircleVisible = true;
+    					CreateTheCircle();
     				}
 
     			}
     		});
+        }
+        
+        
+        //Create ivCircleItems Objects
+        if(ivCircleItems == null){
+        	ivCircleItems = new ImageView[NUM_CIRCLE_ITEMS];
+        	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
+        		ivCircleItems[i] = new ImageView(this);
+        	}
+        	ivCircleItems[0].setImageResource(R.drawable.timer1_icon);
+        	ivCircleItems[1].setImageResource(R.drawable.timer2_icon);
+        	ivCircleItems[2].setImageResource(R.drawable.timer3_icon);
+        	ivCircleItems[3].setImageResource(R.drawable.timer4_icon);
+        	ivCircleItems[4].setImageResource(R.drawable.settings);
+        	ivCircleItems[5].setImageResource(R.drawable.reminderlist);
         }
         
         //Create ivCircle Object
@@ -224,8 +242,7 @@ public class MainActivity extends Activity {
     					if (IsPointInsideRect(motionEvent.getX(), motionEvent.getY(),
     							780 * fCircleScale, 30 * fCircleScale,
     							128 * fCircleScale, 128 * fCircleScale)){
-    						wm.removeView(ivCircle); 
-    						bCircleVisible = false;
+        					RemoveTheCircle();
     						return true;
     					}
     					// If Mouse Is Inside The Center Area
@@ -233,8 +250,7 @@ public class MainActivity extends Activity {
     							352 * fCircleScale, 352 * fCircleScale,
     							256 * fCircleScale, 256 * fCircleScale)){
     						GoToActivity("MainActivity");
-    						wm.removeView(ivCircle); 
-    						bCircleVisible = false;
+        					RemoveTheCircle();
     						return true;
     						
     					}
@@ -243,8 +259,7 @@ public class MainActivity extends Activity {
     							168 * fCircleScale, 92 * fCircleScale,
     							256 * fCircleScale, 256 * fCircleScale)){
     						GoToActivity("Timer1");
-    						wm.removeView(ivCircle); 
-    						bCircleVisible = false;
+        					RemoveTheCircle();
     						return true;
     					}
     					
@@ -253,8 +268,7 @@ public class MainActivity extends Activity {
     							470 * fCircleScale, 64 * fCircleScale,
     							256 * fCircleScale, 256 * fCircleScale)){
     						GoToActivity("Timer2");
-    						wm.removeView(ivCircle); 
-    						bCircleVisible = false;
+        					RemoveTheCircle();
     						return true;
     					}
     					
@@ -263,8 +277,7 @@ public class MainActivity extends Activity {
     							674 * fCircleScale, 320 * fCircleScale,
     							256 * fCircleScale, 256 * fCircleScale)){
     						GoToActivity("Timer3");
-    						wm.removeView(ivCircle); 
-    						bCircleVisible = false;
+        					RemoveTheCircle();
     						return true;
     					}
     					
@@ -283,8 +296,7 @@ public class MainActivity extends Activity {
     							222 * fCircleScale, 634 * fCircleScale,
     							256 * fCircleScale, 256 * fCircleScale)){
     						GoToActivity("Timer5");
-    						wm.removeView(ivCircle); 
-    						bCircleVisible = false;
+        					RemoveTheCircle();
     						return true;
     					}
     					
@@ -293,8 +305,7 @@ public class MainActivity extends Activity {
     							18 * fCircleScale, 378 * fCircleScale,
     							256 * fCircleScale, 256 * fCircleScale)){
     						GoToActivity("Timer6");
-    						wm.removeView(ivCircle); 
-    						bCircleVisible = false;
+        					RemoveTheCircle();
     						return true;
     					}
     					
@@ -421,7 +432,31 @@ public class MainActivity extends Activity {
     	reminderList.add(reminderToAdd);
     }
     
+    private void CreateTheCircle(){
+    	wmParamsCItems = new WindowManager.LayoutParams[NUM_CIRCLE_ITEMS];
+    	int max =(pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x);
+    	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
+    		wmParamsCItems[i] = new WindowManager.LayoutParams();
+    		wmParamsCItems[i].type = 2002;   
+    		wmParamsCItems[i].format = 1; 
+    		wmParamsCItems[i].flags = 40;  
+    		wmParamsCItems[i].gravity = Gravity.LEFT | Gravity.TOP;
+    		wmParamsCItems[i].width = (int)(0.4 * metrics.densityDpi);
+    		wmParamsCItems[i].height = wmParamsCItems[i].width;  
+    		wmParamsCItems[i].x = (int)(max/2 + max*0.6/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0) - wmParamsCItems[i].width/2);
+    		wmParamsCItems[i].y = (int)(max/2 + max*0.6/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i) 
+    				* Math.PI / 180.0) - wmParamsCItems[i].height/2);
+    		wm.addView(ivCircleItems[i], wmParamsCItems[i]);
+    		;
+    	}
+    	
+    	
+    }
     
+    private void RemoveTheCircle(){
+    	
+    }
 
 }
     
