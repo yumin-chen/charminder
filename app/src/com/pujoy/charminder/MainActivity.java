@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
 	static ImageView ivFloating;
 	static ImageView ivCircle;
 	static ImageView[] ivCircleItems;
+	static ImageView ivCircleBg;
 	static ImageView ivBubble;
 	static TextView tvBubble;
 	static WindowManager wm; 
@@ -49,11 +50,15 @@ public class MainActivity extends Activity {
 	static WindowManager.LayoutParams wmParamsI;
 	static WindowManager.LayoutParams wmParamsB;
 	static WindowManager.LayoutParams wmParamsBt;
+	static WindowManager.LayoutParams wmParamsCBg;
 	static WindowManager.LayoutParams[] wmParamsCItems;
 	static DisplayMetrics metrics;
+	static boolean bCircleAnimPlaying = false;
+	static int iCircleAnimStep = 0;
 	
 	private static final int NUM_CIRCLE_ITEMS = 6;
 	private static final int REMINDING_PROCESS = 1;
+	private static final int PLAYING_CIRCLE_ANIM = 2;
 	
 	   private Handler mHandler = new Handler() {
 	        @Override
@@ -67,6 +72,24 @@ public class MainActivity extends Activity {
             			}
             		}	
 	            	mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
+	            }else if(msg.what == PLAYING_CIRCLE_ANIM){
+	            	if(bCircleAnimPlaying){
+	            		iCircleAnimStep++;
+	                	int max =(pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x);
+	        			for(int i=0; i<NUM_CIRCLE_ITEMS; i++){
+		            		wmParamsCItems[i].x = (int)(max/2 + max*0.6/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
+		            				* Math.PI / 180.0) / 30 * (10+iCircleAnimStep) - wmParamsCItems[i].width/2);
+		            		wmParamsCItems[i].y = (int)(max/2 + max*0.6/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i) 
+		            				* Math.PI / 180.0) / 30 * (10+iCircleAnimStep) - wmParamsCItems[i].height/2);
+		            		wm.updateViewLayout(ivCircleItems[i], wmParamsCItems[i]);
+	        			}
+	        			if(iCircleAnimStep>=20){
+	        				iCircleAnimStep = 0;
+	        				bCircleAnimPlaying = false;
+	        			}else{
+		            		mHandler.sendEmptyMessage(PLAYING_CIRCLE_ANIM);	
+	        			}
+	            	}
 	            }
 	        }
 	 };
@@ -163,7 +186,7 @@ public class MainActivity extends Activity {
         if(wmParamsI == null) wmParamsI = new WindowManager.LayoutParams();
         if(wmParamsB == null) wmParamsB = new WindowManager.LayoutParams();
         if(wmParamsBt == null) wmParamsBt = new WindowManager.LayoutParams();
-        
+        if(wmParamsCBg == null) wmParamsCBg = new WindowManager.LayoutParams();
         
         
     	
@@ -228,6 +251,8 @@ public class MainActivity extends Activity {
         	ivCircleItems[3].setImageResource(R.drawable.timer4_icon);
         	ivCircleItems[4].setImageResource(R.drawable.settings);
         	ivCircleItems[5].setImageResource(R.drawable.reminderlist);
+        	ivCircleBg = new ImageView(this);
+        	ivCircleBg.setImageResource(R.drawable.circle_bg);
         }
         
         //Create ivCircle Object
@@ -365,8 +390,8 @@ public class MainActivity extends Activity {
         wmParamsI.type = 2002;   
         wmParamsI.format = 1; 
         wmParamsI.flags = 40;  
-        wmParamsI.width = (int)(96 * fScale);
-        wmParamsI.height = (int)(96 * fScale);  
+        wmParamsI.width = (int)(0.3 * metrics.densityDpi);
+        wmParamsI.height = (int)(0.3 * metrics.densityDpi);  
         wmParamsI.gravity = Gravity.LEFT | Gravity.TOP;
         wmParamsI.x = (int)(pScreenSize.x - wmParamsI.width);
         wmParamsI.y = (int)(vHeader.getHeight() - wmParamsI.height);      
@@ -435,6 +460,15 @@ public class MainActivity extends Activity {
     private void CreateTheCircle(){
     	wmParamsCItems = new WindowManager.LayoutParams[NUM_CIRCLE_ITEMS];
     	int max =(pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x);
+    	wmParamsCBg.type = 2002;   
+    	wmParamsCBg.format = 1; 
+    	wmParamsCBg.flags = 40;  
+    	wmParamsCBg.gravity = Gravity.LEFT | Gravity.TOP;
+    	wmParamsCBg.width = (int)(max);
+    	wmParamsCBg.height = (int)(max);
+    	wmParamsCBg.x = (int)(max/2 - wmParamsCBg.width/2);
+    	wmParamsCBg.y = (int)(max/2 - wmParamsCBg.height/2);
+    	wm.addView(ivCircleBg, wmParamsCBg);
     	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
     		wmParamsCItems[i] = new WindowManager.LayoutParams();
     		wmParamsCItems[i].type = 2002;   
@@ -443,16 +477,14 @@ public class MainActivity extends Activity {
     		wmParamsCItems[i].gravity = Gravity.LEFT | Gravity.TOP;
     		wmParamsCItems[i].width = (int)(0.4 * metrics.densityDpi);
     		wmParamsCItems[i].height = wmParamsCItems[i].width;  
-    		wmParamsCItems[i].x = (int)(max/2 + max*0.6/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0) - wmParamsCItems[i].width/2);
-    		wmParamsCItems[i].y = (int)(max/2 + max*0.6/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i) 
-    				* Math.PI / 180.0) - wmParamsCItems[i].height/2);
+    		wmParamsCItems[i].x = (int)(max/2 - wmParamsCItems[i].width/2);
+    		wmParamsCItems[i].y = (int)(max/2 - wmParamsCItems[i].height/2);
     		wm.addView(ivCircleItems[i], wmParamsCItems[i]);
-    		;
     	}
+			bCircleAnimPlaying = true;
+    		mHandler.sendEmptyMessage(PLAYING_CIRCLE_ANIM);	
     	
-    	
-    }
+    };
     
     private void RemoveTheCircle(){
     	
