@@ -9,9 +9,22 @@
 <string name="feedback">反馈</string>
 <string name="delete">删除</string>
 <string name="edit">编辑</string>
+<string name="text_title">标题：</string>
+<string name="text_time">时间：</string>
+<string name="text_level">级别：</string>
+<string name="date_">日期：</string>
+<string name="time_">时间：</string>
+<string name="repeat_">周期：</string>
+<string name="text_location">地点：</string>
+<string name="text_content">内容：</string>
 <string name="date_added">创建日期：</string>
 <string name="time_added">创建时间：</string>
 <string name="content">提醒内容：</string>
+
+
+<string name="time_type_timer1">计时</string>
+<string name="time_type_timer2">定点</string>
+
 
 <string name="title_timer1">计时提醒</string>
 <string name="title_timer2">定时提醒</string>
@@ -35,6 +48,7 @@
 <string name="timer1_prompt">您将在过完以下时间后收到提醒：</string>
 <string name="timer2_prompt">您将在该时刻收到提醒：</string>
 <string name="timer3_prompt">您将在每个小时的以下时刻收到提醒：</string>
+<string name="timer5_prompt">您将在该事件到时收到提醒：</string>
 <string name="timer_start">添加提醒</string>
 
 

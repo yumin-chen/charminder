@@ -23,6 +23,12 @@
     android:layout_below="@+id/prompt"
     android:background="#e4f2fe" >
 
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_toLeftOf="@+id/timer3_h"
+        android:layout_centerVertical="true"
+        android:src="@drawable/time_b"/>
     <TextView
         android:id="@+id/timer3_h"
         android:layout_width="wrap_content"

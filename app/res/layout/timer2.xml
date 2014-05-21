@@ -22,7 +22,15 @@
     android:layout_alignParentLeft="true"
     android:layout_below="@+id/prompt"
     android:background="#e4f2fe" >
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_toLeftOf="@+id/timer2_yyy"
+        android:layout_centerVertical="true"
+        android:src="@drawable/calendar_b"/>
+        
     <TextView
+        android:id="@+id/timer2_yyy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/timer2_display_year"
@@ -121,17 +129,13 @@
     android:layout_alignParentLeft="true"
     android:layout_below="@+id/timer2_display_date_layout"
     android:background="#e4f2fe" >
-  <TextView
-        android:id="@+id/timer2_amorpm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+       
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_toLeftOf="@+id/timer2_display_hour1"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
-        android:text=""
-        android:textSize="20sp"
-        android:textColor="#304e62" />
+        android:layout_centerVertical="true"
+        android:src="@drawable/time_b"/>
  <TextView
         android:id="@+id/timer2_display_hour1"
         android:layout_width="wrap_content"
@@ -154,7 +158,7 @@
         android:id="@+id/timer2_h"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@+id/timer2_display_minute1"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="26dp"
@@ -165,7 +169,7 @@
         android:id="@+id/timer2_display_minute1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/timer2_h"
+        android:layout_toLeftOf="@+id/timer2_display_minute2"
          android:layout_centerVertical="true"
         android:text="@string/unknown_digit"
         android:textSize="40sp"
@@ -174,7 +178,7 @@
         android:id="@+id/timer2_display_minute2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/timer2_display_minute1"
+        android:layout_toLeftOf="@+id/timer2_m"
          android:layout_centerVertical="true"
         android:text="@string/unknown_digit"
         android:textSize="40sp"
@@ -184,7 +188,7 @@
         android:id="@+id/timer2_m"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         android:layout_toRightOf="@+id/timer2_display_minute2"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="26dp"
@@ -193,11 +197,22 @@
         android:textColor="#304e62" />
  
 
+  <TextView
+        android:id="@+id/timer2_amorpm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/timer2_m"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="#304e62" />
     <ImageView
         android:id="@+id/timer2_backspace"
         android:layout_width="48dp"
         android:layout_height="60dp"
-        android:layout_toRightOf="@+id/timer2_m"
+        android:layout_alignParentRight="true"
         android:layout_marginLeft="12dp"
          android:layout_marginRight="12dp"
         android:layout_centerVertical="true"
