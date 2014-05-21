@@ -4,6 +4,8 @@ import java.io.Console;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.DragEvent;
@@ -24,6 +27,10 @@ import android.view.View.DragShadowBuilder;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -41,6 +48,7 @@ public class MainActivity extends Activity {
 	static boolean bFloatingWindowRunning;
 	static ImageView ivFloating;
 	static ImageView ivCircle;
+	static RelativeLayout vCircle;
 	static ImageView[] ivCircleItems;
 	static ImageView ivCircleBg;
 	static ImageView ivBubble;
@@ -53,13 +61,10 @@ public class MainActivity extends Activity {
 	static WindowManager.LayoutParams wmParamsCBg;
 	static WindowManager.LayoutParams[] wmParamsCItems;
 	static DisplayMetrics metrics;
-	static boolean bCircleAnimPlaying = false;
-	static int iCircleAnimStep = 0;
-	
+
 	private static final int NUM_CIRCLE_ITEMS = 6;
 	private static final int REMINDING_PROCESS = 1;
-	private static final int PLAYING_CIRCLE_ANIM = 2;
-	
+
 	   private Handler mHandler = new Handler() {
 	        @Override
 			public void handleMessage(Message msg) {
@@ -72,24 +77,6 @@ public class MainActivity extends Activity {
             			}
             		}	
 	            	mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
-	            }else if(msg.what == PLAYING_CIRCLE_ANIM){
-	            	if(bCircleAnimPlaying){
-	            		iCircleAnimStep++;
-	                	int max =(pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x);
-	        			for(int i=0; i<NUM_CIRCLE_ITEMS; i++){
-		            		wmParamsCItems[i].x = (int)(max/2 + max*0.6/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
-		            				* Math.PI / 180.0) / 30 * (10+iCircleAnimStep) - wmParamsCItems[i].width/2);
-		            		wmParamsCItems[i].y = (int)(max/2 + max*0.6/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i) 
-		            				* Math.PI / 180.0) / 30 * (10+iCircleAnimStep) - wmParamsCItems[i].height/2);
-		            		wm.updateViewLayout(ivCircleItems[i], wmParamsCItems[i]);
-	        			}
-	        			if(iCircleAnimStep>=20){
-	        				iCircleAnimStep = 0;
-	        				bCircleAnimPlaying = false;
-	        			}else{
-		            		mHandler.sendEmptyMessage(PLAYING_CIRCLE_ANIM);	
-	        			}
-	            	}
 	            }
 	        }
 	 };
@@ -197,7 +184,11 @@ public class MainActivity extends Activity {
             ivFloating.setOnTouchListener(new View.OnTouchListener() {
     				@Override
             	    public boolean onTouch(View view, MotionEvent motionEvent) {
-    					if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+    					switch(motionEvent.getAction()){
+    					case MotionEvent.ACTION_DOWN:
+    						CreateTheCircle();
+    						return true;
+    					case MotionEvent.ACTION_MOVE:
     				        wmParamsI.x = (int)(motionEvent.getRawX() - wmParamsI.width/2);
     				        wmParamsI.y = (int)(motionEvent.getRawY() - wmParamsI.height/2);
     						wm.updateViewLayout(ivFloating, wmParamsI);	
@@ -209,6 +200,9 @@ public class MainActivity extends Activity {
     					        wm.updateViewLayout(ivBubble, wmParamsB);	
     					        wm.updateViewLayout(tvBubble, wmParamsBt);	
     						}
+    						return true;
+    					case MotionEvent.ACTION_UP:
+    						RemoveTheCircle();
     						return true;
     					}
         		        return false;
@@ -238,22 +232,6 @@ public class MainActivity extends Activity {
     		});
         }
         
-        
-        //Create ivCircleItems Objects
-        if(ivCircleItems == null){
-        	ivCircleItems = new ImageView[NUM_CIRCLE_ITEMS];
-        	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
-        		ivCircleItems[i] = new ImageView(this);
-        	}
-        	ivCircleItems[0].setImageResource(R.drawable.timer1_icon);
-        	ivCircleItems[1].setImageResource(R.drawable.timer2_icon);
-        	ivCircleItems[2].setImageResource(R.drawable.timer3_icon);
-        	ivCircleItems[3].setImageResource(R.drawable.timer4_icon);
-        	ivCircleItems[4].setImageResource(R.drawable.settings);
-        	ivCircleItems[5].setImageResource(R.drawable.reminderlist);
-        	ivCircleBg = new ImageView(this);
-        	ivCircleBg.setImageResource(R.drawable.circle_bg);
-        }
         
         //Create ivCircle Object
         if(ivCircle == null){
@@ -458,35 +436,72 @@ public class MainActivity extends Activity {
     }
     
     private void CreateTheCircle(){
+    	if (bCircleVisible)
+    		return;
     	wmParamsCItems = new WindowManager.LayoutParams[NUM_CIRCLE_ITEMS];
     	int max =(pScreenSize.x > pScreenSize.y? pScreenSize.y: pScreenSize.x);
     	wmParamsCBg.type = 2002;   
     	wmParamsCBg.format = 1; 
     	wmParamsCBg.flags = 40;  
-    	wmParamsCBg.gravity = Gravity.LEFT | Gravity.TOP;
     	wmParamsCBg.width = (int)(max);
     	wmParamsCBg.height = (int)(max);
-    	wmParamsCBg.x = (int)(max/2 - wmParamsCBg.width/2);
-    	wmParamsCBg.y = (int)(max/2 - wmParamsCBg.height/2);
-    	wm.addView(ivCircleBg, wmParamsCBg);
+    	//vCircle = getLayoutInflater().inflate(R.layout.the_circle, rl);
+        //Create ivCircleItems Objects
+        if(ivCircleItems == null){
+        	vCircle = new RelativeLayout(getApplicationContext());
+        	ivCircleBg = new ImageView(this);
+        	RelativeLayout.LayoutParams[] params = new RelativeLayout.LayoutParams[NUM_CIRCLE_ITEMS]; 
+        	ivCircleBg.setImageResource(R.drawable.circle_bg);
+        	vCircle.addView(ivCircleBg);
+        	ivCircleItems = new ImageView[NUM_CIRCLE_ITEMS];
+        	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
+        		ivCircleItems[i] = new ImageView(this);
+        		params[i] = new RelativeLayout.LayoutParams((int) (64 * (metrics.densityDpi / 160f)),
+        				(int) (64* (metrics.densityDpi / 160f)));
+        		params[i].leftMargin = 0;
+        		params[i].topMargin = 0;
+        	}
+        	ivCircleItems[0].setImageResource(R.drawable.timer1_icon);
+        	ivCircleItems[1].setImageResource(R.drawable.timer2_icon);
+        	ivCircleItems[2].setImageResource(R.drawable.timer3_icon);
+        	ivCircleItems[3].setImageResource(R.drawable.timer4_icon);
+        	ivCircleItems[4].setImageResource(R.drawable.settings);
+        	ivCircleItems[5].setImageResource(R.drawable.reminderlist);
+        	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
+            	vCircle.addView(ivCircleItems[i], params[i]);
+        	}
+        	
+        }
+
+    	wm.addView(vCircle, wmParamsCBg);
+    	Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom);
+    	ivCircleBg.startAnimation(animation);
     	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
-    		wmParamsCItems[i] = new WindowManager.LayoutParams();
-    		wmParamsCItems[i].type = 2002;   
-    		wmParamsCItems[i].format = 1; 
-    		wmParamsCItems[i].flags = 40;  
-    		wmParamsCItems[i].gravity = Gravity.LEFT | Gravity.TOP;
-    		wmParamsCItems[i].width = (int)(0.4 * metrics.densityDpi);
-    		wmParamsCItems[i].height = wmParamsCItems[i].width;  
-    		wmParamsCItems[i].x = (int)(max/2 - wmParamsCItems[i].width/2);
-    		wmParamsCItems[i].y = (int)(max/2 - wmParamsCItems[i].height/2);
-    		wm.addView(ivCircleItems[i], wmParamsCItems[i]);
+    		float tox = (float) (max/2 + max*0.6/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0) - (64 * (metrics.densityDpi / 160f))/2);
+    		float toy = (float) (max/2 + max*0.6/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0) - (64 * (metrics.densityDpi / 160f))/2);
+    		float fromx = (float) (max/2 + max*0.6/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0)/4 - (64 * (metrics.densityDpi / 160f))/2);
+    		float fromy = (float) (max/2 + max*0.6/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0)/4 - (64 * (metrics.densityDpi / 160f))/2);
+    		ValueAnimator aCircleItemsY = ObjectAnimator.ofFloat(ivCircleItems[i], "y", fromy, toy);
+    		aCircleItemsY.setDuration(200);
+    		ValueAnimator aCircleItemsX = ObjectAnimator.ofFloat(ivCircleItems[i], "x", fromx, tox);
+    		aCircleItemsX.setDuration(200);
+    		aCircleItemsY.start();
+    		aCircleItemsX.start();    
     	}
-			bCircleAnimPlaying = true;
-    		mHandler.sendEmptyMessage(PLAYING_CIRCLE_ANIM);	
-    	
+
+			
+    	bCircleVisible = true;
     };
     
     private void RemoveTheCircle(){
+    	if(!bCircleVisible)
+    		return;
+    	wm.removeView(vCircle);
+    	bCircleVisible = false;
     	
     }
 
