@@ -11,6 +11,7 @@ public class Reminder {
 	public Calendar time_to_remind;
 	public String note;
 	public boolean validity;
+	public int level;
 	public Reminder(int type_of_reminder){
 		time_when_created = Calendar.getInstance();
 		time_to_remind = Calendar.getInstance();

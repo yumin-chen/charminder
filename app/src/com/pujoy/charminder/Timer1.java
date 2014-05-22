@@ -19,6 +19,8 @@ import android.widget.TextView;
 public class Timer1 extends Activity {
 	ArrayList<Integer> TimeDigits = new ArrayList<Integer>();
 	static TextView[] TimerDisplay = new TextView[5];
+	static ImageView[] ivLevelIcon = new ImageView[5];
+	static int level = 1;
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,12 @@ public class Timer1 extends Activity {
 		TimerDisplay[2] = (TextView)findViewById(R.id.timer1_display_minute2);
 		TimerDisplay[1] = (TextView)findViewById(R.id.timer1_display_minute1);
 		TimerDisplay[0] = (TextView)findViewById(R.id.timer1_display_hour);
+		
+		ivLevelIcon[0] = (ImageView)findViewById(R.id.icon_level_star1);
+		ivLevelIcon[1] = (ImageView)findViewById(R.id.icon_level_star2);
+		ivLevelIcon[2] = (ImageView)findViewById(R.id.icon_level_star3);
+		ivLevelIcon[3] = (ImageView)findViewById(R.id.icon_level_star4);
+		ivLevelIcon[4] = (ImageView)findViewById(R.id.icon_level_star5);
 		
         TextView tvKey1 = (TextView)findViewById(R.id.timer1_key1);
         tvKey1.setOnClickListener(numKeyListener);
@@ -174,6 +182,7 @@ public class Timer1 extends Activity {
 						newReminder.time_to_remind.add(Calendar.SECOND, cal.get(Calendar.SECOND));
 						newReminder.time_to_remind.add(Calendar.MINUTE, cal.get(Calendar.MINUTE));
 						newReminder.time_to_remind.add(Calendar.HOUR, cal.get(Calendar.HOUR));
+						newReminder.level = level;
 						newReminder.note = FormatTimeText();
 						MainActivity.AddReminder(newReminder);
 						MainActivity.PushFloatingBubble(getString(R.string.bubble_add_reminder) +
@@ -186,6 +195,40 @@ public class Timer1 extends Activity {
 				}
 			}
 		});
+        
+        
+        
+        View.OnClickListener levelListener = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				switch (v.getId()){
+				case R.id.icon_level_star1:
+					UpdateLevel(1);
+					break;
+				case R.id.icon_level_star2:
+					UpdateLevel(2);
+					break;
+				case R.id.icon_level_star3:
+					UpdateLevel(3);
+					break;
+				case R.id.icon_level_star4:
+					UpdateLevel(4);
+					break;
+				case R.id.icon_level_star5:
+					UpdateLevel(5);
+					break;
+				}
+				
+			}
+		};
+		
+		for(int i=0; i<5; i++){
+			ivLevelIcon[i].setOnClickListener(levelListener);
+		}
+		
+		UpdateLevel(1);
+		
 	}
 	private String FormatTimeText(){
 		String ret = "";
@@ -211,6 +254,17 @@ public class Timer1 extends Activity {
             	TimerDisplay[i].setText("" + TimeDigits.get(i));
             }
        }
+	}
+	private void UpdateLevel(int newlevel){
+		level = newlevel;
+		for(int i=0; i<5; i++){
+			if(i<level){
+				ivLevelIcon[i].setImageResource(R.drawable.star1);
+			}else{
+				ivLevelIcon[i].setImageResource(R.drawable.star0);
+			}
+			
+		}
 	}
 
 }
