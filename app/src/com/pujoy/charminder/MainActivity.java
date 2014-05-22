@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
 	static ImageView[] ivCircleItems;
 	static ImageView ivCircleBg;
 	static TextView tvCircleDescription;
+	static int iOldCircleCurrent;
 	static ImageView ivBubble;
 	static TextView tvBubble;
 	static WindowManager wm; 
@@ -168,21 +169,39 @@ public class MainActivity extends Activity {
     								switch(i){
     								case 0:
         								tvCircleDescription.setText(getString(R.string.title_timer1));
+        								UpdateOldCircleCurrent();
+        								ivCircleItems[i].setImageResource(R.drawable.timer1_icon_a);
+        								iOldCircleCurrent = 1;
         								break;
     								case 1:
         								tvCircleDescription.setText(getString(R.string.title_timer2));
+        								UpdateOldCircleCurrent();
+        								ivCircleItems[i].setImageResource(R.drawable.timer2_icon_a);
+        								iOldCircleCurrent = 2;
         								break;
     								case 2:
         								tvCircleDescription.setText(getString(R.string.title_timer3));
+        								UpdateOldCircleCurrent();
+        								ivCircleItems[i].setImageResource(R.drawable.timer3_icon_a);
+        								iOldCircleCurrent = 3;
         								break;
     								case 3:
         								tvCircleDescription.setText(getString(R.string.title_timer4));
+        								UpdateOldCircleCurrent();
+        								ivCircleItems[i].setImageResource(R.drawable.timer4_icon_a);
+        								iOldCircleCurrent = 4;
         								break;
     								case 4:
         								tvCircleDescription.setText(getString(R.string.settings));
+        								UpdateOldCircleCurrent();
+        								ivCircleItems[i].setImageResource(R.drawable.settings_a);
+        								iOldCircleCurrent = 5;
         								break;
     								case 5:
         								tvCircleDescription.setText(getString(R.string.reminder_list));
+        								UpdateOldCircleCurrent();
+        								ivCircleItems[i].setImageResource(R.drawable.reminderlist_a);
+        								iOldCircleCurrent = 6;
         								break;
     								}
     						    	tvCircleDescription.setBackgroundColor(android.graphics.Color.argb(192, 48, 78, 98));
@@ -192,6 +211,7 @@ public class MainActivity extends Activity {
     									tvCircleDescription.setText("");
     									tvCircleDescription.setBackgroundColor(android.graphics.Color.argb(
     											0, 48, 78, 98));
+    									UpdateOldCircleCurrent();
     								}
     							
     							}
@@ -207,22 +227,22 @@ public class MainActivity extends Activity {
     									ivCircleItems[i].getHeight() +  dpToPx(16))){
     								switch(i){
     								case 0:
-        								GoToActivity("Timer1");
+        								GoToActivity(Timer1.class);
         								break;
     								case 1:
-        								GoToActivity("Timer2");
+        								GoToActivity(Timer2.class);
         								break;
     								case 2:
-        								GoToActivity("Timer3");
+        								GoToActivity(Timer3.class);
         								break;
     								case 3:
-        								GoToActivity("Timer4");
+        								GoToActivity(Timer4.class);
         								break;
     								case 4:
-        								GoToActivity("Settings");
+        								GoToActivity(Settings.class);
         								break;
     								case 5:
-        								GoToActivity("RemindersList");
+        								GoToActivity(RemindersList.class);
         								break;
     								}
     								break;
@@ -351,11 +371,17 @@ public class MainActivity extends Activity {
 
     }
     
-    public void GoToActivity(String ActivityName){
-    	Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setComponent(new ComponentName("com.pujoy.charminder","com.pujoy.charminder."+ActivityName));
-		intent.setPackage("com.pujoy.charminder");
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+    public void GoToActivity(Class<?> cls){
+    	Intent intent = new Intent(this, cls);
+		//intent.setComponent(new ComponentName("com.pujoy.charminder","com.pujoy.charminder."+ActivityName));
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+		startActivity(intent);
+		intent = new Intent(this, BringToFront.class);
+		BringToFront.Open(cls.getName());
 		startActivity(intent);
 	}
 
@@ -370,8 +396,8 @@ public class MainActivity extends Activity {
     	wmParamsC.type = 2002;   
     	wmParamsC.format = 1; 
     	wmParamsC.flags = 40;  
-    	wmParamsC.width = (int)(max);
-    	wmParamsC.height = (int)(max);
+    	wmParamsC.width = (int)(max*0.8);
+    	wmParamsC.height = (int)(max*0.8);
         wmParamsC.gravity = Gravity.LEFT | Gravity.TOP;
         wmParamsC.x = (metrics.widthPixels-wmParamsC.width)/2;
         wmParamsC.y = (metrics.heightPixels-wmParamsC.height)/2;   
@@ -397,14 +423,14 @@ public class MainActivity extends Activity {
         	RelativeLayout.LayoutParams[] params = new RelativeLayout.LayoutParams[NUM_CIRCLE_ITEMS]; 
         	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
         		ivCircleItems[i] = new ImageView(this);
-        		params[i] = new RelativeLayout.LayoutParams((int) dpToPx(64), (int) dpToPx(64));
+        		params[i] = new RelativeLayout.LayoutParams((int) dpToPx(96), (int) dpToPx(96));
         		params[i].leftMargin = 0;
         		params[i].topMargin = 0;
         	}
-        	ivCircleItems[0].setImageResource(R.drawable.timer1_icon);
-        	ivCircleItems[1].setImageResource(R.drawable.timer2_icon);
-        	ivCircleItems[2].setImageResource(R.drawable.timer3_icon);
-        	ivCircleItems[3].setImageResource(R.drawable.timer4_icon);
+        	ivCircleItems[0].setImageResource(R.drawable.timer1_icon_c);
+        	ivCircleItems[1].setImageResource(R.drawable.timer2_icon_c);
+        	ivCircleItems[2].setImageResource(R.drawable.timer3_icon_c);
+        	ivCircleItems[3].setImageResource(R.drawable.timer4_icon_c);
         	ivCircleItems[4].setImageResource(R.drawable.settings);
         	ivCircleItems[5].setImageResource(R.drawable.reminderlist);
         	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
@@ -419,14 +445,14 @@ public class MainActivity extends Activity {
     	Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom);
     	ivCircleBg.startAnimation(animation);
     	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
-    		float tox = (float) (max/2 + max*0.6/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0) -  dpToPx(64)/2);
-    		float toy = (float) (max/2 + max*0.6/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0) -  dpToPx(64)/2);
-    		float fromx = (float) (max/2 + max*0.6/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0)/4 -  dpToPx(64)/2);
-    		float fromy = (float) (max/2 + max*0.6/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0)/4 -  dpToPx(64)/2);
+    		float tox = (float) (wmParamsC.width/2 + max*0.55/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0) -  dpToPx(96)/2);
+    		float toy = (float) (wmParamsC.height/2 + max*0.55/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0) -  dpToPx(96)/2);
+    		float fromx = (float) (wmParamsC.width/2 + max*0.55/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0)/4 -  dpToPx(96)/2);
+    		float fromy = (float) (wmParamsC.height/2 + max*0.55/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0)/4 -  dpToPx(96)/2);
     		ValueAnimator aCircleItemsY = ObjectAnimator.ofFloat(ivCircleItems[i], "y", fromy, toy);
     		aCircleItemsY.setDuration(200);
     		ValueAnimator aCircleItemsX = ObjectAnimator.ofFloat(ivCircleItems[i], "x", fromx, tox);
@@ -449,6 +475,24 @@ public class MainActivity extends Activity {
     
     public float dpToPx(float dp){
     	return dp *(metrics.densityDpi / 160f);
+    }
+    
+    private void UpdateOldCircleCurrent(){
+    	switch(iOldCircleCurrent){
+		case 1:
+			ivCircleItems[0].setImageResource(R.drawable.timer1_icon_c);
+		case 2:
+			ivCircleItems[1].setImageResource(R.drawable.timer2_icon_c);
+		case 3:
+			ivCircleItems[2].setImageResource(R.drawable.timer3_icon_c);
+		case 4:
+			ivCircleItems[3].setImageResource(R.drawable.timer4_icon_c);
+		case 5:
+			ivCircleItems[4].setImageResource(R.drawable.settings);
+		case 6:
+			ivCircleItems[5].setImageResource(R.drawable.reminderlist);
+		}
+		iOldCircleCurrent = 0;
     }
 
 }

@@ -29,9 +29,7 @@
 <string name="title_timer1">计时提醒</string>
 <string name="title_timer2">定时提醒</string>
 <string name="title_timer3">整点提醒</string>
-<string name="title_timer4">定点提醒</string>
-<string name="title_timer5">日程提醒</string>
-<string name="title_timer6">记事提醒</string>
+<string name="title_timer4">事件提醒</string>
 
 
 <string name="expired">已经过期</string>
@@ -48,7 +46,7 @@
 <string name="timer1_prompt">您将在过完以下时间后收到提醒：</string>
 <string name="timer2_prompt">您将在该时刻收到提醒：</string>
 <string name="timer3_prompt">您将在每个小时的以下时刻收到提醒：</string>
-<string name="timer5_prompt">您将在该事件到时收到提醒：</string>
+<string name="timer4_prompt">您将在该事件到时收到提醒：</string>
 <string name="timer_start">添加提醒</string>
 
 

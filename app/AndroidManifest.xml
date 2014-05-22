@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.pujoy.charminder.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,7 +27,7 @@
             <activity
         android:name="com.pujoy.charminder.Timer1"
         android:label="@string/title_timer1"
-        android:parentActivityName="com.pujoy.charminder.MainActivity" >
+        android:parentActivityName="com.pujoy.charminder.MainActivity" android:launchMode="singleTask">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.pujoy.charminder.MainActivity" />
@@ -36,7 +36,7 @@
             <activity
         android:name="com.pujoy.charminder.Timer2"
         android:label="@string/title_timer2"
-        android:parentActivityName="com.pujoy.charminder.MainActivity" >
+        android:parentActivityName="com.pujoy.charminder.MainActivity" android:launchMode="singleTask">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.pujoy.charminder.MainActivity" />
@@ -45,7 +45,7 @@
             <activity
         android:name="com.pujoy.charminder.Timer3"
         android:label="@string/title_timer3"
-        android:parentActivityName="com.pujoy.charminder.MainActivity" >
+        android:parentActivityName="com.pujoy.charminder.MainActivity" android:launchMode="singleTask">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.pujoy.charminder.MainActivity" />
@@ -54,34 +54,18 @@
             <activity
         android:name="com.pujoy.charminder.Timer4"
         android:label="@string/title_timer4"
-        android:parentActivityName="com.pujoy.charminder.MainActivity" >
+        android:parentActivityName="com.pujoy.charminder.MainActivity" android:launchMode="singleTask">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.pujoy.charminder.MainActivity" />
     </activity>
     
-            <activity
-        android:name="com.pujoy.charminder.Timer5"
-        android:label="@string/title_timer5"
-        android:parentActivityName="com.pujoy.charminder.MainActivity" >
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.pujoy.charminder.MainActivity" />
-    </activity>
-    
-            <activity
-        android:name="com.pujoy.charminder.Timer6"
-        android:label="@string/title_timer6"
-        android:parentActivityName="com.pujoy.charminder.MainActivity" >
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.pujoy.charminder.MainActivity" />
-    </activity>
+
     
              <activity
         android:name="com.pujoy.charminder.RemindersList"
         android:label="@string/reminder_list"
-        android:parentActivityName="com.pujoy.charminder.MainActivity" >
+        android:parentActivityName="com.pujoy.charminder.MainActivity" android:launchMode="singleTask">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.pujoy.charminder.MainActivity" />
@@ -90,7 +74,15 @@
     <activity
         android:name="com.pujoy.charminder.Settings"
         android:label="@string/settings"
-        android:parentActivityName="com.pujoy.charminder.MainActivity" >
+        android:parentActivityName="com.pujoy.charminder.MainActivity" android:launchMode="singleTask">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.pujoy.charminder.MainActivity" />
+    </activity>
+    
+    <activity
+        android:name="com.pujoy.charminder.BringToFront"
+        android:parentActivityName="com.pujoy.charminder.MainActivity" android:launchMode="singleInstance">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.pujoy.charminder.MainActivity" />

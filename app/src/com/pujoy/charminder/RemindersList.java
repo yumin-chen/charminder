@@ -90,14 +90,6 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
             	ivType.setImageResource(R.drawable.timer4_icon);
             	tvType.setText(getString(R.string.title_timer4));
             	break;
-        	case 5:
-            	ivType.setImageResource(R.drawable.timer5_icon);
-            	tvType.setText(getString(R.string.title_timer5));
-            	break;
-        	case 6:
-            	ivType.setImageResource(R.drawable.timer6_icon);
-            	tvType.setText(getString(R.string.title_timer6));
-            	break;
         	}
         }
         ScrollView sView = (ScrollView)findViewById(R.id.reminderList_scroll);
@@ -106,7 +98,7 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
         isInFront=true;
         mHandler.sendEmptyMessage(UPDATE_REMINDING_TIME);
 	}
-	public void onClick(View v) {
+	public void onClick(View v) { 
 		for(int i=0; i<MainActivity.reminderList.size(); i++)
         {
         	if(v.getId() == 520+i)
