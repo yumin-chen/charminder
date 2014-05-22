@@ -315,17 +315,14 @@ public class Timer4 extends Activity {
 						newReminder.note = etContent.getText().toString();
 						newReminder.level = level;
 						if(currentTab == 1){
-							if(newReminder.note == "")
-								newReminder.note = (String) RemindersList.GetDescriptionHead(1) + FormatTime(countdownTime);
 							newReminder.time_to_remind = Calendar.getInstance();
+							newReminder.repeat = -1;
 							newReminder.time_to_remind.add(Calendar.MINUTE, countdownTime.get(Calendar.MINUTE));
 							newReminder.time_to_remind.add(Calendar.HOUR_OF_DAY, countdownTime.get(Calendar.HOUR_OF_DAY));
 							MainActivity.PushFloatingBubble(getString(R.string.bubble_add_reminder) +
 									FormatTime(countdownTime) + getString(R.string.bubble_timer4_tab1)
 									+ newReminder.title + getString(R.string.bubble_timer4_end));
 						}else{
-							if(newReminder.note == "")
-								newReminder.note = (String) RemindersList.GetDescriptionHead(2) + FormatDate(remindingTime)  + FormatTime(remindingTime);
 							newReminder.time_to_remind = remindingTime;
 							newReminder.repeat = repeat;
 							MainActivity.PushFloatingBubble(getString(R.string.bubble_add_reminder) +

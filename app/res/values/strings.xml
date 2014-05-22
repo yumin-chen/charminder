@@ -88,5 +88,7 @@
 <string name="bubble_timer4_end">的~</string>
 <string name="bubble_error">我不知道怎么提醒你~</string>
 <string name="bubble_reminder1">已经到了!</string>
+<string name="bubble_reminder4">快去</string>
+<string name="bubble_reminder4end">吧~</string>
 
 </resources>

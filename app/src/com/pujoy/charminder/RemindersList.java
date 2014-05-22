@@ -78,10 +78,47 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
                 	tvTime.setId(1220+i);
                 	tvTime.setText(getString(R.string.time_added)+
                 			FormatTime(MainActivity.reminderList.get(i).time_when_created));
+		        	RelativeLayout rlTime = (RelativeLayout)findViewById(R.id.remindingtime_layout);
+		        	rlTime.setId(1420+i);
+		        	RelativeLayout rlLocation = (RelativeLayout)findViewById(R.id.event_location_layout);
+		        	rlLocation.setId(1520+i);
+		        	TextView tvRemindingtime = (TextView)findViewById(R.id.text_remindingtime);
+		        	tvRemindingtime.setId(1620+i);
+		        	TextView tvLocation = (TextView)findViewById(R.id.text_location);
+		        	tvLocation.setId(1720+i);
+		        	LinearLayout llMainSection = (LinearLayout)findViewById(R.id.main_section_layout);
+		        	llMainSection .setId(1820+i);
+    	        	if(MainActivity.reminderList.get(i).type != 4)
+    	        	{
+    	        		llMainSection.removeView(rlTime);
+    	        		llMainSection.removeView(rlLocation);
+    	        	}else{
+    	        		if(MainActivity.reminderList.get(i).location.isEmpty()){
+    	        			llMainSection.removeView(rlLocation);
+    	        		}else{
+    	        			tvLocation.setText(getString(R.string.event_location)+MainActivity.reminderList.get(i).location);
+    	        		}
+    	        		tvRemindingtime.setText(getString(R.string.time_to_remind)+
+    	        				FormatDate(MainActivity.reminderList.get(i).time_to_remind)+
+    	        				FormatTime(MainActivity.reminderList.get(i).time_to_remind));
+    	        	}
                 	TextView tvContent = (TextView)findViewById(R.id.text_content);
                 	tvContent.setId(1320+i);
-                	tvContent.setText(getString(R.string.content)+ GetDescriptionHead(MainActivity.reminderList.get(i).type) +
+					
+					if(MainActivity.reminderList.get(i).type != 4)
+    	        	{
+					tvContent.setText(getString(R.string.content)+ GetDescriptionHead(MainActivity.reminderList.get(i).type) +
                 			MainActivity.reminderList.get(i).note+ GetDescriptionEnd(MainActivity.reminderList.get(i).type));
+    	        	}else{
+    	        		if(MainActivity.reminderList.get(i).note.isEmpty()){
+    	        			if(MainActivity.reminderList.get(i).repeat == -1){
+    	        				tvContent.setText(GetDescriptionHead(1) + FormatTime(MainActivity.reminderList.get(i).time_to_remind));
+    	        			}else{
+    	        				tvContent.setText(GetDescriptionHead(2) + FormatDate(MainActivity.reminderList.get(i).time_to_remind)
+    	        						+ FormatTime(MainActivity.reminderList.get(i).time_to_remind));
+    	        			}
+    	        		}
+    	        	}
                 	ImageView ivStar1 = (ImageView)findViewById(R.id.reminderlist_level_star1);
                 	ivStar1.setId(generateViewId());
                 	ImageView ivStar2 = (ImageView)findViewById(R.id.reminderlist_level_star2);
@@ -225,6 +262,11 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
 	        //1120+ text_date
 	        //1220+ text_time
 	        //1320+ text_content
+		 	//1420+ remindingtime_layout
+		 	//1520+ event_location_layout
+		 	//1620+ text_time_to_remind
+		 	//1720+ text_location
+		 	//1820+ main_section_layout
 	        LinearLayout lView = (LinearLayout)findViewById(R.id.reminderList_layout);
 	        lView.removeAllViews();
 	        itemsListExpanded.clear();
