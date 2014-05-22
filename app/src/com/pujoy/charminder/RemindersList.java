@@ -179,7 +179,7 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
 		 return s;
 	 } 
 	 
-	 private CharSequence GetDescriptionHead(int Index){
+	 public static CharSequence GetDescriptionHead(int Index){
 		 switch(Index){
 		 case 1:
 			 return "µ¹¼ÆÊ±";
@@ -262,7 +262,7 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
 	            	break;
 	        	case 4:
 	            	ivType.setImageResource(R.drawable.timer4_icon);
-	            	tvType.setText(getString(R.string.title_timer4));
+	            	tvType.setText(MainActivity.reminderList.get(i).title);
 	            	break;
 	        	}
 	        }

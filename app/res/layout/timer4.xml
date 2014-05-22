@@ -104,7 +104,7 @@
             android:src="@drawable/time_b" />
 
         <TextView
-            android:id="@+id/text_time"
+            android:id="@+id/text_remindingtime"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:layout_alignTop="@+id/icon_time"
@@ -122,16 +122,17 @@
     <LinearLayout android:layout_width="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-    android:layout_height="32dp"
-    android:layout_marginTop="4dp"
+    android:layout_height="36dp"
      android:weightSum="13"
-    android:background="#304e62" >
+    android:background="#304e62" 
+    android:id="@+id/timer4_countdown_tab"
+    >
 
     <ImageView
         android:id="@+id/time_type_timer1_icon"
         android:layout_width="0dp"
         android:layout_height="24dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:scaleType="fitEnd"
         android:layout_weight="6"
         android:src="@drawable/timer1_icon" />
@@ -140,7 +141,7 @@
 	    android:id="@+id/time_type_timer1_text"
 	    android:layout_width="0dp"
 	    android:layout_height="24dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
 	    android:gravity="center_vertical"
 	    android:layout_weight="7"
 	    android:text="@string/time_type_timer1"
@@ -148,12 +149,15 @@
 	    android:textSize="14sp" />
 
     </LinearLayout>
-    <LinearLayout android:layout_width="0dp"
+
+    <LinearLayout
+        android:id="@+id/timer4_specified_time_tab"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
         android:layout_weight="1"
+        android:background="#188080"
         android:orientation="horizontal"
-    android:layout_height="36dp"
-     android:weightSum="13"
-    android:background="#188080" > 
+        android:weightSum="13" >
 
     <ImageView
         android:id="@+id/time_type_timer2_icon"
@@ -177,10 +181,16 @@
 
     </LinearLayout>
 </LinearLayout>
-<RelativeLayout android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_marginTop="36dp"
-    android:background="#188080" >
+    android:background="#188080"
+    android:id="@+id/timer4_tab2"
+     >
+    <RelativeLayout android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:id="@+id/date_layout" >
 	<ImageView
                     android:id="@+id/calendar_icon"
                     android:layout_width="24dp"
@@ -188,6 +198,7 @@
                     android:layout_alignParentLeft="true"
     				android:layout_marginLeft="8dp"
    					android:layout_marginTop="8dp"
+       		        android:layout_marginBottom="4dp"
                     android:src="@drawable/calendar" />
 	<TextView
 	    android:id="@+id/text_date"
@@ -207,14 +218,18 @@
     				android:layout_marginLeft="8dp"
    					android:layout_marginTop="8dp"
                     android:src="@drawable/edit" />
-	
+	</RelativeLayout>
+	<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:id="@+id/time_layout" >
 	<ImageView
                     android:id="@+id/time_icon"
                     android:layout_width="24dp"
     				android:layout_height="24dp"
                     android:layout_alignParentLeft="true"
+   					android:layout_marginTop="4dp"
     				android:layout_marginLeft="8dp"
-				    android:layout_below="@+id/calendar_icon"
+       		        android:layout_marginBottom="4dp"
                     android:src="@drawable/time" />
 	<TextView
 	    android:id="@+id/text_time"
@@ -225,7 +240,11 @@
 	    android:gravity="center_vertical"
 	    android:text="@string/time_"
 	    android:textColor="#e4f2fe"
-	    android:textSize="14sp" />
+		android:focusable="true"
+ 		android:focusableInTouchMode="true" 
+	    android:textSize="14sp" >
+    <requestFocus />
+    </TextView>
 	<ImageView
                     android:id="@+id/time_edit_icon"
                     android:layout_width="24dp"
@@ -234,18 +253,22 @@
 	  			    android:layout_alignTop="@+id/time_icon"
     				android:layout_marginLeft="8dp"
                     android:src="@drawable/edit" />
+	</RelativeLayout>
 	
+    <RelativeLayout android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:id="@+id/repeat_layout" >
 	<ImageView
                     android:id="@+id/repeat_icon"
                     android:layout_width="24dp"
     				android:layout_height="24dp"
                     android:layout_alignParentLeft="true"
+   					android:layout_marginTop="4dp"
     				android:layout_marginLeft="8dp"
-				    android:layout_marginBottom="8dp"
-				    android:layout_below="@+id/time_icon"
+				    android:layout_marginBottom="4dp"
                     android:src="@drawable/repeat" />
 	<TextView
-	    android:id="@+id/text_time"
+	    android:id="@+id/text_repeat"
 	    android:layout_width="wrap_content"
 	    android:layout_height="24dp"
 	    android:layout_alignTop="@+id/repeat_icon"
@@ -255,15 +278,16 @@
 	    android:textColor="#e4f2fe"
 	    android:textSize="14sp" />
 	<ImageView
-                    android:id="@+id/time_edit_icon"
+                    android:id="@+id/repeat_edit_icon"
                     android:layout_width="24dp"
     				android:layout_height="24dp"
-	   				 android:layout_toRightOf="@+id/text_time"
+	   				 android:layout_toRightOf="@+id/text_repeat"
 	  			    android:layout_alignTop="@+id/repeat_icon"
     				android:layout_marginLeft="8dp"
                     android:src="@drawable/edit" />
+	</RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -305,6 +329,62 @@
             android:text="@string/text_level"
             android:textSize="16sp"
             android:textColor="#304e62" />
+        
+                  <ImageView
+            android:id="@+id/icon_level_star1"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/text_level"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/star1" />
+          <ImageView
+            android:id="@+id/icon_level_star2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/icon_level_star1"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/star0" />
+          <ImageView
+            android:id="@+id/icon_level_star3"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/icon_level_star2"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/star0" />
+          <ImageView
+            android:id="@+id/icon_level_star4"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/icon_level_star3"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/star0" />
+          <ImageView
+            android:id="@+id/icon_level_star5"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/icon_level_star4"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/star0" />
 
         <View
             android:layout_width="match_parent"
@@ -372,10 +452,10 @@
     </RelativeLayout>
          
            <RelativeLayout
-        android:id="@+id/timer4_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#e4f2fe" >
+               android:id="@+id/timer4_content"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="#e4f2fe" >
 
         <ImageView
             android:id="@+id/icon_content"
@@ -409,13 +489,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="16dp"
+            android:layout_centerVertical="true"
  		    android:textColor="#304e62"
             android:layout_toRightOf="@+id/text_content"
             android:ems="10">
-
+			
         </EditText>
         <View
             android:layout_width="match_parent"

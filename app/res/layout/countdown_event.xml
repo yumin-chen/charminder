@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/timer4_tab1"
+	    android:layout_width="match_parent"
+	    android:layout_height="36dp"
+	    android:layout_marginTop="36dp"
+	    android:background="#304e62" >
+
+	<ImageView
+                    android:id="@+id/time_icon_"
+                    android:layout_width="24dp"
+    				android:layout_height="24dp"
+                    android:layout_alignParentLeft="true"
+   					android:layout_marginTop="8dp"
+    				android:layout_marginLeft="8dp"
+       		        android:layout_marginBottom="8dp"
+                    android:src="@drawable/time" />
+	<TextView
+	    android:id="@+id/text_countdowntime"
+	    android:layout_width="wrap_content"
+	    android:layout_height="24dp"
+	    android:layout_alignTop="@+id/time_icon_"
+	    android:layout_toRightOf="@+id/time_icon_"
+	    android:gravity="center_vertical"
+	    android:text="@string/countdowntime_"
+	    android:textColor="#e4f2fe"
+	    android:textSize="14sp" />
+	<ImageView
+                    android:id="@+id/time_edit_icon_"
+                    android:layout_width="24dp"
+    				android:layout_height="24dp"
+	   				 android:layout_toRightOf="@+id/text_countdowntime"
+	  			    android:layout_alignTop="@+id/time_icon_"
+    				android:layout_marginLeft="8dp"
+                    android:src="@drawable/edit" />
+	</RelativeLayout>
+	
+

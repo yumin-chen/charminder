@@ -17,6 +17,8 @@ import android.widget.TextView;
 public class Timer3 extends Activity {
 	ArrayList<Integer> TimeDigits = new ArrayList<Integer>();
 	static TextView[] TimerDisplay = new TextView[2];
+	static ImageView[] ivLevelIcon = new ImageView[5];
+	static int level = 1;
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,6 +150,7 @@ public class Timer3 extends Activity {
 						newReminder.time_to_remind.set(Calendar.MINUTE, TimeDigits.get(0)*10 + TimeDigits.get(1));
 						newReminder.time_to_remind.set(Calendar.SECOND, 0);
 						newReminder.note=TimeDigits.get(0).toString()+TimeDigits.get(1).toString();
+						newReminder.level=level;
 						if(newReminder.time_to_remind.compareTo(Calendar.getInstance()) <=0) 
 							newReminder.time_to_remind.add(Calendar.HOUR, 1);
 						MainActivity.AddReminder(newReminder);
@@ -164,6 +167,43 @@ public class Timer3 extends Activity {
         TimeDigits.add(0);
         TimeDigits.add(0);
         UpdateTimerDisplay();
+        
+		ivLevelIcon[0] = (ImageView)findViewById(R.id.icon_level_star1);
+		ivLevelIcon[1] = (ImageView)findViewById(R.id.icon_level_star2);
+		ivLevelIcon[2] = (ImageView)findViewById(R.id.icon_level_star3);
+		ivLevelIcon[3] = (ImageView)findViewById(R.id.icon_level_star4);
+		ivLevelIcon[4] = (ImageView)findViewById(R.id.icon_level_star5);
+		
+		
+        View.OnClickListener levelListener = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				switch (v.getId()){
+				case R.id.icon_level_star1:
+					UpdateLevel(1);
+					break;
+				case R.id.icon_level_star2:
+					UpdateLevel(2);
+					break;
+				case R.id.icon_level_star3:
+					UpdateLevel(3);
+					break;
+				case R.id.icon_level_star4:
+					UpdateLevel(4);
+					break;
+				case R.id.icon_level_star5:
+					UpdateLevel(5);
+					break;
+				}
+			}
+		};
+		
+		for(int i=0; i<5; i++){
+			ivLevelIcon[i].setOnClickListener(levelListener);
+		}
+		
+		UpdateLevel(1);
 	}
 	
 	private void UpdateTimerDisplay(){
@@ -178,4 +218,16 @@ public class Timer3 extends Activity {
        }
 	}
 
+
+	private void UpdateLevel(int newlevel){
+		level = newlevel;
+		for(int i=0; i<5; i++){
+			if(i<level){
+				ivLevelIcon[i].setImageResource(R.drawable.star1);
+			}else{
+				ivLevelIcon[i].setImageResource(R.drawable.star0);
+			}
+			
+		}
+	}
 }

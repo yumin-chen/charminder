@@ -13,14 +13,27 @@
 <string name="text_time">时间：</string>
 <string name="text_level">级别：</string>
 <string name="date_">日期：</string>
+<string name="countdowntime_">倒计时：</string>
 <string name="time_">时间：</string>
 <string name="repeat_">周期：</string>
+<string name="repeat_once">仅一次</string>
+<string name="repeat_dayly">每天一次</string>
+<string name="repeat_weekly">每周一次</string>
+<string name="repeat_monthly">每月一次</string>
+<string name="repeat_yearly">每年一次</string>
 <string name="text_location">地点：</string>
 <string name="text_content">内容：</string>
 <string name="date_added">创建日期：</string>
 <string name="time_added">创建时间：</string>
+<string name="event_location">事件地点：</string>
+<string name="time_to_remind">提醒时间：</string>
 <string name="content">提醒内容：</string>
 <string name="level">提醒级别：</string>
+
+<string name="ok">确认</string>
+<string name="cancel">取消</string>
+
+<string name="select_repeat">请选择周期：</string>
 
 <string name="time_type_timer1">计时</string>
 <string name="time_type_timer2">定点</string>
@@ -70,6 +83,9 @@
 <string name="bubble_timer1">之后提醒你~</string>
 <string name="bubble_timer2">准时提醒你~</string>
 <string name="bubble_timer3">每个小时的</string>
+<string name="bubble_timer4_tab1">之后提醒你关于这个</string>
+<string name="bubble_timer4_tab2">准时提醒你关于这个</string>
+<string name="bubble_timer4_end">的~</string>
 <string name="bubble_error">我不知道怎么提醒你~</string>
 <string name="bubble_reminder1">已经到了!</string>
 

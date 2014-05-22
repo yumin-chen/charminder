@@ -230,7 +230,7 @@
      android:id="@+id/timer2_keyboard"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
-     android:layout_above="@+id/timer2_start"
+     android:layout_above="@+id/timer2_level"
      android:layout_alignParentLeft="true"
      android:layout_below="@+id/timer2_display_layout"
      android:layout_marginBottom="1dp"
@@ -372,7 +372,97 @@ android:layout_weight="0.25">
 </LinearLayout>
 
 </LinearLayout>
+ <RelativeLayout
+        android:id="@+id/timer2_level"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/timer2_start"
+        android:background="#e4f2fe" >
+          <ImageView
+            android:id="@+id/icon_level"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/level" />
 
+        <TextView
+            android:id="@+id/text_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon_level"
+            android:gravity="center_vertical"
+            android:text="@string/text_level"
+            android:textSize="16sp"
+            android:textColor="#304e62" />
+
+        
+          <ImageView
+            android:id="@+id/icon_level_star1"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/text_level"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/star1" />
+          <ImageView
+            android:id="@+id/icon_level_star2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/icon_level_star1"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/star0" />
+          <ImageView
+            android:id="@+id/icon_level_star3"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/icon_level_star2"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/star0" />
+          <ImageView
+            android:id="@+id/icon_level_star4"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/icon_level_star3"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/star0" />
+          <ImageView
+            android:id="@+id/icon_level_star5"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/icon_level_star4"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/star0" />
+
+    </RelativeLayout>
 
 <TextView
     android:id="@+id/timer2_start"

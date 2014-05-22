@@ -9,6 +9,7 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -70,14 +71,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Get Screen Resolution And Calculate Scale
-        metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        fScaleY = metrics.heightPixels / 960f;
-        fScaleY = fScaleY > 1? 1: fScaleY == 0? 1: fScaleY;
-        fScaleX = metrics.widthPixels / 680f;
-        fScaleX = fScaleX > 1? 1: fScaleX == 0? 1: fScaleX;
-        fScale = fScaleX > fScaleY? fScaleY: fScaleX;
+        
         
         
         mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
@@ -131,11 +125,6 @@ public class MainActivity extends Activity {
         RelativeLayout running_layout = (RelativeLayout)findViewById(R.id.running_layout);
         running_layout.setOnTouchListener(mainKeyTouchListener);
         running_layout.setOnClickListener(startRunningListener);
-        
-        if(wmParamsI == null) wmParamsI = new WindowManager.LayoutParams();
-        if(wmParamsB == null) wmParamsB = new WindowManager.LayoutParams();
-        if(wmParamsBt == null) wmParamsBt = new WindowManager.LayoutParams();
-        if(wmParamsC == null) wmParamsC = new WindowManager.LayoutParams();
     	
         // Create ivFloating Object
         if (ivFloating == null){
@@ -305,12 +294,25 @@ public class MainActivity extends Activity {
             tvBubble.setGravity(Gravity.CENTER);
         }
         
-    }
-
-    private void CreateFloatingWindow(){
-
+      //Get Screen Resolution And Calculate Scale
+        CalculateMetrics();
         
-        //Get Header Y Position
+    }
+    
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        CalculateMetrics();
+        if(bBubbleVisible){
+        	wm.updateViewLayout(ivBubble, wmParamsB);
+        	wm.updateViewLayout(tvBubble, wmParamsBt);
+		}
+        if(bCircleVisible){
+        	wm.updateViewLayout(vCircle, wmParamsC);
+		}
+
+    }
+    private void CreateFloatingWindow(){
+    	//Get Header Position
         View vHeader = (View)findViewById(R.id.head_p);
 
         wmParamsI.type = 2002;   
@@ -320,10 +322,10 @@ public class MainActivity extends Activity {
         wmParamsI.height = (int)(0.3 * metrics.densityDpi);  
         wmParamsI.gravity = Gravity.LEFT | Gravity.TOP;
         wmParamsI.x = (int)(metrics.widthPixels - wmParamsI.width);
-        wmParamsI.y = (int)(vHeader.getHeight() - wmParamsI.height);      
+        wmParamsI.y = (int)(vHeader.getHeight() - wmParamsI.height);    
+        
+        
         wm.addView(ivFloating, wmParamsI); 
-        
-        
         PushFloatingBubble(getString(R.string.bubble_on_created));
         
     }
@@ -332,33 +334,13 @@ public class MainActivity extends Activity {
     	if (bBubbleVisible){
     		wm.removeView(ivBubble);
     	    wm.removeView(tvBubble);
-    	}
-        wmParamsB.type = 2002;   
-        wmParamsB.format = 1; 
-        wmParamsB.flags = 40;  
-        wmParamsB.width = (int)(640 * fScale);
-        wmParamsB.height = (int)(340 * fScale);  
-        wmParamsB.gravity = Gravity.LEFT | Gravity.TOP;
-        wmParamsB.x = wmParamsI.x - wmParamsB.width;
-        wmParamsB.x = wmParamsB.x < 0? 0: wmParamsB.x;
-        wmParamsB.y = wmParamsI.y - wmParamsB.height;  
-        wmParamsB.y = wmParamsB.y < 0? 0: wmParamsB.y;
-     
-        wmParamsBt.type = 2002;   
-        wmParamsBt.format = 1; 
-        wmParamsBt.flags = 40;  
-        wmParamsBt.width = wmParamsB.width - (int)(80 * fScale);
-        wmParamsBt.height = wmParamsB.height - (int)(64 * fScale);  
-        wmParamsBt.gravity = Gravity.LEFT | Gravity.TOP;
-        wmParamsBt.x = wmParamsB.x + (int)(40 * fScale);
-        wmParamsBt.y = wmParamsB.y + (int)(40 * fScale);   
-        
-        
+    	} 
+    	
      bBubbleVisible = true;
      tvBubble.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18-BubbleText.length()/12);
      tvBubble.setText(BubbleText);
      
-
+     UpdatePositionParams();
      wm.addView(ivBubble, wmParamsB);
      wm.addView(tvBubble, wmParamsBt);
      
@@ -392,17 +374,9 @@ public class MainActivity extends Activity {
     private void CreateTheCircle(){
     	if (bCircleVisible)
     		return;
-    	int max =(metrics.widthPixels > metrics.heightPixels? metrics.heightPixels: metrics.widthPixels);
-    	wmParamsC.type = 2002;   
-    	wmParamsC.format = 1; 
-    	wmParamsC.flags = 40;  
-    	wmParamsC.width = (int)(max*0.8);
-    	wmParamsC.height = (int)(max*0.8);
-        wmParamsC.gravity = Gravity.LEFT | Gravity.TOP;
-        wmParamsC.x = (metrics.widthPixels-wmParamsC.width)/2;
-        wmParamsC.y = (metrics.heightPixels-wmParamsC.height)/2;   
-        
     	
+    	CalculateMetrics();
+    	int max =(metrics.widthPixels > metrics.heightPixels? metrics.heightPixels: metrics.widthPixels);
     	//vCircle = getLayoutInflater().inflate(R.layout.the_circle, rl);
         //Create ivCircleItems Objects
         if(vCircle == null){
@@ -473,7 +447,7 @@ public class MainActivity extends Activity {
     	
     }
     
-    public float dpToPx(float dp){
+    public static float dpToPx(float dp){
     	return dp *(metrics.densityDpi / 160f);
     }
     
@@ -494,7 +468,63 @@ public class MainActivity extends Activity {
 		}
 		iOldCircleCurrent = 0;
     }
+    private void CalculateMetrics(){
+    	metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        fScaleY = metrics.heightPixels / 960f;
+        fScaleY = fScaleY > 1? 1: fScaleY == 0? 1: fScaleY;
+        fScaleX = metrics.widthPixels / 680f;
+        fScaleX = fScaleX > 1? 1: fScaleX == 0? 1: fScaleX;
+        fScale = fScaleX > fScaleY? fScaleY: fScaleX;
+        
+        
+        if(wmParamsI == null) wmParamsI = new WindowManager.LayoutParams();
+        if(wmParamsB == null) wmParamsB = new WindowManager.LayoutParams();
+        if(wmParamsBt == null) wmParamsBt = new WindowManager.LayoutParams();
+        if(wmParamsC == null) wmParamsC = new WindowManager.LayoutParams();
+        
+        UpdatePositionParams();
+        
 
+        
+    }
+    private static void UpdatePositionParams(){
+        
+    	int max =(metrics.widthPixels > metrics.heightPixels? metrics.heightPixels: metrics.widthPixels);
+    	wmParamsC.type = 2002;   
+    	wmParamsC.format = 1; 
+    	wmParamsC.flags = 40;  
+    	wmParamsC.width = (int)(max*0.8);
+    	wmParamsC.height = (int)(max*0.8);
+        wmParamsC.gravity = Gravity.LEFT | Gravity.TOP;
+        wmParamsC.x = (metrics.widthPixels-wmParamsC.width)/2;
+        wmParamsC.y = (metrics.heightPixels-wmParamsC.height)/2;   
+        
+
+        wmParamsB.type = 2002;   
+        wmParamsB.format = 1; 
+        wmParamsB.flags = 40;  
+        wmParamsB.width = (int)(640 * fScale);
+        wmParamsB.height = (int)(340 * fScale);  
+        wmParamsB.gravity = Gravity.LEFT | Gravity.TOP;
+        wmParamsB.x = wmParamsI.x - wmParamsB.width;
+        wmParamsB.x = wmParamsB.x < 0? 0:
+        	wmParamsB.x + wmParamsB.width> metrics.widthPixels?
+        			metrics.widthPixels - wmParamsB.width: wmParamsB.x;
+        wmParamsB.y = wmParamsI.y - wmParamsB.height;  
+        wmParamsB.y = wmParamsB.y < 0? 0:
+        	wmParamsB.y + wmParamsB.height> metrics.heightPixels? 
+        			metrics.heightPixels - wmParamsB.height: wmParamsB.y;
+     
+        wmParamsBt.type = 2002;   
+        wmParamsBt.format = 1; 
+        wmParamsBt.flags = 40;  
+        wmParamsBt.width = wmParamsB.width - (int)(80 * fScale);
+        wmParamsBt.height = wmParamsB.height - (int)(64 * fScale);  
+        wmParamsBt.gravity = Gravity.LEFT | Gravity.TOP;
+        wmParamsBt.x = wmParamsB.x + (int)(40 * fScale);
+        wmParamsBt.y = wmParamsB.y + (int)(40 * fScale);  
+    }
 }
     
 
