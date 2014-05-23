@@ -144,6 +144,31 @@
 	
 	<RelativeLayout android:layout_width="match_parent"
     				android:layout_height="32dp"
+    				 android:id="@+id/repeat_layout"
+        >
+	<ImageView
+                    android:id="@+id/repeat_icon"
+                    android:layout_width="24dp"
+    				android:layout_height="24dp"
+                    android:layout_alignParentLeft="true"
+    				android:layout_marginLeft="8dp"
+   					android:layout_marginTop="4dp"
+   					android:layout_marginBottom="4dp"
+                    android:src="@drawable/repeat" />
+	<TextView
+	    android:id="@+id/text_repeat"
+	    android:layout_width="wrap_content"
+	    android:layout_height="24dp"
+	    android:layout_alignTop="@+id/repeat_icon"
+	    android:layout_toRightOf="@+id/repeat_icon"
+	    android:gravity="center_vertical"
+	    android:text="@string/repeat"
+	    android:textColor="#e4f2fe"
+	    android:textSize="14sp" />
+	</RelativeLayout>
+	
+	<RelativeLayout android:layout_width="match_parent"
+    				android:layout_height="32dp"
     				 android:id="@+id/event_location_layout"
         >
 	<ImageView

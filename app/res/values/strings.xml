@@ -28,10 +28,22 @@
 <string name="event_location">事件地点：</string>
 <string name="time_to_remind">提醒时间：</string>
 <string name="content">提醒内容：</string>
+<string name="repeat">循环周期：</string>
 <string name="level">提醒级别：</string>
 
 <string name="ok">确认</string>
 <string name="cancel">取消</string>
+
+
+<string name="setting_autodelete">自动删除过期提醒</string>
+<string name="setting_bubbletime">气泡提示自动消失时间</string>
+<string name="setting_level1">分级提醒方式</string>
+
+<string name="level_bubble">风吹吹悬浮气泡提示</string>
+<string name="level_notification_center">推送到消息中心</string>
+<string name="level_wake_screen">唤醒屏幕</string>
+<string name="level_vibrate">震动</string>
+<string name="level_sound">响铃</string>
 
 <string name="select_repeat">请选择周期：</string>
 
@@ -56,6 +68,8 @@
 <string name="second">秒</string>
 <string name="everyhour">每小时</string>
 <string name="reminderslist_prompt">您的提醒清单列表：</string>
+<string name="settings_prompt">风吹吹醒程序设置：</string>
+<string name="level_prompt">分级提醒方式设置：</string>
 <string name="timer1_prompt">您将在过完以下时间后收到提醒：</string>
 <string name="timer2_prompt">您将在该时刻收到提醒：</string>
 <string name="timer3_prompt">您将在每个小时的以下时刻收到提醒：</string>

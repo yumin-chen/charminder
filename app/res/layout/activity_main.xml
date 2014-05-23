@@ -81,9 +81,9 @@
             android:textColor="#304e62" />
 
         <ImageView
-            android:id="@+id/floatingwindow_tick"
-            android:layout_width="86dp"
-            android:layout_height="32dp"
+            android:id="@+id/floatingwindow_switch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="false"
             android:layout_centerInParent="false"
@@ -91,7 +91,7 @@
             android:layout_marginLeft="12dp"
             android:contentDescription="@string/floatingwindow"
             android:layout_marginRight="12dp"
-            android:src="@drawable/tick_0" />
+            android:src="@drawable/switch_0" />
 
         <View
             android:layout_width="match_parent"

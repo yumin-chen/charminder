@@ -94,8 +94,8 @@ public class MainActivity extends Activity {
     	    }
 		};
         
-        final ImageView ivEnabled = (ImageView)findViewById(R.id.floatingwindow_tick);
-        ivEnabled.setImageResource(bFloatingWindowRunning? R.drawable.tick_1: R.drawable.tick_0);
+        final ImageView ivEnabled = (ImageView)findViewById(R.id.floatingwindow_switch);
+        ivEnabled.setImageResource(bFloatingWindowRunning? R.drawable.switch_1: R.drawable.switch_0);
         View.OnClickListener startRunningListener = new View.OnClickListener() {
 			
 			@Override
@@ -110,12 +110,12 @@ public class MainActivity extends Activity {
 							bBubbleVisible = false;
 					}
 					
-					ivEnabled.setImageResource(R.drawable.tick_0);
+					ivEnabled.setImageResource(R.drawable.switch_0);
 					bFloatingWindowRunning = false;
 				}
 				else{
 					CreateFloatingWindow();
-					ivEnabled.setImageResource(R.drawable.tick_1);
+					ivEnabled.setImageResource(R.drawable.switch_1);
 					bFloatingWindowRunning = true;
 				}
 

@@ -45,25 +45,10 @@ public class Timer4 extends Activity {
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View mainView = getLayoutInflater().inflate(R.layout.timer4, null);
-        mainView.post(new Runnable() 
-        {
-            @Override
-            public void run() 
-            {     
-            	LinearLayout ll = (LinearLayout)findViewById(R.id.timer4_layout);
-            	ScrollView sv = (ScrollView)findViewById(R.id.timer4_scroll);
-            	if(ll.getHeight() < sv.getHeight())
-                {
-                	TextView tvContent = (TextView)findViewById(R.id.text_content);
-                	tvContent.setHeight((int) (MainActivity.dpToPx(40) + sv.getHeight() - ll.getHeight()));
-                } 
-            }
-        } );
-
-        setContentView(mainView);   
+        setContentView(R.layout.timer4);   
         
         remindingTime = Calendar.getInstance();
+        remindingTime.set(Calendar.SECOND, 0);
         countdownTime.set(Calendar.HOUR_OF_DAY, 0);
         countdownTime.set(Calendar.MINUTE, 0);
         
@@ -84,10 +69,7 @@ public class Timer4 extends Activity {
 		etTitle = (EditText)findViewById(R.id.edit_title);
 		etLocation = (EditText)findViewById(R.id.edit_location);
 		etContent = (EditText)findViewById(R.id.edit_content);
-		
-		
-		
-		
+
 		
 		RelativeLayout rlDate = (RelativeLayout)findViewById(R.id.date_layout);
 		RelativeLayout rlTime = (RelativeLayout)findViewById(R.id.time_layout);
@@ -323,7 +305,8 @@ public class Timer4 extends Activity {
 									FormatTime(countdownTime) + getString(R.string.bubble_timer4_tab1)
 									+ newReminder.title + getString(R.string.bubble_timer4_end));
 						}else{
-							newReminder.time_to_remind = remindingTime;
+							newReminder.time_to_remind = Calendar.getInstance();
+									newReminder.time_to_remind.setTime(remindingTime.getTime());
 							newReminder.repeat = repeat;
 							MainActivity.PushFloatingBubble(getString(R.string.bubble_add_reminder) +
 									FormatDate(remindingTime) + FormatTime(remindingTime) + getString(R.string.bubble_timer4_tab2)

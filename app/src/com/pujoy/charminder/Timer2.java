@@ -223,7 +223,6 @@ public class Timer2 extends Activity {
 						TimeDigits.get(3).toString() + TimeDigits.get(4).toString() + ":" +
 						TimeDigits.get(5).toString() + TimeDigits.get(6).toString() + ":" +
 						TimeDigits.get(7).toString() + TimeDigits.get(8).toString();
-						System.out.println(sTimeToRemind);
 						SimpleDateFormat df = new SimpleDateFormat("yy:MM:dd:HH:mm");
 						Date d = df.parse(sTimeToRemind);
 						newReminder.time_to_remind = Calendar.getInstance();

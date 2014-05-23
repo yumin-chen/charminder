@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/timer4_start"
         android:layout_alignParentLeft="true"
+    android:background="#a8d4f2"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" >
 

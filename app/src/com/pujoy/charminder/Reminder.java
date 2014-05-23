@@ -19,9 +19,6 @@ public class Reminder {
 		time_when_created = Calendar.getInstance();
 		time_to_remind = Calendar.getInstance();
 		validity = true;
-		title="";
-		location="";
-		note="";
 		type = type_of_reminder;
 	}
 	public void Notify(Resources r){
@@ -50,16 +47,22 @@ public class Reminder {
 			switch(repeat){
 			case -1:
 				validity = false;
+				break;
 			case 0:
 				validity = false;
+				break;
 			case 1:
 				time_to_remind.add(Calendar.DAY_OF_MONTH, 1);
+				break;
 			case 2:
 				time_to_remind.add(Calendar.DAY_OF_MONTH, 7);
+				break;
 			case 3:
 				time_to_remind.add(Calendar.MONTH, 1);
+				break;
 			case 4:
 				time_to_remind.add(Calendar.YEAR, 1);
+				break;
 			}
 			break;
 		}

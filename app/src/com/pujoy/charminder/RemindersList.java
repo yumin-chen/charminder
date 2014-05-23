@@ -36,8 +36,13 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
      	        	TextView tvCountDown = (TextView)findViewById(720+i);
      	        	if(tvCountDown != null){
          	        	Calendar t = Calendar.getInstance();
-         	        	t.setTimeInMillis(MainActivity.reminderList.get(i).time_to_remind.getTimeInMillis() - t.getTimeInMillis());
-         	        	tvCountDown.setText(FormatRemindingTime(t));
+         	        	if(t.after(MainActivity.reminderList.get(i).time_to_remind)){
+         	        		tvCountDown.setText(getString(R.string.expired));
+         	        	}else{
+         	        		t.setTimeInMillis(MainActivity.reminderList.get(i).time_to_remind.getTimeInMillis() - t.getTimeInMillis());
+         	        		tvCountDown.setText(FormatRemindingTime(t.getTimeInMillis()));
+         	        	}
+         	        	
      	        	}
          			}
      				if(isInFront)
@@ -82,21 +87,34 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
 		        	rlTime.setId(1420+i);
 		        	RelativeLayout rlLocation = (RelativeLayout)findViewById(R.id.event_location_layout);
 		        	rlLocation.setId(1520+i);
+		        	RelativeLayout rlRepeat = (RelativeLayout)findViewById(R.id.repeat_layout);
+		        	rlRepeat.setId(1920+i);
 		        	TextView tvRemindingtime = (TextView)findViewById(R.id.text_remindingtime);
 		        	tvRemindingtime.setId(1620+i);
 		        	TextView tvLocation = (TextView)findViewById(R.id.text_location);
 		        	tvLocation.setId(1720+i);
+		        	TextView tvRepeat = (TextView)findViewById(R.id.text_repeat);
+		        	tvRepeat.setId(2020+i);
 		        	LinearLayout llMainSection = (LinearLayout)findViewById(R.id.main_section_layout);
 		        	llMainSection .setId(1820+i);
     	        	if(MainActivity.reminderList.get(i).type != 4)
     	        	{
     	        		llMainSection.removeView(rlTime);
     	        		llMainSection.removeView(rlLocation);
+    	        		llMainSection.removeView(rlRepeat);
     	        	}else{
     	        		if(MainActivity.reminderList.get(i).location.isEmpty()){
     	        			llMainSection.removeView(rlLocation);
     	        		}else{
     	        			tvLocation.setText(getString(R.string.event_location)+MainActivity.reminderList.get(i).location);
+    	        		}
+    	        		if(MainActivity.reminderList.get(i).repeat>0){
+    	        			String[] s = new String[] { getString(R.string.repeat_once),
+    	    						getString(R.string.repeat_dayly), getString(R.string.repeat_weekly),
+    	    						getString(R.string.repeat_monthly), getString(R.string.repeat_yearly)};
+    	        			tvRepeat.setText(getString(R.string.repeat)+s[MainActivity.reminderList.get(i).repeat]);
+    	        		}else{
+        	        		llMainSection.removeView(rlRepeat);
     	        		}
     	        		tvRemindingtime.setText(getString(R.string.time_to_remind)+
     	        				FormatDate(MainActivity.reminderList.get(i).time_to_remind)+
@@ -112,11 +130,13 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
     	        	}else{
     	        		if(MainActivity.reminderList.get(i).note.isEmpty()){
     	        			if(MainActivity.reminderList.get(i).repeat == -1){
-    	        				tvContent.setText(GetDescriptionHead(1) + FormatTime(MainActivity.reminderList.get(i).time_to_remind));
+    	        				tvContent.setText(getString(R.string.content)+ GetDescriptionHead(1) + FormatTime(MainActivity.reminderList.get(i).time_to_remind));
     	        			}else{
-    	        				tvContent.setText(GetDescriptionHead(2) + FormatDate(MainActivity.reminderList.get(i).time_to_remind)
+    	        				tvContent.setText(getString(R.string.content)+ GetDescriptionHead(2) + FormatDate(MainActivity.reminderList.get(i).time_to_remind)
     	        						+ FormatTime(MainActivity.reminderList.get(i).time_to_remind));
     	        			}
+    	        		}else{
+    	        			tvContent.setText(getString(R.string.content)+ MainActivity.reminderList.get(i).note);
     	        		}
     	        	}
                 	ImageView ivStar1 = (ImageView)findViewById(R.id.reminderlist_level_star1);
@@ -175,28 +195,23 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
 		 }
 		 return false;
 	}
-	 private String FormatRemindingTime(Calendar t){
-		 String s="";
-		 if(t.getTimeInMillis()<0){
-			 return getString(R.string.expired);
+	 private String FormatRemindingTime(long t){
+		String s="";
+		long diffSeconds = t / 1000 % 60;
+		long diffMinutes = t / (60 * 1000) % 60;
+		long diffHours = t / (60 * 60 * 1000) % 24;
+		long diffDays = t / (24 * 60 * 60 * 1000);
+		 if(diffDays!=0){
+			 s=s+diffDays+getString(R.string.day);
 		 }
-		 if((t.get(Calendar.YEAR)-1970)!=0){
-			 s=s+(t.get(Calendar.YEAR)-1970)+getString(R.string.year);
+		 if(diffHours!=0){
+			 s=s+diffHours+getString(R.string.hour);
 		 }
-		 if(t.get(Calendar.MONTH)!=0){
-			 s=s+t.get(Calendar.MONTH)+getString(R.string.month);
+		 if(diffMinutes!=0){
+			 s=s+diffMinutes+getString(R.string.minute);
 		 }
-		 if((t.get(Calendar.DAY_OF_MONTH)-1)!=0){
-			 s=s+(t.get(Calendar.DAY_OF_MONTH)-1)+getString(R.string.day);
-		 }
-		 if((t.get(Calendar.HOUR_OF_DAY)-8)!=0){
-			 s=s+(t.get(Calendar.HOUR_OF_DAY)-8)+getString(R.string.hour);
-		 }
-		 if(t.get(Calendar.MINUTE)!=0){
-			 s=s+t.get(Calendar.MINUTE)+getString(R.string.minute);
-		 }
-		 if(t.get(Calendar.SECOND)!=0){
-			 s=s+t.get(Calendar.SECOND)+getString(R.string.second);
+		 if(diffSeconds!=0){
+			 s=s+diffSeconds+getString(R.string.second);
 		 }
 		 return s;
 	 } 
@@ -267,6 +282,8 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
 		 	//1620+ text_time_to_remind
 		 	//1720+ text_location
 		 	//1820+ main_section_layout
+		 	//1920+ repeat_layout
+		 	//2020+ text_repeat
 	        LinearLayout lView = (LinearLayout)findViewById(R.id.reminderList_layout);
 	        lView.removeAllViews();
 	        itemsListExpanded.clear();
