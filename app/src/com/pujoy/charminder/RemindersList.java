@@ -285,7 +285,13 @@ public class RemindersList extends Activity implements OnClickListener, OnTouchL
 		 	//1920+ repeat_layout
 		 	//2020+ text_repeat
 	        LinearLayout lView = (LinearLayout)findViewById(R.id.reminderList_layout);
+	        TextView tvPrompt = (TextView)findViewById(R.id.reminderslist_prompt);
+	        if(MainActivity.reminderList.size() == 0)
+	        {
+	        	tvPrompt.setText(getString(R.string.reminderslist_empty_prompt));
+	        }
 	        lView.removeAllViews();
+	        lView.addView(tvPrompt);
 	        itemsListExpanded.clear();
 	        itemsList.clear();
 	        for(int i=0; i<MainActivity.reminderList.size(); i++)

@@ -26,6 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
+	static eSettings settings;
 	public static ArrayList<Reminder> reminderList = new ArrayList<Reminder>();
 	static float fScaleY;
 	static float fScaleX;
@@ -57,11 +58,14 @@ public class MainActivity extends Activity {
 			public void handleMessage(Message msg) {
 	            if (msg.what == REMINDING_PROCESS){
         			for(int i=0; i<reminderList.size(); i++){
-        				System.out.println(reminderList.get(i).time_to_remind.compareTo(Calendar.getInstance()));
         				if(reminderList.get(i).validity && reminderList.get(i).time_to_remind.compareTo(Calendar.getInstance()) <= 0){
             				reminderList.get(i).Notify(getApplicationContext().getResources());
             				break;
             			}
+        				if(reminderList.get(i).validity == false && settings.autoDeleteExpiredReminder){
+        					DeleteReminder(i);
+        					i--;
+        				}
             		}	
 	            	mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
 	            }
@@ -72,7 +76,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        
+        settings = new eSettings();
         
         mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
         if(wm == null) wm =(WindowManager)getApplicationContext().getSystemService("window");
@@ -369,6 +373,9 @@ public class MainActivity extends Activity {
 
     public final static void AddReminder(Reminder reminderToAdd){
     	reminderList.add(reminderToAdd);
+    }
+    public final static void DeleteReminder(int index){
+    	reminderList.remove(index);
     }
     
     private void CreateTheCircle(){

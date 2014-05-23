@@ -6,6 +6,7 @@
         android:id="@+id/reminderList_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+    android:background="#a8d4f2"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
