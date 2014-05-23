@@ -43,6 +43,8 @@ public class Settings extends Activity implements OnClickListener {
     	    }
 		};
 		
+		RelativeLayout rlMainMenu =  (RelativeLayout)findViewById(R.id.setting_main_interface_layout);
+		RelativeLayout rlCircle =  (RelativeLayout)findViewById(R.id.setting_circle_interface_layout);
 		RelativeLayout rlAutoDelete = (RelativeLayout)findViewById(R.id.setting_autodelete_layout);
 		RelativeLayout rlBubbleTime = (RelativeLayout)findViewById(R.id.setting_bubbletime_layout);
 		RelativeLayout rlLevel1 = (RelativeLayout)findViewById(R.id.setting_level1_layout);
@@ -51,6 +53,8 @@ public class Settings extends Activity implements OnClickListener {
 		RelativeLayout rlLevel4 = (RelativeLayout)findViewById(R.id.setting_level4_layout);
 		RelativeLayout rlLevel5 = (RelativeLayout)findViewById(R.id.setting_level5_layout);
 		
+		rlMainMenu.setOnTouchListener(ItemTouchListener);
+		rlCircle.setOnTouchListener(ItemTouchListener);
 		rlAutoDelete.setOnTouchListener(ItemTouchListener);
 		rlBubbleTime.setOnTouchListener(ItemTouchListener);
 		rlLevel1.setOnTouchListener(ItemTouchListener);
@@ -58,6 +62,8 @@ public class Settings extends Activity implements OnClickListener {
 		rlLevel3.setOnTouchListener(ItemTouchListener);
 		rlLevel4.setOnTouchListener(ItemTouchListener);
 		rlLevel5.setOnTouchListener(ItemTouchListener);
+		rlMainMenu.setOnClickListener(this);
+		rlCircle.setOnClickListener(this);
 		rlAutoDelete.setOnClickListener(this);
 		rlBubbleTime.setOnClickListener(this);
 		rlLevel1.setOnClickListener(this);
@@ -76,6 +82,14 @@ public class Settings extends Activity implements OnClickListener {
 	
 	public void onClick(View v) {
 		switch(v.getId()){
+		case R.id.setting_main_interface_layout:
+			Setting_Sections.sectionSetting = MainActivity.settings.mainMenuSection;
+			startActivity(new Intent(this, Setting_Sections.class));
+			break;
+		case R.id.setting_circle_interface_layout:
+			Setting_Sections.sectionSetting = MainActivity.settings.circleSection;
+			startActivity(new Intent(this, Setting_Sections.class));
+			break;
 		case R.id.setting_autodelete_layout:
 			if(MainActivity.settings.autoDeleteExpiredReminder){
 				MainActivity.settings.autoDeleteExpiredReminder = false;

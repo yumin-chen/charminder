@@ -26,7 +26,84 @@
     android:layout_marginBottom="1dp"
     android:textSize="14sp"
     android:text="@string/settings_prompt" />
+<RelativeLayout
+        android:id="@+id/setting_main_interface_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#e4f2fe" >
 
+        <TextView
+            android:id="@+id/setting_main_interface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/setting_main_interface"
+            android:layout_marginLeft="8dp"
+            android:textSize="16sp"
+            android:layout_marginRight="4dp"
+            android:textColor="#304e62" />
+
+        <ImageView
+            android:id="@+id/setting_main_interface_arrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/setting_main_interface"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/right_arrow" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#304e62" />
+    </RelativeLayout>
+ 
+<RelativeLayout
+        android:id="@+id/setting_circle_interface_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#e4f2fe" >
+
+        <TextView
+            android:id="@+id/setting_circle_interface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/setting_circle_interface"
+            android:layout_marginLeft="8dp"
+            android:textSize="16sp"
+            android:layout_marginRight="4dp"
+            android:textColor="#304e62" />
+
+        <ImageView
+            android:id="@+id/setting_circle_interface_arrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/setting_circle_interface"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/right_arrow" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#304e62" />
+    </RelativeLayout>
+    
 <RelativeLayout
         android:id="@+id/setting_autodelete_layout"
         android:layout_width="match_parent"

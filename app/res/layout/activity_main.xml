@@ -41,17 +41,21 @@
      android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="12dp"
-            android:layout_above="@+id/running_layout"
+            android:layout_above="@+id/mainsection_layout"
             android:background="#a8d4f2"
              />
  
-
+<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mainsection_layout"
+        android:layout_above="@+id/footer"
+        android:layout_alignParentLeft="true"
+            android:orientation="vertical" >
     <RelativeLayout
         android:id="@+id/running_layout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@+id/footer"
         android:background="#e4f2fe" >
 
         <ImageView
@@ -65,7 +69,8 @@
             android:contentDescription="@string/floatingwindow"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:src="@drawable/floatingwindow" />
+            android:background="#304e62"
+            android:src="@drawable/floating_icon_w" />
 
         <TextView
             android:id="@+id/title_floatingwindow"
@@ -99,7 +104,52 @@
             android:layout_alignParentBottom="true"
             android:background="#304e62" />
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/setting_reminderslist_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#e4f2fe" >
+<ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="#304e62"
+            android:src="@drawable/reminderlist_w" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/reminder_list"
+            android:layout_marginLeft="56dp"
+            android:textSize="16sp"
+            android:textColor="#304e62" />
 
+        <ImageView
+            android:id="@+id/switch_reminderlist"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/switch_0" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#304e62" />
+    </RelativeLayout>
+</LinearLayout>
     <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
