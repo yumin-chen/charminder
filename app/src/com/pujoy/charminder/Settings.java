@@ -68,6 +68,12 @@ public class Settings extends Activity implements OnClickListener {
 		
 	}
 	
+    @Override
+    protected void onStop(){
+       super.onStop();
+       MainActivity.SaveReminders();
+    }
+	
 	public void onClick(View v) {
 		switch(v.getId()){
 		case R.id.setting_autodelete_layout:

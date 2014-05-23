@@ -34,7 +34,8 @@
 <string name="ok">确认</string>
 <string name="cancel">取消</string>
 
-
+<string name="dismiss">知道了</string>
+<string name="details">详细信息</string>
 
 <string name="setting_autodelete">自动删除过期提醒</string>
 <string name="setting_bubbletime">气泡提示自动消失时间</string>

@@ -8,6 +8,7 @@
         android:minSdkVersion="11"
         android:targetSdkVersion="19" />
     
+    <uses-permission android:name="android.permission.VIBRATE"/>
 	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> 
 	
     <application
@@ -91,6 +92,13 @@
     
     <activity
         android:name="com.pujoy.charminder.BringToFront"
+        android:parentActivityName="com.pujoy.charminder.MainActivity" android:launchMode="singleInstance">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.pujoy.charminder.MainActivity" />
+    </activity>
+    <activity
+        android:name="com.pujoy.charminder.WakeUp"
         android:parentActivityName="com.pujoy.charminder.MainActivity" android:launchMode="singleInstance">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"

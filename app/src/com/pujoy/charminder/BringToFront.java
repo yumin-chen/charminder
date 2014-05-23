@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 public class BringToFront extends Activity {
 	static String s;
@@ -11,6 +12,13 @@ public class BringToFront extends Activity {
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        if(s.isEmpty()){
+        	finish();
+        	return;
+        }
+        	
         Intent intent = new Intent("android.intent.action.MAIN");
 		intent.setComponent(new ComponentName(getPackageName(), s));
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 

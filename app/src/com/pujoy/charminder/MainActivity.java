@@ -8,7 +8,9 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
+	static Context c;
 	static eSettings settings;
 	public static ArrayList<Reminder> reminderList = new ArrayList<Reminder>();
 	static float fScaleY;
@@ -42,12 +45,15 @@ public class MainActivity extends Activity {
 	static int iOldCircleCurrent;
 	static ImageView ivBubble;
 	static TextView tvBubble;
+	static int iBubbleTime;
 	static WindowManager wm; 
 	static TextView tvCircleItemDescription;
 	static WindowManager.LayoutParams wmParamsI;
 	static WindowManager.LayoutParams wmParamsB;
 	static WindowManager.LayoutParams wmParamsBt;
 	static WindowManager.LayoutParams wmParamsC;
+	static SharedPreferences sp;
+	static SharedPreferences spSettings;
 	static DisplayMetrics metrics;
 
 	private static final int NUM_CIRCLE_ITEMS = 6;
@@ -59,7 +65,7 @@ public class MainActivity extends Activity {
 	            if (msg.what == REMINDING_PROCESS){
         			for(int i=0; i<reminderList.size(); i++){
         				if(reminderList.get(i).validity && reminderList.get(i).time_to_remind.compareTo(Calendar.getInstance()) <= 0){
-            				reminderList.get(i).Notify(getApplicationContext().getResources());
+            				reminderList.get(i).Notify(c);
             				break;
             			}
         				if(reminderList.get(i).validity == false && settings.autoDeleteExpiredReminder){
@@ -67,6 +73,14 @@ public class MainActivity extends Activity {
         					i--;
         				}
             		}	
+        			if(bBubbleVisible){
+        				iBubbleTime ++;
+        				if(iBubbleTime>settings.bubbleTimeOut){
+    						wm.removeView(ivBubble); 
+    						wm.removeView(tvBubble);
+    						bBubbleVisible = false;
+        				}
+        			}
 	            	mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
 	            }
 	        }
@@ -75,9 +89,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        settings = new eSettings();
-        
+        spSettings = this.getSharedPreferences("Settings", MODE_PRIVATE);
+        settings = new eSettings(spSettings);
+        sp = (this.getSharedPreferences("Reminders", MODE_PRIVATE));
+        ReadReminders();
+        c = this;
         mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
         if(wm == null) wm =(WindowManager)getApplicationContext().getSystemService("window");
         
@@ -303,6 +319,17 @@ public class MainActivity extends Activity {
         
     }
     
+    @Override
+    protected void onStop(){
+       super.onStop();
+       settings.save(spSettings);
+       SaveReminders();
+    }
+    
+    public static void SaveSettings(){
+    	settings.save(spSettings);
+    }
+    
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         CalculateMetrics();
@@ -347,7 +374,7 @@ public class MainActivity extends Activity {
      UpdatePositionParams();
      wm.addView(ivBubble, wmParamsB);
      wm.addView(tvBubble, wmParamsBt);
-     
+		iBubbleTime = 0;
     }
     
     public boolean IsPointInsideRect(float PointX, float PointY, 
@@ -373,9 +400,11 @@ public class MainActivity extends Activity {
 
     public final static void AddReminder(Reminder reminderToAdd){
     	reminderList.add(reminderToAdd);
+        SaveReminders();
     }
     public final static void DeleteReminder(int index){
     	reminderList.remove(index);
+        SaveReminders();
     }
     
     private void CreateTheCircle(){
@@ -531,6 +560,41 @@ public class MainActivity extends Activity {
         wmParamsBt.gravity = Gravity.LEFT | Gravity.TOP;
         wmParamsBt.x = wmParamsB.x + (int)(40 * fScale);
         wmParamsBt.y = wmParamsB.y + (int)(40 * fScale);  
+    }
+    
+    public static void SaveReminders(){
+    	SharedPreferences.Editor editor = sp.edit();
+    	editor.putInt("remindersNum", reminderList.size());
+    	for(int i=0; i<reminderList.size(); i++){
+    		editor.putInt("r"+i+"type", reminderList.get(i).type);
+    		editor.putInt("r"+i+"level", reminderList.get(i).level);
+    		editor.putInt("r"+i+"repeat", reminderList.get(i).repeat);
+    		editor.putBoolean("r"+i+"validity", reminderList.get(i).validity);
+    		editor.putString("r"+i+"title", reminderList.get(i).title);
+    		editor.putString("r"+i+"location", reminderList.get(i).location);
+    		editor.putString("r"+i+"note", reminderList.get(i).note);
+    		editor.putLong("r"+i+"timeToRemind", reminderList.get(i).time_to_remind.getTimeInMillis());
+    		editor.putLong("r"+i+"timeWhenCreated", reminderList.get(i).time_when_created.getTimeInMillis());
+    	}
+	       	editor.commit();
+	       
+    }
+    public void ReadReminders(){
+    	int size = sp.getInt("remindersNum", 0);
+    	for(int i=0; i<size; i++){
+    		Reminder r = new Reminder(0);
+    		r.type = sp.getInt("r"+i+"type", 0);
+    		r.level = sp.getInt("r"+i+"level", 0);
+    		r.repeat = sp.getInt("r"+i+"repeat", 0);
+    		r.validity = sp.getBoolean("r"+i+"validity", false);
+    		r.title = sp.getString("r"+i+"title", "");
+    		r.location = sp.getString("r"+i+"location", "");
+    		r.note = sp.getString("r"+i+"note", "");
+    		r.time_to_remind.setTimeInMillis(sp.getLong("r"+i+"timeToRemind", 0));
+    		r.time_when_created.setTimeInMillis(sp.getLong("r"+i+"timeWhenCreatedd", 0));
+    		reminderList.add(r);
+    	}
+    	
     }
 }
     
