@@ -57,8 +57,8 @@ public class MainActivity extends Activity {
 	static SharedPreferences spSettings;
 	static DisplayMetrics metrics;
 	static SceneTimer1 sTimer1 = new SceneTimer1();
-	static SceneTimer2 sTimer2 = new SceneTimer2();
 	static SceneTimer3 sTimer3 = new SceneTimer3();
+	static SceneTimer4 sTimer4 = new SceneTimer4();
 
 	private static final int ICON_WIDTH = 80;
 	private static final int NUM_CIRCLE_ITEMS = 6;
@@ -245,13 +245,13 @@ public class MainActivity extends Activity {
     									sTimer1.Create(sContext);
         								break;
     								case 1:
-    									sTimer2.Create(sContext);
+    									//sTimer4.Create(sContext);
         								break;
     								case 2:
     									sTimer3.Create(sContext);
         								break;
     								case 3:
-        								GoToActivity(Timer4.class);
+        								GoToActivity(SceneTimer4.class);
         								break;
     								case 4:
         								GoToActivity(Settings.class);
@@ -352,8 +352,8 @@ public class MainActivity extends Activity {
     	//Get Header Position
         View vHeader = (View)findViewById(R.id.head_p);
 
-        wmParamsI.type = 2002;   
-        wmParamsI.format = 1; 
+        wmParamsI.type = WindowManager.LayoutParams.TYPE_PHONE;   
+        wmParamsI.format = android.graphics.PixelFormat.RGBA_8888; 
         wmParamsI.flags = 40;  
         wmParamsI.width = (int)(0.3 * metrics.densityDpi);
         wmParamsI.height = (int)(0.3 * metrics.densityDpi);  
@@ -534,8 +534,8 @@ public class MainActivity extends Activity {
     private static void UpdatePositionParams(){
         
     	int max =(metrics.widthPixels > metrics.heightPixels? metrics.heightPixels: metrics.widthPixels);
-    	wmParamsC.type = 2002;   
-    	wmParamsC.format = 1; 
+    	wmParamsC.type = WindowManager.LayoutParams.TYPE_PHONE;   
+    	wmParamsC.format = android.graphics.PixelFormat.RGBA_8888; 
     	wmParamsC.flags = 40;  
     	wmParamsC.width = (int) dpToPx(240);
     	wmParamsC.height = (int) dpToPx(240);
@@ -544,8 +544,8 @@ public class MainActivity extends Activity {
         wmParamsC.y = (metrics.heightPixels-wmParamsC.height)/2;   
         
 
-        wmParamsB.type = 2002;   
-        wmParamsB.format = 1; 
+        wmParamsB.type = WindowManager.LayoutParams.TYPE_PHONE;   
+        wmParamsB.format = android.graphics.PixelFormat.RGBA_8888; 
         wmParamsB.flags = 40;  
         wmParamsB.width = (int)(640 * fScale);
         wmParamsB.height = (int)(340 * fScale);  
@@ -559,8 +559,8 @@ public class MainActivity extends Activity {
         	wmParamsB.y + wmParamsB.height> metrics.heightPixels? 
         			metrics.heightPixels - wmParamsB.height: wmParamsB.y;
      
-        wmParamsBt.type = 2002;   
-        wmParamsBt.format = 1; 
+        wmParamsBt.type = WindowManager.LayoutParams.TYPE_PHONE;   
+        wmParamsBt.format = android.graphics.PixelFormat.RGBA_8888; 
         wmParamsBt.flags = 40;  
         wmParamsBt.width = wmParamsB.width - (int)(80 * fScale);
         wmParamsBt.height = wmParamsB.height - (int)(64 * fScale);  

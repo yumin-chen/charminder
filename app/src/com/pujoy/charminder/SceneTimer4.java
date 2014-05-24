@@ -5,10 +5,13 @@ import java.util.Calendar;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.text.InputType;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -25,9 +28,9 @@ import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class SceneTimer2 extends Scene implements OnClickListener{
-	
-	static Context c;
+public class SceneTimer4 extends Activity implements OnClickListener{
+
+	static DisplayMetrics metrics;
 	static RelativeLayout vLayout;
 	static ImageView ivUpperCircle;
 	static ImageView ivMiddleFiller;
@@ -54,24 +57,24 @@ public class SceneTimer2 extends Scene implements OnClickListener{
 	static final float NON_BORDER_SCALE = 0.960548885077187f;
 	static final float BORDER_SCALE = 0.0221843003412969f;
 	static final float CENTER_AREA = 0.3720136518771331f;
-	
-	public void Create(final Context c){
+	protected void onCreate(Bundle savedInstanceState) {
 		if(bVisible)
 			return;
-		super.Create(c);
-		this.c = c;
+        super.onCreate(savedInstanceState);
+		metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		wmParams = new WindowManager.LayoutParams();
 		UpdatePosition();
 		remindingTime = Calendar.getInstance();
-		vLayout = new RelativeLayout(c);
+		vLayout = new RelativeLayout(this);
 		vLayout.layout(0, 0, wmParams.width, wmParams.height);
-		vLayout.setFocusable(true);
-		vLayout.setFocusableInTouchMode(true);
-		vLayout.requestFocus();
 		
-    	ivUpperCircle = new ImageView(c);
-    	ivLowerCircle = new ImageView(c);
-    	ivMiddleFiller = new ImageView(c);
+		getWindow().setBackgroundDrawable(null);
+		getWindow().set
+		
+    	ivUpperCircle = new ImageView(this);
+    	ivLowerCircle = new ImageView(this);
+    	ivMiddleFiller = new ImageView(this);
     	ivUpperCircle.setImageResource(R.drawable.semi_circle);
     	ivUpperCircle.setLayoutParams(new LayoutParams(wmParams.width, wmParams.width/2));
     	ivMiddleFiller.setImageResource(R.drawable.semi_circle_fill);
@@ -86,67 +89,53 @@ public class SceneTimer2 extends Scene implements OnClickListener{
     	
 
     	
-    	ivDateIcon = new ImageView(c);
+    	ivDateIcon = new ImageView(this);
     	ivDateIcon.setLayoutParams(new LayoutParams((int)dpToPx(32), (int)dpToPx(32)));
     	ivDateIcon.setImageResource(R.drawable.calendar_b);
     	ivDateIcon.setY(wmParams.width/2 - wmParams.width*CENTER_AREA/2 + dpToPx(4));
     	ivDateIcon.setX(dpToPx(24));
     	vLayout.addView(ivDateIcon);
     	
-    	ivTimeIcon = new ImageView(c);
+    	ivTimeIcon = new ImageView(this);
     	ivTimeIcon.setLayoutParams(new LayoutParams((int)dpToPx(32), (int)dpToPx(32)));
     	ivTimeIcon.setImageResource(R.drawable.time_b);
     	ivTimeIcon.setY(wmParams.width/2 - wmParams.width*CENTER_AREA/2 + dpToPx(4) + dpToPx(36));
     	ivTimeIcon.setX(dpToPx(24));
     	vLayout.addView(ivTimeIcon);
     	
-    	ivContentIcon = new ImageView(c);
+    	ivContentIcon = new ImageView(this);
     	ivContentIcon.setLayoutParams(new LayoutParams((int)dpToPx(32), (int)dpToPx(32)));
     	ivContentIcon.setImageResource(R.drawable.content_b);
     	ivContentIcon.setY(wmParams.width/2 - wmParams.width*CENTER_AREA/2 + dpToPx(4) + dpToPx(36) + dpToPx(36));
     	ivContentIcon.setX(dpToPx(24));
     	vLayout.addView(ivContentIcon);
     	
-    	tvDate = new TextView(c);
+    	tvDate = new TextView(this);
     	tvDate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
     	tvDate.setTextColor(Color.rgb(48, 78, 98));
-    	tvDate.setText(c.getString(R.string.date_));
+    	tvDate.setText(this.getString(R.string.date_));
     	tvDate.setLayoutParams(new LayoutParams((int)dpToPx(128), (int)dpToPx(32)));
     	tvDate.setX(dpToPx(24) + (int)dpToPx(32) );
     	tvDate.setY(wmParams.width/2 - wmParams.width*CENTER_AREA/2 + dpToPx(6));
     	vLayout.addView(tvDate);
     	
-    	tvTime = new TextView(c);
+    	tvTime = new TextView(this);
     	tvTime.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
     	tvTime.setTextColor(Color.rgb(48, 78, 98));
-    	tvTime.setText(c.getString(R.string.time_));
+    	tvTime.setText(this.getString(R.string.time_));
     	tvTime.setLayoutParams(new LayoutParams((int)dpToPx(128), (int)dpToPx(32)));
     	tvTime.setX(dpToPx(24) + (int)dpToPx(32) );
     	tvTime.setY(wmParams.width/2 - wmParams.width*CENTER_AREA/2 + dpToPx(6) + dpToPx(36));
     	vLayout.addView(tvTime);
     	
-    	etContent = new EditText(c);
+    	etContent = new EditText(this);
     	etContent.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
     	etContent.setTextColor(Color.rgb(48, 78, 98));
-    	etContent.setHint(c.getString(R.string.note));
+    	etContent.setHint(this.getString(R.string.note));
     	etContent.setMaxLines(1);
     	etContent.setInputType(InputType.TYPE_CLASS_TEXT);
     	etContent.setFocusable(true);
     	etContent.setFocusableInTouchMode(true);
-    	etContent.setOnFocusChangeListener(new OnFocusChangeListener() {
-
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if(hasFocus){
-			    	((InputMethodManager)c.getSystemService(Context.INPUT_METHOD_SERVICE)).
-			    	toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-				}else{
-					((InputMethodManager)c.getSystemService(Context.INPUT_METHOD_SERVICE)).
-					hideSoftInputFromWindow(etContent.getWindowToken(), 0);
-				}
-				
-			}
-    	});
     	etContent.setX(dpToPx(24) + (int)dpToPx(32) );
     	etContent.setY(wmParams.width/2 - wmParams.width*CENTER_AREA/2 + dpToPx(36) + dpToPx(36));
     	vLayout.addView(etContent);
@@ -169,16 +158,16 @@ public class SceneTimer2 extends Scene implements OnClickListener{
     	    }
 		};
 		
-    	tvOkCircle = new TextView(c);
-    	tvCancelCircle = new TextView(c);
+    	tvOkCircle = new TextView(this);
+    	tvCancelCircle = new TextView(this);
     	tvOkCircle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     	tvCancelCircle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     	tvOkCircle.setGravity(Gravity.CENTER);
     	tvCancelCircle.setGravity(Gravity.CENTER);
     	tvOkCircle.setTextColor(Color.rgb(48, 78, 98));
     	tvCancelCircle.setTextColor(Color.rgb(48, 78, 98));
-    	tvOkCircle.setText(c.getString(R.string.ok));
-    	tvCancelCircle.setText(c.getString(R.string.cancel));
+    	tvOkCircle.setText(this.getString(R.string.ok));
+    	tvCancelCircle.setText(this.getString(R.string.cancel));
     	tvOkCircle.setBackgroundResource(R.drawable.small_circle);
     	tvOkCircle.setLayoutParams(new LayoutParams((int)dpToPx(73.39249146757679f), (int)dpToPx(73.39249146757679f)));
     	tvCancelCircle.setBackgroundResource(R.drawable.small_circle);
@@ -216,7 +205,7 @@ public class SceneTimer2 extends Scene implements OnClickListener{
     	    }
 		};
     	for(int i=0; i<5; i++){
-    		ivStar[i] = new ImageView(c);
+    		ivStar[i] = new ImageView(this);
     		ivStar[i].setLayoutParams(new LayoutParams((int)dpToPx(32), (int)dpToPx(32)));
     		ivStar[i].setOnClickListener(this);
     		ivStar[i].setOnTouchListener(StarsTouchListener);
@@ -235,36 +224,36 @@ public class SceneTimer2 extends Scene implements OnClickListener{
     	}
     	UpdateStarImage();
     	
-    	tvLevel = new TextView(c);
+    	tvLevel = new TextView(this);
     	tvLevel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     	tvLevel.setGravity(Gravity.CENTER);
     	tvLevel.setTextColor(Color.rgb(228, 242, 254));
-    	tvLevel.setText(c.getString(R.string.important_level));
+    	tvLevel.setText(this.getString(R.string.important_level));
     	tvLevel.setLayoutParams(new LayoutParams((int)dpToPx(64), (int)dpToPx(32)));
     	tvLevel.setX(wmParams.width/2-dpToPx(64)/2);
     	tvLevel.setY(wmParams.height-wmParams.width/2+wmParams.width*CENTER_AREA/2+dpToPx(4));
     	
     	vLayout.addView(tvLevel);
     	
-    	tvTitle = new TextView(c);
+    	tvTitle = new TextView(this);
     	tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     	tvTitle.setGravity(Gravity.CENTER);
     	tvTitle.setTextColor(Color.rgb(228, 242, 254));
-    	tvTitle.setText(c.getString(R.string.title_timer2));
+    	tvTitle.setText(this.getString(R.string.title_timer4));
     	tvTitle.setLayoutParams(new LayoutParams((int)dpToPx(64), (int)dpToPx(28)));
     	tvTitle.setX(wmParams.width/2-dpToPx(40)/2);
     	
     	vLayout.addView(tvTitle);
     	
-    	ivTitleIcon = new ImageView(c);
-    	ivTitleIcon.setImageResource(R.drawable.timer2_icon);
+    	ivTitleIcon = new ImageView(this);
+    	ivTitleIcon.setImageResource(R.drawable.timer4_icon);
     	ivTitleIcon.setLayoutParams(new LayoutParams((int)dpToPx(28), (int)dpToPx(28)));
     	ivTitleIcon.setX(wmParams.width/2-dpToPx(40)/2-dpToPx(26));
     	
     	vLayout.addView(ivTitleIcon);
     	
     	
-    	MainActivity.wm.addView(vLayout, wmParams);
+    	//MainActivity.wm.addView(vLayout, wmParams);
     	
 		ValueAnimator aUpperCicleY = ObjectAnimator.ofFloat(ivUpperCircle, "y",
 				wmParams.height/2 - wmParams.width/2, 0);
@@ -300,7 +289,9 @@ public class SceneTimer2 extends Scene implements OnClickListener{
 			aStarX[i].start();
 			aStarY[i].start();
 		}
+
 		
+		setContentView(vLayout);
 		bVisible = true;
 	}
 	public void Remove(){
@@ -346,8 +337,9 @@ public class SceneTimer2 extends Scene implements OnClickListener{
 
             @Override
             public void onAnimationEnd(Animator animation) {
-            	MainActivity.wm.removeView(vLayout);
+            	//MainActivity.wm.removeView(vLayout);
         		bVisible = false;
+				finish();
             }
 
             @Override
@@ -357,8 +349,9 @@ public class SceneTimer2 extends Scene implements OnClickListener{
 
 			@Override
 			public void onAnimationCancel(Animator animation) {
-				MainActivity.wm.removeView(vLayout);
+				//MainActivity.wm.removeView(vLayout);
 				bVisible = false;
+				finish();
 			}
         });
 		
@@ -385,11 +378,11 @@ public class SceneTimer2 extends Scene implements OnClickListener{
 						int selectedMinute) {
 					remindingTime.set(Calendar.HOUR_OF_DAY, selectedHour);
 					remindingTime.set(Calendar.MINUTE, selectedMinute);
-			        tvTime.setText(c.getString(R.string.time_));
+			        tvTime.setText(getString(R.string.time_));
 				}
 			};
 
-		    new TimePickerDialog(c, timePickerListener, remindingTime
+		    new TimePickerDialog(this, timePickerListener, remindingTime
                     .get(Calendar.HOUR_OF_DAY), remindingTime.get(Calendar.MINUTE), true).show();
 			//Ok();
 			//Remove();
@@ -407,8 +400,8 @@ public class SceneTimer2 extends Scene implements OnClickListener{
 	}
 	
 	private void UpdatePosition(){
-    	wmParams.type = 2002;   
-    	wmParams.format = 1; 
+    	wmParams.type = WindowManager.LayoutParams.TYPE_PHONE;   
+    	wmParams.format = android.graphics.PixelFormat.RGBA_8888; 
     	wmParams.flags = 40;  
     	wmParams.width = (int) dpToPx(256);
     	wmParams.height = (int) dpToPx(320-48);
@@ -427,7 +420,9 @@ public class SceneTimer2 extends Scene implements OnClickListener{
     	}
 	}
 
-	
+	public static float dpToPx(float dp){
+		return MainActivity.dpToPx(dp);
+    }
 	private void Ok(){
 		
 	}

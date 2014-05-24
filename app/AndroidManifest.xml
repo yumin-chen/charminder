@@ -53,12 +53,10 @@
     </activity>
     
             <activity
-        android:name="com.pujoy.charminder.Timer4"
+        android:name="com.pujoy.charminder.SceneTimer4"
         android:label="@string/title_timer4"
-        android:parentActivityName="com.pujoy.charminder.MainActivity" android:launchMode="singleTask">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.pujoy.charminder.MainActivity" />
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+        android:launchMode="singleTask">
     </activity>
     
 

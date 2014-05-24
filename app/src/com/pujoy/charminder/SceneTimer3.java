@@ -440,8 +440,8 @@ public class SceneTimer3 extends Scene implements OnClickListener{
 	}
 	
 	private void UpdatePosition(){
-    	wmParams.type = 2002;   
-    	wmParams.format = 1; 
+    	wmParams.type = WindowManager.LayoutParams.TYPE_PHONE;   
+    	wmParams.format = android.graphics.PixelFormat.RGBA_8888; 
     	wmParams.flags = 40;  
     	wmParams.width = (int) dpToPx(256);
     	wmParams.height = (int) dpToPx(320);

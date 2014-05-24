@@ -26,4 +26,6 @@
 	<style name="TitleBarTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
     	<item name="android:textColor">#e4f2fe</item>
 	</style>
+	
+	
 </resources>
