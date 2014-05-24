@@ -30,6 +30,8 @@
 <string name="content">提醒内容：</string>
 <string name="repeat">循环周期：</string>
 <string name="level">提醒级别：</string>
+<string name="important_level">重要星级</string>
+<string name="note">备注（选填）</string>
 
 <string name="ok">确认</string>
 <string name="cancel">取消</string>

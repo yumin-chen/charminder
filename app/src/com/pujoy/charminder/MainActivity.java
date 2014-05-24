@@ -21,6 +21,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -28,7 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	static Context c;
+	static Context sContext;
 	static eSettings settings;
 	public static ArrayList<Reminder> reminderList = new ArrayList<Reminder>();
 	static float fScaleY;
@@ -55,7 +56,11 @@ public class MainActivity extends Activity {
 	static SharedPreferences sp;
 	static SharedPreferences spSettings;
 	static DisplayMetrics metrics;
+	static SceneTimer1 sTimer1 = new SceneTimer1();
+	static SceneTimer2 sTimer2 = new SceneTimer2();
+	static SceneTimer3 sTimer3 = new SceneTimer3();
 
+	private static final int ICON_WIDTH = 80;
 	private static final int NUM_CIRCLE_ITEMS = 6;
 	private static final int REMINDING_PROCESS = 1;
 
@@ -65,7 +70,7 @@ public class MainActivity extends Activity {
 	            if (msg.what == REMINDING_PROCESS){
         			for(int i=0; i<reminderList.size(); i++){
         				if(reminderList.get(i).validity && reminderList.get(i).time_to_remind.compareTo(Calendar.getInstance()) <= 0){
-            				reminderList.get(i).Notify(c);
+            				reminderList.get(i).Notify(sContext);
             				break;
             			}
         				if(reminderList.get(i).validity == false && settings.autoDeleteExpiredReminder){
@@ -93,7 +98,7 @@ public class MainActivity extends Activity {
         settings = new eSettings(spSettings);
         sp = (this.getSharedPreferences("Reminders", MODE_PRIVATE));
         ReadReminders();
-        c = this;
+        sContext = this;
         mHandler.sendEmptyMessageDelayed(REMINDING_PROCESS, 1000);
         if(wm == null) wm =(WindowManager)getApplicationContext().getSystemService("window");
         
@@ -129,6 +134,7 @@ public class MainActivity extends Activity {
 							wm.removeView(tvBubble);
 							bBubbleVisible = false;
 					}
+					sTimer1.Remove();
 					
 					ivEnabled.setImageResource(R.drawable.switch_0);
 					bFloatingWindowRunning = false;
@@ -236,13 +242,13 @@ public class MainActivity extends Activity {
     									ivCircleItems[i].getHeight() +  dpToPx(16))){
     								switch(i){
     								case 0:
-        								GoToActivity(Timer1.class);
+    									sTimer1.Create(sContext);
         								break;
     								case 1:
-        								GoToActivity(Timer2.class);
+    									sTimer2.Create(sContext);
         								break;
     								case 2:
-        								GoToActivity(Timer3.class);
+    									sTimer3.Create(sContext);
         								break;
     								case 3:
         								GoToActivity(Timer4.class);
@@ -421,19 +427,20 @@ public class MainActivity extends Activity {
         	ivCircleItems = new ImageView[NUM_CIRCLE_ITEMS];
         	tvCircleDescription = new TextView(this);
         	RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(
-        			(int)dpToPx(128), (int)dpToPx(128));
-        	textParams.leftMargin = (wmParamsC.width - (int)dpToPx(128))/2;
-        	textParams.topMargin = (wmParamsC.height - (int)dpToPx(128))/2;
+        			(int)dpToPx(96), (int)dpToPx(96));
+        	textParams.leftMargin = (wmParamsC.width - (int)dpToPx(96))/2;
+        	textParams.topMargin = (wmParamsC.height - (int)dpToPx(96))/2;
         	tvCircleDescription.setGravity(Gravity.CENTER);
-        	tvCircleDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        	tvCircleDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         	tvCircleDescription.setTextColor(android.graphics.Color.rgb(228, 242, 254));
         	vCircle.addView(tvCircleDescription, textParams);
         	ivCircleBg.setImageResource(R.drawable.circle_bg);
+        	ivCircleBg.setLayoutParams(new LayoutParams(wmParamsC.width, wmParamsC.height));
         	vCircle.addView(ivCircleBg);
         	RelativeLayout.LayoutParams[] params = new RelativeLayout.LayoutParams[NUM_CIRCLE_ITEMS]; 
         	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
         		ivCircleItems[i] = new ImageView(this);
-        		params[i] = new RelativeLayout.LayoutParams((int) dpToPx(96), (int) dpToPx(96));
+        		params[i] = new RelativeLayout.LayoutParams((int) dpToPx(ICON_WIDTH), (int) dpToPx(ICON_WIDTH));
         		params[i].leftMargin = 0;
         		params[i].topMargin = 0;
         	}
@@ -455,14 +462,14 @@ public class MainActivity extends Activity {
     	Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom);
     	ivCircleBg.startAnimation(animation);
     	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
-    		float tox = (float) (wmParamsC.width/2 + max*0.55/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0) -  dpToPx(96)/2);
-    		float toy = (float) (wmParamsC.height/2 + max*0.55/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0) -  dpToPx(96)/2);
-    		float fromx = (float) (wmParamsC.width/2 + max*0.55/2 * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0)/4 -  dpToPx(96)/2);
-    		float fromy = (float) (wmParamsC.height/2 + max*0.55/2 * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
-    				* Math.PI / 180.0)/4 -  dpToPx(96)/2);
+    		float tox = (float) (wmParamsC.width/2 + dpToPx(82.73437500000001f) * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0) -  dpToPx(ICON_WIDTH)/2);
+    		float toy = (float) (wmParamsC.height/2 + dpToPx(82.73437500000001f) * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0) -  dpToPx(ICON_WIDTH)/2);
+    		float fromx = (float) (wmParamsC.width/2 + dpToPx(82.73437500000001f) * Math.sin(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0)/4 -  dpToPx(ICON_WIDTH)/2);
+    		float fromy = (float) (wmParamsC.height/2 + dpToPx(82.73437500000001f) * Math.cos(((360/NUM_CIRCLE_ITEMS) * i)
+    				* Math.PI / 180.0)/4 -  dpToPx(ICON_WIDTH)/2);
     		ValueAnimator aCircleItemsY = ObjectAnimator.ofFloat(ivCircleItems[i], "y", fromy, toy);
     		aCircleItemsY.setDuration(200);
     		ValueAnimator aCircleItemsX = ObjectAnimator.ofFloat(ivCircleItems[i], "x", fromx, tox);
@@ -530,8 +537,8 @@ public class MainActivity extends Activity {
     	wmParamsC.type = 2002;   
     	wmParamsC.format = 1; 
     	wmParamsC.flags = 40;  
-    	wmParamsC.width = (int)(max*0.8);
-    	wmParamsC.height = (int)(max*0.8);
+    	wmParamsC.width = (int) dpToPx(240);
+    	wmParamsC.height = (int) dpToPx(240);
         wmParamsC.gravity = Gravity.LEFT | Gravity.TOP;
         wmParamsC.x = (metrics.widthPixels-wmParamsC.width)/2;
         wmParamsC.y = (metrics.heightPixels-wmParamsC.height)/2;   

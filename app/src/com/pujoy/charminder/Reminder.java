@@ -155,5 +155,6 @@ public class Reminder {
 			}
 			break;
 		}
+		MainActivity.SaveReminders();
 	}
 }
