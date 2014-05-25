@@ -88,8 +88,8 @@
 <string name="timer_start">添加提醒</string>
 
 
-<string name="am">早上(a.m.)</string>
-<string name="pm">下午(p.m.)</string>
+<string name="am">上午</string>
+<string name="pm">下午</string>
 
 <string name="key1">1</string>
 <string name="key2">2</string>

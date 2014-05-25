@@ -57,8 +57,8 @@ public class MainActivity extends Activity {
 	static SharedPreferences spSettings;
 	static DisplayMetrics metrics;
 	static SceneTimer1 sTimer1 = new SceneTimer1();
+	static SceneTimer2 sTimer2 = new SceneTimer2();
 	static SceneTimer3 sTimer3 = new SceneTimer3();
-	static SceneTimer4 sTimer4 = new SceneTimer4();
 
 	private static final int ICON_WIDTH = 80;
 	private static final int NUM_CIRCLE_ITEMS = 6;
@@ -151,6 +151,26 @@ public class MainActivity extends Activity {
         RelativeLayout running_layout = (RelativeLayout)findViewById(R.id.running_layout);
         running_layout.setOnTouchListener(mainKeyTouchListener);
         running_layout.setOnClickListener(startRunningListener);
+        RelativeLayout reminder_list_layout = (RelativeLayout)findViewById(R.id.main_reminderslist_layout);
+        reminder_list_layout.setOnTouchListener(mainKeyTouchListener);
+        reminder_list_layout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				GoToActivity(RemindersList.class);
+
+			}
+		});
+        RelativeLayout settings_layout = (RelativeLayout)findViewById(R.id.main_settings_layout);
+        settings_layout.setOnTouchListener(mainKeyTouchListener);
+        settings_layout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				GoToActivity(Settings.class);
+
+			}
+		});
     	
         // Create ivFloating Object
         if (ivFloating == null){
@@ -245,13 +265,13 @@ public class MainActivity extends Activity {
     									sTimer1.Create(sContext);
         								break;
     								case 1:
-    									//sTimer4.Create(sContext);
+    									sTimer2.Create(sContext);
         								break;
     								case 2:
     									sTimer3.Create(sContext);
         								break;
     								case 3:
-        								GoToActivity(SceneTimer4.class);
+        								GoToActivity(Timer4.class);
         								break;
     								case 4:
         								GoToActivity(Settings.class);

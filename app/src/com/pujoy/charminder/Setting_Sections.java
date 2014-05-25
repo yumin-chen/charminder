@@ -32,7 +32,7 @@ public class Setting_Sections extends Activity implements OnClickListener {
 		};
 		
 		RelativeLayout[] rlList = new RelativeLayout[6];
-		rlList[0] = (RelativeLayout)findViewById(R.id.setting_reminderslist_layout);
+		rlList[0] = (RelativeLayout)findViewById(R.id.main_reminderslist_layout);
 		rlList[1] = (RelativeLayout)findViewById(R.id.setting_settings_layout);
 		rlList[2] = (RelativeLayout)findViewById(R.id.setting_timer1_layout);
 		rlList[3] = (RelativeLayout)findViewById(R.id.setting_timer2_layout);
@@ -74,7 +74,7 @@ public class Setting_Sections extends Activity implements OnClickListener {
 	
 	public void onClick(View v) {
 		switch(v.getId()){
-		case R.id.setting_reminderslist_layout:
+		case R.id.main_reminderslist_layout:
 			if(sectionSetting[0]){
 				sectionSetting[0] = false;
 				ImageView Switch = (ImageView)findViewById(R.id.switch_reminderlist);

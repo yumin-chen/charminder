@@ -28,7 +28,7 @@
     android:text="@string/main_menu_setting_prompt" />
     
 <RelativeLayout
-        android:id="@+id/setting_reminderslist_layout"
+        android:id="@+id/main_reminderslist_layout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="#e4f2fe" >
