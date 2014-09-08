@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">风吹吹醒</string>
+    <string name="floating_icon_name">小吹</string>
+    <string name="welcome_greeting">嗨，我叫%1$s！</string>
+    <string name="user_guide">爱我你就拖拖我吧！</string>
+   
+    <string name="circle_title_timer1">计时提醒</string>
+	<string name="circle_title_timer2">定时提醒</string>
+	<string name="circle_title_timer3">整点提醒</string>
+	<string name="circle_title_timer4">事件提醒</string>
+	<string name="circle_settings">设置</string>
+    <string name="circle_reminder_list">提醒清单</string>
+   
+    <string name="title_timer1">计时提醒</string>
+	<string name="title_timer2">定时提醒</string>
+	<string name="title_timer3">整点提醒</string>
+	<string name="title_timer4">事件提醒</string>
+	<string name="settings">设置</string>
+    <string name="reminder_list">提醒清单</string>
+</resources>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">风吹吹醒</string>
+    <string name="floatingwindow">启用风吹吹醒</string>
+    <string name="reminder_list">提醒清单</string>
+<string name="settings">设置</string>
+<string name="rate">评价</string>
+<string name="feedback">反馈</string>
+<string name="delete">删除</string>
+<string name="edit">编辑</string>
+<string name="text_title">标题：</string>
+<string name="text_time">时间：</string>
+<string name="text_level">级别：</string>
+<string name="date_">日期：</string>
+<string name="countdowntime_">倒计时：</string>
+<string name="time_">时间：</string>
+<string name="repeat_">周期：</string>
+<string name="repeat_once">仅一次</string>
+<string name="repeat_dayly">每天一次</string>
+<string name="repeat_weekly">每周一次</string>
+<string name="repeat_monthly">每月一次</string>
+<string name="repeat_yearly">每年一次</string>
+<string name="text_location">地点：</string>
+<string name="text_content">内容：</string>
+<string name="date_added">创建日期：</string>
+<string name="time_added">创建时间：</string>
+<string name="event_location">事件地点：</string>
+<string name="time_to_remind">提醒时间：</string>
+<string name="content">提醒内容：</string>
+<string name="repeat">循环周期：</string>
+<string name="level">提醒级别：</string>
+<string name="important_level">重要星级</string>
+<string name="note">备注（选填）</string>
+
+<string name="ok">确认</string>
+<string name="cancel">取消</string>
+
+<string name="dismiss">知道了</string>
+<string name="details">详细信息</string>
+
+<string name="setting_main_interface">主菜单板块设置</string>
+<string name="setting_circle_interface">悬浮圆盘板块设置</string>
+<string name="setting_autodelete">自动删除过期提醒</string>
+<string name="setting_bubbletime">气泡提示自动消失时间</string>
+<string name="setting_level1">分级提醒方式</string>
+<string name="setting_section">板块设置</string>
+
+<string name="level_bubble">风吹吹悬浮气泡提示</string>
+<string name="level_notification_center">推送到消息中心</string>
+<string name="level_wake_screen">唤醒屏幕</string>
+<string name="level_vibrate">震动</string>
+<string name="level_sound">响铃</string>
+
+<string name="select_bubbletimeout">请选择气泡消失时间：</string>
+<string name="select_repeat">请选择周期：</string>
+
+<string name="time_type_timer1">计时</string>
+<string name="time_type_timer2">定点</string>
+
+
+<string name="title_timer1">计时提醒</string>
+<string name="title_timer2">定时提醒</string>
+<string name="title_timer3">整点提醒</string>
+<string name="title_timer4">事件提醒</string>
+
+
+<string name="expired">已经过期</string>
+<string name="single0">0</string>
+<string name="unknown_digit">_</string>
+<string name="year">年</string>
+<string name="month">月</string>
+<string name="day">日</string>
+<string name="hour">时</string>
+<string name="minute">分</string>
+<string name="second">秒</string>
+<string name="everyhour">每小时</string>
+
+<string name="reminderslist_empty_prompt">—您的提醒清单列表为空—</string>
+<string name="reminderslist_prompt">您的提醒清单列表：</string>
+<string name="settings_prompt">风吹吹醒程序设置：</string>
+<string name="main_menu_setting_prompt">定义您的主菜单显示的板块：</string>
+<string name="level_prompt">分级提醒方式设置：</string>
+<string name="timer1_prompt">您将在过完以下时间后收到提醒：</string>
+<string name="timer2_prompt">您将在该时刻收到提醒：</string>
+<string name="timer3_prompt">您将在每个小时的以下时刻收到提醒：</string>
+<string name="timer4_prompt">您将在该事件到时收到提醒：</string>
+<string name="timer_start">添加提醒</string>
+
+
+<string name="am">上午</string>
+<string name="pm">下午</string>
+
+<string name="key1">1</string>
+<string name="key2">2</string>
+<string name="key3">3</string>
+<string name="key4">4</string>
+<string name="key5">5</string>
+<string name="key6">6</string>
+<string name="key7">7</string>
+<string name="key8">8</string>
+<string name="key9">9</string>
+<string name="key0">0</string>
+
+<string name="bubble_on_created">我叫风吹吹，爱我你就摸摸我吧~</string>
+<string name="bubble_info_needed">请先告诉我需要提醒的信息吧~</string>
+<string name="bubble_add_reminder">好的，我会在</string>
+<string name="bubble_timer1">之后提醒你~</string>
+<string name="bubble_timer2">准时提醒你~</string>
+<string name="bubble_timer3">每个小时的</string>
+<string name="bubble_timer4_tab1">之后提醒你关于这个</string>
+<string name="bubble_timer4_tab2">准时提醒你关于这个</string>
+<string name="bubble_timer4_end">的~</string>
+<string name="bubble_error">我不知道怎么提醒你~</string>
+<string name="bubble_reminder1">已经到了!</string>
+<string name="bubble_reminder4">快去</string>
+<string name="bubble_reminder4end">吧~</string>
+
+</resources>

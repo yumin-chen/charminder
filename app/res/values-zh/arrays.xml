@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="babble_bubble">
+        <item>猜猜我是男的还是女的？</item>
+        <item>再多摸我几下我也不会怀孕。</item>
+        <item>你是在挑逗我吗？</item>
+        <item>嘻嘻，好痒，好痒……</item>
+        <item>我感受到了你手指头的体温。</item>
+        <item>再摸，我就把你的手指头吃掉。</item>
+    </string-array>
+</resources>
