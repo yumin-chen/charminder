@@ -25,9 +25,11 @@ public class MainCircle extends FloatingBase{
 	public ImageView[] ivCircleItems;
 	private int iOldHover;
 	private static final int ICON_WIDTH = 80;
+	private static final int ITEM_POSITION_OFFSET = -3;
+	private static final float INNER_CIRCLE_RADIUS = 82.73437500000001f;
 	
 	@Override
-	protected void initialize(){
+	protected void onInitialize(){
 		mainView = new RelativeLayout(con);
 		ivBackground = new ImageView(con);
 		ivBackground.setImageResource(R.drawable.circle_bg);
@@ -35,11 +37,11 @@ public class MainCircle extends FloatingBase{
     	tvCircleDescription = new TextView(con);
     	RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(
     			(int)dpToPx(96), (int)dpToPx(96));
-		updateLayoutParams();
+		onUpdateLayout();
     	textParams.leftMargin = (layoutParams.getWidth() - (int)dpToPx(96))/2;
     	textParams.topMargin = (layoutParams.getHeight() - (int)dpToPx(96))/2;
     	tvCircleDescription.setGravity(Gravity.CENTER);
-    	tvCircleDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18 + iLang*2);
+    	tvCircleDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14 + iLang*8);
     	tvCircleDescription.setTextColor(android.graphics.Color.rgb(228, 242, 254));
     	mainView.addView(tvCircleDescription, textParams);
     	ivBackground.setLayoutParams(new LayoutParams(layoutParams.getWidth(), layoutParams.getHeight()));
@@ -57,6 +59,7 @@ public class MainCircle extends FloatingBase{
     	ivCircleItems[3].setImageResource(R.drawable.timer4_icon_c);
     	ivCircleItems[4].setImageResource(R.drawable.settings);
     	ivCircleItems[5].setImageResource(R.drawable.reminderlist);
+    	ivCircleItems[6].setImageResource(R.drawable.exit);
     	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
     		mainView.addView(ivCircleItems[i], params[i]);
     	}
@@ -64,21 +67,21 @@ public class MainCircle extends FloatingBase{
 	}
 	
 	@Override
-	protected void createView(){
+	protected void onCreate(){
 		addView(mainView, layoutParams); 
     	tvCircleDescription.setText("");
     	tvCircleDescription.setBackgroundColor(android.graphics.Color.argb(0, 48, 78, 98));
     	Animation animation = AnimationUtils.loadAnimation(con, R.anim.zoom);
     	ivBackground.startAnimation(animation);
     	for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
-    		float tox = (float) (layoutParams.getWidth()/2 + dpToPx(82.73437500000001f) *
-    				Math.sin(((360/NUM_CIRCLE_ITEMS) * i) * Math.PI / 180.0) -  dpToPx(ICON_WIDTH)/2);
-    		float toy = (float) (layoutParams.getHeight()/2 + dpToPx(82.73437500000001f) * 
-    				Math.cos(((360/NUM_CIRCLE_ITEMS) * i) * Math.PI / 180.0) -  dpToPx(ICON_WIDTH)/2);
-    		float fromx = (float) (layoutParams.getWidth()/2 + dpToPx(82.73437500000001f) * 
-    				Math.sin(((360/NUM_CIRCLE_ITEMS) * i) * Math.PI / 180.0)/4 -  dpToPx(ICON_WIDTH)/2);
-    		float fromy = (float) (layoutParams.getHeight()/2 + dpToPx(82.73437500000001f) *
-    				Math.cos(((360/NUM_CIRCLE_ITEMS) * i) * Math.PI / 180.0)/4 -  dpToPx(ICON_WIDTH)/2);
+    		float tox = (float) (layoutParams.getWidth()/2 + dpToPx(INNER_CIRCLE_RADIUS) *
+    				Math.sin(((360/NUM_CIRCLE_ITEMS) * (i+ITEM_POSITION_OFFSET)) * Math.PI / 180.0) -  dpToPx(ICON_WIDTH)/2);
+    		float toy = (float) (layoutParams.getHeight()/2 + dpToPx(INNER_CIRCLE_RADIUS) * 
+    				Math.cos(((360/NUM_CIRCLE_ITEMS) * (i+ITEM_POSITION_OFFSET)) * Math.PI / 180.0) -  dpToPx(ICON_WIDTH)/2);
+    		float fromx = (float) (layoutParams.getWidth()/2 + dpToPx(INNER_CIRCLE_RADIUS) * 
+    				Math.sin(((360/NUM_CIRCLE_ITEMS) * (i+ITEM_POSITION_OFFSET)) * Math.PI / 180.0)/4 -  dpToPx(ICON_WIDTH)/2);
+    		float fromy = (float) (layoutParams.getHeight()/2 + dpToPx(INNER_CIRCLE_RADIUS) *
+    				Math.cos(((360/NUM_CIRCLE_ITEMS) * (i+ITEM_POSITION_OFFSET)) * Math.PI / 180.0)/4 -  dpToPx(ICON_WIDTH)/2);
     		ValueAnimator aCircleItemsY = ObjectAnimator.ofFloat(ivCircleItems[i], "y", fromy, toy);
     		aCircleItemsY.setDuration(200);
     		ValueAnimator aCircleItemsX = ObjectAnimator.ofFloat(ivCircleItems[i], "x", fromx, tox);
@@ -93,12 +96,12 @@ public class MainCircle extends FloatingBase{
 	}
 	
 	@Override
-	protected void release(){
+	protected void onRemove(){
 		removeView(mainView);
 	}
 	
 	@Override
-	protected void updateLayoutParams(){
+	protected void onUpdateLayout(){
 		layoutParams.setX((getScreenWidth() - layoutParams.getWidth())/2);
 		layoutParams.setY((getScreenHeight() - layoutParams.getHeight())/2); 	
 		layoutParams.setWidth((int) dpToPx(240));
@@ -151,6 +154,12 @@ public class MainCircle extends FloatingBase{
 			ivCircleItems[i].setImageResource(R.drawable.reminderlist_a);
 			iOldHover = 6;
 			break;
+		case 6:
+			tvCircleDescription.setText(con.getString(R.string.circle_exit));
+			updateOldHoverItem();
+			ivCircleItems[i].setImageResource(R.drawable.exit_a);
+			iOldHover = 7;
+			break;
 		}
 	}
 
@@ -168,8 +177,18 @@ public class MainCircle extends FloatingBase{
 			ivCircleItems[4].setImageResource(R.drawable.settings);
 		case 6:
 			ivCircleItems[5].setImageResource(R.drawable.reminderlist);
+		case 7:
+			ivCircleItems[6].setImageResource(R.drawable.exit);
 		}
 		iOldHover = 0;
+	}
+
+	public boolean isPointInsideItem(float pointX, float pointY, int item) {
+		final int RADIUS_COMPLEMENT = 8;
+		return isPointInsideCircle((int) pointX, (int) pointY,
+				(int) (getX() + ivCircleItems[item].getX() + ivCircleItems[item].getWidth()/2),
+				(int) (getY() + ivCircleItems[item].getY() + ivCircleItems[item].getHeight()/2),
+				(int)(ivCircleItems[item].getWidth()/2 + dpToPx(RADIUS_COMPLEMENT)));
 	}
 	
 }

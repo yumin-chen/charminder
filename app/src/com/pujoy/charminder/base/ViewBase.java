@@ -22,10 +22,24 @@ public class ViewBase {
 	public static float dpToPx(float dp){
 		return dp *(metrics.densityDpi / 160f);
     }
-    public static boolean isPointInsideRect(float PointX, float PointY, 
-    		float RectX, float RectY, float RectWidth, float RectHeight){
-    	return (PointX >= RectX) && (PointX < RectX + RectWidth) 
-    			&& (PointY >= RectY) && (PointY < RectY + RectHeight) ;
+    public static boolean isPointInsideRect(float pointX, float pointY, 
+    		float rectX, float rectY, float rectWidth, float rectHeight){
+    	return (pointX >= rectX) && (pointX < rectX + rectWidth) 
+    			&& (pointY >= rectY) && (pointY < rectY + rectHeight) ;
+    }
+    public static boolean isPointInsideCircle(int  pointX, int pointY, 
+    		int circleCenterX, int circleCenterY, int radius){
+    	int dx = Math.abs(circleCenterX - pointX);
+    	int dy = Math.abs(circleCenterY - pointY);
+    	if(dx + dy <= radius)
+    		return true;
+    	if(dx > radius) 
+    		return false;
+    	if(dy > radius)
+    		return false;
+    	if((dx^2) + (dy^2) <= radius)
+    		return true;
+    	return false;
     }
     public static boolean isRotated(){
     	return(bOldRotation != isLandscape());

@@ -9,19 +9,25 @@ public class TimerThread extends Handler{
 	private static final int REMINDING_WAITING_TIME = 1000;
 	private static final int MOVING_ICON_PROCESS = 2;
 	private static final int MOVING_ICON_WAITING_TIME = 1;
+	private static boolean bCreated;
 	
 	public TimerThread(){
+		if (bCreated)
+			return;
 		sendEmptyMessageDelayed(REMINDING_PROCESS, REMINDING_WAITING_TIME);
+		bCreated = true;
 	}
 	
-	public void MoveIconToCorner(){
-		if(charmy.MoveToCorner()){
+	public void moveIconToCorner(){
+		if(charmy != null && charmy.MoveToCorner()){
 			sendEmptyMessageDelayed(MOVING_ICON_PROCESS, MOVING_ICON_WAITING_TIME);
 		}
 	}
 	
 	@Override
 	public void handleMessage(Message msg) {
+		if (!bCreated)
+			return;
         if (msg.what == REMINDING_PROCESS){
         	if(charmy.bCreated){
         		if(charmy.bubble.bCreated){

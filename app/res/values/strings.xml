@@ -2,20 +2,48 @@
 <resources>
     <string name="app_name">Charminder</string>
     <string name="floating_icon_name">Charmy</string>
-    <string name="welcome_greeting">Hi, my name is %1$s!\u0020</string>
-    <string name="user_guide">Try dragging me somewhere please!</string>
+    <string name="b_welcome_greeting">Hi, my name is %1$s!\u0020</string>
+    <string name="b_user_guide">Try dragging me somewhere please!</string>
+    <string name="b_exit">Bye, I will miss you!</string>
+    <string name="b_exit_completely">Take care, you will not be reminded after I\'m gone.</string>
     
-    <string name="circle_title_timer1">Count\ndown</string>
-	<string name="circle_title_timer2">Alarm</string>
-	<string name="circle_title_timer3">Hourly</string>
-	<string name="circle_title_timer4">Events</string>
+    <string name="popDialog_defualtTitle">Charminder</string>
+    
+    <string name="ok">OK</string>
+	<string name="cancel">Cancel</string>
+	
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+	
+    <string name="circle_title_timer1">Countdown\nReminder</string>
+	<string name="circle_title_timer2">Alarm\nReminder</string>
+	<string name="circle_title_timer3">Hourly\nReminder</string>
+	<string name="circle_title_timer4">Event\nReminder</string>
 	<string name="circle_settings">Settings</string>
     <string name="circle_reminder_list">Reminder\nList</string>
+    <string name="circle_exit">Exit</string>
     
-    <string name="title_timer1">Countdown</string>
+    <string name="onExit_title">Exit</string>
+    <string name="onExit_content">Do you want to still be reminded after you exit %1$s?</string>
+    
+    <string name="title_timer1">C.down</string>
 	<string name="title_timer2">Timer</string>
 	<string name="title_timer3">Hourly</string>
 	<string name="title_timer4">Events</string>
 	<string name="settings">Settings</string>
     <string name="reminder_list">Reminderlist</string>
+    
+    <string name="unit_year">Y</string>
+	<string name="unit_month">M</string>
+	<string name="unit_day">D</string>
+	<string name="unit_hour">h</string>
+	<string name="unit_minute">m</string>
+	<string name="unit_second">s</string>
+	<string name="unit_everyhour">Every</string>
+	
+	<string name="priority">Priority</string>
+	
+	<string name="a_m_">a.m.</string>
+	<string name="p_m_">p.m.</string>
+	
 </resources>

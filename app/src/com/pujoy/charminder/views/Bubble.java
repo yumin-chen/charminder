@@ -25,7 +25,7 @@ public class Bubble extends FloatingBase implements OnClickListener{
 	private FloatingLayoutParams floatingTextLayoutParams;
 	
 	@Override
-	protected void initialize(){
+	protected void onInitialize(){
 		mainView = new ImageView(con);
 		mainView.setOnClickListener(this);
         textView = new TextView(con);
@@ -39,11 +39,11 @@ public class Bubble extends FloatingBase implements OnClickListener{
 		float fSize = (float) (22 - iLang*2 - (Math.sqrt(text.length())/(1.4-iLang*0.2)));
 		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fSize < 8? 8: fSize);
 		textView.setText(text);
-		updateLayoutParams();
+		onUpdateLayout();
 	}
 	
 	@Override
-	protected void createView(){
+	protected void onCreate(){
 		addView(mainView, layoutParams); 
 		bViewAdded = false;
 		addView(textView, floatingTextLayoutParams); 
@@ -51,14 +51,14 @@ public class Bubble extends FloatingBase implements OnClickListener{
 	}
 	
 	@Override
-	protected void release(){
+	protected void onRemove(){
 		removeView(mainView);
 		bViewAdded = true;
 		removeView(textView);
 	}
 	
 	@Override
-	protected void updateLayoutParams() {
+	protected void onUpdateLayout() {
 		layoutParams.setWidth((int) dpToPx(280));
 		layoutParams.setHeight((int) dpToPx(148.75f));  
 		float fHorizontal;

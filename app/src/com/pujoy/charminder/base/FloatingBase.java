@@ -7,33 +7,36 @@ public abstract class FloatingBase extends ViewBase{
 	public boolean bCreated;
 	public boolean bViewAdded;
 	protected FloatingLayoutParams layoutParams;
-	protected abstract void initialize(); 
-	protected abstract void createView(); 
-	protected abstract void release(); 
-	protected abstract void updateLayoutParams(); 
-
-	public void create(){
-		if (bCreated){
-			remove();
-		}
-		updateLayoutParams();
-		createView();
-		bCreated = true;
-	}
-	public void remove(){
-		if (!bCreated){
-			return;
-		}
-		release();
-		bCreated = false;
-	}
+	
+	protected abstract void onInitialize(); 
+	protected abstract void onCreate(); 
+	protected abstract void onRemove(); 
+	protected abstract void onUpdateLayout(); 
+	
 	public FloatingBase(){
 		if(bInitialized){
 			return;
 		}
 		if(layoutParams == null) layoutParams = new FloatingLayoutParams();
-		initialize();
+		onInitialize();
 		bInitialized = true;
+	}
+
+	public void create(){
+		if (bCreated){
+			remove();
+		}
+		onUpdateLayout();
+		onCreate();
+		bCreated = true;
+	}
+	
+	public void remove(){
+		if (!bCreated){
+			return;
+		}
+		onRemove();
+		bCreated = false;
 	}
 	
 	protected void addView(android.view.View view, FloatingLayoutParams params){

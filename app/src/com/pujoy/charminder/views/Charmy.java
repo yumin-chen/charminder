@@ -4,7 +4,12 @@ import java.util.Random;
 
 import com.pujoy.charminder.R;
 import com.pujoy.charminder.base.FloatingBase;
+import com.pujoy.charminder.base.FunctionWrapper;
+import com.pujoy.charminder.base.PopDialog;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,9 +30,10 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 	private float fOldMouseY;
 	private float fX;
 	private float fY;
+	private boolean bBeingRemoved;
 
 	@Override
-	protected void initialize(){
+	protected void onInitialize(){
 		layoutParams.setWidth((int) dpToPx(48));
 		layoutParams.setHeight((int) dpToPx(48)); 
 		layoutParams.setX((int) (getScreenWidth() - layoutParams.getWidth()));
@@ -51,24 +57,64 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 
 	
 	@Override
-	protected void createView(){
+	protected void onCreate(){
 		addView(mainView, layoutParams); 
-
+		bBeingRemoved = false;
 	}
 	
 	@Override
-	protected void release(){
-		removeView(mainView);
-		if(bubble.isCreated()){
-			bubble.remove();
+	public void remove(){
+		if (!bCreated){
+			return;
 		}
+		bBeingRemoved = true;
+		ivIcon.setPivotX(ivIcon.getWidth()/2);
+		ivIcon.setPivotY(ivIcon.getHeight()/2);
+		ValueAnimator aRotation = ObjectAnimator.ofFloat(ivIcon, "rotation",
+				0, 3600/2);
+		aRotation.setDuration(3000);
+		aRotation.addListener(new Animator.AnimatorListener(){
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+            	removeView(mainView);
+            	if(bubble.isCreated()){
+        			bubble.remove();
+        		}
+            	bCreated = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+
+			@Override
+			public void onAnimationCancel(Animator animation) {
+				removeView(mainView);
+				if(bubble.isCreated()){
+					bubble.remove();
+				}
+				bCreated = false;
+			}
+        });
+		aRotation.start();
+		
 	}
 	
 	@Override
-	protected void updateLayoutParams(){ 
+	protected void onRemove(){
+	}
+	
+	@Override
+	protected void onUpdateLayout(){ 
 		bubble.iIconPositionX = layoutParams.getX();
 		bubble.iIconPositionY = layoutParams.getY();
-		bubble.updateLayoutParams();
+		bubble.onUpdateLayout();
 	}
 	
 	public void PushBubble(String BubbleText){
@@ -83,6 +129,8 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 	
 	@Override
 	public void onClick(View v){
+		if (bBeingRemoved)
+			return;
 		if(bubble.isCreated()){
 			bubble.remove();
 		}
@@ -91,6 +139,8 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
+		if (bBeingRemoved)
+			return false;
 		
 		switch(event.getAction()){
 		case MotionEvent.ACTION_DOWN:
@@ -110,14 +160,10 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 			layoutParams.setY((int) (fY)); 
 			fOldMouseX = event.getRawX();
 			fOldMouseY = event.getRawY();
-			updateLayoutParams();
+			onUpdateLayout();
 			Update();	
 			for(int i=0; i < NUM_CIRCLE_ITEMS; i++){
-				if(isPointInsideRect(event.getRawX(), event.getRawY(),
-						mainCircle.getX() + mainCircle.ivCircleItems[i].getX() - dpToPx(8),
-						mainCircle.getY() + mainCircle.ivCircleItems[i].getY() - dpToPx(8),
-						mainCircle.ivCircleItems[i].getWidth() +  dpToPx(16),
-						mainCircle.ivCircleItems[i].getHeight() +  dpToPx(16))){
+				if(mainCircle.isPointInsideItem(event.getRawX(), event.getRawY(), i)){
 					mainCircle.Hover(i);
 			    	mainCircle.tvCircleDescription.setBackgroundColor(android.graphics.Color.argb(192, 48, 78, 98));
 					break;
@@ -134,23 +180,29 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 			break;
 		case MotionEvent.ACTION_UP:
 			mainCircle.remove();
-			timerThread.MoveIconToCorner();
+			timerThread.moveIconToCorner();
 			for(int i=0;i<NUM_CIRCLE_ITEMS;i++){
-				if(isPointInsideRect(event.getRawX(), event.getRawY(),
-						mainCircle.getX() + mainCircle.ivCircleItems[i].getX() - dpToPx(8),
-						mainCircle.getY() + mainCircle.ivCircleItems[i].getY() - dpToPx(8),
-						mainCircle.ivCircleItems[i].getWidth() +  dpToPx(16),
-						mainCircle.ivCircleItems[i].getHeight() +  dpToPx(16))){
+				if(mainCircle.isPointInsideItem(event.getRawX(), event.getRawY(), i)){
 					switch(i){
 					case 0:
-						//sTimer1.Create(sContext);
+					{
+						Timer1 timer1 = new Timer1();
+						timer1.create();
 						break;
+					}
+						
 					case 1:
-						//sTimer2.Create(sContext);
+					{
+						Timer2 timer2 = new Timer2();
+						timer2.create();
 						break;
+					}
 					case 2:
-						//sTimer3.Create(sContext);
+					{
+						Timer3 timer3 = new Timer3();
+						timer3.create();
 						break;
+					}
 					case 3:
 						//GoToActivity(Timer4.class);
 						break;
@@ -160,6 +212,30 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 					case 5:
 						//GoToActivity(RemindersList.class);
 						break;
+					case 6:
+					{
+						PopDialog dialog = new PopDialog(con.getResources().getString(R.string.onExit_content, 
+								con.getResources().getString(R.string.app_name)),
+								con.getResources().getString(R.string.onExit_title),
+							new FunctionWrapper(){
+								@Override
+								public void function() {
+									remove();
+									PushBubble(con.getResources().getString(R.string.b_exit));
+								}
+							},
+							new FunctionWrapper(){
+								@Override
+								public void function() {
+									remove();
+									PushBubble(con.getResources().getString(R.string.b_exit_completely));
+									timerThread = null;
+								}
+							});
+						dialog.setOkText(con.getResources().getString(R.string.yes));
+						dialog.setCancelText(con.getResources().getString(R.string.no));
+						dialog.create();
+					}
 					}
 					break;
 				}else{
@@ -184,12 +260,13 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 		int toTop = layoutParams.getY();
 		int toBottom = getScreenHeight() - layoutParams.getY() - layoutParams.getHeight();
 		final int speed = (int) dpToPx(8);
-		final float retationSpeed = 8;
+		float retationSpeed = 12;
 		boolean r = false;
 		if (Math.min(toLeft, toRight) <= Math.min(toTop, toBottom)){
 			if(toLeft < toRight){
 				if(layoutParams.getX() != 0){
 					layoutParams.setX(layoutParams.getX() - speed);
+					retationSpeed = -retationSpeed;
 					r = true;
 				}
 			}else{
@@ -202,6 +279,7 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 			if(toTop < toBottom){
 				if(layoutParams.getY() != 0){
 					layoutParams.setY(layoutParams.getY() - speed);
+					retationSpeed = -retationSpeed;
 					r = true;
 				}
 			}else{
@@ -215,7 +293,7 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 			ivIcon.setPivotX(ivIcon.getWidth()/2);
 			ivIcon.setPivotY(ivIcon.getHeight()/2);
 			ivIcon.setRotation(ivIcon.getRotation() + retationSpeed);
-			updateLayoutParams();
+			onUpdateLayout();
 			Update();	
 		}
 		return r;

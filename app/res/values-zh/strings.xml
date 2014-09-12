@@ -2,8 +2,18 @@
 <resources>
     <string name="app_name">风吹吹醒</string>
     <string name="floating_icon_name">小吹</string>
-    <string name="welcome_greeting">嗨，我叫%1$s！</string>
-    <string name="user_guide">爱我你就拖拖我吧！</string>
+    <string name="b_welcome_greeting">嗨，我叫%1$s！</string>
+    <string name="b_user_guide">爱我你就拖拖我吧！</string>
+    <string name="b_exit">再见，我会想你的！</string>
+    <string name="b_exit_completely">你要自己照顾好自己哦，我走了之后就不会再提醒你啦！</string>
+	
+	<string name="popDialog_defualtTitle">风吹吹醒</string>
+   
+    <string name="ok">确认</string>
+	<string name="cancel">取消</string>
+	
+	<string name="yes">是</string>
+	<string name="no">否</string>
    
     <string name="circle_title_timer1">计时提醒</string>
 	<string name="circle_title_timer2">定时提醒</string>
@@ -11,6 +21,10 @@
 	<string name="circle_title_timer4">事件提醒</string>
 	<string name="circle_settings">设置</string>
     <string name="circle_reminder_list">提醒清单</string>
+    <string name="circle_exit">退出</string>
+	
+	<string name="onExit_title">退出程序</string>
+    <string name="onExit_content">是否在退出%1$s之后继续接收提醒？</string>
    
     <string name="title_timer1">计时提醒</string>
 	<string name="title_timer2">定时提醒</string>
@@ -18,4 +32,17 @@
 	<string name="title_timer4">事件提醒</string>
 	<string name="settings">设置</string>
     <string name="reminder_list">提醒清单</string>
+	
+	<string name="unit_year">年</string>
+	<string name="unit_month">月</string>
+	<string name="unit_day">日</string>
+	<string name="unit_hour">时</string>
+	<string name="unit_minute">分</string>
+	<string name="unit_second">秒</string>
+	<string name="unit_everyhour">每小时</string>
+	
+	<string name="priority">重要星级</string>
+	
+	<string name="a_m_">a.m.</string>
+	<string name="p_m_">p.m.</string>
 </resources>
