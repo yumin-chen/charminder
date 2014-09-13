@@ -20,7 +20,6 @@ import static com.pujoy.charminder.MainActivity.con;
 public class Timer2 extends FloatingTimerDialog implements OnClickListener{
 	
 	static ImageView ivTitleIcon;
-	static TextView tvTitle;
 	static TextView tvAmPm;
 	static TextView[] tvDigits;
 	static TextView tvHour;
@@ -161,22 +160,12 @@ public class Timer2 extends FloatingTimerDialog implements OnClickListener{
 
     	currentDigit = 0;
     	UpdateCurrentDigit();
-		
-    	tvTitle = new TextView(con);
-    	tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-    	tvTitle.setGravity(Gravity.CENTER);
-    	tvTitle.setTextColor(Constants.COLOR_LIGHTBLUE);
-    	tvTitle.setText(con.getString(R.string.title_timer2));
-    	tvTitle.setLayoutParams(new LayoutParams((int)dpToPx(64), (int)dpToPx(28)));
-    	tvTitle.setX(layoutParams.getWidth()/2-dpToPx(40)/2);
-    	
-    	addToMainView(tvTitle);
+
     	
     	ivTitleIcon = new ImageView(con);
     	ivTitleIcon.setImageResource(R.drawable.timer2_icon);
-    	ivTitleIcon.setLayoutParams(new LayoutParams((int)dpToPx(28), (int)dpToPx(28)));
-    	ivTitleIcon.setX(layoutParams.getWidth()/2-dpToPx(40)/2-dpToPx(26));
-    	
+    	ivTitleIcon.setLayoutParams(new LayoutParams((int)dpToPx(32), (int)dpToPx(32)));
+    	ivTitleIcon.setX(layoutParams.getWidth()/2-dpToPx(32)/2);
     	addToMainView(ivTitleIcon);
     	
 	}
@@ -184,11 +173,8 @@ public class Timer2 extends FloatingTimerDialog implements OnClickListener{
 	@Override 
 	protected void onCreate(){
 	
-	ValueAnimator aTitleY = ObjectAnimator.ofFloat(tvTitle, "y",
-			layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(10), dpToPx(10));
-	aTitleY.setDuration(500);
 	ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(ivTitleIcon, "y",
-			layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(10), dpToPx(10));
+			layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(4), dpToPx(4));
 	aTitleIconY.setDuration(500);
    
 
@@ -241,7 +227,6 @@ public class Timer2 extends FloatingTimerDialog implements OnClickListener{
 			(layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(58), dpToPx(58));
 	aMinuteY.setDuration(500);
 	
-		aTitleY.start();
 		aTitleIconY.start();
 		a201Y.start();
 		aYearY.start();
@@ -264,11 +249,8 @@ public class Timer2 extends FloatingTimerDialog implements OnClickListener{
     				dpToPx(40), (layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(40));
     		aDigitsY[i].setDuration(500);
     	}
-		ValueAnimator aTitleY = ObjectAnimator.ofFloat(tvTitle, "y",
-				dpToPx(10), layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(10));
-		aTitleY.setDuration(500);
 		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(ivTitleIcon, "y",
-				dpToPx(10), layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(10));
+				dpToPx(4), layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(4));
 		aTitleIconY.setDuration(500);
 
     	ValueAnimator aAmPmY = ObjectAnimator.ofFloat(tvAmPm, "y",
@@ -309,7 +291,6 @@ public class Timer2 extends FloatingTimerDialog implements OnClickListener{
     	}
     	
 
-		aTitleY.start();
 		aTitleIconY.start();
 		aAmPmY.start();
 		aHourY.start();

@@ -1,7 +1,9 @@
 package com.pujoy.charminder.views;
 
+import com.pujoy.charminder.Constants;
 import com.pujoy.charminder.R;
 import com.pujoy.charminder.base.FloatingBase;
+
 import static com.pujoy.charminder.MainActivity.iLang;
 import static com.pujoy.charminder.MainActivity.NUM_CIRCLE_ITEMS;
 
@@ -23,7 +25,9 @@ public class MainCircle extends FloatingBase{
 	ImageView ivBackground;
 	TextView tvCircleDescription;
 	public ImageView[] ivCircleItems;
+	FloatingText mainCircleItemDescription;
 	private int iOldHover;
+	public int HoveringItem;
 	private static final int ICON_WIDTH = 80;
 	private static final int ITEM_POSITION_OFFSET = -3;
 	private static final float INNER_CIRCLE_RADIUS = 82.73437500000001f;
@@ -41,8 +45,8 @@ public class MainCircle extends FloatingBase{
     	textParams.leftMargin = (layoutParams.getWidth() - (int)dpToPx(96))/2;
     	textParams.topMargin = (layoutParams.getHeight() - (int)dpToPx(96))/2;
     	tvCircleDescription.setGravity(Gravity.CENTER);
-    	tvCircleDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14 + iLang*8);
-    	tvCircleDescription.setTextColor(android.graphics.Color.rgb(228, 242, 254));
+    	tvCircleDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16 + iLang*8);
+    	tvCircleDescription.setTextColor(Constants.COLOR_LIGHTBLUE);
     	mainView.addView(tvCircleDescription, textParams);
     	ivBackground.setLayoutParams(new LayoutParams(layoutParams.getWidth(), layoutParams.getHeight()));
     	mainView.addView(ivBackground);
@@ -56,7 +60,7 @@ public class MainCircle extends FloatingBase{
     	ivCircleItems[0].setImageResource(R.drawable.timer1_icon_c);
     	ivCircleItems[1].setImageResource(R.drawable.timer2_icon_c);
     	ivCircleItems[2].setImageResource(R.drawable.timer3_icon_c);
-    	ivCircleItems[3].setImageResource(R.drawable.timer4_icon_c);
+    	ivCircleItems[3].setImageResource(R.drawable.audio_reminder);
     	ivCircleItems[4].setImageResource(R.drawable.settings);
     	ivCircleItems[5].setImageResource(R.drawable.reminderlist);
     	ivCircleItems[6].setImageResource(R.drawable.exit);
@@ -98,14 +102,19 @@ public class MainCircle extends FloatingBase{
 	@Override
 	protected void onRemove(){
 		removeView(mainView);
+		if(mainCircleItemDescription != null){
+			mainCircleItemDescription.remove();
+			mainCircleItemDescription = null;
+			HoveringItem = 0;
+		}
 	}
 	
 	@Override
 	protected void onUpdateLayout(){
-		layoutParams.setX((getScreenWidth() - layoutParams.getWidth())/2);
-		layoutParams.setY((getScreenHeight() - layoutParams.getHeight())/2); 	
 		layoutParams.setWidth((int) dpToPx(240));
 		layoutParams.setHeight((int) dpToPx(240));  
+		layoutParams.setX((getScreenWidth() - layoutParams.getWidth())/2);
+		layoutParams.setY((getScreenHeight() - layoutParams.getHeight())/2); 	
 	}
 	
 	public int getX(){
@@ -117,46 +126,79 @@ public class MainCircle extends FloatingBase{
 	}
 
 	public void Hover(int i) {
+		if(HoveringItem != i + 1){
+			HoveringItem = i + 1;
+		}else{
+			return;
+		}
 		switch(i){
 		case 0:
 			tvCircleDescription.setText(con.getString(R.string.circle_title_timer1));
 			updateOldHoverItem();
+			mainCircleItemDescription = new FloatingText();
+			mainCircleItemDescription.setText(con.getString(R.string.description_timer1,
+					con.getString(R.string.title_timer1)));
+			mainCircleItemDescription.create();
 			ivCircleItems[i].setImageResource(R.drawable.timer1_icon_a);
 			iOldHover = 1;
 			break;
 		case 1:
 			tvCircleDescription.setText(con.getString(R.string.circle_title_timer2));
 			updateOldHoverItem();
+			mainCircleItemDescription = new FloatingText();
+			mainCircleItemDescription.setText(con.getString(R.string.description_timer2,
+					con.getString(R.string.title_timer2)));
+			mainCircleItemDescription.create();
 			ivCircleItems[i].setImageResource(R.drawable.timer2_icon_a);
 			iOldHover = 2;
 			break;
 		case 2:
 			tvCircleDescription.setText(con.getString(R.string.circle_title_timer3));
 			updateOldHoverItem();
+			mainCircleItemDescription = new FloatingText();
+			mainCircleItemDescription.setText(con.getString(R.string.description_timer3,
+					con.getString(R.string.title_timer3)));
+			mainCircleItemDescription.create();
 			ivCircleItems[i].setImageResource(R.drawable.timer3_icon_a);
 			iOldHover = 3;
 			break;
 		case 3:
 			tvCircleDescription.setText(con.getString(R.string.circle_title_timer4));
 			updateOldHoverItem();
-			ivCircleItems[i].setImageResource(R.drawable.timer4_icon_a);
+			mainCircleItemDescription = new FloatingText();
+			mainCircleItemDescription.setText(con.getString(R.string.description_timer4,
+					con.getString(R.string.title_timer4)));
+			mainCircleItemDescription.create();
+			ivCircleItems[i].setImageResource(R.drawable.audio_reminder_a);
 			iOldHover = 4;
 			break;
 		case 4:
 			tvCircleDescription.setText(con.getString(R.string.circle_settings));
 			updateOldHoverItem();
+			mainCircleItemDescription = new FloatingText();
+			mainCircleItemDescription.setText(con.getString(R.string.description_settings,
+					con.getString(R.string.settings)));
+			mainCircleItemDescription.create();
 			ivCircleItems[i].setImageResource(R.drawable.settings_a);
 			iOldHover = 5;
 			break;
 		case 5:
 			tvCircleDescription.setText(con.getString(R.string.circle_reminder_list));
 			updateOldHoverItem();
+			mainCircleItemDescription = new FloatingText();
+			mainCircleItemDescription.setText(con.getString(R.string.description_reminder_list,
+					con.getString(R.string.reminder_list)));
+			mainCircleItemDescription.create();
 			ivCircleItems[i].setImageResource(R.drawable.reminderlist_a);
 			iOldHover = 6;
 			break;
 		case 6:
 			tvCircleDescription.setText(con.getString(R.string.circle_exit));
 			updateOldHoverItem();
+			mainCircleItemDescription = new FloatingText();
+			mainCircleItemDescription.setText(con.getString(R.string.description_exit,
+					con.getString(R.string.exit)));
+			mainCircleItemDescription.create();
 			ivCircleItems[i].setImageResource(R.drawable.exit_a);
 			iOldHover = 7;
 			break;
@@ -164,6 +206,10 @@ public class MainCircle extends FloatingBase{
 	}
 
 	public void updateOldHoverItem() {
+		if(mainCircleItemDescription != null){
+			mainCircleItemDescription.remove();
+			mainCircleItemDescription = null;
+		}
     	switch(iOldHover){
 		case 1:
 			ivCircleItems[0].setImageResource(R.drawable.timer1_icon_c);
@@ -172,7 +218,7 @@ public class MainCircle extends FloatingBase{
 		case 3:
 			ivCircleItems[2].setImageResource(R.drawable.timer3_icon_c);
 		case 4:
-			ivCircleItems[3].setImageResource(R.drawable.timer4_icon_c);
+			ivCircleItems[3].setImageResource(R.drawable.audio_reminder);
 		case 5:
 			ivCircleItems[4].setImageResource(R.drawable.settings);
 		case 6:

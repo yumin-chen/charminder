@@ -173,6 +173,7 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 						mainCircle.tvCircleDescription.setBackgroundColor(android.graphics.Color.argb(
 								0, 48, 78, 98));
 						mainCircle.updateOldHoverItem();
+						mainCircle.HoveringItem = 0;
 					}
 				
 				}
@@ -204,8 +205,11 @@ public class Charmy extends FloatingBase implements OnTouchListener, OnClickList
 						break;
 					}
 					case 3:
-						//GoToActivity(Timer4.class);
+					{
+						Timer4 timer4 = new Timer4();
+						timer4.create();
 						break;
+					}
 					case 4:
 						//GoToActivity(Settings.class);
 						break;

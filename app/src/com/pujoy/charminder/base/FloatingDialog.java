@@ -59,15 +59,17 @@ public abstract class FloatingDialog extends FloatingBase{
 		ValueAnimator aOkCircleY = ObjectAnimator.ofFloat(tvOkCircle, "y",
 				layoutParams.getHeight()/2-tvOkCircle.getLayoutParams().height, 0);
 		aOkCircleY.setDuration(ANIMATION_DURATION);
+			
+		
 		ValueAnimator aCancelCircleY = ObjectAnimator.ofFloat(tvCancelCircle, "y",
 				layoutParams.getHeight()/2-tvCancelCircle.getLayoutParams().height, 0);
 		aCancelCircleY.setDuration(ANIMATION_DURATION);
+		aCancelCircleY.start();
 		
 		aUpperCicleY.start();
 		aMiddleFillerHeight.start();   
 		aLowerCicleY.start();  
 		aOkCircleY.start();
-		aCancelCircleY.start();
 	}
 	
 	@Override
@@ -88,9 +90,11 @@ public abstract class FloatingDialog extends FloatingBase{
 		ValueAnimator aOkCircleY = ObjectAnimator.ofFloat(tvOkCircle, "y",
 				0, layoutParams.getHeight()/2-tvOkCircle.getLayoutParams().height);
 		aOkCircleY.setDuration(ANIMATION_DURATION);
+			
 		ValueAnimator aCancelCircleY = ObjectAnimator.ofFloat(tvCancelCircle, "y",
 				0, layoutParams.getHeight()/2-tvCancelCircle.getLayoutParams().height);
 		aCancelCircleY.setDuration(ANIMATION_DURATION);
+		aCancelCircleY.start();
 		
 		aUpperCicleY.addListener(new Animator.AnimatorListener(){
             @Override
@@ -120,7 +124,6 @@ public abstract class FloatingDialog extends FloatingBase{
 		aMiddleFillerHeight.start();   
 		aLowerCicleY.start();  
 		aOkCircleY.start();
-		aCancelCircleY.start();
 		
 		onRemove();
 	}
@@ -170,21 +173,13 @@ public abstract class FloatingDialog extends FloatingBase{
 		};
     	
     	tvOkCircle = new TextView(con);
-    	tvCancelCircle = new TextView(con);
     	tvOkCircle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-    	tvCancelCircle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     	tvOkCircle.setGravity(Gravity.CENTER);
-    	tvCancelCircle.setGravity(Gravity.CENTER);
     	tvOkCircle.setTextColor(Constants.COLOR_DARKBLUE);
-    	tvCancelCircle.setTextColor(Constants.COLOR_DARKBLUE);
     	tvOkCircle.setText(con.getString(R.string.ok));
-    	tvCancelCircle.setText(con.getString(R.string.cancel));
     	tvOkCircle.setBackgroundResource(R.drawable.small_circle);
     	tvOkCircle.setLayoutParams(new LayoutParams((int)dpToPx(73.39249146757679f), (int)dpToPx(73.39249146757679f)));
-    	tvCancelCircle.setBackgroundResource(R.drawable.small_circle);
-    	tvCancelCircle.setLayoutParams(new LayoutParams((int)dpToPx(73.39249146757679f), (int)dpToPx(73.39249146757679f)));
     	tvOkCircle.setX(0);
-    	tvCancelCircle.setX(layoutParams.getWidth() - tvCancelCircle.getLayoutParams().width);
     	tvOkCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -192,6 +187,18 @@ public abstract class FloatingDialog extends FloatingBase{
 				remove();
 			}
 		});
+    	tvOkCircle.setOnTouchListener(OkCancelTouchListener);
+    	mainView.addView(tvOkCircle);
+    	
+    
+    	tvCancelCircle = new TextView(con);
+    	tvCancelCircle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+    	tvCancelCircle.setGravity(Gravity.CENTER);
+    	tvCancelCircle.setTextColor(Constants.COLOR_DARKBLUE);
+    	tvCancelCircle.setText(con.getString(R.string.cancel));
+    	tvCancelCircle.setBackgroundResource(R.drawable.small_circle);
+    	tvCancelCircle.setLayoutParams(new LayoutParams((int)dpToPx(73.39249146757679f), (int)dpToPx(73.39249146757679f)));
+    	tvCancelCircle.setX(layoutParams.getWidth() - tvCancelCircle.getLayoutParams().width);
     	tvCancelCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -199,10 +206,10 @@ public abstract class FloatingDialog extends FloatingBase{
 				remove();
 			}
 		});
-    	tvOkCircle.setOnTouchListener(OkCancelTouchListener);
     	tvCancelCircle.setOnTouchListener(OkCancelTouchListener);
-    	mainView.addView(tvOkCircle);
     	mainView.addView(tvCancelCircle);
+    
+    	
 	}
 	
 	
@@ -213,6 +220,7 @@ public abstract class FloatingDialog extends FloatingBase{
 	
 	protected void onInitSortView(){
 		tvOkCircle.bringToFront();
+		if(tvCancelCircle != null)
 		tvCancelCircle.bringToFront();
 	}
 	

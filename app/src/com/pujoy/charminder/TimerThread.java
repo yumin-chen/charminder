@@ -37,6 +37,13 @@ public class TimerThread extends Handler{
     				}
     			}	
         	}
+        	if(Constants.floatingText != null && Constants.floatingText.isCreated()){
+        		Constants.floatingText.iTimer --;
+        		if(Constants.floatingText.iTimer <= 0){
+        			Constants.floatingText.remove();
+        			Constants.floatingText = null;
+        		}
+        	}
         	sendEmptyMessageDelayed(REMINDING_PROCESS, REMINDING_WAITING_TIME);
         } else if(msg.what == MOVING_ICON_PROCESS){
         	if(charmy.bCreated){

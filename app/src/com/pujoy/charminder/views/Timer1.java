@@ -19,7 +19,6 @@ public class Timer1 extends FloatingTimerDialog implements OnClickListener{
 	
 	private TextView[] tvDigits;
 	private ImageView ivTitleIcon;
-	private TextView tvTitle;
 	private TextView tvHour;
 	private TextView tvMinute;
 	private int currentDigit;
@@ -65,33 +64,20 @@ public class Timer1 extends FloatingTimerDialog implements OnClickListener{
     	tvMinute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 		addToMainView(tvMinute);
     	
-
-    	
-    	tvTitle = new TextView(con);
-    	tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-    	tvTitle.setGravity(Gravity.CENTER);
-    	tvTitle.setTextColor(Constants.COLOR_LIGHTBLUE);
-    	tvTitle.setText(con.getString(R.string.title_timer1));
-    	tvTitle.setLayoutParams(new LayoutParams((int)dpToPx(64), (int)dpToPx(28)));
-    	tvTitle.setX(layoutParams.getWidth()/2-dpToPx(40)/2);
-    	
-    	addToMainView(tvTitle);
     	
     	ivTitleIcon = new ImageView(con);
     	ivTitleIcon.setImageResource(R.drawable.timer1_icon);
-    	ivTitleIcon.setLayoutParams(new LayoutParams((int)dpToPx(28), (int)dpToPx(28)));
-    	ivTitleIcon.setX(layoutParams.getWidth()/2-dpToPx(40)/2-dpToPx(26));
+    	ivTitleIcon.setLayoutParams(new LayoutParams((int)dpToPx(32), (int)dpToPx(32)));
+    	ivTitleIcon.setX(layoutParams.getWidth()/2-dpToPx(32)/2);
     	
     	addToMainView(ivTitleIcon);
 	}
 	
 	@Override 
 	protected void onCreate(){
-		ValueAnimator aTitleY = ObjectAnimator.ofFloat(tvTitle, "y",
-				layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(10), dpToPx(10));
-		aTitleY.setDuration(ANIMATION_DURATION);
+
 		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(ivTitleIcon, "y",
-				layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(10), dpToPx(10));
+				layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(4) , dpToPx(4));
 		aTitleIconY.setDuration(ANIMATION_DURATION);
     	ValueAnimator aHourY = ObjectAnimator.ofFloat(tvHour, "y",
     			(layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(52), dpToPx(52));
@@ -106,8 +92,7 @@ public class Timer1 extends FloatingTimerDialog implements OnClickListener{
         			(layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(34), dpToPx(34));
     		aDigitsY[i].setDuration(ANIMATION_DURATION);
     	}
-    	
-		aTitleY.start();
+
 		aTitleIconY.start();
 		aHourY.start();
 		aMinuteY.start();
@@ -119,12 +104,9 @@ public class Timer1 extends FloatingTimerDialog implements OnClickListener{
 	@Override
 	public void onRemove(){
 
-    	
-		ValueAnimator aTitleY = ObjectAnimator.ofFloat(tvTitle, "y",
-				dpToPx(10), layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(10));
-		aTitleY.setDuration(ANIMATION_DURATION);
+
 		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(ivTitleIcon, "y",
-				dpToPx(10), layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(10));
+				dpToPx(4), layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(4));
 		aTitleIconY.setDuration(ANIMATION_DURATION);
 
     	ValueAnimator aHourY = ObjectAnimator.ofFloat(tvHour, "y",
@@ -141,7 +123,6 @@ public class Timer1 extends FloatingTimerDialog implements OnClickListener{
     		aDigitsY[i].setDuration(ANIMATION_DURATION);
     	}
 		
-		aTitleY.start();
 		aTitleIconY.start();
 		aHourY.start();
 		aMinuteY.start();

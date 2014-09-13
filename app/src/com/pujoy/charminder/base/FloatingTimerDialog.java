@@ -21,6 +21,7 @@ public abstract class FloatingTimerDialog extends FloatingDialog {
 	protected TextView[] tvNumKeys;
 	private TextView tvLevel;
 	private ImageView[] ivStar;
+	private ImageView ivAddNote;
 	public int level = 3;
 	
 	protected abstract void onKeyDown(int key); 
@@ -117,10 +118,10 @@ public abstract class FloatingTimerDialog extends FloatingDialog {
 				switch (motionEvent.getAction())
 				{
 				case MotionEvent.ACTION_DOWN:
-					v.setBackgroundColor(Color.rgb(100, 191, 206));
+					v.setBackgroundColor(Constants.COLOR_GREENBLUE);
 					break;
 				case MotionEvent.ACTION_UP:
-					v.setBackgroundColor(Color.TRANSPARENT);
+					v.setBackgroundColor(Constants.COLOR_TRANSPARENT);
 					break;
 				}
 				return false;
@@ -164,6 +165,31 @@ public abstract class FloatingTimerDialog extends FloatingDialog {
     	}
     	tvNumKeys[9].setX(layoutParams.getWidth()*BORDER_SCALE +(layoutParams.getWidth()*NON_BORDER_SCALE/3)*(10%3));
     	tvNumKeys[9].setText("0");
+    	
+    	ivAddNote = new ImageView(con);
+    	ivAddNote.setImageResource(R.drawable.edit);
+    	int height = bFullUpperCircle? (int) ((layoutParams.getHeight() - layoutParams.getWidth() + layoutParams.getWidth()/2*NONCENTER_PROPORTION)/4+2):
+			(int) ((layoutParams.getHeight() - layoutParams.getWidth() + layoutParams.getWidth()*NONCENTER_PROPORTION)/4+2);
+    	ivAddNote.setLayoutParams(new LayoutParams(height-2, height-2));
+    	ivAddNote.setX(layoutParams.getWidth()*BORDER_SCALE +(layoutParams.getWidth()*NON_BORDER_SCALE/3)*(11%3)
+    			+(layoutParams.getWidth()*NON_BORDER_SCALE/3)/2 - height/2);
+    	if(bFullUpperCircle){
+    		ivAddNote.setY((float)(int) (layoutParams.getWidth()/2 + 
+    				(layoutParams.getHeight() - layoutParams.getWidth()+ layoutParams.getWidth()/2*NONCENTER_PROPORTION)/4*Math.floor(11/3)-1));
+		}else{
+			ivAddNote.setY((float)(int) (layoutParams.getWidth()/2- layoutParams.getWidth()*NONCENTER_PROPORTION/2 + 
+    				(layoutParams.getHeight() - layoutParams.getWidth()+ layoutParams.getWidth()*NONCENTER_PROPORTION)/4*Math.floor(11/3)-1));
+		}
+    	ivAddNote.setOnTouchListener(NumKeysTouchListener);
+    	ivAddNote.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				
+			}
+    		
+    	});
+    	addToMainView(ivAddNote);
     	
     	ivStar = new ImageView[5];
     	level = 3;
@@ -215,6 +241,7 @@ public abstract class FloatingTimerDialog extends FloatingDialog {
     	tvLevel.setX(layoutParams.getWidth()/2-dpToPx(64)/2);
     	tvLevel.setY(layoutParams.getHeight()-layoutParams.getWidth()/2+layoutParams.getWidth()*NONCENTER_PROPORTION/2+dpToPx(4));
     	addToMainView(tvLevel);
+    	
 	}
 	
 	@Override
