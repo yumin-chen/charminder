@@ -6,12 +6,12 @@ import static com.pujoy.charminder.MainActivity.con;
 import android.content.Context;
 
 public class Log {
-	FileOutputStream f;
-	public Log(String sLog)
+	public static void w(String log)
 	{
 		try {
+			FileOutputStream f;
 			f = con.openFileOutput("log", Context.MODE_PRIVATE | Context.MODE_APPEND);
-			f.write(sLog.getBytes());
+			f.write(log.getBytes());
 			f.close();
 		} catch (Exception e) {
 			e.printStackTrace();

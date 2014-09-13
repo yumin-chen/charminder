@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pujoy.charminder.Constants;
@@ -13,20 +14,23 @@ import com.pujoy.charminder.R;
 import com.pujoy.charminder.base.FloatingBase;
 
 public class FloatingText extends FloatingBase{
-	TextView mainView;
+	RelativeLayout mainView;
+	TextView mTextView;
 	public int iTimer;
 	
 	@Override
 	protected void onInitialize() {
 		onUpdateLayout();
-    	mainView = new TextView(con);
-    	mainView.setGravity(Gravity.CENTER);
-    	mainView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-    	mainView.setTextColor(Constants.COLOR_DARKBLUE);
-    	mainView.setBackgroundResource(R.drawable.light_back);
-    	mainView.setLayoutParams(new LayoutParams((int)(layoutParams.getWidth() - dpToPx(32)),
+		mainView = new RelativeLayout(con);
+    	mTextView = new TextView(con);
+    	mTextView.setGravity(Gravity.CENTER);
+    	mTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+    	mTextView.setTextColor(Constants.COLOR_DARKBLUE);
+    	mTextView.setBackgroundResource(R.drawable.light_back);
+    	mTextView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
     			LayoutParams.WRAP_CONTENT));
-    	mainView.setOnClickListener(new OnClickListener(){
+    	mTextView.setMaxWidth(layoutParams.getWidth());
+    	mTextView.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
@@ -35,6 +39,9 @@ public class FloatingText extends FloatingBase{
 			}
     		
     	});
+    	
+    	mainView.addView(mTextView);
+    	mainView.setGravity(Gravity.CENTER);
 	}
 
 	@Override
@@ -57,7 +64,7 @@ public class FloatingText extends FloatingBase{
 	}
 	
 	public void setText(CharSequence text){
-		mainView.setText(text);
+		mTextView.setText(text);
 	}
 
 }

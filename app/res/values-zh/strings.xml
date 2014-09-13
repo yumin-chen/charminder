@@ -33,7 +33,7 @@
 	<string name="settings">设置</string>
     <string name="reminder_list">提醒清单</string>
 	<string name="exit">退出</string>
-	
+
 	<string name="description_timer1">你可以设置一个<b>%1$s</b>，然后当设定的时间倒计时到零之后你就会收到提醒。</string>
 	<string name="description_timer2">你可以设置一个<b>%1$s</b>，然后当系统时间到达设定的时间时你就会收到提醒。</string>
 	<string name="description_timer3">你可以设置一个<b>%1$s</b>，然后每个小时的指定分钟你都会收到一个提醒。</string>
@@ -51,21 +51,18 @@
 	<string name="unit_everyhour">每小时</string>
 	
 	<string name="priority">重要星级</string>
-	
+	 
 	<string name="a_m_">a.m.</string>
 	<string name="p_m_">p.m.</string>
 	
 	<string name="speech_recognition_speak_now">请说话</string>
+	<string name="speech_recognition_speak_end">点击上方话筒说话</string>
 	
-	<string name="speech_recognition_error">语音识别失败，因为</string>
-	<string name="speech_recognition_error1">网络超时。</string>
-	<string name="speech_recognition_error2">其它网络错误。</string>
-	<string name="speech_recognition_error3">音频录制错误。</string>
-	<string name="speech_recognition_error4">服务器发送了错误的状态。</string>
-	<string name="speech_recognition_error5">其它客户端的错误。</string>
-	<string name="speech_recognition_error6">没有检测到有效的语音输入，请您再说大声一点。</string>
-	<string name="speech_recognition_error7">不能听懂您说的内容，请您再用标准的普通话说清晰一些。</string>
-	<string name="speech_recognition_error8">语音识别服务正忙。</string>
-	<string name="speech_recognition_error9">没有足够的权限。</string>
-	<string name="speech_recognition_error_unknown">未知错误%1$s。</string>
+	<string name="speech_recognition_error1">网络超时</string>
+	<string name="speech_recognition_error2">网络错误</string>
+	<string name="speech_recognition_error3">音频录制错误</string>
+	<string name="speech_recognition_error4">服务器状态错误</string>
+	<string name="speech_recognition_error8">语音识别服务正忙</string>
+	<string name="speech_recognition_error9">没有足够的权限</string>
+	<string name="speech_recognition_error_unknown">未知错误%1$s</string>
 </resources>

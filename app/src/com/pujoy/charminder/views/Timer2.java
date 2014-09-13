@@ -416,5 +416,15 @@ public class Timer2 extends FloatingTimerDialog implements OnClickListener{
 		UpdateCurrentDigit();
 	}
 
+	@Override
+	protected void onOk() {
+		
+	}
+
+	@Override
+	protected void onCancel() {
+		
+	}
+
 
 }

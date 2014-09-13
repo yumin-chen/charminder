@@ -3,6 +3,7 @@ package com.pujoy.charminder.views;
 import static com.pujoy.charminder.MainActivity.con;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -11,7 +12,6 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.transition.Visibility;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -19,21 +19,26 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 
 import com.pujoy.charminder.Constants;
 import com.pujoy.charminder.R;
-import com.pujoy.charminder.base.FloatingDialog;
+import com.pujoy.charminder.SpeechParser;
+import com.pujoy.charminder.SpeechParser.ParseResult;
+import com.pujoy.charminder.base.FloatingDialogWithStars;
 
-public class Timer4 extends FloatingDialog implements OnClickListener {
+public class Timer4 extends FloatingDialogWithStars implements OnClickListener {
 	private ImageView ivTitleIcon;
 	private TextView tvTitle;
 	private ImageView ivMicBackground; 
 	private ImageView ivMicIcon; 
 	private ImageView ivVolume; 
 	private TextView tvSpeechPrompt;
+	private TextView tvTime;
+	private TextView tvSpeechText;
 	private SpeechRecognizer mSpeechRecognizer;   
+	
+	private int iOldErrorInfo;
     
 	protected void onInitialize(){
 		super.onInitialize();
@@ -89,7 +94,7 @@ public class Timer4 extends FloatingDialog implements OnClickListener {
     	
     	mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(con.getApplicationContext());
     	mSpeechRecognizer.setRecognitionListener(new speechListener());  
-        
+    	
 	}
 
 	protected void onCreate() {
@@ -127,11 +132,11 @@ public class Timer4 extends FloatingDialog implements OnClickListener {
 	            		rmsdB = 0;
 	            	ivVolume.setPivotY(0);
 	            	ivVolume.setScaleY((10-rmsdB)/10);
-
 	            }
 	            public void onBufferReceived(byte[] buffer)
 	            {
-	                     Log.d(TAG, "onBufferReceived");
+	            	//According to the web, this is never called on JellyBean and above
+	            	//So I won't bother to save the audio buffer
 	            }
 	            public void onEndOfSpeech()
 	            {
@@ -142,41 +147,39 @@ public class Timer4 extends FloatingDialog implements OnClickListener {
 	            public void onError(int error)
 	            {
 	            	onEndOfSpeech();
-	            	String errorInfo = con.getString(R.string.speech_recognition_error);
+	            	String errorInfo = null;
 	            	switch(error){
 	            	case 1:
-	            		errorInfo = errorInfo.concat(con.getString(R.string.speech_recognition_error1));
+	            		errorInfo = (con.getString(R.string.speech_recognition_error1));
 	            		break;
 	            	case 2:
-	            		errorInfo = errorInfo.concat(con.getString(R.string.speech_recognition_error2));
+	            		errorInfo = (con.getString(R.string.speech_recognition_error2));
 	            		break;
 	            	case 3:
-	            		errorInfo = errorInfo.concat(con.getString(R.string.speech_recognition_error3));
+	            		errorInfo = (con.getString(R.string.speech_recognition_error3));
 	            		break;
 	            	case 4:
-	            		errorInfo = errorInfo.concat(con.getString(R.string.speech_recognition_error4));
+	            		errorInfo = (con.getString(R.string.speech_recognition_error4));
 	            		break;
 	            	case 5:
-	            		errorInfo = errorInfo.concat(con.getString(R.string.speech_recognition_error5));
-	            		break;
 	            	case 6:
-	            		errorInfo = errorInfo.concat(con.getString(R.string.speech_recognition_error6));
-	            		break;
 	            	case 7:
-	            		errorInfo = errorInfo.concat(con.getString(R.string.speech_recognition_error7));
 	            		break;
 	            	case 8:
-	            		errorInfo = errorInfo.concat(con.getString(R.string.speech_recognition_error8));
+	            		if(iOldErrorInfo == 8)
+	            			errorInfo = (con.getString(R.string.speech_recognition_error8));
 	            		break;
 	            	case 9:
-	            		errorInfo = errorInfo.concat(con.getString(R.string.speech_recognition_error9));
+	            		errorInfo = (con.getString(R.string.speech_recognition_error9));
 	            		break;
 	            	default:
-	            		errorInfo = errorInfo.concat(con.getString(R.string.speech_recognition_error_unknown,
+	            		errorInfo = (con.getString(R.string.speech_recognition_error_unknown,
 	            				String.valueOf(error)));
 	            		break;
 	            	}
-	            	Constants.pushText(errorInfo);
+	            	if(errorInfo != null)
+	            		Constants.pushText(errorInfo);
+	            	iOldErrorInfo = error;
 	            }
 	            public void onResults(Bundle results)                   
 	            {
@@ -186,9 +189,12 @@ public class Timer4 extends FloatingDialog implements OnClickListener {
                     ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     for (int i = 0; i < data.size(); i++)
                     {
-                              Log.d(TAG, "result " + data.get(i));
-                              str += data.get(i);
+                    	Log.d(TAG, "result " + data.get(i));
+                    	//String temp = SpeechParser.parseChinese(data.get(i));
+                    	//Log.d(TAG, SpeechParser.parseChinese(data.get(i)));
+                        str += data.get(i);
                     }
+                    
                     Constants.pushText(str);        
 	            }
 	            public void onPartialResults(Bundle partialResults)

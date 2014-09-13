@@ -45,7 +45,7 @@ public class MainCircle extends FloatingBase{
     	textParams.leftMargin = (layoutParams.getWidth() - (int)dpToPx(96))/2;
     	textParams.topMargin = (layoutParams.getHeight() - (int)dpToPx(96))/2;
     	tvCircleDescription.setGravity(Gravity.CENTER);
-    	tvCircleDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16 + iLang*8);
+    	tvCircleDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16 + iLang*6);
     	tvCircleDescription.setTextColor(Constants.COLOR_LIGHTBLUE);
     	mainView.addView(tvCircleDescription, textParams);
     	ivBackground.setLayoutParams(new LayoutParams(layoutParams.getWidth(), layoutParams.getHeight()));

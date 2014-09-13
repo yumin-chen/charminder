@@ -52,9 +52,9 @@ public abstract class FloatingBase extends ViewBase{
 			}
 			bViewAdded = true;
 		}catch(android.view.WindowManager.BadTokenException e){
-			new Log(e.getMessage());
+			Log.w(e.getMessage());
 		}catch(Exception e){
-			new Log(e.getMessage());
+			Log.w(e.getMessage());
 		}finally{
 		}
 	}

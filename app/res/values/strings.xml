@@ -58,17 +58,14 @@
 	<string name="speech_recognition_speak_now">Speak now</string>
 	<string name="speech_recognition_speak_end">Tap the mic above</string>
 	
-	<string name="speech_recognition_error">Speech recognition failed because\u0020</string>
-	<string name="speech_recognition_error1">network operation timed out.</string>
-	<string name="speech_recognition_error2">of other network related errors.</string>
-	<string name="speech_recognition_error3">of audio recording error.</string>
-	<string name="speech_recognition_error4">server sends error status.</string>
-	<string name="speech_recognition_error5">of other client side errors.</string>
-	<string name="speech_recognition_error6">there was no valid speech input. Please speak more loudly and keep your surrounding quiet.</string>
-	<string name="speech_recognition_error7">what you said isn\'t understandable. Please speak more clearly.</string>
-	<string name="speech_recognition_error8">recognition service is busy.</string>
-	<string name="speech_recognition_error9">of insufficient permissions.</string>
-	<string name="speech_recognition_error_unknown">of an unknown error %1$s.</string>
+
+	<string name="speech_recognition_error1">Network operation timed out</string>
+	<string name="speech_recognition_error2">Network error</string>
+	<string name="speech_recognition_error3">Audio recording error</string>
+	<string name="speech_recognition_error4">Server sends error status</string>
+	<string name="speech_recognition_error8">Recognition service is busy</string>
+	<string name="speech_recognition_error9">Insufficient permissions</string>
+	<string name="speech_recognition_error_unknown">Unknown error %1$s</string>
 	
 	
 </resources>
