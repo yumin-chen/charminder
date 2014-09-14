@@ -1,9 +1,6 @@
 package com.pujoy.charminder.views;
 
-import static com.pujoy.charminder.MainActivity.con;
-
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -12,210 +9,398 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+
+
+
 import com.pujoy.charminder.Constants;
+import com.pujoy.charminder.Log;
 import com.pujoy.charminder.R;
 import com.pujoy.charminder.SpeechParser;
 import com.pujoy.charminder.SpeechParser.ParseResult;
-import com.pujoy.charminder.base.FloatingDialogWithStars;
+import com.pujoy.charminder.base.WindowDialogWithStars;
 
-public class Timer4 extends FloatingDialogWithStars implements OnClickListener {
-	private ImageView ivTitleIcon;
-	private TextView tvTitle;
-	private ImageView ivMicBackground; 
-	private ImageView ivMicIcon; 
-	private ImageView ivVolume; 
-	private TextView tvSpeechPrompt;
-	private TextView tvTime;
-	private TextView tvSpeechText;
+import static com.pujoy.charminder.MainActivity.iLang;
+import static com.pujoy.charminder.MainActivity.mCon;
+
+public class Timer4 extends WindowDialogWithStars implements OnClickListener {
+	private ImageView mTitleIcon;
+	private TextView mTitle;
+	private ImageView mMicBackground; 
+	private ImageView mMicIcon; 
+	private ImageView mVolume; 
+	private TextView mSpeechPrompt;
+	private ImageView mTimeIcon;
+	private TextView mTimeText;
+	private ImageView mContentIcon;
+	private TextView mSpeechContent;
+	private ImageView mEditIcon;
+	private TextView mEditText;
+	private ImageView mRerecordIcon;
+	private TextView mRerecordText;
 	private SpeechRecognizer mSpeechRecognizer;   
 	
 	private int iOldErrorInfo;
     
 	protected void onInitialize(){
 		super.onInitialize();
-		ivTitleIcon = new ImageView(con);
-    	ivTitleIcon.setImageResource(R.drawable.audio_reminder);
-    	ivTitleIcon.setLayoutParams(new LayoutParams((int)dpToPx(54), (int)dpToPx(54)));
-    	ivTitleIcon.setX(layoutParams.getWidth()/2-dpToPx(54)/2);
+		mTitleIcon = new ImageView(mCon);
+    	mTitleIcon.setImageResource(R.drawable.audio_reminder);
+    	mTitleIcon.setLayoutParams(new LayoutParams((int)dpToPx(54), (int)dpToPx(54)));
+    	mTitleIcon.setX(mLayoutParams.getWidth()/2-dpToPx(54)/2);
     	
-    	addToMainView(ivTitleIcon);
+    	addToMainView(mTitleIcon);
     	
-    	tvTitle = new TextView(con);
-    	tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-    	tvTitle.setGravity(Gravity.CENTER);
-    	tvTitle.setTextColor(Constants.COLOR_LIGHTBLUE);
-    	tvTitle.setText(con.getString(R.string.title_timer4));
-    	tvTitle.setLayoutParams(new LayoutParams((int)dpToPx(72), (int)dpToPx(48)));
-    	tvTitle.setX(layoutParams.getWidth()/2-dpToPx(72)/2);
+    	mTitle = new TextView(mCon);
+    	mTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+    	mTitle.setGravity(Gravity.CENTER);
+    	mTitle.setTextColor(Constants.COLOR_LIGHTBLUE);
+    	mTitle.setText(mCon.getString(R.string.title_timer4));
+    	mTitle.setLayoutParams(new LayoutParams((int)dpToPx(72), (int)dpToPx(48)));
+    	mTitle.setX(mLayoutParams.getWidth()/2-dpToPx(72)/2);
     	
-    	addToMainView(tvTitle);
+    	addToMainView(mTitle);
     	
-    	ivMicBackground = new ImageView(con);
-    	ivMicBackground.setLayoutParams(new LayoutParams((int)(dpToPx(128)*0.8), (int)(dpToPx(128)*0.8)));
-    	ivMicBackground.setX((float) (layoutParams.getWidth()/2-dpToPx(128)*0.8/2));
-    	ivMicBackground.setY((float) (layoutParams.getHeight()/2-dpToPx(128)*0.8/2)-dpToPx(16));
-    	ivMicBackground.setOnClickListener(this);
-    	addToMainView(ivMicBackground);
+    	mMicBackground = new ImageView(mCon);
+    	mMicBackground.setLayoutParams(new LayoutParams((int)(dpToPx(128)*0.8), (int)(dpToPx(128)*0.8)));
+    	mMicBackground.setX((float) (mLayoutParams.getWidth()/2-dpToPx(128)*0.8/2));
+    	mMicBackground.setY((float) (mLayoutParams.getHeight()/2-dpToPx(128)*0.8/2)-dpToPx(16));
+    	mMicBackground.setOnClickListener(this);
+    	addToMainView(mMicBackground);
 
     	
-    	ivVolume = new ImageView(con);
-    	ivVolume.setImageResource(R.drawable.volume);
-    	ivMicBackground.setImageResource(R.drawable.speech_recognizer_background);
-    	ivVolume.setLayoutParams(new LayoutParams((int)(dpToPx(28.8f)*0.8), (int)(dpToPx(46.8f)*0.8)));
-    	ivVolume.setX((float) (ivMicBackground.getX()+dpToPx(49.6f)*0.8));
-    	ivVolume.setY((float) (ivMicBackground.getY()+dpToPx(34.2f)*0.8));
-    	ivVolume.setVisibility(View.GONE);
-    	addToMainView(ivVolume);
+    	mVolume = new ImageView(mCon);
+    	mVolume.setImageResource(R.drawable.volume);
+    	mMicBackground.setImageResource(R.drawable.speech_recognizer_background);
+    	mVolume.setLayoutParams(new LayoutParams((int)(dpToPx(28.8f)*0.8), (int)(dpToPx(46.8f)*0.8)));
+    	mVolume.setX((float) (mMicBackground.getX()+dpToPx(49.6f)*0.8));
+    	mVolume.setY((float) (mMicBackground.getY()+dpToPx(34.2f)*0.8));
+    	mVolume.setVisibility(View.GONE);
+    	addToMainView(mVolume);
     	
-    	ivMicIcon = new ImageView(con);
-    	ivMicIcon.setImageResource(R.drawable.speech_recognizer);
-    	ivMicIcon.setLayoutParams(new LayoutParams((int)(dpToPx(128)*0.8), (int)(dpToPx(128)*0.8)));
-    	ivMicIcon.setX((float) (layoutParams.getWidth()/2-dpToPx(128)*0.8/2));
-    	ivMicIcon.setY((float) (layoutParams.getHeight()/2-dpToPx(128)*0.8/2)-dpToPx(16));
-    	addToMainView(ivMicIcon);
+    	mMicIcon = new ImageView(mCon);
+    	mMicIcon.setImageResource(R.drawable.speech_recognizer);
+    	mMicIcon.setLayoutParams(new LayoutParams((int)(dpToPx(128)*0.8), (int)(dpToPx(128)*0.8)));
+    	mMicIcon.setX((float) (mLayoutParams.getWidth()/2-dpToPx(128)*0.8/2));
+    	mMicIcon.setY((float) (mLayoutParams.getHeight()/2-dpToPx(128)*0.8/2)-dpToPx(16));
+    	addToMainView(mMicIcon);
     	
-    	tvSpeechPrompt = new TextView(con);
-    	tvSpeechPrompt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-    	tvSpeechPrompt.setGravity(Gravity.CENTER);
-    	tvSpeechPrompt.setTextColor(Constants.COLOR_DARKBLUE);
-    	tvSpeechPrompt.setLayoutParams(new LayoutParams((int)dpToPx(128), (int)dpToPx(26)));
-    	tvSpeechPrompt.setX(layoutParams.getWidth()/2-dpToPx(128)/2);
-    	tvSpeechPrompt.setY((float) (ivMicIcon.getY()+dpToPx(128)*0.8+dpToPx(8)));
-    	addToMainView(tvSpeechPrompt);
+    	mSpeechPrompt = new TextView(mCon);
+    	mSpeechPrompt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+    	mSpeechPrompt.setGravity(Gravity.CENTER);
+    	mSpeechPrompt.setTextColor(Constants.COLOR_DARKBLUE);
+    	mSpeechPrompt.setLayoutParams(new LayoutParams((int)dpToPx(128), (int)dpToPx(26)));
+    	mSpeechPrompt.setX(mLayoutParams.getWidth()/2 - dpToPx(128)/2);
+    	mSpeechPrompt.setY((float) (mMicIcon.getY() + dpToPx(128)*0.8 + dpToPx(8)));
+    	addToMainView(mSpeechPrompt);
     	
-    	mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(con.getApplicationContext());
+    	mTimeText = new TextView(mCon);
+    	mTimeText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+    	mTimeText.setTextColor(Constants.COLOR_DARKBLUE);
+    	mTimeText.setGravity(Gravity.CENTER_VERTICAL|Gravity.LEFT);
+    	mTimeText.setX((int)dpToPx(40));
+    	mTimeText.setY(mLayoutParams.getWidth()/2*(1-CENTER_PROPORTION) + dpToPx(8));
+    	mTimeText.setLayoutParams(new LayoutParams((int)(dpToPx(256-8)-mTimeText.getX()), (int)dpToPx(26)));
+    	mTimeText.setVisibility(View.GONE);
+    	addToMainView(mTimeText);
+    	
+
+    	mTimeIcon = new ImageView(mCon);
+    	mTimeIcon.setImageResource(R.drawable.time);
+    	mTimeIcon.setLayoutParams(new LayoutParams((int)dpToPx(24), (int)dpToPx(24)));
+    	mTimeIcon.setX(dpToPx(12));
+    	mTimeIcon.setY(mTimeText.getY());
+    	mTimeIcon.setVisibility(View.GONE);
+    	addToMainView(mTimeIcon);
+    	
+    	mSpeechContent = new TextView(mCon);
+    	mSpeechContent.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+    	mSpeechContent.setTextColor(Constants.COLOR_DARKBLUE);
+    	mSpeechContent.setX((int)dpToPx(40));
+    	mSpeechContent.setY(mLayoutParams.getWidth()/2*(1-CENTER_PROPORTION) + dpToPx(32+4));
+    	mSpeechContent.setLayoutParams(new LayoutParams((int)(dpToPx(256-8)-mTimeText.getX()), (int)dpToPx(68)));
+    	mSpeechContent.setVisibility(View.GONE);
+    	addToMainView(mSpeechContent);
+    	
+    	
+    	mContentIcon = new ImageView(mCon);
+    	mContentIcon.setImageResource(R.drawable.content);
+    	mContentIcon.setLayoutParams(new LayoutParams((int)dpToPx(24), (int)dpToPx(24)));
+    	mContentIcon.setX(dpToPx(12));
+    	mContentIcon.setY(mSpeechContent.getY());
+    	mContentIcon.setVisibility(View.GONE);
+    	addToMainView(mContentIcon);
+    	
+    	OnTouchListener editButtonTouchListener = new OnTouchListener(){
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				switch (event.getAction())
+				{
+				case MotionEvent.ACTION_DOWN:
+					mEditIcon.setImageResource(R.drawable.sr_edit_button_a);
+					break;
+				case MotionEvent.ACTION_UP:
+					mEditIcon.setImageResource(R.drawable.sr_edit_button);
+					break;
+				}
+				return false;
+			}
+    		
+    	};
+    	
+    	OnClickListener editButtonOnClickListener = new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				
+			}
+			
+    	};
+    	
+    	OnTouchListener rerecordButtonTouchListener = new OnTouchListener(){
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				switch (event.getAction())
+				{
+				case MotionEvent.ACTION_DOWN:
+					mEditIcon.setImageResource(R.drawable.sr_record_button_a);
+					break;
+				case MotionEvent.ACTION_UP:
+					mEditIcon.setImageResource(R.drawable.sr_record_button);
+					break;
+				}
+				return false;
+			}
+    		
+    	};
+    	
+    	OnClickListener rerecordButtonOnClickListener = new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				clearResult();
+				startRecording();
+			}
+			
+    	};
+    	
+    	mEditIcon = new ImageView(mCon);
+    	mEditIcon.setImageResource(R.drawable.sr_edit_button);
+    	mEditIcon.setLayoutParams(new LayoutParams((int)dpToPx(48), (int)dpToPx(48)));
+    	mEditIcon.setX(dpToPx(22));
+    	mEditIcon.setY(mLayoutParams.getHeight() - mLayoutParams.getWidth()/2*(1-CENTER_PROPORTION) - dpToPx(54));
+    	mEditIcon.setVisibility(View.GONE);
+    	mEditIcon.setOnTouchListener(editButtonTouchListener);
+    	mEditIcon.setOnClickListener(editButtonOnClickListener);
+    	addToMainView(mEditIcon);
+    	
+    	mRerecordIcon = new ImageView(mCon);
+    	mRerecordIcon.setImageResource(R.drawable.sr_record_button);
+    	mRerecordIcon.setLayoutParams(new LayoutParams((int)dpToPx(48), (int)dpToPx(48)));
+    	mRerecordIcon.setX(mLayoutParams.getWidth()/2 - dpToPx(16) + dpToPx(22));
+    	mRerecordIcon.setY(mLayoutParams.getHeight() - mLayoutParams.getWidth()/2*(1-CENTER_PROPORTION) - dpToPx(54));
+    	mRerecordIcon.setVisibility(View.GONE);
+    	mRerecordIcon.setOnTouchListener(rerecordButtonTouchListener);
+    	mRerecordIcon.setOnClickListener(rerecordButtonOnClickListener);
+    	addToMainView(mRerecordIcon);
+    	
+    	mEditText = new TextView(mCon);
+    	mEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+    	mEditText.setTextColor(Constants.COLOR_DARKBLUE);
+    	mEditText.setGravity(Gravity.CENTER_VERTICAL|Gravity.LEFT);
+    	mEditText.setX(mEditIcon.getX() + dpToPx(52));
+    	mEditText.setY(mEditIcon.getY());
+    	mEditText.setText(mCon.getString(R.string.speech_recognition_edit_button_text));
+    	mEditText.setLayoutParams(new LayoutParams((int)(dpToPx(96)), (int)dpToPx(48)));
+    	mEditText.setVisibility(View.GONE);
+    	mEditText.setOnTouchListener(editButtonTouchListener);
+    	mEditText.setOnClickListener(editButtonOnClickListener);
+    	addToMainView(mEditText);
+    	
+    	mRerecordText = new TextView(mCon);
+    	mRerecordText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+    	mRerecordText.setTextColor(Constants.COLOR_DARKBLUE);
+    	mRerecordText.setGravity(Gravity.CENTER_VERTICAL|Gravity.LEFT);
+    	mRerecordText.setX(mRerecordIcon.getX()+ dpToPx(52));
+    	mRerecordText.setY(mRerecordIcon.getY());
+    	mRerecordText.setText(mCon.getString(R.string.speech_recognition_rerecord_button_text));
+    	mRerecordText.setLayoutParams(new LayoutParams((int)(dpToPx(96)), (int)dpToPx(48)));
+    	mRerecordText.setVisibility(View.GONE);
+    	mRerecordText.setOnTouchListener(rerecordButtonTouchListener);
+    	mRerecordText.setOnClickListener(rerecordButtonOnClickListener);
+    	addToMainView(mRerecordText);
+    	
+    	mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(mCon.getApplicationContext());
     	mSpeechRecognizer.setRecognitionListener(new speechListener());  
-    	
 	}
 
 	protected void onCreate() {
-		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(ivTitleIcon, "y",
-				layoutParams.getHeight()/2 - layoutParams.getWidth()/2 - dpToPx(4) , - dpToPx(4));
+		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(mTitleIcon, "y",
+				mLayoutParams.getHeight()/2 - mLayoutParams.getWidth()/2 - dpToPx(4) , - dpToPx(4));
 		aTitleIconY.setDuration(ANIMATION_DURATION);
 		aTitleIconY.start();
 		
-		ValueAnimator aTitleY = ObjectAnimator.ofFloat(tvTitle, "y",
-				layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(32), dpToPx(32));
+		ValueAnimator aTitleY = ObjectAnimator.ofFloat(mTitle, "y",
+				mLayoutParams.getHeight()/2 - mLayoutParams.getWidth()/2 + dpToPx(32), dpToPx(32));
 		aTitleY.setDuration(ANIMATION_DURATION);
 		aTitleY.start();
 		
 		startRecording();
 	}
 	
-	class speechListener implements RecognitionListener          
-	   {
-	            private static final String TAG = "cym";
-				public void onReadyForSpeech(Bundle params)
-	            {
-					onBeginningOfSpeech();
-	            }
-	            public void onBeginningOfSpeech()
-	            {
-	            	ivMicBackground.setImageResource(R.drawable.speech_recognizer_background_on_speaking);
-	            	ivVolume.setVisibility(View.VISIBLE);
-	            	tvSpeechPrompt.setText(con.getString(R.string.speech_recognition_speak_now));
-	            }
-	            public void onRmsChanged(float rmsdB)
-	            {
-	            	if(rmsdB > 10)
-	            		rmsdB = 10;
-	            	if(rmsdB <0)
-	            		rmsdB = 0;
-	            	ivVolume.setPivotY(0);
-	            	ivVolume.setScaleY((10-rmsdB)/10);
-	            }
-	            public void onBufferReceived(byte[] buffer)
-	            {
-	            	//According to the web, this is never called on JellyBean and above
-	            	//So I won't bother to save the audio buffer
-	            }
-	            public void onEndOfSpeech()
-	            {
-	            	ivMicBackground.setImageResource(R.drawable.speech_recognizer_background);
-	            	ivVolume.setVisibility(View.GONE);
-	            	tvSpeechPrompt.setText(con.getString(R.string.speech_recognition_speak_end));
-	            }
-	            public void onError(int error)
-	            {
-	            	onEndOfSpeech();
-	            	String errorInfo = null;
-	            	switch(error){
-	            	case 1:
-	            		errorInfo = (con.getString(R.string.speech_recognition_error1));
-	            		break;
-	            	case 2:
-	            		errorInfo = (con.getString(R.string.speech_recognition_error2));
-	            		break;
-	            	case 3:
-	            		errorInfo = (con.getString(R.string.speech_recognition_error3));
-	            		break;
-	            	case 4:
-	            		errorInfo = (con.getString(R.string.speech_recognition_error4));
-	            		break;
-	            	case 5:
-	            	case 6:
-	            	case 7:
-	            		break;
-	            	case 8:
-	            		if(iOldErrorInfo == 8)
-	            			errorInfo = (con.getString(R.string.speech_recognition_error8));
-	            		break;
-	            	case 9:
-	            		errorInfo = (con.getString(R.string.speech_recognition_error9));
-	            		break;
-	            	default:
-	            		errorInfo = (con.getString(R.string.speech_recognition_error_unknown,
-	            				String.valueOf(error)));
-	            		break;
-	            	}
-	            	if(errorInfo != null)
-	            		Constants.pushText(errorInfo);
-	            	iOldErrorInfo = error;
-	            }
-	            public void onResults(Bundle results)                   
-	            {
-	            	onEndOfSpeech();
-                    String str = new String();
-                    Log.d(TAG, "onResults " + results);
-                    ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                    for (int i = 0; i < data.size(); i++)
-                    {
-                    	Log.d(TAG, "result " + data.get(i));
-                    	//String temp = SpeechParser.parseChinese(data.get(i));
-                    	//Log.d(TAG, SpeechParser.parseChinese(data.get(i)));
-                        str += data.get(i);
-                    }
-                    
-                    Constants.pushText(str);        
-	            }
-	            public void onPartialResults(Bundle partialResults)
-	            {
-	            	//Didn't make it support partial results so ignore this.
-	            }
-	            public void onEvent(int eventType, Bundle params)
-	            {
-	                     Log.d(TAG, "onEvent " + eventType);
-	            }
-	   }
+	private void onStartOfSpeechRecognizing(){
+    	mMicBackground.setImageResource(R.drawable.speech_recognizer_background_on_speaking);
+    	mVolume.setVisibility(View.VISIBLE);
+    	mSpeechPrompt.setText(mCon.getString(R.string.speech_recognition_speak_now));
+	}
+	
+	private void onEndOfSpeechRecognizing(){
+    	mMicBackground.setImageResource(R.drawable.speech_recognizer_background);
+    	mVolume.setVisibility(View.GONE);
+    	mSpeechPrompt.setText(mCon.getString(R.string.speech_recognition_speak_end));
+	}
+	
+	private void displayResult(String speechText, ParseResult result){
+		mSpeechContent.setVisibility(View.VISIBLE);
+    	mContentIcon.setVisibility(View.VISIBLE);
+    	mTimeIcon.setVisibility(View.VISIBLE);
+    	mTimeText.setVisibility(View.VISIBLE);
+    	mEditIcon.setVisibility(View.VISIBLE);
+    	mRerecordIcon.setVisibility(View.VISIBLE);
+    	mEditText.setVisibility(View.VISIBLE);
+    	mRerecordText.setVisibility(View.VISIBLE);
+    	mMicIcon.setVisibility(View.GONE);
+    	mVolume.setVisibility(View.GONE);
+    	mMicBackground.setVisibility(View.GONE);
+    	mSpeechPrompt.setVisibility(View.GONE);
+    	mTimeText.setText(result.sTimePhrase);
+    	mSpeechContent.setText(speechText);
+	}
+	
+	private void clearResult(){
+		mSpeechContent.setVisibility(View.GONE);
+    	mContentIcon.setVisibility(View.GONE);
+    	mTimeIcon.setVisibility(View.GONE);
+    	mTimeText.setVisibility(View.GONE);
+    	mRerecordIcon.setVisibility(View.GONE);
+    	mEditIcon.setVisibility(View.GONE);
+    	mEditText.setVisibility(View.GONE);
+    	mRerecordText.setVisibility(View.GONE);
+    	mMicIcon.setVisibility(View.VISIBLE);
+    	mVolume.setVisibility(View.VISIBLE);
+    	mSpeechPrompt.setVisibility(View.VISIBLE);
+    	mMicBackground.setVisibility(View.VISIBLE);
+	}
+	
+	class speechListener implements RecognitionListener
+	{
+		public void onReadyForSpeech(Bundle params)
+        {
+			onStartOfSpeechRecognizing();
+        }
+        public void onBeginningOfSpeech()
+        {
+        	onStartOfSpeechRecognizing();
+        }
+        public void onRmsChanged(float rmsdB)
+        {
+        	if(rmsdB > 10)
+        		rmsdB = 10;
+        	if(rmsdB <0)
+        		rmsdB = 0;
+        	mVolume.setPivotY(0);
+        	mVolume.setScaleY((10-rmsdB)/10);
+        }
+        public void onBufferReceived(byte[] buffer)
+        {
+        	//According to the web, this is never called on JellyBean and above
+        	//So I won't bother to save the audio buffer
+        }
+        public void onEndOfSpeech()
+        {
+        	onEndOfSpeechRecognizing();
+        }
+        public void onError(int error)
+        {
+        	onEndOfSpeechRecognizing();
+        	String errorInfo = null;
+        	switch(error){
+        	case 1:
+        		errorInfo = (mCon.getString(R.string.speech_recognition_error1));
+        		break;
+        	case 2:
+        		errorInfo = (mCon.getString(R.string.speech_recognition_error2));
+        		break;
+        	case 3:
+        		errorInfo = (mCon.getString(R.string.speech_recognition_error3));
+        		break;
+        	case 4:
+        		errorInfo = (mCon.getString(R.string.speech_recognition_error4));
+        		break;
+        	case 5:
+        	case 6:
+        	case 7:
+        		break;
+        	case 8:
+        		if(iOldErrorInfo == 8)
+        			errorInfo = (mCon.getString(R.string.speech_recognition_error8));
+        		break;
+        	case 9:
+        		errorInfo = (mCon.getString(R.string.speech_recognition_error9));
+        		break;
+        	default:
+        		errorInfo = (mCon.getString(R.string.speech_recognition_error_unknown,
+        				String.valueOf(error)));
+        		break;
+        	}
+        	if(errorInfo != null)
+        		Constants.pushText(errorInfo);
+        	iOldErrorInfo = error;
+        }
+        public void onResults(Bundle results)                   
+        {
+        	onEndOfSpeechRecognizing();
+            ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+            try{
+            	SpeechParser sp = new SpeechParser(data, iLang);
+            	ParseResult r = sp.parse();
+            	displayResult(data.get(0), r);
+            }catch(Exception e){
+            	Log.w(e.getMessage());
+        	}finally{
+            	
+            }
+        }
+        public void onPartialResults(Bundle partialResults)
+        {
+        	//Didn't make it support partial results so ignore this.
+        }
+        public void onEvent(int eventType, Bundle params)
+        {
+        }
+	}
 
 
 	protected void onRemove() {
-		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(ivTitleIcon, "y",
-			- dpToPx(4), layoutParams.getHeight()/2 - layoutParams.getWidth()/2 - dpToPx(4));
+		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(mTitleIcon, "y",
+			- dpToPx(4), mLayoutParams.getHeight()/2 - mLayoutParams.getWidth()/2 - dpToPx(4));
 		aTitleIconY.setDuration(ANIMATION_DURATION);
 		aTitleIconY.start();
 		
-		ValueAnimator aTitleY = ObjectAnimator.ofFloat(tvTitle, "y",
-				dpToPx(32), layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(32));
+		ValueAnimator aTitleY = ObjectAnimator.ofFloat(mTitle, "y",
+				dpToPx(32), mLayoutParams.getHeight()/2 - mLayoutParams.getWidth()/2 + dpToPx(32));
 		aTitleY.setDuration(ANIMATION_DURATION);
 		aTitleY.start();
 
@@ -224,7 +409,7 @@ public class Timer4 extends FloatingDialogWithStars implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-		if(v == ivMicBackground){
+		if(v == mMicBackground){
 			startRecording();
 		}
 		
@@ -240,11 +425,11 @@ public class Timer4 extends FloatingDialogWithStars implements OnClickListener {
 
 	@Override
 	protected void onUpdateLayout() {
-    	layoutParams.setWidth((int) dpToPx(256));
-    	layoutParams.setHeight((int) dpToPx(320));
-        layoutParams.x = (getScreenWidth()-layoutParams.getWidth())/2;
-        layoutParams.y = (getScreenHeight()-layoutParams.getHeight())/2;   
-        layoutParams.alpha = 0.95f;
+    	mLayoutParams.setWidth((int) dpToPx(256));
+    	mLayoutParams.setHeight((int) dpToPx(320));
+        mLayoutParams.x = (getScreenWidth()-mLayoutParams.getWidth())/2;
+        mLayoutParams.y = (getScreenHeight()-mLayoutParams.getHeight())/2;   
+        mLayoutParams.alpha = 0.95f;
 	}
 
 

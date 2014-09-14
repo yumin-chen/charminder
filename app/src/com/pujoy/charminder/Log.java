@@ -2,7 +2,7 @@ package com.pujoy.charminder;
 
 import java.io.FileOutputStream;
 
-import static com.pujoy.charminder.MainActivity.con;
+import static com.pujoy.charminder.MainActivity.mCon;
 import android.content.Context;
 
 public class Log {
@@ -10,7 +10,7 @@ public class Log {
 	{
 		try {
 			FileOutputStream f;
-			f = con.openFileOutput("log", Context.MODE_PRIVATE | Context.MODE_APPEND);
+			f = mCon.openFileOutput("log", Context.MODE_PRIVATE | Context.MODE_APPEND);
 			f.write(log.getBytes());
 			f.close();
 		} catch (Exception e) {

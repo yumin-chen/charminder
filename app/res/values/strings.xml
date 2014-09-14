@@ -58,6 +58,8 @@
 	<string name="speech_recognition_speak_now">Speak now</string>
 	<string name="speech_recognition_speak_end">Tap the mic above</string>
 	
+	<string name="speech_recognition_edit_button_text">Edit</string>
+	<string name="speech_recognition_rerecord_button_text">Re-speak</string>
 
 	<string name="speech_recognition_error1">Network operation timed out</string>
 	<string name="speech_recognition_error2">Network error</string>

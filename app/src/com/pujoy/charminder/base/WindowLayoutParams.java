@@ -6,8 +6,8 @@ import static com.pujoy.charminder.base.ViewBase.getScreenWidth;
 import static com.pujoy.charminder.base.ViewBase.getScreenHeight;
 import static com.pujoy.charminder.base.ViewBase.isRotated;
 
-public class FloatingLayoutParams extends WindowManager.LayoutParams {
-	public FloatingLayoutParams(){
+public class WindowLayoutParams extends WindowManager.LayoutParams {
+	public WindowLayoutParams(){
 		super();
         type = WindowManager.LayoutParams.TYPE_PHONE;   
         format = android.graphics.PixelFormat.RGBA_8888; 
@@ -15,7 +15,7 @@ public class FloatingLayoutParams extends WindowManager.LayoutParams {
         gravity = Gravity.LEFT | Gravity.TOP;
 	}
 
-	public FloatingLayoutParams(FloatingLayoutParams params){
+	public WindowLayoutParams(WindowLayoutParams params){
 		// Clone
 		super();
         type = WindowManager.LayoutParams.TYPE_PHONE;   

@@ -2,7 +2,7 @@ package com.pujoy.charminder.views;
 
 import com.pujoy.charminder.Constants;
 import com.pujoy.charminder.R;
-import com.pujoy.charminder.base.FloatingTimerDialog;
+import com.pujoy.charminder.base.WindowTimerDialog;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -13,83 +13,83 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
-import static com.pujoy.charminder.MainActivity.con;
+import static com.pujoy.charminder.MainActivity.mCon;
 
-public class Timer1 extends FloatingTimerDialog implements OnClickListener{
+public class Timer1 extends WindowTimerDialog implements OnClickListener{
 	
-	private TextView[] tvDigits;
-	private ImageView ivTitleIcon;
-	private TextView tvHour;
-	private TextView tvMinute;
-	private int currentDigit;
+	private TextView[] mDigits;
+	private ImageView mTitleIcon;
+	private TextView mHour;
+	private TextView mMinute;
+	private int iCurrentDigit;
 	
 	@Override
 	protected void onInitialize(){
 		super.onInitialize();
 		
-    	tvDigits = new TextView[4];
+    	mDigits = new TextView[4];
     	ValueAnimator[] aDigitsY = new ValueAnimator[4];
     	for(int i=0; i<4; i++){
-    		tvDigits[i] = new TextView(con);
-    		tvDigits[i].setLayoutParams(new LayoutParams((int)dpToPx(20), (int)dpToPx(40)));
-    		tvDigits[i].setX(layoutParams.getWidth()/2
+    		mDigits[i] = new TextView(mCon);
+    		mDigits[i].setLayoutParams(new LayoutParams((int)dpToPx(20), (int)dpToPx(40)));
+    		mDigits[i].setX(mLayoutParams.getWidth()/2
     				- dpToPx(20*2) - dpToPx(8) + dpToPx(20)*i + (i>1?dpToPx(12):0));
-    		tvDigits[i].setY(dpToPx(36));
-    		tvDigits[i].setText("0");
-    		tvDigits[i].setGravity(Gravity.CENTER);
-    		tvDigits[i].setTextSize(TypedValue.COMPLEX_UNIT_SP, 32);
-    		tvDigits[i].setOnClickListener(this);
-    		aDigitsY[i] = ObjectAnimator.ofFloat(tvDigits[i], "y",
-        			(layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(34), dpToPx(34));
+    		mDigits[i].setY(dpToPx(36));
+    		mDigits[i].setText("0");
+    		mDigits[i].setGravity(Gravity.CENTER);
+    		mDigits[i].setTextSize(TypedValue.COMPLEX_UNIT_SP, 32);
+    		mDigits[i].setOnClickListener(this);
+    		aDigitsY[i] = ObjectAnimator.ofFloat(mDigits[i], "y",
+        			(mLayoutParams.getHeight()-mLayoutParams.getWidth())/2 + dpToPx(34), dpToPx(34));
     		aDigitsY[i].setDuration(ANIMATION_DURATION);
-    		addToMainView(tvDigits[i]);
+    		addToMainView(mDigits[i]);
     	}
-    	currentDigit = 2;
+    	iCurrentDigit = 2;
     	UpdateCurrentDigit();
-    	tvHour = new TextView(con);
-    	tvHour.setLayoutParams(new LayoutParams((int)dpToPx(20), (int)dpToPx(20)));
-    	tvHour.setX(layoutParams.getWidth()/2- dpToPx(12));
-    	tvHour.setText(con.getString(R.string.unit_hour));
-    	tvHour.setGravity(Gravity.CENTER);
-    	tvHour.setTextColor(Constants.COLOR_LIGHTBLUE);
-    	tvHour.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-		addToMainView(tvHour);
-    	tvMinute = new TextView(con);
-    	tvMinute.setLayoutParams(new LayoutParams((int)dpToPx(20), (int)dpToPx(20)));
-    	tvMinute.setX(layoutParams.getWidth()/2 + dpToPx(20)*2);
-    	tvMinute.setY(dpToPx(52));
-    	tvMinute.setText(con.getString(R.string.unit_minute));
-    	tvMinute.setGravity(Gravity.CENTER);
-    	tvMinute.setTextColor(Constants.COLOR_LIGHTBLUE);
-    	tvMinute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-		addToMainView(tvMinute);
+    	mHour = new TextView(mCon);
+    	mHour.setLayoutParams(new LayoutParams((int)dpToPx(20), (int)dpToPx(20)));
+    	mHour.setX(mLayoutParams.getWidth()/2- dpToPx(12));
+    	mHour.setText(mCon.getString(R.string.unit_hour));
+    	mHour.setGravity(Gravity.CENTER);
+    	mHour.setTextColor(Constants.COLOR_LIGHTBLUE);
+    	mHour.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+		addToMainView(mHour);
+    	mMinute = new TextView(mCon);
+    	mMinute.setLayoutParams(new LayoutParams((int)dpToPx(20), (int)dpToPx(20)));
+    	mMinute.setX(mLayoutParams.getWidth()/2 + dpToPx(20)*2);
+    	mMinute.setY(dpToPx(52));
+    	mMinute.setText(mCon.getString(R.string.unit_minute));
+    	mMinute.setGravity(Gravity.CENTER);
+    	mMinute.setTextColor(Constants.COLOR_LIGHTBLUE);
+    	mMinute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+		addToMainView(mMinute);
     	
     	
-    	ivTitleIcon = new ImageView(con);
-    	ivTitleIcon.setImageResource(R.drawable.timer1_icon);
-    	ivTitleIcon.setLayoutParams(new LayoutParams((int)dpToPx(32), (int)dpToPx(32)));
-    	ivTitleIcon.setX(layoutParams.getWidth()/2-dpToPx(32)/2);
+    	mTitleIcon = new ImageView(mCon);
+    	mTitleIcon.setImageResource(R.drawable.timer1_icon);
+    	mTitleIcon.setLayoutParams(new LayoutParams((int)dpToPx(32), (int)dpToPx(32)));
+    	mTitleIcon.setX(mLayoutParams.getWidth()/2-dpToPx(32)/2);
     	
-    	addToMainView(ivTitleIcon);
+    	addToMainView(mTitleIcon);
 	}
 	
 	@Override 
 	protected void onCreate(){
 
-		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(ivTitleIcon, "y",
-				layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(4) , dpToPx(4));
+		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(mTitleIcon, "y",
+				mLayoutParams.getHeight()/2 - mLayoutParams.getWidth()/2 + dpToPx(4) , dpToPx(4));
 		aTitleIconY.setDuration(ANIMATION_DURATION);
-    	ValueAnimator aHourY = ObjectAnimator.ofFloat(tvHour, "y",
-    			(layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(52), dpToPx(52));
+    	ValueAnimator aHourY = ObjectAnimator.ofFloat(mHour, "y",
+    			(mLayoutParams.getHeight()-mLayoutParams.getWidth())/2 + dpToPx(52), dpToPx(52));
     	aHourY.setDuration(ANIMATION_DURATION);
-    	ValueAnimator aMinuteY = ObjectAnimator.ofFloat(tvMinute, "y",
-    			(layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(52), dpToPx(52));
+    	ValueAnimator aMinuteY = ObjectAnimator.ofFloat(mMinute, "y",
+    			(mLayoutParams.getHeight()-mLayoutParams.getWidth())/2 + dpToPx(52), dpToPx(52));
     	aMinuteY.setDuration(ANIMATION_DURATION);
     	
     	ValueAnimator[] aDigitsY = new ValueAnimator[4];
     	for(int i=0; i<4; i++){
-    		aDigitsY[i] = ObjectAnimator.ofFloat(tvDigits[i], "y",
-        			(layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(34), dpToPx(34));
+    		aDigitsY[i] = ObjectAnimator.ofFloat(mDigits[i], "y",
+        			(mLayoutParams.getHeight()-mLayoutParams.getWidth())/2 + dpToPx(34), dpToPx(34));
     		aDigitsY[i].setDuration(ANIMATION_DURATION);
     	}
 
@@ -105,21 +105,21 @@ public class Timer1 extends FloatingTimerDialog implements OnClickListener{
 	public void onRemove(){
 
 
-		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(ivTitleIcon, "y",
-				dpToPx(4), layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(4));
+		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(mTitleIcon, "y",
+				dpToPx(4), mLayoutParams.getHeight()/2 - mLayoutParams.getWidth()/2 + dpToPx(4));
 		aTitleIconY.setDuration(ANIMATION_DURATION);
 
-    	ValueAnimator aHourY = ObjectAnimator.ofFloat(tvHour, "y",
-    			dpToPx(52), (layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(52));
+    	ValueAnimator aHourY = ObjectAnimator.ofFloat(mHour, "y",
+    			dpToPx(52), (mLayoutParams.getHeight()-mLayoutParams.getWidth())/2 + dpToPx(52));
     	aHourY.setDuration(ANIMATION_DURATION);
-    	ValueAnimator aMinuteY = ObjectAnimator.ofFloat(tvMinute, "y",
-    			dpToPx(52), (layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(52));
+    	ValueAnimator aMinuteY = ObjectAnimator.ofFloat(mMinute, "y",
+    			dpToPx(52), (mLayoutParams.getHeight()-mLayoutParams.getWidth())/2 + dpToPx(52));
     	aMinuteY.setDuration(ANIMATION_DURATION);
     	
     	ValueAnimator[] aDigitsY = new ValueAnimator[4];
     	for(int i=0; i<4; i++){
-    		aDigitsY[i] = ObjectAnimator.ofFloat(tvDigits[i], "y",
-    				dpToPx(34), (layoutParams.getHeight()-layoutParams.getWidth())/2 + dpToPx(34));
+    		aDigitsY[i] = ObjectAnimator.ofFloat(mDigits[i], "y",
+    				dpToPx(34), (mLayoutParams.getHeight()-mLayoutParams.getWidth())/2 + dpToPx(34));
     		aDigitsY[i].setDuration(ANIMATION_DURATION);
     	}
 		
@@ -135,8 +135,8 @@ public class Timer1 extends FloatingTimerDialog implements OnClickListener{
 	public void onClick(View v) {
 		
 		for(int i=0; i<4; i++){
-			if(v == tvDigits[i]){
-				currentDigit = i;
+			if(v == mDigits[i]){
+				iCurrentDigit = i;
 				UpdateCurrentDigit();
 			}
 		}
@@ -147,21 +147,21 @@ public class Timer1 extends FloatingTimerDialog implements OnClickListener{
 	
 	@Override
 	protected void onUpdateLayout(){
-    	layoutParams.setWidth((int) dpToPx(256));
-    	layoutParams.setHeight((int) dpToPx(320));
-        layoutParams.x = (getScreenWidth()-layoutParams.getWidth())/2;
-        layoutParams.y = (getScreenHeight()-layoutParams.getHeight())/2;   
-        layoutParams.alpha = 0.95f;
+    	mLayoutParams.setWidth((int) dpToPx(256));
+    	mLayoutParams.setHeight((int) dpToPx(320));
+        mLayoutParams.x = (getScreenWidth()-mLayoutParams.getWidth())/2;
+        mLayoutParams.y = (getScreenHeight()-mLayoutParams.getHeight())/2;   
+        mLayoutParams.alpha = 0.95f;
 	}
 
 	private void UpdateCurrentDigit(){
 		for(int i=0; i<4; i++){
-			if(currentDigit == i){
-	    		tvDigits[i].setBackgroundColor(Constants.COLOR_LIGHTBLUE);
-	    		tvDigits[i].setTextColor(Constants.COLOR_DARKBLUE);
+			if(iCurrentDigit == i){
+	    		mDigits[i].setBackgroundColor(Constants.COLOR_LIGHTBLUE);
+	    		mDigits[i].setTextColor(Constants.COLOR_DARKBLUE);
 			}else{
-	    		tvDigits[i].setBackgroundColor(Constants.COLOR_DARKBLUE);
-	    		tvDigits[i].setTextColor(Constants.COLOR_LIGHTBLUE);
+	    		mDigits[i].setBackgroundColor(Constants.COLOR_DARKBLUE);
+	    		mDigits[i].setTextColor(Constants.COLOR_LIGHTBLUE);
 			}
 		}
 	}
@@ -188,14 +188,14 @@ public class Timer1 extends FloatingTimerDialog implements OnClickListener{
 	
 	@Override
 	protected void onKeyDown(int i){
-		if(currentDigit == 2 && (i>=5 && i!=9)){
-			tvDigits[2].setText("0");
-			currentDigit ++;
+		if(iCurrentDigit == 2 && (i>=5 && i!=9)){
+			mDigits[2].setText("0");
+			iCurrentDigit ++;
 		}
-		tvDigits[currentDigit].setText(tvNumKeys[i].getText());
-		currentDigit ++;
-		if(currentDigit == 4)
-			currentDigit = 0;
+		mDigits[iCurrentDigit].setText(mNumKeys[i].getText());
+		iCurrentDigit ++;
+		if(iCurrentDigit == 4)
+			iCurrentDigit = 0;
 		UpdateCurrentDigit();
 	}
 	

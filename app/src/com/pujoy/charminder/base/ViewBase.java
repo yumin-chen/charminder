@@ -5,22 +5,22 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.Surface;
 import android.view.WindowManager;
-import static com.pujoy.charminder.MainActivity.con;
+import static com.pujoy.charminder.MainActivity.mCon;
 
 public class ViewBase {
-	static WindowManager wm; 
-	private static DisplayMetrics metrics;
+	static WindowManager mWindowManager; 
+	private static DisplayMetrics mMetrics;
 	private static boolean bOldRotation = isLandscape();
 	public ViewBase(){
-		if (metrics == null){
-		metrics = new DisplayMetrics();
-		((Activity) con).getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		if (mMetrics == null){
+		mMetrics = new DisplayMetrics();
+		((Activity) mCon).getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
 		bOldRotation = isLandscape();
 		}
-		if(wm == null) wm =(WindowManager)con.getApplicationContext().getSystemService("window");
+		if(mWindowManager == null) mWindowManager =(WindowManager)mCon.getApplicationContext().getSystemService("window");
 	}
 	public static float dpToPx(float dp){
-		return dp *(metrics.densityDpi / 160f);
+		return dp *(mMetrics.densityDpi / 160f);
     }
     public static boolean isPointInsideRect(float pointX, float pointY, 
     		float rectX, float rectY, float rectWidth, float rectHeight){
@@ -45,18 +45,18 @@ public class ViewBase {
     	return(bOldRotation != isLandscape());
     }
     public static boolean isLandscape(){
-    	final int rotation = ((WindowManager) con.getSystemService(Context.WINDOW_SERVICE)).
+    	final int rotation = ((WindowManager) mCon.getSystemService(Context.WINDOW_SERVICE)).
 				getDefaultDisplay().getRotation();
     	return(rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270);
     }
     
     public static int getScreenWidth(){
-    	if (isRotated()) return metrics.heightPixels;
-    	return metrics.widthPixels;
+    	if (isRotated()) return mMetrics.heightPixels;
+    	return mMetrics.widthPixels;
     }
     
     public static int getScreenHeight(){
-    	if (isRotated()) return metrics.widthPixels;
-    	return metrics.heightPixels;
+    	if (isRotated()) return mMetrics.widthPixels;
+    	return mMetrics.heightPixels;
     }
 }

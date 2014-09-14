@@ -2,22 +2,22 @@ package com.pujoy.charminder.base;
 
 import com.pujoy.charminder.Log;
 
-public abstract class FloatingBase extends ViewBase{
+public abstract class WindowBase extends ViewBase{
 	public boolean bInitialized;
 	public boolean bCreated;
 	public boolean bViewAdded;
-	protected FloatingLayoutParams layoutParams;
+	protected WindowLayoutParams mLayoutParams;
 	
 	protected abstract void onInitialize(); 
 	protected abstract void onCreate(); 
 	protected abstract void onRemove(); 
 	protected abstract void onUpdateLayout(); 
 	
-	public FloatingBase(){
+	public WindowBase(){
 		if(bInitialized){
 			return;
 		}
-		if(layoutParams == null) layoutParams = new FloatingLayoutParams();
+		if(mLayoutParams == null) mLayoutParams = new WindowLayoutParams();
 		onInitialize();
 		bInitialized = true;
 	}
@@ -39,16 +39,16 @@ public abstract class FloatingBase extends ViewBase{
 		bCreated = false;
 	}
 	
-	protected void addView(android.view.View view, FloatingLayoutParams params){
+	protected void addView(android.view.View view, WindowLayoutParams params){
 		if (bViewAdded){
 			return;
 		}
 		
 		try {
 			if(isRotated()){
-				wm.addView(view, new FloatingLayoutParams(params)); 
+				mWindowManager.addView(view, new WindowLayoutParams(params)); 
 			}else{
-				wm.addView(view, params); 
+				mWindowManager.addView(view, params); 
 			}
 			bViewAdded = true;
 		}catch(android.view.WindowManager.BadTokenException e){
@@ -63,11 +63,11 @@ public abstract class FloatingBase extends ViewBase{
 		if (!bViewAdded){
 			return;
 		}
-		wm.removeView(view);
+		mWindowManager.removeView(view);
 		bViewAdded = false;
 	}
 	
-	protected void updateViewLayout(android.view.View view, FloatingLayoutParams params){
+	protected void updateViewLayout(android.view.View view, WindowLayoutParams params){
 		if (!bCreated){
 			return;
 		}
@@ -76,9 +76,9 @@ public abstract class FloatingBase extends ViewBase{
 			return;
 		}
 		if(isRotated()){
-			wm.updateViewLayout(view, new FloatingLayoutParams(params)); 
+			mWindowManager.updateViewLayout(view, new WindowLayoutParams(params)); 
 		}else{
-			wm.updateViewLayout(view, params); 
+			mWindowManager.updateViewLayout(view, params); 
 		}
 	}
 	

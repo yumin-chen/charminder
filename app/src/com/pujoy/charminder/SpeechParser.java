@@ -8,6 +8,7 @@ public class SpeechParser {
 	ArrayList<String> mSpeechText;
 	int iLang;
 	public static String sTimePhrase;
+	
 	public SpeechParser(ArrayList<String> speechText, int language){
 		mSpeechText = speechText;
 		iLang = language;
@@ -37,7 +38,7 @@ public class SpeechParser {
         {
 			switch(iLang){
 			case 0:
-				//parseResult[i] = parseEnglish(mSpeechText.get(i));
+				parseResult[i] = parseChinese(mSpeechText.get(i));
 				break;
 			case 1:
 				parseResult[i] = parseChinese(mSpeechText.get(i));
@@ -77,7 +78,7 @@ public class SpeechParser {
 		return false;
 	}
 
-	public static ParseResult parseChinese(String speechText) {
+	private ParseResult parseChinese(String speechText) {
 		ParseResult r = new ParseResult();
 		Calendar cal = Calendar.getInstance();
 		final char[] arabicNumbers = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
@@ -331,6 +332,9 @@ public class SpeechParser {
 		
 		r.mCalendar = cal;
 		r.sTimePhrase = timePhrase_prefix + timePhrase_date + timePhrase_week + timePhrase_am_pm + timePhrase_time;
+		if(r.sTimePhrase == ""){
+			r.sTimePhrase = "未能识别时间";
+		}
 		return r;
 	}
 

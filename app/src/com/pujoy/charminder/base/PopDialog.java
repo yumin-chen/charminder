@@ -1,6 +1,6 @@
 package com.pujoy.charminder.base;
 
-import static com.pujoy.charminder.MainActivity.con;
+import static com.pujoy.charminder.MainActivity.mCon;
 
 import com.pujoy.charminder.Constants;
 import com.pujoy.charminder.R;
@@ -12,12 +12,12 @@ import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
-public class PopDialog extends FloatingDialog{
+public class PopDialog extends WindowDialog{
 	
 	FunctionWrapper mOnOkListener;
 	FunctionWrapper mOnCancelListener;
-	TextView tvTitle;
-	TextView tvContent;
+	TextView mTitle;
+	TextView mContent;
 	
 	public PopDialog(){
 		super();
@@ -25,20 +25,20 @@ public class PopDialog extends FloatingDialog{
 	
 	public PopDialog(String content){
 		super();
-		tvContent.setText(content);
-		tvTitle.setText(con.getResources().getString(R.string.popDialog_defualtTitle));
+		mContent.setText(content);
+		mTitle.setText(mCon.getResources().getString(R.string.popDialog_defualtTitle));
 	}
 	
 	public PopDialog(String content, String title){
 		super();
-		tvTitle.setText(title);
-		tvContent.setText(content);
+		mTitle.setText(title);
+		mContent.setText(content);
 	}
 	
 	public PopDialog(String content, String title, FunctionWrapper onOK){
 		super();
-		tvTitle.setText(title);
-		tvContent.setText(content);
+		mTitle.setText(title);
+		mContent.setText(content);
 		mOnOkListener = onOK;
 	}
 	
@@ -46,17 +46,17 @@ public class PopDialog extends FloatingDialog{
 		super();
 		mOnOkListener = onOK;
 		mOnCancelListener = onCancel;
-    	tvTitle.setText(title);
-    	tvContent.setText(content);
+    	mTitle.setText(title);
+    	mContent.setText(content);
 	}
 	
 	
 	public void setTitle(String title){
-		tvTitle.setText(title);
+		mTitle.setText(title);
 	}
 	
 	public void setContent(String content){
-		tvContent.setText(content);
+		mContent.setText(content);
 	}
 	
 	public void setOnOkListener(FunctionWrapper onOK){
@@ -70,29 +70,29 @@ public class PopDialog extends FloatingDialog{
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		tvTitle = new TextView(con);
-    	tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-    	tvTitle.setGravity(Gravity.CENTER);
-    	tvTitle.setTextColor(Constants.COLOR_LIGHTBLUE);
-    	tvTitle.setLayoutParams(new LayoutParams((int)dpToPx(128), (int)dpToPx(28)));
-    	tvTitle.setX(layoutParams.getWidth()/2-dpToPx(128)/2);
-    	addToMainView(tvTitle);
+		mTitle = new TextView(mCon);
+    	mTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+    	mTitle.setGravity(Gravity.CENTER);
+    	mTitle.setTextColor(Constants.COLOR_LIGHTBLUE);
+    	mTitle.setLayoutParams(new LayoutParams((int)dpToPx(128), (int)dpToPx(28)));
+    	mTitle.setX(mLayoutParams.getWidth()/2-dpToPx(128)/2);
+    	addToMainView(mTitle);
 
-		tvContent = new TextView(con);
-    	tvContent.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-    	tvContent.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP);
-    	tvContent.setTextColor(Constants.COLOR_DARKBLUE);
-    	tvContent.setLayoutParams(new LayoutParams((int)(layoutParams.getWidth() - dpToPx(24)),
+		mContent = new TextView(mCon);
+    	mContent.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+    	mContent.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP);
+    	mContent.setTextColor(Constants.COLOR_DARKBLUE);
+    	mContent.setLayoutParams(new LayoutParams((int)(mLayoutParams.getWidth() - dpToPx(24)),
     			LayoutParams.WRAP_CONTENT));
-    	tvContent.setX(dpToPx(12));
-    	tvContent.setY((layoutParams.getWidth() * NONCENTER_PROPORTION));
-    	addToMainView(tvContent);
+    	mContent.setX(dpToPx(12));
+    	mContent.setY((mLayoutParams.getWidth() * CENTER_PROPORTION));
+    	addToMainView(mContent);
 	}
 
 	@Override
 	protected void onCreate() {
-		ValueAnimator aTitleY = ObjectAnimator.ofFloat(tvTitle, "y",
-				layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(24), dpToPx(24));
+		ValueAnimator aTitleY = ObjectAnimator.ofFloat(mTitle, "y",
+				mLayoutParams.getHeight()/2 - mLayoutParams.getWidth()/2 + dpToPx(24), dpToPx(24));
 		aTitleY.setDuration(ANIMATION_DURATION);
 		aTitleY.start();
 		
@@ -100,8 +100,8 @@ public class PopDialog extends FloatingDialog{
 
 	@Override
 	protected void onRemove() {
-		ValueAnimator aTitleY = ObjectAnimator.ofFloat(tvTitle, "y",
-				dpToPx(24), layoutParams.getHeight()/2 - layoutParams.getWidth()/2 + dpToPx(24));
+		ValueAnimator aTitleY = ObjectAnimator.ofFloat(mTitle, "y",
+				dpToPx(24), mLayoutParams.getHeight()/2 - mLayoutParams.getWidth()/2 + dpToPx(24));
 		aTitleY.setDuration(ANIMATION_DURATION);
 		aTitleY.start();
 		
@@ -109,11 +109,11 @@ public class PopDialog extends FloatingDialog{
 
 	@Override
 	protected void onUpdateLayout() {
-    	layoutParams.setWidth((int) dpToPx(256));
-    	layoutParams.setHeight((int) dpToPx(256));
-        layoutParams.x = (getScreenWidth()-layoutParams.getWidth())/2;
-        layoutParams.y = (getScreenHeight()-layoutParams.getHeight())/2;   
-        layoutParams.alpha = 0.95f;
+    	mLayoutParams.setWidth((int) dpToPx(256));
+    	mLayoutParams.setHeight((int) dpToPx(256));
+        mLayoutParams.x = (getScreenWidth()-mLayoutParams.getWidth())/2;
+        mLayoutParams.y = (getScreenHeight()-mLayoutParams.getHeight())/2;   
+        mLayoutParams.alpha = 0.95f;
 	}
 
 	@Override
