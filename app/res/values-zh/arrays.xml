@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string-array name="main_menu_names">
+        <item>计时提醒</item>
+		<item>定时提醒</item>
+		<item>整点提醒</item>
+		<item>语音提醒</item>
+		<item>设置</item>
+   		<item>提醒清单</item>
+   		<item>退出</item>
+    </string-array>
+	
+	<string-array name="main_menu_names_on_circle">
+        <item>计时提醒</item>
+		<item>定时提醒</item>
+		<item>整点提醒</item>
+		<item>语音提醒</item>
+		<item>设置</item>
+   		<item>提醒清单</item>
+   		<item>退出</item>
+    </string-array>
+	
+	<string-array name="main_menu_descriptions">
+        <item>你可以设置一个<b>%1$s</b>，然后当设定的时间倒计时到零之后你就会收到提醒。</item>
+		<item>你可以设置一个<b>%1$s</b>，然后当系统时间到达设定的时间时你就会收到提醒。</item>
+		<item>你可以设置一个<b>%1$s</b>，然后每个小时的指定分钟你都会收到一个提醒。</item>
+		<item>你可以通过语音录下需要提醒的内容和时间设置为<b>%1$s</b>，系统会通过识别你的语音来决定提醒的时间。</item>
+		<item>你可以在这里修改<b>%1$s</b>。</item>
+		<item>你可以在<b>%1$s</b>查看所有已经添加的提醒项目。</item>
+		<item>你可以选此项<b>%1$s</b>。</item>
+    </string-array>
+	
+		
+	
+
     <string-array name="babble_bubble">
         <item>猜猜我是男的还是女的？</item>
         <item>再多摸我几下我也不会怀孕。</item>

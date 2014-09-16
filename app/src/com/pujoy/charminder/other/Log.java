@@ -1,16 +1,15 @@
-package com.pujoy.charminder;
+package com.pujoy.charminder.other;
 
 import java.io.FileOutputStream;
 
-import static com.pujoy.charminder.MainActivity.mCon;
 import android.content.Context;
 
 public class Log {
-	public static void w(String log)
-	{
+	public static void w(String log) {
 		try {
 			FileOutputStream f;
-			f = mCon.openFileOutput("log", Context.MODE_PRIVATE | Context.MODE_APPEND);
+			f = G.context.openFileOutput("log", Context.MODE_PRIVATE
+					| Context.MODE_APPEND);
 			f.write(log.getBytes());
 			f.close();
 		} catch (Exception e) {

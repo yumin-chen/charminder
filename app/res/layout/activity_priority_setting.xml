@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.pujoy.charminder.activities.layout.TitleBar
+        xmlns:titlebar="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        titlebar:title_text="@string/priority_setting_title"
+        titlebar:parent_activity="com.pujoy.charminder.activities.SettingsActivity" />
+
+    <com.pujoy.charminder.activities.layout.LightListView
+    xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue" >
+
+      <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="4.5dip" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.5dp"
+                android:gravity="center_vertical"
+                android:text="@string/priority_setting_prompt"
+                android:textColor="@color/dark_blue_l"
+                android:textSize="14sp" />
+
+            <com.pujoy.charminder.activities.layout.LightListItem
+                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+                android:id="@+id/priority_bubble_layout"
+                style="@style/Charminder.SettingItem.Top"
+                listitem:text="@string/priority_bubble" >
+
+                <include
+                    android:id="@+id/priority_bubble_switch"
+                    layout="@layout/item_switch" />
+            </com.pujoy.charminder.activities.layout.LightListItem>
+
+            <com.pujoy.charminder.activities.layout.LightListItem
+                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+                android:id="@+id/priority_notification_center_layout"
+                style="@style/Charminder.SettingItem.Middle"
+                listitem:text="@string/priority_notification_center" >
+
+                <include
+                    android:id="@+id/priority_notification_center_switch"
+                    layout="@layout/item_switch" />
+            </com.pujoy.charminder.activities.layout.LightListItem>
+
+            <com.pujoy.charminder.activities.layout.LightListItem
+                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+                android:id="@+id/priority_wake_screen_layout"
+                style="@style/Charminder.SettingItem.Middle"
+                listitem:text="@string/priority_wake_screen" >
+
+                <include
+                    android:id="@+id/priority_wake_screen_switch"
+                    layout="@layout/item_switch" />
+            </com.pujoy.charminder.activities.layout.LightListItem>
+
+            <com.pujoy.charminder.activities.layout.LightListItem
+                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+                android:id="@+id/priority_vibrate_layout"
+                style="@style/Charminder.SettingItem.Middle"
+                listitem:text="@string/priority_vibrate" >
+
+                <include
+                    android:id="@+id/priority_vibrate_switch"
+                    layout="@layout/item_switch" />
+            </com.pujoy.charminder.activities.layout.LightListItem>
+
+            <com.pujoy.charminder.activities.layout.LightListItem
+                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+                android:id="@+id/priority_sound_layout"
+                style="@style/Charminder.SettingItem.Bottom"
+                listitem:text="@string/priority_sound" >
+
+                <include
+                    android:id="@+id/priority_sound_switch"
+                    layout="@layout/item_switch" />
+            </com.pujoy.charminder.activities.layout.LightListItem>
+
+    
+        </LinearLayout>
+    </com.pujoy.charminder.activities.layout.LightListView>
+
+</LinearLayout>

@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <array name="main_menu_icons">
+        <item>@drawable/timer1_icon_c</item>
+        <item>@drawable/timer2_icon_c</item>
+        <item>@drawable/timer3_icon_c</item>
+        <item>@drawable/audio_reminder</item>
+        <item>@drawable/settings</item>
+        <item>@drawable/reminderlist</item>
+        <item>@drawable/exit</item>
+    </array>
+    
+    <array name="main_menu_icons_hovered">
+        <item>@drawable/timer1_icon_a</item>
+        <item>@drawable/timer2_icon_a</item>
+        <item>@drawable/timer3_icon_a</item>
+        <item>@drawable/audio_reminder_a</item>
+        <item>@drawable/settings_a</item>
+        <item>@drawable/reminderlist_a</item>
+        <item>@drawable/exit_a</item>
+    </array>
+    
+    <string-array name="main_menu_names">
+        <item>Countdown Reminder</item>
+		<item>Alarm Reminder</item>
+		<item>Hourly Reminder</item>
+		<item>Audio Reminder</item>
+		<item>Settings</item>
+   		<item>Reminderlist</item>
+   		<item>Exit</item>
+    </string-array>
+    
+    <string-array name="main_menu_names_on_circle">
+        <item>Countdown\nReminder</item>
+		<item>Alarm\nReminder</item>
+		<item>Hourly\nReminder</item>
+		<item>Audio\nReminder</item>
+		<item>Settings</item>
+   		<item>Reminder\nList</item>
+   		<item>Exit</item>
+    </string-array>
+    
+    <string-array name="main_menu_descriptions">
+        <item>You can set a <b>%1$s</b> and you will be reminded after the set time is counted backwards to zero.</item>
+		<item>You can set a <b>%1$s</b> and you will be reminded when the set time is exactly the same as the current system time.</item>
+		<item>You can set a <b>%1$s</b> and you will be reminded at the set minute of every single hour.</item>
+		<item>You can record your voice and set a <b>%1$s</b>, the reminding time will be decided by what you say in your voice recording.</item>
+		<item>You can change the <b>%1$s</b> here.</item>
+   	 	<item>You can view all set reminders here at <b>%1$s</b>.</item>
+    	<item>You can <b>%1$s</b> this program here.</item>
+    </string-array>
+    
+        
+    
     <string-array name="babble_bubble">
         <item>Charmy, charmy, charmy…</item>
         <item>Mhh, keep fondling me!</item>

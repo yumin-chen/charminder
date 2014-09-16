@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Charminder</string>
+    <string name="none"></string>
     <string name="floating_icon_name">Charmy</string>
     <string name="b_welcome_greeting">Hi, my name is %1$s!\u0020</string>
     <string name="b_user_guide">Try dragging me somewhere please!</string>
@@ -14,33 +15,9 @@
 	
 	<string name="yes">Yes</string>
 	<string name="no">No</string>
-	
-    <string name="circle_title_timer1">Countdown\nReminder</string>
-	<string name="circle_title_timer2">Alarm\nReminder</string>
-	<string name="circle_title_timer3">Hourly\nReminder</string>
-	<string name="circle_title_timer4">Audio\nReminder</string>
-	<string name="circle_settings">Settings</string>
-    <string name="circle_reminder_list">Reminder\nList</string>
-    <string name="circle_exit">Exit</string>
     
     <string name="onExit_title">Exit</string>
-    <string name="onExit_content">Do you want to still be reminded after you exit %1$s?</string>
-    
-    <string name="title_timer1">Countdown Reminder</string>
-	<string name="title_timer2">Alarm Reminder</string>
-	<string name="title_timer3">Hourly Reminder</string>
-	<string name="title_timer4">Audio Reminder</string>
-	<string name="settings">Settings</string>
-    <string name="reminder_list">Reminderlist</string>
-    <string name="exit">Exit</string>
-    
-    <string name="description_timer1">You can set a <b>%1$s</b> and you will be reminded after the set time is counted backwards to zero.</string>
-	<string name="description_timer2">You can set a <b>%1$s</b> and you will be reminded when the set time is exactly the same as the current system time.</string>
-	<string name="description_timer3">You can set a <b>%1$s</b> and you will be reminded at the set minute of every single hour.</string>
-	<string name="description_timer4">You can record your voice and set a <b>%1$s</b>, the reminding time will be decided by what you say in your voice recording.</string>
-	<string name="description_settings">You can change the <b>%1$s</b> here.</string>
-    <string name="description_reminder_list">You can view all set reminders here at <b>%1$s</b>.</string>
-    <string name="description_exit">You can <b>%1$s</b> this program here.</string>
+    <string name="onExit_content">Do you want to still receive notification after you exit %1$s?</string>
     
     <string name="unit_year">Y</string>
 	<string name="unit_month">M</string>
@@ -70,4 +47,27 @@
 	<string name="speech_recognition_error_unknown">Unknown error %1$s</string>
 	
 	
+	<string name="setting_catagory_general">General Settings</string>
+	<string name="setting_catagory_priority">Priority Settings</string>
+	<string name="setting_catagory_other">Other</string>
+	<string name="setting_circle_interface">Circle panel layout</string>
+	<string name="setting_autodelete">Auto delete expired reminders</string>
+	<string name="setting_bubbletime">Bubble disapear time</string>
+	<string name="settings_title">Settings</string>
+	<string name="select_bubbletimeout">Select time:</string>
+	<string name="setting_about">About Charminder</string>
+	<string name="setting_exit">Exit</string>
+	
+	<string name="priority_setting_title">Priority Settings</string>
+	<string name="priority_setting_prompt">Reminding Method</string>
+	<string name="priority_bubble">Push bubble</string>
+	<string name="priority_notification_center">Push notification</string>
+	<string name="priority_wake_screen">Wake screen</string>
+	<string name="priority_vibrate">Vibrate</string>
+	<string name="priority_sound">Sound</string>
+	
+	<string name="circle_layout_setting_title">Circle Panel Layout</string>
+	<string name="circle_layout_setting_prompt">Long press and drag to move each tile</string>
+	<string name="circle_layout_setting_not_used">Not used tiles</string>
+	<string name="circle_layout_setting_cannot_remove_settings_icon">You can\'t remove settings</string>
 </resources>
