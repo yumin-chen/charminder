@@ -19,7 +19,7 @@ public abstract class WindowDialogWithStars extends WindowDialog {
 
 	private TextView mPriority;
 	private ImageView[] mStar;
-	protected int iLevel = 3;
+	protected int iPriority = 3;
 
 	@Override
 	public void create() {
@@ -108,7 +108,7 @@ public abstract class WindowDialogWithStars extends WindowDialog {
 	protected void onInitialize(boolean bFullUpperCircle) {
 		super.onInitialize(bFullUpperCircle);
 		mStar = new ImageView[5];
-		iLevel = 3;
+		iPriority = 3;
 		View.OnTouchListener StarsTouchListener = new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent motionEvent) {
@@ -119,7 +119,7 @@ public abstract class WindowDialogWithStars extends WindowDialog {
 								+ mStar[i].getX()
 								&& motionEvent.getRawX() < mLayoutParams.x
 										+ mStar[i].getX() + (int) dpToPx(32)) {
-							iLevel = i + 1;
+							iPriority = i + 1;
 							UpdateStarImage();
 						}
 					}
@@ -138,7 +138,7 @@ public abstract class WindowDialogWithStars extends WindowDialog {
 				public void onClick(View v) {
 					for (int i = 0; i < 5; i++) {
 						if (v == mStar[i]) {
-							iLevel = i + 1;
+							iPriority = i + 1;
 							UpdateStarImage();
 						}
 					}
@@ -171,7 +171,7 @@ public abstract class WindowDialogWithStars extends WindowDialog {
 
 	private void UpdateStarImage() {
 		for (int i = 0; i < 5; i++) {
-			if (iLevel <= i) {
+			if (iPriority <= i) {
 				mStar[i].setImageResource(R.drawable.star0);
 			} else {
 				mStar[i].setImageResource(R.drawable.star1);

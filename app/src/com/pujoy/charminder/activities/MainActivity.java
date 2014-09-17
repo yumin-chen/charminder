@@ -2,6 +2,7 @@ package com.pujoy.charminder.activities;
 
 import com.pujoy.charminder.R;
 import com.pujoy.charminder.base.ActivityBase;
+import com.pujoy.charminder.data.ReminderList;
 import com.pujoy.charminder.data.Settings;
 import com.pujoy.charminder.other.G;
 import com.pujoy.charminder.other.TimerThread;
@@ -18,6 +19,7 @@ public class MainActivity extends ActivityBase {
 		finish();
 
 		G.settings = new Settings();
+		G.reminders = new ReminderList();
 
 		if (G.mTimerThread == null)
 			G.mTimerThread = new TimerThread();

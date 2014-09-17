@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Charminder</string>
     <string name="none"></string>
     <string name="floating_icon_name">Charmy</string>
@@ -7,67 +8,56 @@
     <string name="b_user_guide">Try dragging me somewhere please!</string>
     <string name="b_exit">Bye, I will miss you!</string>
     <string name="b_exit_completely">Take care, you will not be reminded after I\'m gone.</string>
-    
     <string name="popDialog_defualtTitle">Charminder</string>
-    
     <string name="ok">OK</string>
-	<string name="cancel">Cancel</string>
-	
-	<string name="yes">Yes</string>
-	<string name="no">No</string>
-    
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="onExit_title">Exit</string>
     <string name="onExit_content">Do you want to still receive notification after you exit %1$s?</string>
-    
     <string name="unit_year">Y</string>
-	<string name="unit_month">M</string>
-	<string name="unit_day">D</string>
-	<string name="unit_hour">h</string>
-	<string name="unit_minute">m</string>
-	<string name="unit_second">s</string>
-	<string name="unit_everyhour">Every</string>
-	
-	<string name="priority">Priority</string>
-	
-	<string name="a_m_">a.m.</string>
-	<string name="p_m_">p.m.</string>
-	
-	<string name="speech_recognition_speak_now">Speak now</string>
-	<string name="speech_recognition_speak_end">Tap the mic above</string>
-	
-	<string name="speech_recognition_edit_button_text">Edit</string>
-	<string name="speech_recognition_rerecord_button_text">Re-speak</string>
+    <string name="unit_month">M</string>
+    <string name="unit_day">D</string>
+    <string name="unit_hour">h</string>
+    <string name="unit_minute">m</string>
+    <string name="unit_second">s</string>
+    <string name="unit_everyhour">Every</string>
+    <string name="priority">Priority</string>
+    <string name="a_m_">a.m.</string>
+    <string name="p_m_">p.m.</string>
+    <string name="speech_recognition_speak_now">Speak now</string>
+    <string name="speech_recognition_speak_end">Tap the mic above</string>
+    <string name="speech_recognition_edit_button_text">Edit</string>
+    <string name="speech_recognition_rerecord_button_text">Re-speak</string>
+    <string name="speech_recognition_error1">Network operation timed out</string>
+    <string name="speech_recognition_error2">Network error</string>
+    <string name="speech_recognition_error3">Audio recording error</string>
+    <string name="speech_recognition_error4">Server sends error status</string>
+    <string name="speech_recognition_error8">Recognition service is busy</string>
+    <string name="speech_recognition_error9">Insufficient permissions</string>
+    <string name="speech_recognition_error_unknown">Unknown error %1$s</string>
+    <string name="setting_catagory_general">General Settings</string>
+    <string name="setting_catagory_priority">Priority Settings</string>
+    <string name="setting_catagory_other">Other</string>
+    <string name="setting_circle_interface">Circle panel layout</string>
+    <string name="setting_autodelete">Auto delete expired reminders</string>
+    <string name="setting_bubbletime">Bubble disapear time</string>
+    <string name="settings_title">Settings</string>
+    <string name="select_bubbletimeout">Select time:</string>
+    <string name="setting_about">About Charminder</string>
+    <string name="setting_exit">Exit</string>
+    <string name="priority_setting_title">Priority Settings</string>
+    <string name="priority_setting_prompt">Reminding Method</string>
+    <string name="priority_bubble">Push bubble</string>
+    <string name="priority_notification_center">Push notification</string>
+    <string name="priority_wake_screen">Wake screen</string>
+    <string name="priority_vibrate">Vibrate</string>
+    <string name="priority_sound">Sound</string>
+    <string name="circle_layout_setting_title">Circle Panel Layout</string>
+    <string name="circle_layout_setting_prompt">Long press and drag to move each tile</string>
+    <string name="circle_layout_setting_not_used">Not used tiles</string>
+    <string name="circle_layout_setting_cannot_remove_settings_icon">You can\'t remove settings</string>
+    <string name="reminder_list_title">Reminder List</string>
+    <string name="reminder_list_prompt">Your reminders</string>
 
-	<string name="speech_recognition_error1">Network operation timed out</string>
-	<string name="speech_recognition_error2">Network error</string>
-	<string name="speech_recognition_error3">Audio recording error</string>
-	<string name="speech_recognition_error4">Server sends error status</string>
-	<string name="speech_recognition_error8">Recognition service is busy</string>
-	<string name="speech_recognition_error9">Insufficient permissions</string>
-	<string name="speech_recognition_error_unknown">Unknown error %1$s</string>
-	
-	
-	<string name="setting_catagory_general">General Settings</string>
-	<string name="setting_catagory_priority">Priority Settings</string>
-	<string name="setting_catagory_other">Other</string>
-	<string name="setting_circle_interface">Circle panel layout</string>
-	<string name="setting_autodelete">Auto delete expired reminders</string>
-	<string name="setting_bubbletime">Bubble disapear time</string>
-	<string name="settings_title">Settings</string>
-	<string name="select_bubbletimeout">Select time:</string>
-	<string name="setting_about">About Charminder</string>
-	<string name="setting_exit">Exit</string>
-	
-	<string name="priority_setting_title">Priority Settings</string>
-	<string name="priority_setting_prompt">Reminding Method</string>
-	<string name="priority_bubble">Push bubble</string>
-	<string name="priority_notification_center">Push notification</string>
-	<string name="priority_wake_screen">Wake screen</string>
-	<string name="priority_vibrate">Vibrate</string>
-	<string name="priority_sound">Sound</string>
-	
-	<string name="circle_layout_setting_title">Circle Panel Layout</string>
-	<string name="circle_layout_setting_prompt">Long press and drag to move each tile</string>
-	<string name="circle_layout_setting_not_used">Not used tiles</string>
-	<string name="circle_layout_setting_cannot_remove_settings_icon">You can\'t remove settings</string>
 </resources>

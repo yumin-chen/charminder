@@ -29,6 +29,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.pujoy.charminder.activities.ReminderListActivity"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
             android:name="com.pujoy.charminder.activities.SettingsActivity"
             android:launchMode="singleTask" >
         </activity>
@@ -49,6 +53,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pujoy.charminder.activities.SettingsActivity" />
         </activity>
+        
+        <activity
+        android:name="com.pujoy.charminder.activities.WakeUpScreen"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar" 
+        android:launchMode="singleInstance">
+  		</activity>
     </application>
 
 </manifest>

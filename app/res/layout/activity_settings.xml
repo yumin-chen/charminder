@@ -1,176 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.pujoy.charminder.activities.layout.ActivityWrapper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:charmy="http://schemas.android.com/apk/res/com.pujoy.charminder"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    charmy:title_text="@string/settings_title" >
 
-    <com.pujoy.charminder.activities.layout.TitleBar
-        xmlns:titlebar="http://schemas.android.com/apk/res/com.pujoy.charminder"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        titlebar:title_text="@string/settings_title" />
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:text="@string/setting_catagory_general"/>
 
-    <com.pujoy.charminder.activities.layout.LightListView
-    xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/blue" >
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_circle_interface_layout"
+        style="@style/Charminder.LightListViewItem.Single"
+        listitem:text="@string/setting_circle_interface" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.pujoy.charminder.activities.layout.LightListItem>
+
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_autodelete_layout"
+        style="@style/Charminder.LightListViewItem.Top"
+        listitem:text="@string/setting_autodelete" >
+
+        <include
+            android:id="@+id/setting_autodelete_switch"
+            layout="@layout/item_switch" />
+    </com.pujoy.charminder.activities.layout.LightListItem>
+
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_bubbletime_layout"
+        style="@style/Charminder.LightListViewItem.Bottom"
+        listitem:text="@string/setting_bubbletime" >
+
+        <TextView
+            android:id="@+id/setting_bubbletime_num"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="4.5dip" >
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/unit_second"
+            android:textColor="@color/dark_blue"
+            android:textSize="16sp" />
+    </com.pujoy.charminder.activities.layout.LightListItem>
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4.5dp"
-                android:layout_marginLeft="@dimen/light_list_catagory_margin_left"
-                android:gravity="center_vertical"
-                android:text="@string/setting_catagory_general"
-                android:textColor="@color/dark_blue_l"
-                android:textSize="14sp" />
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:text="@string/setting_catagory_priority" />
 
-            <com.pujoy.charminder.activities.layout.LightListItem
-                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                android:id="@+id/setting_circle_interface_layout"
-                style="@style/Charminder.SettingItem.Single"
-                listitem:text="@string/setting_circle_interface" >
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_level1_layout"
+        style="@style/Charminder.LightListViewItem.Top" >
 
-                <include layout="@layout/item_light_list_item_arrow" />
-            </com.pujoy.charminder.activities.layout.LightListItem>
+        <com.pujoy.charminder.activities.layout.FiveStars
+            xmlns:fivestars="http://schemas.android.com/apk/res/com.pujoy.charminder"
+            style="@style/Charminder.LightListViewItem.Stars"
+            fivestars:number="1" />
 
-            <com.pujoy.charminder.activities.layout.LightListItem
-                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                android:id="@+id/setting_autodelete_layout"
-                style="@style/Charminder.SettingItem.Top"
-                listitem:text="@string/setting_autodelete" >
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.pujoy.charminder.activities.layout.LightListItem>
 
-                <include
-                    android:id="@+id/setting_autodelete_switch"
-                    layout="@layout/item_switch" />
-            </com.pujoy.charminder.activities.layout.LightListItem>
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_level2_layout"
+        style="@style/Charminder.LightListViewItem.Middle" >
 
-            <com.pujoy.charminder.activities.layout.LightListItem
-                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                android:id="@+id/setting_bubbletime_layout"
-                style="@style/Charminder.SettingItem.Bottom"
-                listitem:text="@string/setting_bubbletime" >
+        <com.pujoy.charminder.activities.layout.FiveStars
+            xmlns:fivestars="http://schemas.android.com/apk/res/com.pujoy.charminder"
+            style="@style/Charminder.LightListViewItem.Stars"
+            fivestars:number="2" />
 
-                <TextView
-                    android:id="@+id/setting_bubbletime_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="8dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/unit_second"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="16sp" />
-            </com.pujoy.charminder.activities.layout.LightListItem>
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.pujoy.charminder.activities.layout.LightListItem>
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4.5dp"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/light_list_catagory_margin_left"
-                android:text="@string/setting_catagory_priority"
-                android:textColor="@color/dark_blue_l"
-                android:textSize="14sp" />
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_level3_layout"
+        style="@style/Charminder.LightListViewItem.Middle" >
 
-            <com.pujoy.charminder.activities.layout.LightListItem
-                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                android:id="@+id/setting_level1_layout"
-                style="@style/Charminder.SettingItem.Top" >
+        <com.pujoy.charminder.activities.layout.FiveStars
+            xmlns:fivestars="http://schemas.android.com/apk/res/com.pujoy.charminder"
+            style="@style/Charminder.LightListViewItem.Stars"
+            fivestars:number="3" />
 
-                <com.pujoy.charminder.activities.layout.FiveStars
-                    xmlns:fivestars="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                    style="@style/Charminder.SettingItem.Stars"
-                    fivestars:number="1" />
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.pujoy.charminder.activities.layout.LightListItem>
 
-                <include layout="@layout/item_light_list_item_arrow" />
-            </com.pujoy.charminder.activities.layout.LightListItem>
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_level4_layout"
+        style="@style/Charminder.LightListViewItem.Middle" >
 
-            <com.pujoy.charminder.activities.layout.LightListItem
-                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                android:id="@+id/setting_level2_layout"
-                style="@style/Charminder.SettingItem.Middle" >
+        <com.pujoy.charminder.activities.layout.FiveStars
+            xmlns:fivestars="http://schemas.android.com/apk/res/com.pujoy.charminder"
+            style="@style/Charminder.LightListViewItem.Stars"
+            fivestars:number="4" />
 
-                <com.pujoy.charminder.activities.layout.FiveStars
-                    xmlns:fivestars="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                    style="@style/Charminder.SettingItem.Stars"
-                    fivestars:number="2" />
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.pujoy.charminder.activities.layout.LightListItem>
 
-                <include layout="@layout/item_light_list_item_arrow" />
-            </com.pujoy.charminder.activities.layout.LightListItem>
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_level5_layout"
+        style="@style/Charminder.LightListViewItem.Bottom" >
 
-            <com.pujoy.charminder.activities.layout.LightListItem
-                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                android:id="@+id/setting_level3_layout"
-                style="@style/Charminder.SettingItem.Middle" >
+        <com.pujoy.charminder.activities.layout.FiveStars
+            xmlns:fivestars="http://schemas.android.com/apk/res/com.pujoy.charminder"
+            style="@style/Charminder.LightListViewItem.Stars"
+            fivestars:number="5" />
 
-                <com.pujoy.charminder.activities.layout.FiveStars
-                    xmlns:fivestars="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                    style="@style/Charminder.SettingItem.Stars"
-                    fivestars:number="3" />
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.pujoy.charminder.activities.layout.LightListItem>
 
-                <include layout="@layout/item_light_list_item_arrow" />
-            </com.pujoy.charminder.activities.layout.LightListItem>
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:text="@string/setting_catagory_other" />
 
-            <com.pujoy.charminder.activities.layout.LightListItem
-                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                android:id="@+id/setting_level4_layout"
-                style="@style/Charminder.SettingItem.Middle" >
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_about_layout"
+        style="@style/Charminder.LightListViewItem.Single"
+        listitem:text="@string/setting_about" >
 
-                <com.pujoy.charminder.activities.layout.FiveStars
-                    xmlns:fivestars="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                    style="@style/Charminder.SettingItem.Stars"
-                    fivestars:number="4" />
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.pujoy.charminder.activities.layout.LightListItem>
 
-                <include layout="@layout/item_light_list_item_arrow" />
-            </com.pujoy.charminder.activities.layout.LightListItem>
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_exit_layout"
+        style="@style/Charminder.LightListViewItem.Single"
+        listitem:text="@string/setting_exit" >
+    </com.pujoy.charminder.activities.layout.LightListItem>
 
-            <com.pujoy.charminder.activities.layout.LightListItem
-                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                android:id="@+id/setting_level5_layout"
-                style="@style/Charminder.SettingItem.Bottom" >
-
-                <com.pujoy.charminder.activities.layout.FiveStars
-                    xmlns:fivestars="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                    style="@style/Charminder.SettingItem.Stars"
-                    fivestars:number="5" />
-
-                <include layout="@layout/item_light_list_item_arrow" />
-            </com.pujoy.charminder.activities.layout.LightListItem>
-            
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4.5dp"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/light_list_catagory_margin_left"
-                android:text="@string/setting_catagory_other"
-                android:textColor="@color/dark_blue_l"
-                android:textSize="14sp" />
-            
-            <com.pujoy.charminder.activities.layout.LightListItem
-                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                android:id="@+id/setting_about_layout"
-                style="@style/Charminder.SettingItem.Single"
-                listitem:text="@string/setting_about" >
-                <include layout="@layout/item_light_list_item_arrow" />
-            </com.pujoy.charminder.activities.layout.LightListItem>
-            
-            <com.pujoy.charminder.activities.layout.LightListItem
-                xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-                android:id="@+id/setting_exit_layout"
-                style="@style/Charminder.SettingItem.Single"
-                listitem:text="@string/setting_exit" >
-            </com.pujoy.charminder.activities.layout.LightListItem>
-        </LinearLayout>
-    </com.pujoy.charminder.activities.layout.LightListView>
-
-</LinearLayout>
+</com.pujoy.charminder.activities.layout.ActivityWrapper>

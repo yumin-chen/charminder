@@ -1,6 +1,9 @@
 package com.pujoy.charminder.views;
 
+import java.util.Calendar;
+
 import com.pujoy.charminder.R;
+import com.pujoy.charminder.data.Reminder;
 import com.pujoy.charminder.base.WindowTimerDialog;
 import com.pujoy.charminder.other.C;
 import com.pujoy.charminder.other.G;
@@ -176,6 +179,15 @@ public class Timer3 extends WindowTimerDialog implements OnClickListener {
 
 	@Override
 	protected void onOk() {
+		Reminder newReminder = new Reminder(3);
+		newReminder.mTimeToRemind = Calendar.getInstance();
+		newReminder.mTimeToRemind.set(Calendar.MINUTE, 
+				Integer.valueOf(mDigits[0].getText().toString()+mDigits[1].getText()));
+		newReminder.mTimeToRemind.set(Calendar.SECOND, 0);
+		if(newReminder.mTimeToRemind.compareTo(Calendar.getInstance()) <=0) 
+			newReminder.mTimeToRemind.add(Calendar.HOUR, 1);
+		newReminder.iPriority = iPriority;
+		G.reminders.add(newReminder, true);
 	}
 
 	@Override

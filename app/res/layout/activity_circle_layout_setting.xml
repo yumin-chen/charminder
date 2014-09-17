@@ -1,71 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.pujoy.charminder.activities.layout.ActivityWrapper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:charmy="http://schemas.android.com/apk/res/com.pujoy.charminder"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    charmy:parent_activity="com.pujoy.charminder.activities.SettingsActivity"
+    charmy:title_text="@string/circle_layout_setting_title" >
 
-    <com.pujoy.charminder.activities.layout.TitleBar
-        xmlns:titlebar="http://schemas.android.com/apk/res/com.pujoy.charminder"
-        android:layout_width="fill_parent"
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/circle_layout_setting_prompt"/>
+
+    <RelativeLayout
+        android:id="@+id/circle_layout_setting_layout"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circle_bg" >
+    </RelativeLayout>
+
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/circle_layout_setting_not_used"/>
+
+    <RelativeLayout
+        android:id="@+id/circle_layout_setting_not_used_layout"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        titlebar:parent_activity="com.pujoy.charminder.activities.SettingsActivity"
-        titlebar:title_text="@string/circle_layout_setting_title" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/dark_back"
+        android:minHeight="80dp" >
+    </RelativeLayout>
 
-    <com.pujoy.charminder.activities.layout.LightListView
-        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/blue" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="4.5dip" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4.5dp"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_vertical"
-                android:text="@string/circle_layout_setting_prompt"
-                android:textColor="@color/dark_blue_l"
-                android:textSize="14sp" />
-
-            <RelativeLayout
-                android:id="@+id/circle_layout_setting_layout"
-                android:layout_width="240dp"
-                android:layout_height="240dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/circle_bg" >
-            </RelativeLayout>
-            
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4.5dp"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_vertical"
-                android:text="@string/circle_layout_setting_not_used"
-                android:textColor="@color/dark_blue_l"
-                android:textSize="14sp" />
-            
-            <RelativeLayout
-                android:id="@+id/circle_layout_setting_not_used_layout"
-                android:layout_width="240dp"
-                android:minHeight="80dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/dark_back" >
-            </RelativeLayout>
-
-
-        </LinearLayout>
-    </com.pujoy.charminder.activities.layout.LightListView>
-
-</LinearLayout>
+</com.pujoy.charminder.activities.layout.ActivityWrapper>

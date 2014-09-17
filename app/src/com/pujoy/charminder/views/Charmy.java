@@ -3,6 +3,7 @@ package com.pujoy.charminder.views;
 import java.util.Random;
 
 import com.pujoy.charminder.R;
+import com.pujoy.charminder.activities.ReminderListActivity;
 import com.pujoy.charminder.activities.SettingsActivity;
 import com.pujoy.charminder.base.WindowBase;
 import com.pujoy.charminder.other.C;
@@ -220,7 +221,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 							G.goToActivity(SettingsActivity.class);
 							break;
 						case 5:
-							// GoToActivity(RemindersList.class);
+							G.goToActivity(ReminderListActivity.class);
 							break;
 						case 6: {
 							G.exit();

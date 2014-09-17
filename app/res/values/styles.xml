@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -16,34 +16,50 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowActionBar">false</item>
-		<item name="android:windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
+
     <style name="Charminder" />
-    <style name="Charminder.SettingItem" parent="@style/Charminder">
+    
+    <style name="Charminder.LightListViewText" parent="@style/Charminder">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/light_list_catagory_margin_left</item>
+        <item name="android:layout_marginTop">4.5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/dark_blue_l</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Charminder.LightListViewItem" parent="@style/Charminder">
         <item name="android:clickable">true</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/light_blue</item>
     </style>
-        <style name="Charminder.SettingItem.Top" parent="@style/Charminder.SettingItem">
+
+    <style name="Charminder.LightListViewItem.Top" parent="@style/Charminder.LightListViewItem">
         <item name="android:layout_marginTop">4.5dp</item>
         <item name="android:layout_marginBottom">0.5dp</item>
     </style>
-    <style name="Charminder.SettingItem.Bottom" parent="@style/Charminder.SettingItem">
+
+    <style name="Charminder.LightListViewItem.Bottom" parent="@style/Charminder.LightListViewItem">
         <item name="android:layout_marginTop">0.5dp</item>
         <item name="android:layout_marginBottom">4.5dp</item>
     </style>
-    <style name="Charminder.SettingItem.Middle" parent="@style/Charminder.SettingItem">
+
+    <style name="Charminder.LightListViewItem.Middle" parent="@style/Charminder.LightListViewItem">
         <item name="android:layout_marginTop">0.5dp</item>
         <item name="android:layout_marginBottom">0.5dp</item>
     </style>
-    <style name="Charminder.SettingItem.Single" parent="@style/Charminder.SettingItem">
+
+    <style name="Charminder.LightListViewItem.Single" parent="@style/Charminder.LightListViewItem">
         <item name="android:layout_marginTop">4.5dp</item>
         <item name="android:layout_marginBottom">4.5dp</item>
     </style>
-    <style name="Charminder.SettingItem.Stars" parent="@style/Charminder">
+
+    <style name="Charminder.LightListViewItem.Stars" parent="@style/Charminder">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">fill_parent</item>
         <item name="android:layout_centerVertical">true</item>

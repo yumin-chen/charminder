@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import com.pujoy.charminder.R;
 import com.pujoy.charminder.base.WindowTimerDialog;
+import com.pujoy.charminder.data.Reminder;
 import com.pujoy.charminder.other.C;
 import com.pujoy.charminder.other.G;
 
@@ -186,58 +187,58 @@ public class Timer2 extends WindowTimerDialog implements OnClickListener {
 		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(mTitleIcon, "y",
 				mLayoutParams.getHeight() / 2 - mLayoutParams.getWidth() / 2
 						+ dpToPx(4), dpToPx(4));
-		aTitleIconY.setDuration(500);
+		aTitleIconY.setDuration(ANIMATION_DURATION);
 
 		ValueAnimator[] aDigitsY = new ValueAnimator[9];
 		for (int i = 0; i < 4; i++) {
 			aDigitsY[i] = ObjectAnimator.ofFloat(mDigits[i], "y",
 					(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 							+ dpToPx(40), dpToPx(40));
-			aDigitsY[i].setDuration(500);
+			aDigitsY[i].setDuration(ANIMATION_DURATION);
 		}
 
 		for (int i = 4; i < 9; i++) {
 			aDigitsY[i] = ObjectAnimator.ofFloat(mDigits[i], "y",
 					(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 							+ dpToPx(84), dpToPx(84));
-			aDigitsY[i].setDuration(500);
+			aDigitsY[i].setDuration(ANIMATION_DURATION);
 
 		}
 
 		ValueAnimator a201Y = ObjectAnimator.ofFloat(mTwoZeroOne, "y",
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(84), dpToPx(84));
-		a201Y.setDuration(500);
+		a201Y.setDuration(ANIMATION_DURATION);
 
 		ValueAnimator aYearY = ObjectAnimator.ofFloat(mYear, "y",
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(84 + 18), dpToPx(84 + 18));
-		aYearY.setDuration(500);
+		aYearY.setDuration(ANIMATION_DURATION);
 
 		ValueAnimator aMonthY = ObjectAnimator.ofFloat(mMonth, "y",
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(84 + 18), dpToPx(84 + 18));
-		aMonthY.setDuration(500);
+		aMonthY.setDuration(ANIMATION_DURATION);
 
 		ValueAnimator aDayY = ObjectAnimator.ofFloat(mDay, "y",
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(84 + 18), dpToPx(84 + 18));
-		aDayY.setDuration(500);
+		aDayY.setDuration(ANIMATION_DURATION);
 
 		ValueAnimator aAmPmY = ObjectAnimator.ofFloat(mAmPm, "y",
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(58), dpToPx(58));
-		aAmPmY.setDuration(500);
+		aAmPmY.setDuration(ANIMATION_DURATION);
 
 		ValueAnimator aHourY = ObjectAnimator.ofFloat(mHour, "y",
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(58), dpToPx(58));
-		aHourY.setDuration(500);
+		aHourY.setDuration(ANIMATION_DURATION);
 
 		ValueAnimator aMinuteY = ObjectAnimator.ofFloat(mMinute, "y",
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(58), dpToPx(58));
-		aMinuteY.setDuration(500);
+		aMinuteY.setDuration(ANIMATION_DURATION);
 
 		aTitleIconY.start();
 		a201Y.start();
@@ -260,62 +261,62 @@ public class Timer2 extends WindowTimerDialog implements OnClickListener {
 			aDigitsY[i] = ObjectAnimator.ofFloat(mDigits[i], "y", dpToPx(40),
 					(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 							+ dpToPx(40));
-			aDigitsY[i].setDuration(500);
+			aDigitsY[i].setDuration(ANIMATION_DURATION);
+		}
+
+		for (int i = 4; i < 9; i++) {
+			aDigitsY[i] = ObjectAnimator.ofFloat(mDigits[i], "y", dpToPx(84),
+					(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
+							+ dpToPx(84));
+			aDigitsY[i].setDuration(ANIMATION_DURATION);
 		}
 		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(mTitleIcon, "y",
 				dpToPx(4),
 				mLayoutParams.getHeight() / 2 - mLayoutParams.getWidth() / 2
 						+ dpToPx(4));
-		aTitleIconY.setDuration(500);
+		aTitleIconY.setDuration(ANIMATION_DURATION);
 
 		ValueAnimator aAmPmY = ObjectAnimator.ofFloat(mAmPm, "y", dpToPx(58),
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(58));
-		aAmPmY.setDuration(500);
+		aAmPmY.setDuration(ANIMATION_DURATION);
 		ValueAnimator aHourY = ObjectAnimator.ofFloat(mHour, "y", dpToPx(58),
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(58));
-		aHourY.setDuration(500);
+		aHourY.setDuration(ANIMATION_DURATION);
 		ValueAnimator aMinuteY = ObjectAnimator.ofFloat(mMinute, "y",
 				dpToPx(58),
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(58));
-		aMinuteY.setDuration(500);
+		aMinuteY.setDuration(ANIMATION_DURATION);
 
 		ValueAnimator aMonthY = ObjectAnimator.ofFloat(mMonth, "y",
 				dpToPx(84 + 18),
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(84 + 18));
-		aMonthY.setDuration(500);
+		aMonthY.setDuration(ANIMATION_DURATION);
 		aMonthY.start();
 
 		ValueAnimator aDayY = ObjectAnimator.ofFloat(mDay, "y",
 				dpToPx(84 + 18),
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(84 + 18));
-		aDayY.setDuration(500);
+		aDayY.setDuration(ANIMATION_DURATION);
 		aDayY.start();
 
 		ValueAnimator aYearY = ObjectAnimator.ofFloat(mYear, "y",
 				dpToPx(84 + 18),
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(84 + 18));
-		aYearY.setDuration(500);
+		aYearY.setDuration(ANIMATION_DURATION);
 		aYearY.start();
 
 		ValueAnimator a201Y = ObjectAnimator.ofFloat(mTwoZeroOne, "y",
 				dpToPx(84),
 				(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
 						+ dpToPx(84));
-		a201Y.setDuration(500);
+		a201Y.setDuration(ANIMATION_DURATION);
 		a201Y.start();
-
-		for (int i = 4; i < 9; i++) {
-			aDigitsY[i] = ObjectAnimator.ofFloat(mDigits[i], "y", dpToPx(84),
-					(mLayoutParams.getHeight() - mLayoutParams.getWidth()) / 2
-							+ dpToPx(84));
-			aDigitsY[i].setDuration(500);
-		}
 
 		aTitleIconY.start();
 		aAmPmY.start();
@@ -328,7 +329,7 @@ public class Timer2 extends WindowTimerDialog implements OnClickListener {
 	}
 
 	public void onClick(View v) {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 9; i++) {
 			if (v == mDigits[i]) {
 				currentDigit = i;
 				UpdateCurrentDigit();
@@ -448,7 +449,20 @@ public class Timer2 extends WindowTimerDialog implements OnClickListener {
 
 	@Override
 	protected void onOk() {
-
+		Reminder newReminder = new Reminder(2);
+		newReminder.mTimeToRemind.add(Calendar.YEAR, Integer.valueOf((String) mDigits[8].getText()) 
+				- (String.valueOf(newReminder.mTimeToRemind.get(Calendar.YEAR)).charAt(3) - '0'));
+		newReminder.mTimeToRemind.set(Calendar.MONTH,
+				Integer.valueOf(mDigits[4].getText().toString() + mDigits[5].getText()) - 1);
+		newReminder.mTimeToRemind.set(Calendar.DAY_OF_MONTH,
+				Integer.valueOf(mDigits[6].getText().toString() + mDigits[7].getText()));
+		newReminder.mTimeToRemind.set(Calendar.HOUR_OF_DAY, 
+				Integer.valueOf(mDigits[0].getText().toString() + mDigits[1].getText()));
+		newReminder.mTimeToRemind.set(Calendar.MINUTE, 
+				Integer.valueOf(mDigits[2].getText().toString() + mDigits[3].getText()));
+		newReminder.mTimeToRemind.set(Calendar.SECOND, 0);
+		newReminder.iPriority = iPriority;
+		G.reminders.add(newReminder, true);
 	}
 
 	@Override

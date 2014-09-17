@@ -32,7 +32,6 @@ public class Settings {
 				"mPrioritySetting4", "11110"));
 		mPrioritySetting[4] = new PrioritySetting(sp.getString(
 				"mPrioritySetting5", "11111"));
-		iBubbleTimeOut = 5;
 	}
 
 	public void save() {

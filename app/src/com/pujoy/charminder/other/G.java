@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.pujoy.charminder.R;
+import com.pujoy.charminder.data.ReminderList;
 import com.pujoy.charminder.data.Settings;
 import com.pujoy.charminder.helper.PopDialog;
 import com.pujoy.charminder.helper.PopDialog.FunctionWrapper;
@@ -14,6 +15,7 @@ public class G{
 	public static Charmy mCharmy;
 	public static TimerThread mTimerThread;
 	public static Settings settings;
+	public static ReminderList reminders;
 	public static Context context;
 
 	public static int getLanguage() {
@@ -23,10 +25,6 @@ public class G{
 
 	public static void goToActivity(Class<?> cls) {
 		context.startActivity(new Intent(context, cls));
-		// Intent intent = new Intent(context, BringToFront.class);
-		// BringToFront.sName = cls.getName();
-		// context.startActivity(intent);
-
 	}
 
 	public static void exit() {

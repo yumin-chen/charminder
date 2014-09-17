@@ -1,6 +1,9 @@
 package com.pujoy.charminder.views;
 
+import java.util.Calendar;
+
 import com.pujoy.charminder.R;
+import com.pujoy.charminder.data.Reminder;
 import com.pujoy.charminder.base.WindowTimerDialog;
 import com.pujoy.charminder.other.C;
 import com.pujoy.charminder.other.G;
@@ -179,18 +182,13 @@ public class Timer1 extends WindowTimerDialog implements OnClickListener {
 
 	@Override
 	protected void onOk() {
-		// Reminder newReminder = new Reminder(1);
-		// newReminder.time_to_remind = Calendar.getInstance();
-		// newReminder.time_to_remind.add(Calendar.HOUR,
-		// Integer.valueOf(tvDigits[0].getText().toString()+tvDigits[1].getText()));
-		// newReminder.time_to_remind.add(Calendar.MINUTE,
-		// Integer.valueOf(tvDigits[2].getText().toString()+tvDigits[3].getText()));
-		// newReminder.level = level;
-		// newReminder.note = FormatTimeText();
-		// MainActivity.AddReminder(newReminder);
-		// MainActivity.PushFloatingBubble(c.getString(R.string.bubble_add_reminder)
-		// +
-		// newReminder.note + c.getString(R.string.bubble_timer1));
+		Reminder newReminder = new Reminder(1);
+		newReminder.mTimeToRemind.add(Calendar.HOUR, 
+				Integer.valueOf(mDigits[0].getText().toString() + mDigits[1].getText()));
+		newReminder.mTimeToRemind.add(Calendar.MINUTE, 
+				Integer.valueOf(mDigits[2].getText().toString() + mDigits[3].getText()));
+		newReminder.iPriority = iPriority;
+		G.reminders.add(newReminder, true);
 	}
 
 	@Override
@@ -210,17 +208,5 @@ public class Timer1 extends WindowTimerDialog implements OnClickListener {
 			iCurrentDigit = 0;
 		UpdateCurrentDigit();
 	}
-
-	// private String FormatTimeText(){
-	// String ret = tvDigits[0].getText().toString()+tvDigits[1].getText();
-	// if(!(ret).isEmpty()){
-	// ret += con.getString(R.string.unit_hour);
-	// }
-	// String sec = tvDigits[2].getText().toString()+tvDigits[3].getText();
-	// if(!(sec.isEmpty() || ret.isEmpty())){
-	// ret += sec + con.getString(R.string.unit_minute);
-	// }
-	// return ret;
-	// }
 
 }

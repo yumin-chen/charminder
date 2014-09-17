@@ -1,71 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">风吹吹醒</string>
     <string name="floating_icon_name">小吹</string>
     <string name="b_welcome_greeting">嗨，我叫%1$s！</string>
     <string name="b_user_guide">爱我你就拖拖我吧！</string>
     <string name="b_exit">再见，我会想你的！</string>
     <string name="b_exit_completely">你要自己照顾好自己哦，我走了之后就不会再提醒你啦！</string>
-	
-	<string name="popDialog_defualtTitle">风吹吹醒</string>
-   
+    <string name="popDialog_defualtTitle">风吹吹醒</string>
     <string name="ok">确认</string>
-	<string name="cancel">取消</string>
-	
-	<string name="yes">是</string>
-	<string name="no">否</string>
-	
-	<string name="onExit_title">退出程序</string>
+    <string name="cancel">取消</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="onExit_title">退出程序</string>
     <string name="onExit_content">是否在退出%1$s之后继续接收提醒消息？</string>
-   
-	<string name="unit_year">年</string>
-	<string name="unit_month">月</string>
-	<string name="unit_day">日</string>
-	<string name="unit_hour">时</string>
-	<string name="unit_minute">分</string>
-	<string name="unit_second">秒</string>
-	<string name="unit_everyhour">每小时</string>
-	
-	<string name="priority">重要星级</string>
-	<string name="a_m_">a.m.</string>
-	<string name="p_m_">p.m.</string>
-	
-	<string name="speech_recognition_speak_now">请说话</string>
-	<string name="speech_recognition_speak_end">点击上方话筒说话</string>
-	
-	<string name="speech_recognition_edit_button_text">编辑</string>
-	<string name="speech_recognition_rerecord_button_text">重说</string>
-	
-	<string name="speech_recognition_error1">网络超时</string>
-	<string name="speech_recognition_error2">网络错误</string>
-	<string name="speech_recognition_error3">音频录制错误</string>
-	<string name="speech_recognition_error4">服务器状态错误</string>
-	<string name="speech_recognition_error8">语音识别服务正忙</string>
-	<string name="speech_recognition_error9">没有足够的权限</string>
-	<string name="speech_recognition_error_unknown">未知错误%1$s</string>
-	
-	<string name="setting_catagory_general">通常设置</string>
-	<string name="setting_catagory_priority">分级提醒设置</string>
-	<string name="setting_catagory_other">其它</string>
-	<string name="setting_circle_interface">悬浮圆盘板块设置</string>
-	<string name="setting_autodelete">自动删除过期提醒</string>
-	<string name="setting_bubbletime">气泡提示自动消失时间</string>
-	<string name="settings_title">设置</string>
-	<string name="select_bubbletimeout">请选择气泡消失时间：</string>
-	<string name="setting_about">关于...</string>
-	<string name="setting_exit">退出</string>
-	
-	<string name="priority_setting_title">分级提醒设置</string>
-	<string name="priority_setting_prompt">提醒方式</string>
-	<string name="priority_bubble">风吹吹悬浮气泡提示</string>
-	<string name="priority_notification_center">推送到消息中心</string>
-	<string name="priority_wake_screen">唤醒屏幕</string>
-	<string name="priority_vibrate">震动</string>
-	<string name="priority_sound">响铃</string>
-	
-	<string name="circle_layout_setting_title">悬浮圆盘板块设置</string>
-	<string name="circle_layout_setting_prompt">长按可以拖动各个板块</string>
-	<string name="circle_layout_setting_not_used">闲置的板块</string>
-	<string name="circle_layout_setting_cannot_remove_settings_icon">设置板块不能移除</string>
-	
+    <string name="unit_year">年</string>
+    <string name="unit_month">月</string>
+    <string name="unit_day">日</string>
+    <string name="unit_hour">时</string>
+    <string name="unit_minute">分</string>
+    <string name="unit_second">秒</string>
+    <string name="unit_everyhour">每小时</string>
+    <string name="priority">重要星级</string>
+    <string name="a_m_">a.m.</string>
+    <string name="p_m_">p.m.</string>
+    <string name="speech_recognition_speak_now">请说话</string>
+    <string name="speech_recognition_speak_end">点击上方话筒说话</string>
+    <string name="speech_recognition_edit_button_text">编辑</string>
+    <string name="speech_recognition_rerecord_button_text">重说</string>
+    <string name="speech_recognition_error1">网络超时</string>
+    <string name="speech_recognition_error2">网络错误</string>
+    <string name="speech_recognition_error3">音频录制错误</string>
+    <string name="speech_recognition_error4">服务器状态错误</string>
+    <string name="speech_recognition_error8">语音识别服务正忙</string>
+    <string name="speech_recognition_error9">没有足够的权限</string>
+    <string name="speech_recognition_error_unknown">未知错误%1$s</string>
+    <string name="setting_catagory_general">通常设置</string>
+    <string name="setting_catagory_priority">分级提醒设置</string>
+    <string name="setting_catagory_other">其它</string>
+    <string name="setting_circle_interface">悬浮圆盘板块设置</string>
+    <string name="setting_autodelete">自动删除过期提醒</string>
+    <string name="setting_bubbletime">气泡提示自动消失时间</string>
+    <string name="settings_title">设置</string>
+    <string name="select_bubbletimeout">请选择气泡消失时间：</string>
+    <string name="setting_about">关于...</string>
+    <string name="setting_exit">退出</string>
+    <string name="priority_setting_title">分级提醒设置</string>
+    <string name="priority_setting_prompt">提醒方式</string>
+    <string name="priority_bubble">风吹吹悬浮气泡提示</string>
+    <string name="priority_notification_center">推送到消息中心</string>
+    <string name="priority_wake_screen">唤醒屏幕</string>
+    <string name="priority_vibrate">震动</string>
+    <string name="priority_sound">响铃</string>
+    <string name="circle_layout_setting_title">悬浮圆盘板块设置</string>
+    <string name="circle_layout_setting_prompt">长按可以拖动各个板块</string>
+    <string name="circle_layout_setting_not_used">闲置的板块</string>
+    <string name="circle_layout_setting_cannot_remove_settings_icon">设置板块不能移除</string>
+    <string name="reminder_list_title">提醒清单</string>
+
 </resources>

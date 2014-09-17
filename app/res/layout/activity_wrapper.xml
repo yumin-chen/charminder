@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <com.pujoy.charminder.activities.layout.TitleBar
+        xmlns:titlebar="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/acvitity_title_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <com.pujoy.charminder.activities.layout.LightListView
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue" >
+
+        <LinearLayout
+            android:id="@+id/acvitity_main_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="4.5dip" >
+        </LinearLayout>
+    </com.pujoy.charminder.activities.layout.LightListView>
+
+</merge>
