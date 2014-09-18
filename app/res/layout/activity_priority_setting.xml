@@ -7,8 +7,8 @@
     charmy:title_text="@string/priority_setting_title" >
 
     <TextView
-		style="@style/Charminder.LightListViewText"
-        android:text="@string/priority_setting_prompt"/>
+        style="@style/Charminder.LightListViewText"
+        android:text="@string/priority_setting_prompt" />
 
     <com.pujoy.charminder.activities.layout.LightListItem
         xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"

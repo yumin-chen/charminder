@@ -14,9 +14,13 @@ import android.widget.ScrollView;
 public class LightListView extends ScrollView {
 	public LightListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		LayoutInflater.from(context).inflate(R.layout.fragment_light_listview,
+	}
+	
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+		LayoutInflater.from(getContext()).inflate(R.layout.fragment_light_listview,
 				this, true);
-
 		this.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent motionEvent) {
@@ -31,11 +35,11 @@ public class LightListView extends ScrollView {
 								View grandchildView = childViewGroup
 										.getChildAt(j);
 								if (grandchildView != null
-										&& grandchildView instanceof LightListItem) {
+										&& (grandchildView instanceof LightListItem
+										|| grandchildView instanceof ReminderItem)) {
 									grandchildView
 											.setBackgroundColor(C.COLOR_LIGHTBLUE);
 								}
-
 							}
 						}
 
@@ -45,6 +49,5 @@ public class LightListView extends ScrollView {
 				return false;
 			}
 		});
-
 	}
 }

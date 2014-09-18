@@ -61,7 +61,7 @@ public class FloatingText extends WindowBase {
 		mLayoutParams.setX((getScreenWidth() - mLayoutParams.getWidth()) / 2);
 		mLayoutParams.setY((int) ((getScreenHeight() - mLayoutParams
 				.getHeight()) / 2 + dpToPx(240) / 2 + dpToPx(48)));
-		mLayoutParams.alpha = 0.85f;
+		mLayoutParams.alpha = 0.90f;
 	}
 
 	public void setText(CharSequence text) {

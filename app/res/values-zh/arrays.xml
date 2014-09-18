@@ -19,6 +19,14 @@
         <item>提醒清单</item>
         <item>退出</item>
     </string-array>
+    <string-array name="reminder_item_attr">
+        <item>创建日期：</item>
+        <item>提醒时间：</item>
+        <item>重要星级：</item>
+        <item>循环周期：</item>
+        <item>事件地点：</item>
+        <item>提醒内容：</item>
+    </string-array>
     <string-array name="main_menu_descriptions">
         <item>你可以设置一个<b>%1$s</b>，然后当设定的时间倒计时到零之后你就会收到提醒。</item>
         <item>你可以设置一个<b>%1$s</b>，然后当系统时间到达设定的时间时你就会收到提醒。</item>

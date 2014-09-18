@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -33,7 +34,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 	private TextView mTitle;
 	private ImageView mMicBackground;
 	private ImageView mMicIcon;
-	private ImageView mVolume;
+	private View mVolume;
 	private TextView mSpeechPrompt;
 	private ImageView mTimeIcon;
 	private TextView mTimeText;
@@ -79,8 +80,8 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 		mMicBackground.setOnClickListener(this);
 		addToMainView(mMicBackground);
 
-		mVolume = new ImageView(G.context);
-		mVolume.setImageResource(R.drawable.volume);
+		mVolume = new View(G.context);
+		mVolume.setBackgroundColor(Color.rgb(237, 28, 36));;
 		mMicBackground
 				.setImageResource(R.drawable.speech_recognizer_background);
 		mVolume.setLayoutParams(new LayoutParams((int) (dpToPx(28.8f) * 0.8),

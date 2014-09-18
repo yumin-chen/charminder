@@ -58,6 +58,7 @@
     <string name="circle_layout_setting_not_used">Not used tiles</string>
     <string name="circle_layout_setting_cannot_remove_settings_icon">You can\'t remove settings</string>
     <string name="reminder_list_title">Reminder List</string>
-    <string name="reminder_list_prompt">Your reminders</string>
+    <string name="reminder_list_empty">It\'s empty here, \n Why not go and add some reminders?</string>
+    <string name="reminder_list_item_expired">Expired</string>
 
 </resources>

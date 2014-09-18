@@ -14,16 +14,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class LightListItem extends RelativeLayout {
+	String sText;
 	public LightListItem(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		LayoutInflater.from(context).inflate(R.layout.fragment_light_list_item,
-				this, true);
 
 		TypedArray array = context.obtainStyledAttributes(attrs,
 				R.styleable.StringStyleable, 0, 0);
-		String text = array.getString(R.styleable.StringStyleable_text);
-		if (text != null)
-			((TextView) findViewById(R.id.light_list_item_text)).setText(text);
+		sText = array.getString(R.styleable.StringStyleable_text);
 		array.recycle();
 
 		this.setOnTouchListener(new View.OnTouchListener() {
@@ -42,5 +39,13 @@ public class LightListItem extends RelativeLayout {
 		});
 		this.setOnClickListener((OnClickListener) G.context);
 
+	}
+	
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+		LayoutInflater.from(getContext()).inflate(R.layout.fragment_light_list_item,
+				this, true);
+		((TextView) findViewById(R.id.light_list_item_text)).setText(sText);
 	}
 }

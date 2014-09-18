@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="64dp">
+    
+    <View
+        android:id="@+id/reminder_item_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/dark_blue" />
+    
+    <ImageView
+        android:id="@+id/reminder_type_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/dark_blue"
+        android:contentDescription="@string/none" />
+
+    <TextView
+        android:id="@+id/reminder_type"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/dark_blue"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/countdown_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/none"
+        android:src="@drawable/countdown" />
+
+    <TextView
+        android:id="@+id/countdown_text"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_alignTop="@+id/countdown_icon"
+        android:layout_toLeftOf="@+id/reminder_item_expand"
+        android:layout_toRightOf="@+id/countdown_icon"
+        android:gravity="center_vertical"
+        android:text=""
+        android:textColor="@color/dark_blue"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/reminder_item_expand"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/none"
+        android:src="@drawable/down_arrow" />
+
+
+</merge>

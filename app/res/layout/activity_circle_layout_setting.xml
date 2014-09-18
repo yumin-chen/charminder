@@ -9,7 +9,7 @@
     <TextView
         style="@style/Charminder.LightListViewText"
         android:layout_gravity="center_horizontal"
-        android:text="@string/circle_layout_setting_prompt"/>
+        android:text="@string/circle_layout_setting_prompt" />
 
     <RelativeLayout
         android:id="@+id/circle_layout_setting_layout"
@@ -24,7 +24,7 @@
     <TextView
         style="@style/Charminder.LightListViewText"
         android:layout_gravity="center_horizontal"
-        android:text="@string/circle_layout_setting_not_used"/>
+        android:text="@string/circle_layout_setting_not_used" />
 
     <RelativeLayout
         android:id="@+id/circle_layout_setting_not_used_layout"

@@ -3,10 +3,36 @@
     xmlns:charmy="http://schemas.android.com/apk/res/com.pujoy.charminder"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    charmy:background_color="@color/light_blue"
+    charmy:head_margin="0dp"
     charmy:title_text="@string/reminder_list_title" >
 
-    <TextView
-        style="@style/Charminder.LightListViewText"
-        android:text="@string/reminder_list_prompt" />
+    <ImageView
+        android:id="@+id/reminder_list_empty"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/darkblue_circle"
+        android:contentDescription="@string/none"
+        android:src="@drawable/reminderlist" />
 
+    <TextView
+        android:id="@+id/reminder_list_empty_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:maxWidth="256dp"
+        android:text="@string/reminder_list_empty"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/dark_blue"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/reminder_foot"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/back_lightblue_to_blue" />
 </com.pujoy.charminder.activities.layout.ActivityWrapper>

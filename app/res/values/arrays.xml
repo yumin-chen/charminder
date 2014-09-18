@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <array name="reminder_list_icons">
+        <item>@drawable/timer1_icon</item>
+        <item>@drawable/timer2_icon</item>
+        <item>@drawable/timer3_icon</item>
+        <item>@drawable/audio_reminder_r</item>
+    </array>
     <array name="main_menu_icons">
         <item>@drawable/timer1_icon_c</item>
         <item>@drawable/timer2_icon_c</item>
@@ -19,7 +25,22 @@
         <item>@drawable/reminderlist_a</item>
         <item>@drawable/exit_a</item>
     </array>
-
+    <array name="reminder_item_attr_icon">
+        <item>@drawable/calendar</item>
+        <item>@drawable/time</item>
+        <item>@drawable/priority</item>
+        <item>@drawable/repeat</item>
+        <item>@drawable/location</item>
+        <item>@drawable/content</item>
+    </array>
+    <string-array name="reminder_item_attr">
+        <item>Date created:</item>
+        <item>Date to remind:</item>
+        <item>Priority:</item>
+        <item>Repeat:</item>
+        <item>Location:</item>
+        <item>Note:</item>
+    </string-array>
     <string-array name="main_menu_names">
         <item>Countdown Reminder</item>
         <item>Alarm Reminder</item>

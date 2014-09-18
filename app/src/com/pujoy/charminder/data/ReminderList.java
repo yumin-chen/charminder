@@ -25,7 +25,7 @@ public class ReminderList {
     		r.sLocation = sp.getString("r"+i+"location", "");
     		r.sNote = sp.getString("r"+i+"note", "");
     		r.mTimeToRemind.setTimeInMillis(sp.getLong("r"+i+"timeToRemind", 0));
-    		r.mTimeCreated.setTimeInMillis(sp.getLong("r"+i+"timeCreatedd", 0));
+    		r.mTimeCreated.setTimeInMillis(sp.getLong("r"+i+"timeCreated", 0));
     		mReminders.add(r);
     	}
 	}
@@ -48,6 +48,14 @@ public class ReminderList {
 	    editor.commit();
 	}
 	
+	public int size(){
+		return mReminders.size();
+	}
+	
+	public Reminder get(int index) {
+		return mReminders.get(index);
+	}
+	
 	public void add(Reminder newReminder) {
 		add(newReminder, false);
 	}
@@ -64,8 +72,10 @@ public class ReminderList {
 		String[] bubble = G.context.getResources().getStringArray(
 				R.array.bubble_add_reminder);
 		return String.format(bubble[reminder.iType-1],
-				Reminder.formatTime(reminder));
+				Reminder.formatRemindTime(reminder));
 	}
+
+
 
 	
 }

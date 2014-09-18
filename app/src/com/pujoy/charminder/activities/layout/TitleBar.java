@@ -8,7 +8,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,9 +21,14 @@ public class TitleBar extends LinearLayout {
 	public TitleBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setOrientation(HORIZONTAL);
-		setGravity(Gravity.CENTER);
-		setWeightSum(1.0f);
 		LayoutInflater.from(context).inflate(R.layout.fragment_title_bar, this,
+				true);
+	}
+	
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+		LayoutInflater.from(getContext()).inflate(R.layout.fragment_title_bar, this,
 				true);
 	}
 	

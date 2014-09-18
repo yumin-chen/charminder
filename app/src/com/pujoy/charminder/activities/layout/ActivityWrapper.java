@@ -1,6 +1,8 @@
 package com.pujoy.charminder.activities.layout;
 
 import com.pujoy.charminder.R;
+import com.pujoy.charminder.base.ViewBase;
+import com.pujoy.charminder.other.C;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,6 +14,8 @@ import android.widget.LinearLayout;
 public class ActivityWrapper extends LinearLayout {
 	String sParentActivity;
 	String sTitle;
+	int iHeadMargin;
+	int iBackgroundColor;
 
 	public ActivityWrapper(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -20,6 +24,9 @@ public class ActivityWrapper extends LinearLayout {
 				R.styleable.ActivityAttr, 0, 0);
 		sTitle = array.getString(R.styleable.ActivityAttr_title_text);
 		sParentActivity = array.getString(R.styleable.ActivityAttr_parent_activity);
+		iHeadMargin = array.getDimensionPixelSize(R.styleable.ActivityAttr_head_margin,
+				(int)ViewBase.dpToPx(4.5f));
+		iBackgroundColor = array.getColor(R.styleable.ActivityAttr_background_color, C.COLOR_BLUE);
 		array.recycle();
 	}
 	
@@ -47,6 +54,8 @@ public class ActivityWrapper extends LinearLayout {
 		}
 		
 		LinearLayout ll = ((LinearLayout) findViewById(R.id.acvitity_main_view));
+		ll.setPadding(0, iHeadMargin, 0, 0);
+		ll.setBackgroundColor(iBackgroundColor);
 		for(int i = 0; i < children.length; i++){
             ll.addView(children[i]);
 		}

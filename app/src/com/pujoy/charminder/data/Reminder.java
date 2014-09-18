@@ -14,7 +14,7 @@ import android.os.PowerManager;
 import android.os.Vibrator;
 
 public class Reminder {
-	public int iType;//Reminder Type
+	public int iType;//Reminder Type starting from 1
 	public Calendar mTimeCreated;
 	public Calendar mTimeToRemind;
 	public String sNote;
@@ -28,30 +28,6 @@ public class Reminder {
 		mTimeToRemind = Calendar.getInstance();
 		bValidity = true;
 		iType = type_of_reminder;
-	}
-	static class TimeHelper{
-		public static long getSeconds(long millis){
-			return getInSeconds(millis) % 60;
-		}
-		public static long getMinutes(long millis){
-			return getInMinutes(millis) % 60;
-		}
-		public static long getHours(long millis){
-			return getInHours(millis) % 24;
-		}
-
-		public static long getInSeconds(long millis){
-			return millis / (1000);
-		}
-		public static long getInMinutes(long millis){
-			return millis / (60 * 1000);
-		}
-		public static long getInHours(long millis){
-			return millis / (60 * 60 * 1000);
-		}
-		public static long getInDays(long millis){
-			return millis / (24 * 60 * 60 * 1000);
-		}
 	}
 	public void Notify(){
 		if(G.settings.mPrioritySetting[iPriority-1].bVibrate){
@@ -69,24 +45,20 @@ public class Reminder {
 				G.context.startActivity(new Intent(G.context, WakeUpScreen.class));
 		}
 	}
+	public static String formatTime(Calendar time){
+		return time.get(Calendar.DAY_OF_MONTH) + "/" + (time.get(Calendar.MONTH) + 1) + "/"
+				+ time.get(Calendar.YEAR) + " " + time.get(Calendar.HOUR_OF_DAY) + ":" 
+				+ time.get(Calendar.MINUTE);
+	}
 	
-	public static String formatTime(Reminder rem) {
+	public static String formatRemindTime(Reminder rem) {
 		Calendar cal = rem.mTimeToRemind;
 		String ret = new String();
 		switch (rem.iType){
 		case 1:
 		{
 			long diffs = rem.mTimeToRemind.getTimeInMillis() - rem.mTimeCreated.getTimeInMillis();
-			int temp = (int) TimeHelper.getInHours(diffs);
-			if(temp != 0)
-			{
-			ret = String.valueOf(temp) + G.context.getString(R.string.unit_hour);
-			}
-			temp = (int) TimeHelper.getMinutes(diffs);
-			if(temp != 0 || ret.isEmpty()){
-				ret += String.valueOf(temp) + G.context.getString(R.string.unit_minute);
-			}
-			return ret;
+			return formatCountdownText(diffs);
 		}
 		case 2:
 			//English
@@ -125,6 +97,53 @@ public class Reminder {
 		}
 		return ret;
 	}
+
+	public static String formatCountdownText(long diffs) {
+		String ret = new String();
+		int temp = (int) TimeHelper.getInDays(diffs);
+		if(temp != 0)
+		{
+		ret = String.valueOf(temp) + G.context.getString(R.string.unit_day);
+		}
+		temp = (int) TimeHelper.getHours(diffs);
+		if(temp != 0)
+		{
+		ret += String.valueOf(temp) + G.context.getString(R.string.unit_hour);
+		}
+		temp = (int) TimeHelper.getMinutes(diffs);
+		if(temp != 0 || ret.isEmpty()){
+			ret += String.valueOf(temp) + G.context.getString(R.string.unit_minute);
+		}
+		temp = (int) TimeHelper.getSeconds(diffs);
+		if(temp != 0){
+			ret += String.valueOf(temp) + G.context.getString(R.string.unit_second);
+		}
+		return ret;
+	}
 	
 
+	static class TimeHelper{
+		public static long getSeconds(long millis){
+			return getInSeconds(millis) % 60;
+		}
+		public static long getMinutes(long millis){
+			return getInMinutes(millis) % 60;
+		}
+		public static long getHours(long millis){
+			return getInHours(millis) % 24;
+		}
+
+		public static long getInSeconds(long millis){
+			return millis / (1000);
+		}
+		public static long getInMinutes(long millis){
+			return millis / (60 * 1000);
+		}
+		public static long getInHours(long millis){
+			return millis / (60 * 60 * 1000);
+		}
+		public static long getInDays(long millis){
+			return millis / (24 * 60 * 60 * 1000);
+		}
+	}
 }

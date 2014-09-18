@@ -57,5 +57,7 @@
     <string name="circle_layout_setting_not_used">闲置的板块</string>
     <string name="circle_layout_setting_cannot_remove_settings_icon">设置板块不能移除</string>
     <string name="reminder_list_title">提醒清单</string>
+    <string name="reminder_list_empty">你的提醒清单空空如也，\n快去添加提醒吧！</string>
+    <string name="reminder_list_item_expired">已经过期</string>
 
 </resources>
