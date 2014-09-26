@@ -179,20 +179,11 @@ public class Timer3 extends WindowTimerDialog implements OnClickListener {
 
 	@Override
 	protected void onOk() {
-		Reminder newReminder = new Reminder(3);
-		newReminder.mTimeToRemind = Calendar.getInstance();
-		newReminder.mTimeToRemind.set(Calendar.MINUTE, 
-				Integer.valueOf(mDigits[0].getText().toString()+mDigits[1].getText()));
-		newReminder.mTimeToRemind.set(Calendar.SECOND, 0);
-		if(newReminder.mTimeToRemind.compareTo(Calendar.getInstance()) <=0) 
-			newReminder.mTimeToRemind.add(Calendar.HOUR, 1);
-		newReminder.iPriority = iPriority;
-		G.reminders.add(newReminder, true);
+		addReminder(true);
 	}
 
 	@Override
 	protected void onCancel() {
-
 	}
 
 	@Override
@@ -206,6 +197,20 @@ public class Timer3 extends WindowTimerDialog implements OnClickListener {
 		if (iCurrentDigit == 2)
 			iCurrentDigit = 0;
 		UpdateCurrentDigit();
+	}
+
+	protected void addReminder(boolean pushBubble) {
+		Reminder newReminder = new Reminder(3);
+		newReminder.mTimeToRemind = Calendar.getInstance();
+		newReminder.mTimeToRemind.set(Calendar.MINUTE, 
+				Integer.valueOf(mDigits[0].getText().toString()+mDigits[1].getText()));
+		newReminder.mTimeToRemind.set(Calendar.SECOND, 0);
+		if(newReminder.mTimeToRemind.compareTo(Calendar.getInstance()) <=0) 
+			newReminder.mTimeToRemind.add(Calendar.HOUR, 1);
+		newReminder.iPriority = iPriority;
+		newReminder.iRepeat = 1;// Hourly
+		G.reminders.add(newReminder, pushBubble);
+		
 	}
 
 }

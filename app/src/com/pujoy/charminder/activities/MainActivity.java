@@ -17,7 +17,6 @@ public class MainActivity extends ActivityBase {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		finish();
-
 		G.settings = new Settings();
 		G.reminders = new ReminderList();
 
@@ -28,7 +27,7 @@ public class MainActivity extends ActivityBase {
 			if (G.mCharmy != null) {
 				if (!G.mCharmy.isCreated())
 					G.mCharmy.create();
-				G.mCharmy.PushBubble(getResources().getString(
+				G.mCharmy.pushBubble(getResources().getString(
 						R.string.b_user_guide));
 			}
 			return;
@@ -38,7 +37,7 @@ public class MainActivity extends ActivityBase {
 			G.mCharmy = new Charmy();
 		}
 		G.mCharmy.create();
-		G.mCharmy.PushBubble(getResources().getString(
+		G.mCharmy.pushBubble(getResources().getString(
 				R.string.b_welcome_greeting,
 				getResources().getString(R.string.floating_icon_name)).concat(
 				getResources().getString(R.string.b_user_guide)));

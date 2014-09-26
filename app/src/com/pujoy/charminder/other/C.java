@@ -16,5 +16,6 @@ public class C {
 	public static final int COLOR_BLUE = Color.rgb(168, 212, 242);
 	public static final int COLOR_GREENBLUE = Color.rgb(96, 192, 208);
 	public static final int COLOR_TRANSPARENT = Color.argb(0, 255, 255, 255);
+	public static final int COLOR_BLACK_TRANSLUCENT = Color.argb(128, 0, 0, 0);
 
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="64dp">
-    
+    android:layout_height="64dp" >
+
     <View
         android:id="@+id/reminder_item_divider"
         android:layout_width="match_parent"
@@ -10,8 +10,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="64dp"
         android:layout_marginRight="8dp"
-        android:background="@color/dark_blue" />
-    
+        android:background="@color/blue" />
+
     <ImageView
         android:id="@+id/reminder_type_icon"
         android:layout_width="48dp"
@@ -62,6 +62,5 @@
         android:layout_alignParentTop="true"
         android:contentDescription="@string/none"
         android:src="@drawable/down_arrow" />
-
 
 </merge>

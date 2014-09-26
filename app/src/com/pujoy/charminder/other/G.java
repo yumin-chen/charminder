@@ -7,7 +7,7 @@ import com.pujoy.charminder.R;
 import com.pujoy.charminder.data.ReminderList;
 import com.pujoy.charminder.data.Settings;
 import com.pujoy.charminder.helper.PopDialog;
-import com.pujoy.charminder.helper.PopDialog.FunctionWrapper;
+import com.pujoy.charminder.helper.FunctionWrapper;
 import com.pujoy.charminder.views.Charmy;
 
 //Global variables
@@ -37,7 +37,7 @@ public class G{
 					public void function() {
 						if (mCharmy != null && mCharmy.isCreated()) {
 							mCharmy.remove();
-							mCharmy.PushBubble(G.context.getResources()
+							mCharmy.pushBubble(G.context.getResources()
 									.getString(R.string.b_exit));
 						}
 
@@ -47,7 +47,7 @@ public class G{
 					public void function() {
 						if (mCharmy != null && mCharmy.isCreated()) {
 							mCharmy.remove();
-							mCharmy.PushBubble(G.context.getResources()
+							mCharmy.pushBubble(G.context.getResources()
 									.getString(R.string.b_exit_completely));
 						}
 						mTimerThread.destroy();

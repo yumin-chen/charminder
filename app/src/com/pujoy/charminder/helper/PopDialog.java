@@ -2,6 +2,7 @@ package com.pujoy.charminder.helper;
 
 import com.pujoy.charminder.R;
 import com.pujoy.charminder.base.WindowDialog;
+import com.pujoy.charminder.helper.FunctionWrapper;
 import com.pujoy.charminder.other.C;
 import com.pujoy.charminder.other.G;
 
@@ -13,10 +14,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
 public class PopDialog extends WindowDialog {
-	public static interface FunctionWrapper {
-		void function();
-	}
-
 	FunctionWrapper mOnOkListener;
 	FunctionWrapper mOnCancelListener;
 	TextView mTitle;

@@ -449,6 +449,15 @@ public class Timer2 extends WindowTimerDialog implements OnClickListener {
 
 	@Override
 	protected void onOk() {
+		addReminder(true);
+	}
+
+	@Override
+	protected void onCancel() {
+
+	}
+
+	protected void addReminder(boolean pushBubble) {
 		Reminder newReminder = new Reminder(2);
 		newReminder.mTimeToRemind.add(Calendar.YEAR, Integer.valueOf((String) mDigits[8].getText()) 
 				- (String.valueOf(newReminder.mTimeToRemind.get(Calendar.YEAR)).charAt(3) - '0'));
@@ -462,12 +471,7 @@ public class Timer2 extends WindowTimerDialog implements OnClickListener {
 				Integer.valueOf(mDigits[2].getText().toString() + mDigits[3].getText()));
 		newReminder.mTimeToRemind.set(Calendar.SECOND, 0);
 		newReminder.iPriority = iPriority;
-		G.reminders.add(newReminder, true);
-	}
-
-	@Override
-	protected void onCancel() {
-
+		G.reminders.add(newReminder, pushBubble);
 	}
 
 }

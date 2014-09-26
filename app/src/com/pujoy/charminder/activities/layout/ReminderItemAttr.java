@@ -1,13 +1,24 @@
 package com.pujoy.charminder.activities.layout;
 
 import com.pujoy.charminder.R;
+import com.pujoy.charminder.activities.ReminderEditorActivity;
+import com.pujoy.charminder.activities.ReminderListActivity;
+import com.pujoy.charminder.helper.FunctionWrapper;
 import com.pujoy.charminder.base.ViewBase;
 import com.pujoy.charminder.data.Reminder;
 import com.pujoy.charminder.other.C;
 import com.pujoy.charminder.other.G;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.TypedArray;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class ReminderItemAttr extends LinearLayout {
@@ -16,7 +27,7 @@ public class ReminderItemAttr extends LinearLayout {
 		super(context);
 		setOrientation(VERTICAL);
 		setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-		setBackgroundColor(C.COLOR_LIGHTBLUE);
+		setBackgroundColor(C.COLOR_BLUE);
 	}
 	
 	public void setReminder(int index){
@@ -26,6 +37,94 @@ public class ReminderItemAttr extends LinearLayout {
 
 	protected void update() {
 		this.removeAllViews();
+		LayoutInflater.from(getContext()).inflate(R.layout.fragment_reminder_item_expansion,
+				this, true);
+		LinearLayout editButton = ((LinearLayout) findViewById(R.id.expansion_item_edit_button));
+		editButton.setOnTouchListener(new OnTouchListener(){
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				ImageView image = (ImageView) findViewById(R.id.expansion_item_edit_image);
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					v.setBackgroundColor(C.COLOR_GREENBLUE);
+					image.setImageResource(R.drawable.sr_edit_button_a);
+					break;
+				case MotionEvent.ACTION_CANCEL:
+				case MotionEvent.ACTION_UP:
+					v.setBackgroundColor(C.COLOR_BLUE);
+					image.setImageResource(R.drawable.sr_edit_button);
+					break;
+				}
+				return false;
+			}
+			
+		});
+		editButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				ReminderEditorActivity.iIndex = iIndex;
+				ReminderEditorActivity.mOnOkLisntener = new FunctionWrapper(){
+
+					@Override
+					public void function() {
+			            ReminderListActivity.updateItem(iIndex);
+					}
+					
+				};
+				ReminderEditorActivity.mOnCancelLisntener = null;
+				G.context.startActivity(new Intent(G.context, ReminderEditorActivity.class));
+			}
+			
+		});
+
+		LinearLayout deleteButton = ((LinearLayout) findViewById(R.id.expansion_item_delete_button));
+		deleteButton.setOnTouchListener(new OnTouchListener(){
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				ImageView image = (ImageView) findViewById(R.id.expansion_item_delete_image);
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					v.setBackgroundColor(C.COLOR_GREENBLUE);
+					image.setImageResource(R.drawable.delete_button_a);
+					break;
+				case MotionEvent.ACTION_CANCEL:
+				case MotionEvent.ACTION_UP:
+					v.setBackgroundColor(C.COLOR_BLUE);
+					image.setImageResource(R.drawable.delete_button);
+					break;
+				}
+				return false;
+			}
+			
+		});
+		deleteButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder diaglog = new AlertDialog.Builder(v.getContext());
+				diaglog.setTitle(R.string.reminder_list_item_delete_dialog_title);
+			    diaglog.setMessage(R.string.reminder_list_item_delete_dialog_content);
+			    diaglog.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) { 
+			            G.reminders.remove(iIndex);
+			            ReminderListActivity.update((Activity) G.context);
+			        }
+			     });
+				diaglog.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) { 
+			            // do nothing
+			        }
+			     });
+			    diaglog.setIcon(android.R.drawable.ic_delete);
+			    diaglog.show();
+				
+			}
+			
+		});
+		
 		TypedArray drawable = getResources().obtainTypedArray(
 				R.array.reminder_item_attr_icon);
 		String[] names = G.context.getResources().getStringArray(
@@ -50,7 +149,12 @@ public class ReminderItemAttr extends LinearLayout {
 				break;
 			}
 			case 3://Repeat
-				item.setText(names[i]);
+				if(G.reminders.get(iIndex).iRepeat == 0){
+					continue;
+				}
+				String[] repeat = G.context.getResources().getStringArray(
+						R.array.repeat);
+				item.setText(names[i] + repeat[G.reminders.get(iIndex).iRepeat]);
 				break;
 			case 4://Location
 				if(G.reminders.get(iIndex).sLocation == null || G.reminders.get(iIndex).sLocation.isEmpty()){

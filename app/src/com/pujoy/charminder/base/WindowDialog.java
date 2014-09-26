@@ -78,6 +78,11 @@ public abstract class WindowDialog extends WindowBase {
 		aLowerCicleY.start();
 		aOkCircleY.start();
 	}
+	
+	public void removeImmediate(){
+		removeView(mMainView);
+		bCreated = false;
+	}
 
 	@Override
 	public void remove() {
@@ -116,8 +121,7 @@ public abstract class WindowDialog extends WindowBase {
 
 			@Override
 			public void onAnimationEnd(Animator animation) {
-				removeView(mMainView);
-				bCreated = false;
+				removeImmediate();
 			}
 
 			@Override
@@ -127,8 +131,7 @@ public abstract class WindowDialog extends WindowBase {
 
 			@Override
 			public void onAnimationCancel(Animator animation) {
-				removeView(mMainView);
-				bCreated = false;
+				removeImmediate();
 			}
 		});
 

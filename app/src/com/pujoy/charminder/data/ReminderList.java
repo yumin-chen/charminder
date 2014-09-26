@@ -24,13 +24,14 @@ public class ReminderList {
     		r.sTitle = sp.getString("r"+i+"title", "");
     		r.sLocation = sp.getString("r"+i+"location", "");
     		r.sNote = sp.getString("r"+i+"note", "");
+    		r.sTimePhrase = sp.getString("r"+i+"timePhrase", "");
     		r.mTimeToRemind.setTimeInMillis(sp.getLong("r"+i+"timeToRemind", 0));
     		r.mTimeCreated.setTimeInMillis(sp.getLong("r"+i+"timeCreated", 0));
     		mReminders.add(r);
     	}
 	}
 	
-	private void save() {
+	public void save() {
 		SharedPreferences sp = (G.context.getSharedPreferences("Reminders", Context.MODE_PRIVATE));
     	SharedPreferences.Editor editor = sp.edit();
     	editor.putInt("reminderCount", mReminders.size());
@@ -42,6 +43,7 @@ public class ReminderList {
     		editor.putString("r"+i+"title", mReminders.get(i).sTitle);
     		editor.putString("r"+i+"location", mReminders.get(i).sLocation);
     		editor.putString("r"+i+"note", mReminders.get(i).sNote);
+    		editor.putString("r"+i+"timePhrase", mReminders.get(i).sTimePhrase);
     		editor.putLong("r"+i+"timeToRemind", mReminders.get(i).mTimeToRemind.getTimeInMillis());
     		editor.putLong("r"+i+"timeCreated", mReminders.get(i).mTimeCreated.getTimeInMillis());
     	}
@@ -56,6 +58,12 @@ public class ReminderList {
 		return mReminders.get(index);
 	}
 	
+	public Reminder remove(int index){
+		Reminder ret = mReminders.remove(index);
+		save();
+		return ret;
+	}
+	
 	public void add(Reminder newReminder) {
 		add(newReminder, false);
 	}
@@ -64,7 +72,7 @@ public class ReminderList {
 		mReminders.add(newReminder);
 		save();
 		if(pushBubble){
-			G.mCharmy.PushBubble(getBubbleText(newReminder));
+			G.mCharmy.pushBubble(getBubbleText(newReminder));
 		}
 	}
 

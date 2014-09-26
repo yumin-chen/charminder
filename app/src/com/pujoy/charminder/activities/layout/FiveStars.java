@@ -1,58 +1,99 @@
 package com.pujoy.charminder.activities.layout;
 
 import com.pujoy.charminder.R;
+import com.pujoy.charminder.base.ViewBase;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class FiveStars extends LinearLayout {
-	int iNum;
+	int iPriority;
+	ImageView[] mStars;
 	public FiveStars(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		setOrientation(HORIZONTAL);
-		setGravity(Gravity.CENTER_VERTICAL);
 		TypedArray array = context.obtainStyledAttributes(attrs,
 				R.styleable.IntegerStyleable, 0, 0);
-		iNum = array.getInteger(R.styleable.IntegerStyleable_number, 0);
+		iPriority = array.getInteger(R.styleable.IntegerStyleable_number, 0);
 		array.recycle();
+		initialize(context);
+		
 	}
 	
 	public FiveStars(Context context){
 		super(context);
+		initialize(context);
+	}
+	
+	private void initialize(Context context) {
 		setOrientation(HORIZONTAL);
-		setGravity(Gravity.CENTER_VERTICAL);
-		LayoutInflater.from(getContext()).inflate(
-				R.layout.fragment_settings_five_stars, this, true);
+		LayoutParams layout = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		layout.gravity = Gravity.CENTER_VERTICAL;
+		setLayoutParams(layout);
+		mStars = new ImageView[5];
+		for(int i = 0; i < 5; i ++){
+			mStars[i] = new ImageView(context);
+			mStars[i].setLayoutParams(new LayoutParams((int) ViewBase.dpToPx(24), (int) ViewBase.dpToPx(24)));
+			this.addView(mStars[i]);
+		}
+		
+	}
+	
+	private void update() {
+		for(int i = 0; i < mStars.length; i ++){
+			mStars[i].setImageResource(iPriority > i ? R.drawable.star1 : R.drawable.star0);
+		}
 	}
 	
 	@Override
 	protected void onFinishInflate() {
 		super.onFinishInflate();
-		LayoutInflater.from(getContext()).inflate(
-				R.layout.fragment_settings_five_stars, this, true);
 		update();
 	}
 	
-	public void setPriority(int num){
-		iNum = num;
+	public void setPriority(int priority){
+		iPriority = priority;
 		update();
 	}
-
-	private void update() {
-		ImageView rlStar1 = (ImageView) findViewById(R.id.settings_five_stars_star1);
-		rlStar1.setImageResource(iNum > 0 ? R.drawable.star1 : R.drawable.star0);
-		ImageView rlStar2 = (ImageView) findViewById(R.id.settings_five_stars_star2);
-		rlStar2.setImageResource(iNum > 1 ? R.drawable.star1 : R.drawable.star0);
-		ImageView rlStar3 = (ImageView) findViewById(R.id.settings_five_stars_star3);
-		rlStar3.setImageResource(iNum > 2 ? R.drawable.star1 : R.drawable.star0);
-		ImageView rlStar4 = (ImageView) findViewById(R.id.settings_five_stars_star4);
-		rlStar4.setImageResource(iNum > 3 ? R.drawable.star1 : R.drawable.star0);
-		ImageView rlStar5 = (ImageView) findViewById(R.id.settings_five_stars_star5);
-		rlStar5.setImageResource(iNum > 4 ? R.drawable.star1 : R.drawable.star0);
+	
+	public int getPriority(){
+		return iPriority;
 	}
+	
+	public void setEditable(boolean editable){
+		if(editable){
+			this.setClickable(true);
+			this.setOnTouchListener(new OnTouchListener(){
+
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					switch (event.getAction()) {
+					case MotionEvent.ACTION_UP:
+					case MotionEvent.ACTION_MOVE:
+						for (int i = 0; i < 5; i++) {
+							if (((event.getX() - mStars[0].getX() >= mStars[i].getX())
+									&& ((event.getX() - mStars[0].getX())) < (mStars[i].getX() + (int) ViewBase.dpToPx(24)))) {
+								iPriority = i + 1;
+								update();
+								break;
+							}
+						}
+						break;
+					}
+					return false;
+				}
+				
+			});
+		}else{
+			this.setOnTouchListener(null);
+		}
+		
+	}
+
+
 }

@@ -19,6 +19,7 @@ import android.widget.TextView;
 public class Bubble extends WindowBase implements OnClickListener {
 	ImageView mMainView;
 	TextView mTextView;
+	Bitmap[] mBubbleBitmap;
 	public int iTimer;
 	public int iIconPositionX;
 	public int iIconPositionY;
@@ -33,6 +34,19 @@ public class Bubble extends WindowBase implements OnClickListener {
 		mTextView.setGravity(Gravity.CENTER);
 		mTextView.setOnClickListener(this);
 		mTextLayoutParams = new WindowLayoutParams();
+		mBubbleBitmap = new Bitmap[4];
+		mBubbleBitmap[0] = BitmapFactory.decodeResource(G.context.getResources(),
+				R.drawable.bubble);
+		Matrix matrix = new Matrix();
+		matrix.preScale(-1, 1);
+		mBubbleBitmap[1] = Bitmap.createBitmap(mBubbleBitmap[0], 0, 0, mBubbleBitmap[0].getWidth(),
+				mBubbleBitmap[0].getHeight(), matrix, true);
+		matrix.preScale(-1, -1);
+		mBubbleBitmap[2] = Bitmap.createBitmap(mBubbleBitmap[0], 0, 0, mBubbleBitmap[0].getWidth(),
+				mBubbleBitmap[0].getHeight(), matrix, true);
+		matrix.preScale(-1, 1);
+		mBubbleBitmap[3] = Bitmap.createBitmap(mBubbleBitmap[0], 0, 0, mBubbleBitmap[0].getWidth(),
+				mBubbleBitmap[0].getHeight(), matrix, true);
 	}
 
 	public void setText(String text) {
@@ -63,29 +77,22 @@ public class Bubble extends WindowBase implements OnClickListener {
 	protected void onUpdateLayout() {
 		mLayoutParams.setWidth((int) dpToPx(280));
 		mLayoutParams.setHeight((int) dpToPx(148.75f));
-		float fHorizontal;
-		float fVertical;
+		int bitmapIndex = 0;
+
 		if (iIconPositionX + (int) dpToPx(24) > getScreenWidth() / 2) {
 			mLayoutParams.setX(iIconPositionX - mLayoutParams.getWidth());
-			fHorizontal = 1;
 		} else {
 			mLayoutParams.setX(iIconPositionX + (int) dpToPx(48));
-			fHorizontal = -1;
+			bitmapIndex++;
 		}
 		if (iIconPositionY + (int) dpToPx(24) > getScreenHeight() / 2) {
 			mLayoutParams.setY(iIconPositionY - mLayoutParams.getHeight());
-			fVertical = 1;
 		} else {
 			mLayoutParams.setY(iIconPositionY + (int) dpToPx(48));
-			fVertical = -1;
+			bitmapIndex +=2;
 		}
 
-		Matrix matrix = new Matrix();
-		matrix.preScale(fHorizontal, fVertical);
-		Bitmap src = BitmapFactory.decodeResource(G.context.getResources(),
-				R.drawable.bubble);
-		mMainView.setImageBitmap(Bitmap.createBitmap(src, 0, 0, src.getWidth(),
-				src.getHeight(), matrix, true));
+		mMainView.setImageBitmap(mBubbleBitmap[bitmapIndex]);
 
 		mTextLayoutParams.setWidth(mLayoutParams.getWidth() - (int) dpToPx(35));
 		mTextLayoutParams.setHeight(mLayoutParams.getHeight()
@@ -99,7 +106,7 @@ public class Bubble extends WindowBase implements OnClickListener {
 		remove();
 	}
 
-	public void Update() {
+	public void update() {
 		if (bCreated) {
 			updateViewLayout(mMainView, mLayoutParams);
 			updateViewLayout(mTextView, mTextLayoutParams);

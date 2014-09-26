@@ -1,5 +1,6 @@
 package com.pujoy.charminder.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,25 +15,25 @@ import com.pujoy.charminder.other.G;
 
 public class ReminderListActivity extends ActivityBase implements
 OnClickListener {
-	ReminderItem[] aReminderItem;
+	static ReminderItem[] aReminderItem;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_reminder_list);
-		update();
+		update(this);
 	}
 
-	private void update() {
-		ImageView imageEmpty = (ImageView)findViewById(R.id.reminder_list_empty);
-		TextView textEmpty = (TextView)findViewById(R.id.reminder_list_empty_text);
+	static public void update(Activity context) {
+		context.setContentView(R.layout.activity_reminder_list);
+		ImageView imageEmpty = (ImageView)context.findViewById(R.id.reminder_list_empty);
+		TextView textEmpty = (TextView)context.findViewById(R.id.reminder_list_empty_text);
 		if(G.reminders.size() > 0){
 			imageEmpty.setVisibility(View.GONE);
 			textEmpty.setVisibility(View.GONE);
-			View foot = (View)findViewById(R.id.reminder_foot);
+			View foot = (View)context.findViewById(R.id.reminder_foot);
 			aReminderItem = new ReminderItem[G.reminders.size()];
-			LinearLayout mainView = (LinearLayout)findViewById(R.id.acvitity_main_view);
+			LinearLayout mainView = (LinearLayout)context.findViewById(R.id.acvitity_main_view);
 			for(int i = 0; i < G.reminders.size(); i++){
-				aReminderItem[i] = new ReminderItem(this);
+				aReminderItem[i] = new ReminderItem(context);
 				mainView.addView(aReminderItem[i]);
 				aReminderItem[i].setReminder(i);
 			}
@@ -42,9 +43,24 @@ OnClickListener {
 			textEmpty.setVisibility(View.VISIBLE);
 		}
 	}
-
+	
+	static public void updateItem(int index) {
+		aReminderItem[index].update();
+	}
+	
+	public static void updateTime() {
+		if(G.reminders.size() != aReminderItem.length){
+			update((Activity) G.context);
+			return;
+		}
+		for(int i = 0; i < G.reminders.size(); i++){
+			aReminderItem[i].updateTime();
+		}
+	}
 	@Override
 	public void onClick(View v) {
 	}
+
+
 
 }

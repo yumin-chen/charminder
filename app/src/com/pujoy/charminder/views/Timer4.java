@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.pujoy.charminder.R;
 import com.pujoy.charminder.base.WindowDialogWithStars;
+import com.pujoy.charminder.data.Reminder;
 import com.pujoy.charminder.helper.Helper;
 import com.pujoy.charminder.other.C;
 import com.pujoy.charminder.other.G;
@@ -45,7 +46,8 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 	private ImageView mRerecordIcon;
 	private TextView mRerecordText;
 	private SpeechRecognizer mSpeechRecognizer;
-
+	private ParseResult mParseResult;
+	private String sSpeechInput;
 	private int iOldErrorInfo;
 
 	protected void onInitialize() {
@@ -173,7 +175,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-
+				startEditing();
 			}
 
 		};
@@ -288,6 +290,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 		mVolume.setVisibility(View.VISIBLE);
 		mSpeechPrompt.setText(G.context
 				.getString(R.string.speech_recognition_speak_now));
+		mParseResult = null;
 	}
 
 	private void onEndOfSpeechRecognizing() {
@@ -296,6 +299,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 		mVolume.setVisibility(View.GONE);
 		mSpeechPrompt.setText(G.context
 				.getString(R.string.speech_recognition_speak_end));
+		mParseResult = null;
 	}
 
 	private void displayResult(String speechText, ParseResult result) {
@@ -405,8 +409,9 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 					.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 			try {
 				SpeechParser sp = new SpeechParser(data, G.getLanguage());
-				ParseResult r = sp.parse();
-				displayResult(data.get(0), r);
+				mParseResult = sp.parse();
+				sSpeechInput = data.get(0);
+				displayResult(sSpeechInput, mParseResult);
 			} catch (Exception e) {
 				Log.w(e.getMessage());
 			} finally {
@@ -423,6 +428,8 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 	}
 
 	protected void onRemove() {
+		mSpeechRecognizer.stopListening();
+		
 		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(mTitleIcon, "y",
 				-dpToPx(4),
 				mLayoutParams.getHeight() / 2 - mLayoutParams.getWidth() / 2
@@ -435,8 +442,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 						+ dpToPx(32));
 		aTitleY.setDuration(ANIMATION_DURATION);
 		aTitleY.start();
-
-		mSpeechRecognizer.stopListening();
+		
 	}
 
 	@Override
@@ -468,10 +474,23 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 
 	@Override
 	protected void onOk() {
-		// TODO Auto-generated method stub
-
+		if(mParseResult == null){
+			Helper.pushText(G.context.getResources().getString(R.string.speech_recognition_no_input));
+			return;
+		}
+		addReminder(true);
 	}
-
+	
+	protected void addReminder(boolean pushBubble) {
+		Reminder newReminder = new Reminder(4);
+		newReminder.mTimeToRemind = mParseResult.mCalendar;
+		newReminder.sNote = sSpeechInput;
+		newReminder.sTimePhrase = mParseResult.sTimePhrase;
+		newReminder.iPriority = iPriority;
+		G.reminders.add(newReminder, pushBubble);
+		
+	}
+	
 	@Override
 	protected void onCancel() {
 		// TODO Auto-generated method stub

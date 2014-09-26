@@ -2,19 +2,20 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <ImageView
-        android:id="@+id/expansion_item_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:id="@+id/expansion_item_delete_image"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginLeft="64dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="4dp"
-        android:contentDescription="@string/none" />
+        android:contentDescription="@string/none"
+        android:src="@drawable/delete_button" />
 
     <TextView
-        android:id="@+id/expansion_item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:text="@string/reminder_list_item_delete"
         android:textColor="@color/dark_blue"
         android:textSize="14sp" />
 

@@ -124,14 +124,14 @@ public class Charmy extends WindowBase implements OnTouchListener,
 		mBubble.onUpdateLayout();
 	}
 
-	public void PushBubble(String BubbleText) {
-		mBubble.setText(BubbleText);
+	public void pushBubble(String bubbleText) {
+		mBubble.setText(bubbleText);
 		mBubble.create();
 	}
 
-	public void Update() {
+	public void update() {
 		updateViewLayout(mMainView, mLayoutParams);
-		mBubble.Update();
+		mBubble.update();
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 			fOldMouseX = event.getRawX();
 			fOldMouseY = event.getRawY();
 			onUpdateLayout();
-			Update();
+			update();
 			for (int i = 0; i < mMainCircle.mCircleItems.length; i++) {
 				if (mMainCircle.isPointInsideItem(event.getRawX(),
 						event.getRawY(), i)) {
@@ -241,7 +241,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 		String[] babble_text = G.context.getResources().getStringArray(
 				R.array.babble_bubble);
 		Random r = new Random();
-		PushBubble(babble_text[r.nextInt(babble_text.length)]);
+		pushBubble(babble_text[r.nextInt(babble_text.length)]);
 	}
 
 	public boolean MoveToCorner() {
@@ -288,7 +288,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 			mIcon.setPivotY(mIcon.getHeight() / 2);
 			mIcon.setRotation(mIcon.getRotation() + retationSpeed);
 			onUpdateLayout();
-			Update();
+			update();
 		}
 		return r;
 	}

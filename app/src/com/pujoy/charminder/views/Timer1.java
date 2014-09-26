@@ -179,21 +179,25 @@ public class Timer1 extends WindowTimerDialog implements OnClickListener {
 			}
 		}
 	}
-
-	@Override
-	protected void onOk() {
+	
+	protected void addReminder(boolean pushBubble){
 		Reminder newReminder = new Reminder(1);
 		newReminder.mTimeToRemind.add(Calendar.HOUR, 
 				Integer.valueOf(mDigits[0].getText().toString() + mDigits[1].getText()));
 		newReminder.mTimeToRemind.add(Calendar.MINUTE, 
 				Integer.valueOf(mDigits[2].getText().toString() + mDigits[3].getText()));
 		newReminder.iPriority = iPriority;
-		G.reminders.add(newReminder, true);
+		G.reminders.add(newReminder,pushBubble);
+	}
+
+	@Override
+	protected void onOk() {
+		addReminder(true);
 	}
 
 	@Override
 	protected void onCancel() {
-
+		
 	}
 
 	@Override

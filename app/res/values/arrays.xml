@@ -41,6 +41,14 @@
         <item>Location:</item>
         <item>Note:</item>
     </string-array>
+    <string-array name="repeat">
+        <item>Never</item>
+        <item>Hourly</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
     <string-array name="main_menu_names">
         <item>Countdown Reminder</item>
         <item>Alarm Reminder</item>
@@ -72,6 +80,13 @@
         <item>OK, I will remind you after %1$s.</item>
         <item>OK, I will remind you at %1$s sharp.</item>
         <item>OK, I will remind you every hour at %1$s.</item>
+        <item>OK, I will remind you at %1$s.</item>
+    </string-array>
+    <string-array name="bubble_notify">
+        <item>%1$s just passed.</item>
+        <item>It\'s %1$s now.</item>
+        <item>It\'s %2$s:%1$s now.</item>
+        <item>It\'s %1$s now.</item>
     </string-array>
     <string-array name="babble_bubble">
         <item>Charmy, charmy, charmy…</item>

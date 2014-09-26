@@ -23,10 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
         android:maxWidth="256dp"
         android:text="@string/reminder_list_empty"
-        android:layout_marginBottom="16dp"
         android:textColor="@color/dark_blue"
         android:textSize="18sp" />
 
@@ -35,4 +35,5 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/back_lightblue_to_blue" />
+
 </com.pujoy.charminder.activities.layout.ActivityWrapper>

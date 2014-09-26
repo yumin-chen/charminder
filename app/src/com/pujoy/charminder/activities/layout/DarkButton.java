@@ -7,46 +7,48 @@ import com.pujoy.charminder.other.G;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class LightListItem extends RelativeLayout {
-	String sText;
-	public LightListItem(Context context, AttributeSet attrs) {
-		super(context, attrs);
+public class DarkButton extends TextView {
 
+	String sText;
+	public DarkButton(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		this.setBackgroundColor(C.COLOR_DARKBLUE);
+		this.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+		this.setTextColor(C.COLOR_LIGHTBLUE);
+		this.setGravity(Gravity.CENTER);
 		TypedArray array = context.obtainStyledAttributes(attrs,
 				R.styleable.StringStyleable, 0, 0);
 		sText = array.getString(R.styleable.StringStyleable_text);
 		array.recycle();
-
-		this.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent motionEvent) {
-				switch (motionEvent.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					v.setBackgroundColor(C.COLOR_LIGHTBLUE_WD);
-					break;
-				case MotionEvent.ACTION_CANCEL:
-				case MotionEvent.ACTION_UP:
-					v.setBackgroundColor(C.COLOR_LIGHTBLUE);
-					break;
-				}
-				return false;
-			}
-		});
-		this.setOnClickListener((OnClickListener) G.context);
-
 	}
 	
 	@Override
 	protected void onFinishInflate() {
 		super.onFinishInflate();
-		LayoutInflater.from(getContext()).inflate(R.layout.fragment_light_list_item,
-				this, true);
-		((TextView) findViewById(R.id.light_list_item_text)).setText(sText);
+		this.setText(sText);
+		this.setOnTouchListener(new OnTouchListener(){
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					v.setBackgroundColor(C.COLOR_LIGHTBLUE_WD);
+					break;
+				case MotionEvent.ACTION_CANCEL:
+				case MotionEvent.ACTION_UP:
+					v.setBackgroundColor(C.COLOR_DARKBLUE);
+					break;
+				}
+				return false;
+			}
+			
+		});
+		this.setOnClickListener((OnClickListener) G.context);
 	}
 }

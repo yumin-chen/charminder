@@ -36,6 +36,7 @@
     <string name="speech_recognition_error8">Recognition service is busy</string>
     <string name="speech_recognition_error9">Insufficient permissions</string>
     <string name="speech_recognition_error_unknown">Unknown error %1$s</string>
+    <string name="speech_recognition_no_input">No input</string>
     <string name="setting_catagory_general">General Settings</string>
     <string name="setting_catagory_priority">Priority Settings</string>
     <string name="setting_catagory_other">Other</string>
@@ -60,5 +61,17 @@
     <string name="reminder_list_title">Reminder List</string>
     <string name="reminder_list_empty">It\'s empty here, \n Why not go and add some reminders?</string>
     <string name="reminder_list_item_expired">Expired</string>
+    <string name="reminder_list_item_edit">Edit</string>
+    <string name="reminder_list_item_delete">Delete</string>
+    <string name="reminder_list_item_delete_dialog_title">Delete reminder</string>
+    <string name="reminder_list_item_delete_dialog_content">Are you sure you want to delete this reminder?</string>
+    <string name="edit_title_prompt">Title</string>
+    <string name="edit_time_prompt">Time</string>
+    <string name="edit_priority_prompt">Priority</string>
+    <string name="edit_repeat_prompt">Repeat</string>
+    <string name="edit_location_prompt">Location</string>
+    <string name="edit_note_prompt">Note</string>
+    <string name="edit_time_picker_prompt">Select a time</string>
+    <string name="edit_repeat_picker_prompt">Repetition</string>
 
 </resources>

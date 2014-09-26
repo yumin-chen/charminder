@@ -45,6 +45,7 @@ public class SpeechParser {
 		}
 		// Compare results and get the most reliable one
 		int maxHit = 0;
+		int maxMember = 0;
 		for (int i = 0; i <= (parseResult.length + 1) / 2 - 1; i++) {
 			for (int j = 0; j < parseResult.length; j++) {
 				if (parseResult[i].sTimePhrase
@@ -52,17 +53,12 @@ public class SpeechParser {
 					parseResult[i].iHit++;
 					if (parseResult[i].iHit > maxHit) {
 						maxHit = parseResult[i].iHit;
+						maxMember = i;
 					}
 				}
 			}
 		}
-		for (int i = 0; i <= (parseResult.length + 1) / 2 - 1; i++) {
-			if (parseResult[i].iHit == maxHit) {
-				return parseResult[i];
-			}
-		}
-
-		return null;
+		return parseResult[maxMember];
 	}
 
 	private static boolean arrayContain(char[] array, char element) {
@@ -74,7 +70,7 @@ public class SpeechParser {
 		return false;
 	}
 
-	private ParseResult parseChinese(String speechText) {
+	public static ParseResult parseChinese(String speechText) {
 		ParseResult r = new ParseResult();
 		Calendar cal = Calendar.getInstance();
 		final char[] arabicNumbers = new char[] { '0', '1', '2', '3', '4', '5',
@@ -112,6 +108,7 @@ public class SpeechParser {
 					.replace(chineseNumbers[i], arabicNumbers[i]);
 		}
 
+		// Replace synonyms
 		speechText = speechText.replace("下个星期", "下周");
 		speechText = speechText.replace("星期天", "星期0");
 		speechText = speechText.replace("星期日", "星期0");
@@ -124,6 +121,16 @@ public class SpeechParser {
 		speechText = speechText.replace("小时之后", "小时后");
 		speechText = speechText.replace("分钟之后", "分钟后");
 
+		// Remove those extra spaces that interfere with parsing
+		speechText = speechText.replace(" 点", "点");
+		speechText = speechText.replace("点 ", "点");
+		speechText = speechText.replace("过 ", "过");
+		speechText = speechText.replace(" 年", "年");
+		speechText = speechText.replace(" 月", "月");
+		speechText = speechText.replace(" 日", "日");
+		speechText = speechText.replace(" 周", "周");
+		speechText = speechText.replace("周 ", "周");
+		
 		final char CHINESE_DIAN = '点';
 		index = speechText.indexOf(CHINESE_DIAN);
 		while (index != -1) {
@@ -352,6 +359,7 @@ public class SpeechParser {
 		if (r.sTimePhrase == "") {
 			r.sTimePhrase = "未能识别时间";
 		}
+		r.iHit = 0;
 		return r;
 	}
 

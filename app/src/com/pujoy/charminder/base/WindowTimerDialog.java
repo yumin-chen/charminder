@@ -19,7 +19,7 @@ public abstract class WindowTimerDialog extends WindowDialogWithStars {
 
 	protected TextView[] mNumKeys;
 	private ImageView mAddNote;
-
+	
 	protected abstract void onKeyDown(int key);
 
 	@Override
@@ -158,7 +158,7 @@ public abstract class WindowTimerDialog extends WindowDialogWithStars {
 
 			@Override
 			public void onClick(View v) {
-
+				startEditing();
 			}
 
 		});

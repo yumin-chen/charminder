@@ -28,6 +28,10 @@ public class ViewBase {
 	public static float dpToPx(float dp) {
 		return dp * (mMetrics.densityDpi / 160f);
 	}
+	
+	public static float pxToDp(float px) {
+		return px / (mMetrics.densityDpi / 160f);
+	}
 
 	public static boolean isPointInsideRect(float pointX, float pointY,
 			float rectX, float rectY, float rectWidth, float rectHeight) {

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="repeat">
+        <item>不重复</item>
+        <item>每小时一次</item>
+        <item>每日一次</item>
+        <item>每周一次</item>
+        <item>每月一次</item>
+        <item>每年一次</item>
+    </string-array>
     <string-array name="main_menu_names">
         <item>计时提醒</item>
         <item>定时提醒</item>
@@ -40,6 +48,13 @@
         <item>好的，我会在过了%1$s之后提醒你的。</item>
         <item>好的，我会在%1$s准时提醒你的。</item>
         <item>好的，我会在每个小时的%1$s提醒你的。</item>
+        <item>好的，我会在%1$s提醒你的。</item>
+    </string-array>
+    <string-array name="bubble_notify">
+        <item>%1$s已过。</item>
+        <item>%1$s到了。</item>
+        <item>%2$s点%1$s到了。</item>
+        <item>%1$s到了。</item>
     </string-array>
     <string-array name="babble_bubble">
         <item>猜猜我是男的还是女的？</item>

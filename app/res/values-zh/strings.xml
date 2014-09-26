@@ -35,6 +35,7 @@
     <string name="speech_recognition_error8">语音识别服务正忙</string>
     <string name="speech_recognition_error9">没有足够的权限</string>
     <string name="speech_recognition_error_unknown">未知错误%1$s</string>
+    <string name="speech_recognition_no_input">您还没有说话哦</string>
     <string name="setting_catagory_general">通常设置</string>
     <string name="setting_catagory_priority">分级提醒设置</string>
     <string name="setting_catagory_other">其它</string>
@@ -59,5 +60,17 @@
     <string name="reminder_list_title">提醒清单</string>
     <string name="reminder_list_empty">你的提醒清单空空如也，\n快去添加提醒吧！</string>
     <string name="reminder_list_item_expired">已经过期</string>
-
+    <string name="reminder_list_item_edit">编辑</string>
+    <string name="reminder_list_item_delete">删除</string>
+    <string name="reminder_list_item_delete_dialog_title">删除提醒</string>
+    <string name="reminder_list_item_delete_dialog_content">确认要删除该条提醒么？删除后无法恢复。</string>
+    <string name="edit_title_prompt">标题</string>
+    <string name="edit_time_prompt">时间</string>
+    <string name="edit_priority_prompt">星级</string>
+    <string name="edit_repeat_prompt">周期</string>
+    <string name="edit_location_prompt">地点</string>
+    <string name="edit_note_prompt">内容</string>
+    <string name="edit_time_picker_prompt">请选择时间</string>
+    <string name="edit_repeat_picker_prompt">请选择周期</string>
+	
 </resources>

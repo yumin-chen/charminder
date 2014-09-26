@@ -1,11 +1,14 @@
 package com.pujoy.charminder.base;
 
 import com.pujoy.charminder.R;
+import com.pujoy.charminder.activities.ReminderEditorActivity;
+import com.pujoy.charminder.helper.FunctionWrapper;
 import com.pujoy.charminder.other.C;
 import com.pujoy.charminder.other.G;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -20,6 +23,8 @@ public abstract class WindowDialogWithStars extends WindowDialog {
 	private TextView mPriority;
 	private ImageView[] mStar;
 	protected int iPriority = 3;
+	
+	abstract protected void addReminder(boolean pushBubble);
 
 	@Override
 	public void create() {
@@ -167,6 +172,22 @@ public abstract class WindowDialogWithStars extends WindowDialog {
 	@Override
 	protected void onInitialize() {
 		onInitialize(false);
+	}
+	
+	protected void startEditing(){
+		removeImmediate();
+		addReminder(false);
+		ReminderEditorActivity.iIndex = G.reminders.size() - 1;
+		ReminderEditorActivity.mOnOkLisntener = null;
+		ReminderEditorActivity.mOnCancelLisntener = new FunctionWrapper(){
+
+			@Override
+			public void function() {
+				G.reminders.remove(G.reminders.size() - 1);
+			}
+			
+		};
+		G.context.startActivity(new Intent(G.context, ReminderEditorActivity.class));
 	}
 
 	private void UpdateStarImage() {

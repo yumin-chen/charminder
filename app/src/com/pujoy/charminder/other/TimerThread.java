@@ -1,5 +1,8 @@
 package com.pujoy.charminder.other;
 
+import java.util.Calendar;
+
+import com.pujoy.charminder.activities.ReminderListActivity;
 import com.pujoy.charminder.helper.Helper;
 
 import android.os.Handler;
@@ -36,6 +39,17 @@ public class TimerThread extends Handler {
 		if (!bCreated)
 			return;
 		if (msg.what == REMINDING_PROCESS) {
+			for(int i=0; i<G.reminders.size(); i++){
+				if(G.reminders.get(i).bValidity && 
+						G.reminders.get(i).mTimeToRemind.compareTo(Calendar.getInstance()) <= 0){
+					G.reminders.get(i).Notify();
+					if(G.reminders.get(i).bValidity == false && G.settings.bAutoDeleteExpiredReminder){
+						G.reminders.remove(i);
+    					i--;
+    				}
+    				break;
+    			}
+    		}	
 			if (G.mCharmy.bCreated) {
 				if (G.mCharmy.mBubble.bCreated) {
 					G.mCharmy.mBubble.iTimer++;
@@ -43,6 +57,9 @@ public class TimerThread extends Handler {
 						G.mCharmy.mBubble.remove();
 					}
 				}
+			}
+			if (G.context instanceof ReminderListActivity){
+				ReminderListActivity.updateTime();
 			}
 			if (Helper.mFloatingText != null
 					&& Helper.mFloatingText.isCreated()) {
