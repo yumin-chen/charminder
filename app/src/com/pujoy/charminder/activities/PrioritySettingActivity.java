@@ -48,6 +48,7 @@ public class PrioritySettingActivity extends ActivityBase implements
 
 	}
 
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.priority_bubble_layout:

@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Charminder</string>
+    <string name="noti_default">Charminder is running in the background</string>
     <string name="none"></string>
     <string name="floating_icon_name">Charmy</string>
     <string name="b_welcome_greeting">Hi, my name is %1$s!\u0020</string>
@@ -41,8 +42,12 @@
     <string name="setting_catagory_priority">Priority Settings</string>
     <string name="setting_catagory_other">Other</string>
     <string name="setting_circle_interface">Circle panel layout</string>
+    <string name="setting_forenoti">Show persistent notification</string>
     <string name="setting_autodelete">Auto delete expired reminders</string>
     <string name="setting_bubbletime">Bubble disapear time</string>
+    <string name="settings_turn_off_notification_title">Warning</string>
+    <string name="settings_turn_off_notification_content">Are you sure you want to turn off the persistent notification? Android may kill the background service when memory is low, and this app might completely stop working on some devices.\n Do you want to continue?</string>
+    
     <string name="settings_title">Settings</string>
     <string name="select_bubbletimeout">Select time:</string>
     <string name="setting_about">About Charminder</string>

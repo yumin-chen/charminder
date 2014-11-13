@@ -47,6 +47,7 @@ public class TimerThread extends Handler {
 						G.reminders.remove(i);
     					i--;
     				}
+					G.reminders.save();
     				break;
     			}
     		}	

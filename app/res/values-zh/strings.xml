@@ -40,9 +40,12 @@
     <string name="setting_catagory_priority">分级提醒设置</string>
     <string name="setting_catagory_other">其它</string>
     <string name="setting_circle_interface">悬浮圆盘板块设置</string>
+    <string name="setting_forenoti">保持图标显示在状态条中</string>
     <string name="setting_autodelete">自动删除过期提醒</string>
     <string name="setting_bubbletime">气泡提示自动消失时间</string>
-    <string name="settings_title">设置</string>
+	<string name="settings_turn_off_notification_title">警告</string>
+    <string name="settings_turn_off_notification_content">确定要关闭状态条中的图标显示么？关闭之后将无法保证程序在后台的持续运行，甚至在某些机型可能完全无法正常使用。\n你确认要继续吗？</string>
+	<string name="settings_title">设置</string>
     <string name="select_bubbletimeout">请选择气泡消失时间：</string>
     <string name="setting_about">关于...</string>
     <string name="setting_exit">退出</string>

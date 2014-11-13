@@ -25,6 +25,7 @@ public class PopDialog extends WindowDialog {
 
 	public PopDialog(String content) {
 		super();
+		checkInitialization();
 		mContent.setText(content);
 		mTitle.setText(G.context.getResources().getString(
 				R.string.popDialog_defualtTitle));
@@ -32,12 +33,14 @@ public class PopDialog extends WindowDialog {
 
 	public PopDialog(String content, String title) {
 		super();
+		checkInitialization();
 		mTitle.setText(title);
 		mContent.setText(content);
 	}
 
 	public PopDialog(String content, String title, FunctionWrapper onOK) {
 		super();
+		checkInitialization();
 		mTitle.setText(title);
 		mContent.setText(content);
 		mOnOkListener = onOK;
@@ -46,6 +49,7 @@ public class PopDialog extends WindowDialog {
 	public PopDialog(String content, String title, FunctionWrapper onOK,
 			FunctionWrapper onCancel) {
 		super();
+		checkInitialization();
 		mOnOkListener = onOK;
 		mOnCancelListener = onCancel;
 		mTitle.setText(title);
@@ -53,10 +57,12 @@ public class PopDialog extends WindowDialog {
 	}
 
 	public void setTitle(String title) {
+		checkInitialization();
 		mTitle.setText(title);
 	}
 
 	public void setContent(String content) {
+		checkInitialization();
 		mContent.setText(content);
 	}
 
@@ -90,6 +96,15 @@ public class PopDialog extends WindowDialog {
 		mContent.setY((mLayoutParams.getWidth() * CENTER_PROPORTION));
 		addToMainView(mContent);
 	}
+	
+	@Override
+	protected void onDestroy() {
+		removeFromMainView(mTitle);
+		mTitle = null;
+		removeFromMainView(mContent);
+		mContent = null;
+		super.onDestroy();
+	}
 
 	@Override
 	protected void onCreate() {
@@ -113,6 +128,7 @@ public class PopDialog extends WindowDialog {
 
 	@Override
 	protected void onUpdateLayout() {
+		super.onUpdateLayout();
 		mLayoutParams.setWidth((int) dpToPx(256));
 		mLayoutParams.setHeight((int) dpToPx(256));
 		mLayoutParams.x = (getScreenWidth() - mLayoutParams.getWidth()) / 2;

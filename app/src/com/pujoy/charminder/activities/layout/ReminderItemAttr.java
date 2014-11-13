@@ -26,7 +26,7 @@ public class ReminderItemAttr extends LinearLayout {
 	public ReminderItemAttr(Context context) {
 		super(context);
 		setOrientation(VERTICAL);
-		setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		setLayoutParams(new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
 		setBackgroundColor(C.COLOR_BLUE);
 	}
 	
@@ -108,13 +108,15 @@ public class ReminderItemAttr extends LinearLayout {
 				diaglog.setTitle(R.string.reminder_list_item_delete_dialog_title);
 			    diaglog.setMessage(R.string.reminder_list_item_delete_dialog_content);
 			    diaglog.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-			        public void onClick(DialogInterface dialog, int which) { 
+			        @Override
+					public void onClick(DialogInterface dialog, int which) { 
 			            G.reminders.remove(iIndex);
 			            ReminderListActivity.update((Activity) G.context);
 			        }
 			     });
 				diaglog.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-			        public void onClick(DialogInterface dialog, int which) { 
+			        @Override
+					public void onClick(DialogInterface dialog, int which) { 
 			            // do nothing
 			        }
 			     });

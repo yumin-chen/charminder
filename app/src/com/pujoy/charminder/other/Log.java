@@ -6,6 +6,7 @@ import android.content.Context;
 
 public class Log {
 	public static void w(String log) {
+		android.util.Log.d("DEBUG_Charmy", log);
 		try {
 			FileOutputStream f;
 			f = G.context.openFileOutput("log", Context.MODE_PRIVATE

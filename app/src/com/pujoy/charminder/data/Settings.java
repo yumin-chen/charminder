@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class Settings {
+	public boolean bPersistentNotification;
 	public boolean bAutoDeleteExpiredReminder;
 	public int iBubbleTimeOut;
 	public double dCircleAngle;
@@ -18,6 +19,8 @@ public class Settings {
 				Context.MODE_PRIVATE);
 		mCircleSection = formatByteArray(sp.getString("mCircleSection",
 				"0123456"));
+		bPersistentNotification = sp.getBoolean(
+				"bPersistentNotification", true);
 		bAutoDeleteExpiredReminder = sp.getBoolean(
 				"bAutoDeleteExpiredReminder", false);
 		iBubbleTimeOut = sp.getInt("iBubbleTimeOut", 5);
@@ -40,6 +43,8 @@ public class Settings {
 		SharedPreferences.Editor editor = sp.edit();
 		editor.putString("mCircleSection",
 				generateStringFromByteArray(mCircleSection));
+		editor.putBoolean("bPersistentNotification",
+				bPersistentNotification);
 		editor.putBoolean("bAutoDeleteExpiredReminder",
 				bAutoDeleteExpiredReminder);
 		editor.putLong("dCircleAngle", Double.doubleToLongBits(dCircleAngle));

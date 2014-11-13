@@ -32,11 +32,11 @@ public abstract class WindowDialog extends WindowBase {
 
 	protected static final int ANIMATION_DURATION = 500;
 
+	@Override
 	protected abstract void onCreate();
 
+	@Override
 	protected abstract void onRemove();
-
-	protected abstract void onUpdateLayout();
 
 	protected abstract void onOk();
 
@@ -239,6 +239,29 @@ public abstract class WindowDialog extends WindowBase {
 	@Override
 	protected void onInitialize() {
 		onInitialize(false);
+	}
+	
+	@Override 
+	protected void onDestroy(){
+		mUpperCircle.setImageBitmap(null);
+		removeFromMainView(mUpperCircle);
+		mUpperCircle = null;
+		mMiddleFiller.setImageBitmap(null);
+		removeFromMainView(mMiddleFiller);
+		mMiddleFiller = null;
+		mLowerCircle.setImageBitmap(null);
+		removeFromMainView(mLowerCircle);
+		mLowerCircle = null;
+		removeFromMainView(mOkCircle);
+		mOkCircle = null;
+		removeFromMainView(mCancelCircle);
+		mCancelCircle = null;
+		super.onDestroy();
+	}
+	
+	@Override
+	protected void onUpdateLayout(){
+		super.onUpdateLayout();
 	}
 
 	protected void onInitSortView() {

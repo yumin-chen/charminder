@@ -174,6 +174,24 @@ public abstract class WindowDialogWithStars extends WindowDialog {
 		onInitialize(false);
 	}
 	
+	@Override
+	protected void onDestroy() {
+		for (int i = 0; i < mStar.length; i ++){
+			mStar[i].getDrawingCache().recycle();
+			removeFromMainView(mStar[i]);
+			mStar[i] = null;
+		}
+		mStar = null;
+		removeFromMainView(mPriority);
+		mPriority = null;
+		super.onDestroy();
+	}
+	
+	@Override
+	protected void onUpdateLayout(){
+		super.onUpdateLayout();
+	}
+	
 	protected void startEditing(){
 		removeImmediate();
 		addReminder(false);

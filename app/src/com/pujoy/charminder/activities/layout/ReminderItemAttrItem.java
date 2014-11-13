@@ -13,7 +13,7 @@ public class ReminderItemAttrItem extends LinearLayout {
 	public ReminderItemAttrItem(Context context) {
 		super(context);
 		setOrientation(HORIZONTAL);
-		setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		setLayoutParams(new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
 		LayoutInflater.from(getContext()).inflate(R.layout.fragment_reminder_item_expansion_item,
 				this, true);
 	}

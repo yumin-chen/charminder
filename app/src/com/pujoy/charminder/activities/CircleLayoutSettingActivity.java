@@ -48,6 +48,7 @@ public class CircleLayoutSettingActivity extends ActivityBase implements OnDragL
 		mUnusedSection.setOnDragListener(this);
 		final GestureDetector unusedGestureDetector = new GestureDetector(this, new UnusedGestureListener());
 		mUnusedSection.setOnTouchListener(new OnTouchListener(){
+			@Override
 			public boolean onTouch(View v, MotionEvent event) {
                 return unusedGestureDetector.onTouchEvent(event);
             }
@@ -296,7 +297,7 @@ public class CircleLayoutSettingActivity extends ActivityBase implements OnDragL
 						int j = (int) - (mouseAngle / (2 * Math.PI / G.settings.mCircleSection.length)) + 1;
 						if (j >= G.settings.mCircleSection.length)
 							j = 0;
-						byte b = (byte)G.settings.mCircleSection[item];
+						byte b = G.settings.mCircleSection[item];
 						G.settings.deleteCircleItem(item);
 		    			G.settings.addCircleItem(b, j);
 		    			updateCircleItems();

@@ -32,7 +32,7 @@ public class FiveStars extends LinearLayout {
 	
 	private void initialize(Context context) {
 		setOrientation(HORIZONTAL);
-		LayoutParams layout = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams layout = new LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		layout.gravity = Gravity.CENTER_VERTICAL;
 		setLayoutParams(layout);
 		mStars = new ImageView[5];

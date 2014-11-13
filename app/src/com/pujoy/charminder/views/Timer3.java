@@ -76,6 +76,23 @@ public class Timer3 extends WindowTimerDialog implements OnClickListener {
 
 		addToMainView(mTitleIcon);
 	}
+	
+	@Override
+	protected void onDestroy() {
+		for (int i = 0; i < mDigits.length; i++) {
+			removeFromMainView(mDigits[i]);
+			mDigits[i] = null;
+		}
+		mDigits = null;
+		mTitleIcon.setImageBitmap(null);
+		removeFromMainView(mTitleIcon);
+		mTitleIcon = null;
+		removeFromMainView(mHour);
+		mHour = null;
+		removeFromMainView(mMinute);
+		mMinute = null;
+		super.onDestroy();
+	}
 
 	@Override
 	protected void onCreate() {
@@ -145,6 +162,7 @@ public class Timer3 extends WindowTimerDialog implements OnClickListener {
 
 	}
 
+	@Override
 	public void onClick(View v) {
 
 		for (int i = 0; i < 2; i++) {
@@ -158,6 +176,7 @@ public class Timer3 extends WindowTimerDialog implements OnClickListener {
 
 	@Override
 	protected void onUpdateLayout() {
+		super.onUpdateLayout();
 		mLayoutParams.setWidth((int) dpToPx(256));
 		mLayoutParams.setHeight((int) dpToPx(320));
 		mLayoutParams.x = (getScreenWidth() - mLayoutParams.getWidth()) / 2;
@@ -199,6 +218,7 @@ public class Timer3 extends WindowTimerDialog implements OnClickListener {
 		UpdateCurrentDigit();
 	}
 
+	@Override
 	protected void addReminder(boolean pushBubble) {
 		Reminder newReminder = new Reminder(3);
 		newReminder.mTimeToRemind = Calendar.getInstance();

@@ -29,7 +29,7 @@ OnClickListener {
 		if(G.reminders.size() > 0){
 			imageEmpty.setVisibility(View.GONE);
 			textEmpty.setVisibility(View.GONE);
-			View foot = (View)context.findViewById(R.id.reminder_foot);
+			View foot = context.findViewById(R.id.reminder_foot);
 			aReminderItem = new ReminderItem[G.reminders.size()];
 			LinearLayout mainView = (LinearLayout)context.findViewById(R.id.acvitity_main_view);
 			for(int i = 0; i < G.reminders.size(); i++){
@@ -49,6 +49,9 @@ OnClickListener {
 	}
 	
 	public static void updateTime() {
+		if(aReminderItem == null){
+			return;
+		}
 		if(G.reminders.size() != aReminderItem.length){
 			update((Activity) G.context);
 			return;

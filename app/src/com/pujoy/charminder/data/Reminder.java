@@ -4,19 +4,15 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import com.pujoy.charminder.R;
-import com.pujoy.charminder.activities.ReminderListActivity;
 import com.pujoy.charminder.activities.WakeUpScreen;
+import com.pujoy.charminder.helper.NotificationController;
 import com.pujoy.charminder.other.G;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.media.RingtoneManager;
 import android.os.PowerManager;
 import android.os.Vibrator;
-import android.support.v4.app.NotificationCompat;
 
 public class Reminder {
 	public int iType;//Reminder Type starting from 1
@@ -54,22 +50,7 @@ public class Reminder {
 			G.mCharmy.pushBubble(formatNotificationText(this));
 		}
 		if(G.settings.mPrioritySetting[iPriority - 1].bNotification){
-			NotificationManager notificationManager = (NotificationManager) 
-					  G.context.getSystemService(Context.NOTIFICATION_SERVICE); 
-			TypedArray drawable = G.context.getResources().obtainTypedArray(
-					R.array.reminder_list_icons);
-			String[] names = G.context.getResources().getStringArray(
-					R.array.main_menu_names);
-			Intent intent = new Intent(G.context, ReminderListActivity.class);
-			PendingIntent pIntent = PendingIntent.getActivity(G.context, 0, intent, 0);
-			NotificationCompat.Builder mBuilder =
-				    new NotificationCompat.Builder(G.context)
-				    .setSmallIcon(drawable.getResourceId(iType - 1, -1))
-			        .setContentIntent(pIntent)
-			        .setContentTitle(names[iType - 1])
-			        .setContentText(formatNotificationText(this));
-			notificationManager.notify(1, mBuilder.build()); 
-			drawable.recycle();
+			NotificationController.pushReminder(this);
 		}
 		switch(iRepeat){
 		case 0:// Never

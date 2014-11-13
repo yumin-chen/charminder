@@ -165,7 +165,8 @@ public class ReminderEditorActivity extends ActivityBase implements OnClickListe
         .setTitle(R.string.edit_repeat_picker_prompt)
         .setSingleChoiceItems( new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, 
         		repeat), iRepeat, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
+            @Override
+			public void onClick(DialogInterface dialog, int which) {
                 (((EditText) findViewById(R.id.edit_repeat))).setText(repeat[which]);
                 iRepeat = which;
                 dialog.cancel();
@@ -201,6 +202,7 @@ public class ReminderEditorActivity extends ActivityBase implements OnClickListe
 	}
 
 	
+	@Override
 	public void onStop () {
 		super.onStop();
 		if(mOnCancelLisntener != null){

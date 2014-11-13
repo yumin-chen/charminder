@@ -79,6 +79,24 @@ public class Timer1 extends WindowTimerDialog implements OnClickListener {
 
 		addToMainView(mTitleIcon);
 	}
+	
+	@Override
+	
+	protected void onDestroy() {
+		for (int i = 0; i < mDigits.length; i++) {
+			removeFromMainView(mDigits[i]);
+			mDigits[i] = null;
+		}
+		mDigits = null; 
+		removeFromMainView(mHour);
+		mHour = null;
+		removeFromMainView(mMinute);
+		mMinute = null;
+		removeFromMainView(mTitleIcon);
+		mTitleIcon.setImageBitmap(null);
+		mTitleIcon = null;
+		super.onDestroy();
+	}
 
 	@Override
 	protected void onCreate() {
@@ -148,6 +166,7 @@ public class Timer1 extends WindowTimerDialog implements OnClickListener {
 
 	}
 
+	@Override
 	public void onClick(View v) {
 
 		for (int i = 0; i < 4; i++) {
@@ -161,6 +180,7 @@ public class Timer1 extends WindowTimerDialog implements OnClickListener {
 
 	@Override
 	protected void onUpdateLayout() {
+		super.onUpdateLayout();
 		mLayoutParams.setWidth((int) dpToPx(256));
 		mLayoutParams.setHeight((int) dpToPx(320));
 		mLayoutParams.x = (getScreenWidth() - mLayoutParams.getWidth()) / 2;
@@ -180,6 +200,7 @@ public class Timer1 extends WindowTimerDialog implements OnClickListener {
 		}
 	}
 	
+	@Override
 	protected void addReminder(boolean pushBubble){
 		Reminder newReminder = new Reminder(1);
 		newReminder.mTimeToRemind.add(Calendar.HOUR, 

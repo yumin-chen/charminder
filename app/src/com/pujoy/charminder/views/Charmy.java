@@ -36,7 +36,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 	protected void onInitialize() {
 		mLayoutParams.setWidth((int) dpToPx(48));
 		mLayoutParams.setHeight((int) dpToPx(48));
-		mLayoutParams.setX((int) (getScreenWidth() - mLayoutParams.getWidth()));
+		mLayoutParams.setX(getScreenWidth() - mLayoutParams.getWidth());
 		mLayoutParams.setY((int) (getScreenHeight() * 0.75 - mLayoutParams
 				.getHeight()));
 		mMainView = new RelativeLayout(G.context);
@@ -53,6 +53,14 @@ public class Charmy extends WindowBase implements OnTouchListener,
 		mIconCenter.setOnTouchListener(this);
 		mMainView.addView(mIconCenter);
 		mBubble = new Bubble();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		mMainView = null;
+		mIcon = null;
+		mIconCenter = null;
+		mBubble = null;
 	}
 
 	@Override
@@ -80,15 +88,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 
 			@Override
 			public void onAnimationEnd(Animator animation) {
-				removeView(mMainView);
-				if (mMainCircle != null) {
-					mMainCircle.remove();
-					mMainCircle = null;
-				}
-				if (mBubble.isCreated()) {
-					mBubble.remove();
-				}
-				bCreated = false;
+				onRemove();
 			}
 
 			@Override
@@ -98,15 +98,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 
 			@Override
 			public void onAnimationCancel(Animator animation) {
-				removeView(mMainView);
-				if (mMainCircle != null) {
-					mMainCircle.remove();
-					mMainCircle = null;
-				}
-				if (mBubble.isCreated()) {
-					mBubble.remove();
-				}
-				bCreated = false;
+				onRemove();
 			}
 		});
 		aRotation.start();
@@ -115,10 +107,21 @@ public class Charmy extends WindowBase implements OnTouchListener,
 
 	@Override
 	protected void onRemove() {
+		removeView(mMainView);
+		if (mMainCircle != null) {
+			mMainCircle.remove();
+			mMainCircle = null;
+		}
+		if (mBubble.isCreated()) {
+			mBubble.remove();
+		}
+		bCreated = false;
+		super.onDestroy();
 	}
 
 	@Override
 	protected void onUpdateLayout() {
+		super.onUpdateLayout();
 		mBubble.iIconPositionX = mLayoutParams.getX();
 		mBubble.iIconPositionY = mLayoutParams.getY();
 		mBubble.onUpdateLayout();
@@ -190,7 +193,6 @@ public class Charmy extends WindowBase implements OnTouchListener,
 			}
 			break;
 		case MotionEvent.ACTION_UP:
-			mMainCircle.remove();
 			G.mTimerThread.moveIconToCorner();
 			for (int i = 0; i < mMainCircle.mCircleItems.length; i++) {
 				if (mMainCircle.isPointInsideItem(event.getRawX(),
@@ -231,6 +233,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 					break;
 				}
 			}
+			mMainCircle.remove();
 			mMainCircle = null;
 			break;
 		}

@@ -20,18 +20,19 @@ import android.widget.TextView;
 
 public class Timer2 extends WindowTimerDialog implements OnClickListener {
 
-	static ImageView mTitleIcon;
-	static TextView mAmPm;
-	static TextView[] mDigits;
-	static TextView mHour;
-	static TextView mMinute;
-	static TextView mYear;
-	static TextView mMonth;
-	static TextView mDay;
-	static TextView mTwoZeroOne;
+	private ImageView mTitleIcon;
+	private TextView mAmPm;
+	private TextView[] mDigits;
+	private TextView mHour;
+	private TextView mMinute;
+	private TextView mYear;
+	private TextView mMonth;
+	private TextView mDay;
+	private TextView mTwoZeroOne;
 
 	static int currentDigit;
 
+	@Override
 	protected void onInitialize() {
 		super.onInitialize(true);
 		mDigits = new TextView[9];
@@ -178,7 +179,33 @@ public class Timer2 extends WindowTimerDialog implements OnClickListener {
 				(int) dpToPx(32)));
 		mTitleIcon.setX(mLayoutParams.getWidth() / 2 - dpToPx(32) / 2);
 		addToMainView(mTitleIcon);
-
+	}
+	
+	@Override
+	protected void onDestroy() {
+		for (int i = 0; i < mDigits.length; i++) {
+			removeFromMainView(mDigits[i]);
+			mDigits[i] = null;
+		}
+		mDigits = null;
+		mTitleIcon.setImageBitmap(null);
+		removeFromMainView(mTitleIcon);
+		mTitleIcon = null;
+		removeFromMainView(mAmPm);
+		mAmPm = null;
+		removeFromMainView(mHour);
+		mHour = null;
+		removeFromMainView(mMinute);
+		mMinute = null;
+		removeFromMainView(mYear);
+		mYear = null;
+		removeFromMainView(mMonth);
+		mMonth = null;
+		removeFromMainView(mDay);
+		mDay = null;
+		removeFromMainView(mTwoZeroOne);
+		mTwoZeroOne = null;
+		super.onDestroy();
 	}
 
 	@Override
@@ -328,6 +355,7 @@ public class Timer2 extends WindowTimerDialog implements OnClickListener {
 
 	}
 
+	@Override
 	public void onClick(View v) {
 		for (int i = 0; i < 9; i++) {
 			if (v == mDigits[i]) {
@@ -339,6 +367,7 @@ public class Timer2 extends WindowTimerDialog implements OnClickListener {
 
 	@Override
 	protected void onUpdateLayout() {
+		super.onUpdateLayout();
 		mLayoutParams.setWidth((int) dpToPx(256));
 		mLayoutParams.setHeight((int) dpToPx(320));
 		mLayoutParams.x = (getScreenWidth() - mLayoutParams.getWidth()) / 2;
@@ -457,6 +486,7 @@ public class Timer2 extends WindowTimerDialog implements OnClickListener {
 
 	}
 
+	@Override
 	protected void addReminder(boolean pushBubble) {
 		Reminder newReminder = new Reminder(2);
 		newReminder.mTimeToRemind.add(Calendar.YEAR, Integer.valueOf((String) mDigits[8].getText()) 

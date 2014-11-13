@@ -64,6 +64,19 @@ public class MainCircle extends WindowBase {
 		drawble.recycle();
 
 	}
+	
+	@Override
+	protected void onDestroy() {
+		mMainView = null;
+		mBackground = null;
+		mCircleDescription = null;
+		for (int i = 0; i < mCircleItems.length; i++) {
+			mCircleItems[i].setImageBitmap(null);
+			mCircleItems[i] = null;
+		}
+		mCircleItems = null;
+		super.onDestroy();
+	}
 
 	@Override
 	protected void onCreate() {
@@ -124,6 +137,7 @@ public class MainCircle extends WindowBase {
 
 	@Override
 	protected void onUpdateLayout() {
+		super.onUpdateLayout();
 		mLayoutParams.setWidth((int) dpToPx(240));
 		mLayoutParams.setHeight((int) dpToPx(240));
 		mLayoutParams.setX((getScreenWidth() - mLayoutParams.getWidth()) / 2);

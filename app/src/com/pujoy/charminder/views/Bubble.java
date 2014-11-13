@@ -19,10 +19,11 @@ import android.widget.TextView;
 public class Bubble extends WindowBase implements OnClickListener {
 	ImageView mMainView;
 	TextView mTextView;
-	Bitmap[] mBubbleBitmap;
 	public int iTimer;
 	public int iIconPositionX;
 	public int iIconPositionY;
+	private int iCachedIndex;
+	private Bitmap mCachedBitmap;
 	private WindowLayoutParams mTextLayoutParams;
 
 	@Override
@@ -34,22 +35,46 @@ public class Bubble extends WindowBase implements OnClickListener {
 		mTextView.setGravity(Gravity.CENTER);
 		mTextView.setOnClickListener(this);
 		mTextLayoutParams = new WindowLayoutParams();
-		mBubbleBitmap = new Bitmap[4];
-		mBubbleBitmap[0] = BitmapFactory.decodeResource(G.context.getResources(),
+	}
+	
+	private Bitmap initializeBubbleBitmap(int index){
+		Bitmap b = BitmapFactory.decodeResource(G.context.getResources(),
 				R.drawable.bubble);
 		Matrix matrix = new Matrix();
-		matrix.preScale(-1, 1);
-		mBubbleBitmap[1] = Bitmap.createBitmap(mBubbleBitmap[0], 0, 0, mBubbleBitmap[0].getWidth(),
-				mBubbleBitmap[0].getHeight(), matrix, true);
-		matrix.preScale(-1, -1);
-		mBubbleBitmap[2] = Bitmap.createBitmap(mBubbleBitmap[0], 0, 0, mBubbleBitmap[0].getWidth(),
-				mBubbleBitmap[0].getHeight(), matrix, true);
-		matrix.preScale(-1, 1);
-		mBubbleBitmap[3] = Bitmap.createBitmap(mBubbleBitmap[0], 0, 0, mBubbleBitmap[0].getWidth(),
-				mBubbleBitmap[0].getHeight(), matrix, true);
+		switch (index){
+		case 0:
+			return b;
+		case 1:
+			matrix.preScale(-1, 1);
+			return Bitmap.createBitmap(b, 0, 0, b.getWidth(),
+					b.getHeight(), matrix, true);
+		case 2:
+			matrix.preScale(1, -1);
+			return Bitmap.createBitmap(b, 0, 0, b.getWidth(),
+					b.getHeight(), matrix, true);
+		case 3:
+			matrix.preScale(-1, -1);
+			return Bitmap.createBitmap(b, 0, 0, b.getWidth(),
+					b.getHeight(), matrix, true);
+		}
+		return null;
 	}
+	
+	@Override
+	protected void onDestroy() {
+		mTextLayoutParams = null;
+		mMainView.setImageBitmap(null);
+		mMainView = null;
+		mTextView = null;
+		mCachedBitmap.recycle();
+		mCachedBitmap = null;
+		iCachedIndex = 0;
+		super.onDestroy();
+	}
+	
 
 	public void setText(String text) {
+		checkInitialization();
 		float fSize = (float) (22 - G.getLanguage() * 2 - (Math.sqrt(text
 				.length()) / (1.4 - G.getLanguage() * 0.2)));
 		mTextView
@@ -75,6 +100,7 @@ public class Bubble extends WindowBase implements OnClickListener {
 
 	@Override
 	protected void onUpdateLayout() {
+		super.onUpdateLayout();
 		mLayoutParams.setWidth((int) dpToPx(280));
 		mLayoutParams.setHeight((int) dpToPx(148.75f));
 		int bitmapIndex = 0;
@@ -91,8 +117,15 @@ public class Bubble extends WindowBase implements OnClickListener {
 			mLayoutParams.setY(iIconPositionY + (int) dpToPx(48));
 			bitmapIndex +=2;
 		}
-
-		mMainView.setImageBitmap(mBubbleBitmap[bitmapIndex]);
+		
+		// If cache hits
+		if(iCachedIndex == bitmapIndex + 1){
+			mMainView.setImageBitmap(mCachedBitmap);
+		}else{ // If cache misses
+			iCachedIndex = bitmapIndex + 1;
+			mCachedBitmap = initializeBubbleBitmap(bitmapIndex);
+			mMainView.setImageBitmap(mCachedBitmap);
+		}
 
 		mTextLayoutParams.setWidth(mLayoutParams.getWidth() - (int) dpToPx(35));
 		mTextLayoutParams.setHeight(mLayoutParams.getHeight()

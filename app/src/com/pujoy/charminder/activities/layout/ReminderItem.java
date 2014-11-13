@@ -79,7 +79,7 @@ public class ReminderItem extends RelativeLayout {
 	
 	public void update() {
 		if(iIndex == 0){
-			removeView((View) findViewById(R.id.reminder_item_divider));
+			removeView(findViewById(R.id.reminder_item_divider));
 		}
 		TypedArray drawable = getResources().obtainTypedArray(
 				R.array.reminder_list_icons);

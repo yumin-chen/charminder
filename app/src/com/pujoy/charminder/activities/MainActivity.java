@@ -5,24 +5,22 @@ import com.pujoy.charminder.base.ActivityBase;
 import com.pujoy.charminder.data.ReminderList;
 import com.pujoy.charminder.data.Settings;
 import com.pujoy.charminder.other.G;
-import com.pujoy.charminder.other.TimerThread;
+import com.pujoy.charminder.other.Log;
+import com.pujoy.charminder.other.MainService;
 import com.pujoy.charminder.views.Charmy;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 public class MainActivity extends ActivityBase {
 	static boolean bInitialized;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		finish();
 		G.settings = new Settings();
 		G.reminders = new ReminderList();
-
-		if (G.mTimerThread == null)
-			G.mTimerThread = new TimerThread();
-
+		
 		if (bInitialized) {
 			if (G.mCharmy != null) {
 				if (!G.mCharmy.isCreated())
@@ -41,7 +39,13 @@ public class MainActivity extends ActivityBase {
 				R.string.b_welcome_greeting,
 				getResources().getString(R.string.floating_icon_name)).concat(
 				getResources().getString(R.string.b_user_guide)));
+		
+		if(startService(new Intent(this, MainService.class)) == null)
+		{
+			Log.w("Failed to create service");
+		}
 		bInitialized = true;
+		finish();
 	}
 
 }

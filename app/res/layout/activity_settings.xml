@@ -20,8 +20,19 @@
 
     <com.pujoy.charminder.activities.layout.LightListItem
         xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
-        android:id="@+id/setting_autodelete_layout"
+        android:id="@+id/setting_forenoti_layout"
         style="@style/Charminder.LightListViewItem.Top"
+        listitem:text="@string/setting_forenoti" >
+
+        <include
+            android:id="@+id/setting_forenoti_switch"
+            layout="@layout/item_switch" />
+    </com.pujoy.charminder.activities.layout.LightListItem>
+    
+    <com.pujoy.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.pujoy.charminder"
+        android:id="@+id/setting_autodelete_layout"
+        style="@style/Charminder.LightListViewItem.Middle"
         listitem:text="@string/setting_autodelete" >
 
         <include

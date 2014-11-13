@@ -78,13 +78,13 @@ public abstract class WindowTimerDialog extends WindowDialogWithStars {
 							: (int) ((mLayoutParams.getHeight()
 									- mLayoutParams.getWidth() + mLayoutParams
 									.getWidth() * CENTER_PROPORTION) / 4 + 2)));
-			mNumKeys[i].setX((float) (int) (mLayoutParams.getWidth()
+			mNumKeys[i].setX((int) (mLayoutParams.getWidth()
 					* BORDER_SCALE
 					+ (mLayoutParams.getWidth() * NON_BORDER_SCALE / 3)
 					* (i % 3) - 1));
 			if (bFullUpperCircle) {
 				mNumKeys[i]
-						.setY((float) (int) (mLayoutParams.getWidth()
+						.setY((int) (mLayoutParams.getWidth()
 								/ 2
 								+ (mLayoutParams.getHeight()
 										- mLayoutParams.getWidth() + mLayoutParams
@@ -92,7 +92,7 @@ public abstract class WindowTimerDialog extends WindowDialogWithStars {
 								/ 4 * Math.floor(i / 3) - 1));
 			} else {
 				mNumKeys[i]
-						.setY((float) (int) (mLayoutParams.getWidth()
+						.setY((int) (mLayoutParams.getWidth()
 								/ 2
 								- mLayoutParams.getWidth()
 								* CENTER_PROPORTION
@@ -138,13 +138,13 @@ public abstract class WindowTimerDialog extends WindowDialogWithStars {
 				+ (mLayoutParams.getWidth() * NON_BORDER_SCALE / 3) / 2
 				- height / 2);
 		if (bFullUpperCircle) {
-			mAddNote.setY((float) (int) (mLayoutParams.getWidth()
+			mAddNote.setY((int) (mLayoutParams.getWidth()
 					/ 2
 					+ (mLayoutParams.getHeight() - mLayoutParams.getWidth() + mLayoutParams
 							.getWidth() / 2 * CENTER_PROPORTION) / 4
 					* Math.floor(11 / 3) - 1));
 		} else {
-			mAddNote.setY((float) (int) (mLayoutParams.getWidth()
+			mAddNote.setY((int) (mLayoutParams.getWidth()
 					/ 2
 					- mLayoutParams.getWidth()
 					* CENTER_PROPORTION
@@ -169,6 +169,24 @@ public abstract class WindowTimerDialog extends WindowDialogWithStars {
 	@Override
 	protected void onInitialize() {
 		onInitialize(false);
+	}
+	
+	@Override
+	protected void onUpdateLayout(){
+		super.onUpdateLayout();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		for (int i = 0; i < mNumKeys.length; i ++){
+			removeFromMainView(mNumKeys[i]);
+			mNumKeys[i] = null;
+		}
+		mNumKeys = null;
+		mAddNote.setImageBitmap(null);
+		removeFromMainView(mAddNote);
+		mAddNote = null;
+		super.onDestroy();
 	}
 
 }

@@ -2,8 +2,11 @@ package com.pujoy.charminder.activities;
 
 import com.pujoy.charminder.R;
 import com.pujoy.charminder.base.ActivityBase;
+import com.pujoy.charminder.helper.NotificationController;
 import com.pujoy.charminder.other.G;
+import com.pujoy.charminder.other.MainService;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,13 +31,48 @@ public class SettingsActivity extends ActivityBase implements OnClickListener {
 			ImageView ivAutoDelete = (ImageView) findViewById(R.id.setting_autodelete_switch);
 			ivAutoDelete.setImageResource(R.drawable.switch_1);
 		}
+		if (G.settings.bPersistentNotification) {
+			ImageView ivForeNoti = (ImageView) findViewById(R.id.setting_forenoti_switch);
+			ivForeNoti.setImageResource(R.drawable.switch_1);
+		}
 
 	}
 
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.setting_circle_interface_layout:
 			startActivity(new Intent(this, CircleLayoutSettingActivity.class));
+			break;
+		case R.id.setting_forenoti_layout:
+			if (G.settings.bPersistentNotification) {
+				AlertDialog.Builder diaglog = new AlertDialog.Builder(v.getContext());
+				diaglog.setTitle(R.string.settings_turn_off_notification_title);
+			    diaglog.setMessage(R.string.settings_turn_off_notification_content);
+			    diaglog.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+			        @Override
+					public void onClick(DialogInterface dialog, int which) { 
+						G.settings.bPersistentNotification = false;
+						MainService.mInstance.stopForeground(true);
+						ImageView ivForeNoti = (ImageView) findViewById(R.id.setting_forenoti_switch);
+						ivForeNoti.setImageResource(R.drawable.switch_0);
+			        }
+			     });
+				diaglog.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+			        @Override
+					public void onClick(DialogInterface dialog, int which) { 
+			            // do nothing
+			        }
+			     });
+			    diaglog.show();
+			} else {
+	        	G.settings.bPersistentNotification = true;
+				MainService.mInstance.startForeground(NotificationController.ID,
+						NotificationController.getDefaultNotification());
+				ImageView ivForeNoti = (ImageView) findViewById(R.id.setting_forenoti_switch);
+				ivForeNoti.setImageResource(R.drawable.switch_1);
+			}
+			G.settings.save();
 			break;
 		case R.id.setting_autodelete_layout:
 			if (G.settings.bAutoDeleteExpiredReminder) {
@@ -58,6 +96,7 @@ public class SettingsActivity extends ActivityBase implements OnClickListener {
 			picker.setValue(G.settings.iBubbleTimeOut);
 			alert.setPositiveButton(getString(R.string.ok),
 					new DialogInterface.OnClickListener() {
+						@Override
 						public void onClick(DialogInterface dialog,
 								int whichButton) {
 							G.settings.iBubbleTimeOut = picker.getValue();
@@ -70,6 +109,7 @@ public class SettingsActivity extends ActivityBase implements OnClickListener {
 
 			alert.setNegativeButton(getString(R.string.cancel),
 					new DialogInterface.OnClickListener() {
+						@Override
 						public void onClick(DialogInterface dialog,
 								int whichButton) {
 							// Cancel.

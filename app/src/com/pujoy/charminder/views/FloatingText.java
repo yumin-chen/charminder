@@ -43,6 +43,13 @@ public class FloatingText extends WindowBase {
 		mMainView.addView(mTextView);
 		mMainView.setGravity(Gravity.CENTER);
 	}
+	
+	@Override
+	protected void onDestroy() {
+		mMainView = null;
+		mTextView = null;
+		super.onDestroy();
+	}
 
 	@Override
 	protected void onCreate() {
@@ -56,6 +63,7 @@ public class FloatingText extends WindowBase {
 
 	@Override
 	protected void onUpdateLayout() {
+		super.onUpdateLayout();
 		mLayoutParams.setWidth((int) dpToPx(240));
 		mLayoutParams.setHeight(LayoutParams.WRAP_CONTENT);
 		mLayoutParams.setX((getScreenWidth() - mLayoutParams.getWidth()) / 2);
@@ -65,6 +73,7 @@ public class FloatingText extends WindowBase {
 	}
 
 	public void setText(CharSequence text) {
+		checkInitialization();
 		mTextView.setText(text);
 	}
 

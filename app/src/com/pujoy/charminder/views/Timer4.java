@@ -50,6 +50,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 	private String sSpeechInput;
 	private int iOldErrorInfo;
 
+	@Override
 	protected void onInitialize() {
 		super.onInitialize();
 		mTitleIcon = new ImageView(G.context);
@@ -267,7 +268,50 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 				.getApplicationContext());
 		mSpeechRecognizer.setRecognitionListener(new speechListener());
 	}
+	
+	@Override
+	protected void onDestroy() {
+		mTitleIcon.setImageBitmap(null);
+		removeFromMainView(mTitleIcon);
+		mTitleIcon = null;
+		mMicIcon.setImageBitmap(null);
+		removeFromMainView(mMicIcon);
+		mMicIcon = null;
+		mMicBackground.setImageBitmap(null);
+		removeFromMainView(mMicBackground);
+		mMicBackground = null;
+		mTimeIcon.setImageBitmap(null);
+		removeFromMainView(mTimeIcon);
+		mTimeIcon = null;
+		mContentIcon.setImageBitmap(null);
+		removeFromMainView(mContentIcon);
+		mContentIcon = null;
+		mEditIcon.setImageBitmap(null);
+		removeFromMainView(mEditIcon);
+		mEditIcon = null;
+		mRerecordIcon.setImageBitmap(null);
+		removeFromMainView(mRerecordIcon);
+		mRerecordIcon = null;
+		removeFromMainView(mTitle);
+		mTitle = null;
+		removeFromMainView(mVolume);
+		mVolume = null;
+		removeFromMainView(mSpeechPrompt);
+		mSpeechPrompt = null;
+		removeFromMainView(mTimeText);
+		mTimeText = null;
+		removeFromMainView(mSpeechContent);
+		mSpeechContent = null;
+		removeFromMainView(mEditText);
+		mEditText = null;
+		removeFromMainView(mRerecordText);
+		mRerecordText = null;
+		mSpeechRecognizer = null;
+		mParseResult = null;
+		super.onDestroy();
+	}
 
+	@Override
 	protected void onCreate() {
 		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(mTitleIcon, "y",
 				mLayoutParams.getHeight() / 2 - mLayoutParams.getWidth() / 2
@@ -333,14 +377,17 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 	}
 
 	class speechListener implements RecognitionListener {
+		@Override
 		public void onReadyForSpeech(Bundle params) {
 			onStartOfSpeechRecognizing();
 		}
 
+		@Override
 		public void onBeginningOfSpeech() {
 			onStartOfSpeechRecognizing();
 		}
 
+		@Override
 		public void onRmsChanged(float rmsdB) {
 			if (rmsdB > 10)
 				rmsdB = 10;
@@ -350,15 +397,18 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 			mVolume.setScaleY((10 - rmsdB) / 10);
 		}
 
+		@Override
 		public void onBufferReceived(byte[] buffer) {
 			// According to the web, this is never called on JellyBean and above
 			// So I won't bother to save the audio buffer
 		}
 
+		@Override
 		public void onEndOfSpeech() {
 			onEndOfSpeechRecognizing();
 		}
 
+		@Override
 		public void onError(int error) {
 			onEndOfSpeechRecognizing();
 			String errorInfo = null;
@@ -403,6 +453,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 			iOldErrorInfo = error;
 		}
 
+		@Override
 		public void onResults(Bundle results) {
 			onEndOfSpeechRecognizing();
 			ArrayList<String> data = results
@@ -419,14 +470,17 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 			}
 		}
 
+		@Override
 		public void onPartialResults(Bundle partialResults) {
 			// Didn't make it support partial results so ignore this.
 		}
 
+		@Override
 		public void onEvent(int eventType, Bundle params) {
 		}
 	}
 
+	@Override
 	protected void onRemove() {
 		mSpeechRecognizer.stopListening();
 		
@@ -465,6 +519,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 
 	@Override
 	protected void onUpdateLayout() {
+		super.onUpdateLayout();
 		mLayoutParams.setWidth((int) dpToPx(256));
 		mLayoutParams.setHeight((int) dpToPx(320));
 		mLayoutParams.x = (getScreenWidth() - mLayoutParams.getWidth()) / 2;
@@ -481,6 +536,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 		addReminder(true);
 	}
 	
+	@Override
 	protected void addReminder(boolean pushBubble) {
 		Reminder newReminder = new Reminder(4);
 		newReminder.mTimeToRemind = mParseResult.mCalendar;

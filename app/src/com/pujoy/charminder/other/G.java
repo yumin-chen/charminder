@@ -50,8 +50,7 @@ public class G{
 							mCharmy.pushBubble(G.context.getResources()
 									.getString(R.string.b_exit_completely));
 						}
-						mTimerThread.destroy();
-						mTimerThread = null;
+						context.stopService(new Intent(context, MainService.class));
 					}
 				});
 		dialog.setOkText(G.context.getResources().getString(R.string.yes));

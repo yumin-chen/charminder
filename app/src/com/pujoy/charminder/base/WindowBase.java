@@ -13,8 +13,14 @@ public abstract class WindowBase extends ViewBase {
 	protected abstract void onCreate();
 
 	protected abstract void onRemove();
+	
+	protected void onDestroy(){
+		System.gc();
+	}
 
-	protected abstract void onUpdateLayout();
+	protected void onUpdateLayout(){
+		checkInitialization();
+	}
 
 	public WindowBase() {
 		if (bInitialized) {
@@ -22,14 +28,13 @@ public abstract class WindowBase extends ViewBase {
 		}
 		if (mLayoutParams == null)
 			mLayoutParams = new WindowLayoutParams();
-		onInitialize();
-		bInitialized = true;
 	}
 
 	public void create() {
 		if (bCreated) {
-			remove();
+			onRemove();
 		}
+		checkInitialization();
 		onUpdateLayout();
 		onCreate();
 		bCreated = true;
@@ -41,6 +46,10 @@ public abstract class WindowBase extends ViewBase {
 		}
 		onRemove();
 		bCreated = false;
+		if (bInitialized){
+			onDestroy();
+			bInitialized = false;
+		}
 	}
 
 	protected void addView(android.view.View view, WindowLayoutParams params) {
@@ -70,9 +79,17 @@ public abstract class WindowBase extends ViewBase {
 		mWindowManager.removeView(view);
 		bViewAdded = false;
 	}
+	
+	protected void checkInitialization(){
+		if (!bInitialized){
+			bInitialized = true;
+			onInitialize();
+		}
+	}
 
 	protected void updateViewLayout(android.view.View view,
 			WindowLayoutParams params) {
+		checkInitialization();
 		if (!bCreated) {
 			return;
 		}
