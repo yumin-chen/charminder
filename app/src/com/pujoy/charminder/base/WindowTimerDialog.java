@@ -61,7 +61,8 @@ public abstract class WindowTimerDialog extends WindowDialogWithStars {
 					break;
 				case MotionEvent.ACTION_UP:
 					v.setBackgroundColor(C.COLOR_TRANSPARENT);
-					break;
+					v.performClick();
+					return true;
 				}
 				return false;
 			}

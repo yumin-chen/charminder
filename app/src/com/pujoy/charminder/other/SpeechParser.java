@@ -39,7 +39,7 @@ public class SpeechParser {
 				parseResult[i] = parseChinese(mSpeechText.get(i));
 				break;
 			case 1:
-				parseResult[i] = parseChinese(mSpeechText.get(i));
+				parseResult[i] = parseEnglish(mSpeechText.get(i));
 				break;
 			}
 		}
@@ -363,9 +363,10 @@ public class SpeechParser {
 		return r;
 	}
 
-	private void parseEnglish(String speechText) {
+	private ParseResult parseEnglish(String speechText) {
+		ParseResult r = new ParseResult();
 		Calendar cal = Calendar.getInstance();
-
+		return r;
 	}
 
 }

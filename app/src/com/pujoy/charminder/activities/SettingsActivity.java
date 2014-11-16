@@ -6,7 +6,6 @@ import com.pujoy.charminder.helper.NotificationController;
 import com.pujoy.charminder.other.G;
 import com.pujoy.charminder.other.MainService;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -145,6 +144,7 @@ public class SettingsActivity extends ActivityBase implements OnClickListener {
 			startActivity(new Intent(this, PrioritySettingActivity.class));
 			break;
 		case R.id.setting_about_layout:
+			G.goToActivity(AboutActivity.class);
 			break;
 		case R.id.setting_exit_layout:
 			G.exit();

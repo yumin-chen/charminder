@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">风吹吹醒</string>
+    <string name="noti_default">风吹吹醒在后台运行</string>
     <string name="floating_icon_name">小吹</string>
     <string name="b_welcome_greeting">嗨，我叫%1$s！</string>
     <string name="b_user_guide">爱我你就拖拖我吧！</string>
@@ -75,5 +76,21 @@
     <string name="edit_note_prompt">内容</string>
     <string name="edit_time_picker_prompt">请选择时间</string>
     <string name="edit_repeat_picker_prompt">请选择周期</string>
-	
+	<string name="error_no_voice_recognition_service_title">错误</string>
+	<string name="error_no_voice_recognition_service">未找到任何语音识别服务。您需要先安装谷歌语音搜索才能够体验完整的语音识别功能。要去应用商店下载安装吗？</string>
+	<string name="error_no_voice_recognition_service_install">去安装</string>
+    <string name="no_floating_window_activity">显示悬浮窗</string>
+    <string name="no_floating_window_activity_content">由于系统限制，悬浮窗未能正常显示。请先根据此向导给予本程序显示悬浮窗的权限。</string>
+	<string name="no_floating_window_activity_step0">获取显示悬浮窗权限：</string>
+	<string name="no_floating_window_activity_step1">第一步：\n\n 通过 设置-安装应用-风吹吹醒 打开应用信息\n</string>
+    <string name="no_floating_window_activity_button">或直接点此直接打开应用信息</string>
+    <string name="no_floating_window_activity_step2">第二步：\n\n 滑动到最底部的权限，找到权限管理\n</string>
+    <string name="no_floating_window_activity_step3">完成：\n\n 找到 显示悬浮窗 一项，允许该权限即可\n</string>
+    <string name="no_floating_window_activity_finish">已设置权限，不再显示此向导</string>
+	<string name="about_website">访问主页</string>
+	<string name="about_check_for_update">检查更新</string>
+	<string name="about_feedback">建议反馈</string>
+	<string name="about_rate">五星好评</string>
+	<string name="about_copyright">Copyright © 2014 Pujoy.com\n扑游娱乐 版权所有</string>
+	<string name="about_update_already_latest">已是最新版</string>
 </resources>

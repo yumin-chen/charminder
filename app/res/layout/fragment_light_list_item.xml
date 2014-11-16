@@ -3,13 +3,6 @@
 
     <TextView
         android:id="@+id/light_list_item_text"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/light_list_item_height"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="4dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/dark_blue"
-        android:textSize="16sp" />
+        style="@style/Charminder.LightListViewItemText" />
 
 </merge>

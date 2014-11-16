@@ -18,6 +18,7 @@ public class G{
 	public static ReminderList reminders;
 	public static Context context;
 
+	// Return 1 if the current system language is Chinese, 0 if English.
 	public static int getLanguage() {
 		return context.getResources().getString(R.string.floating_icon_name)
 				.equals("Charmy") ? 0 : 1;

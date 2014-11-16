@@ -12,10 +12,13 @@ import com.pujoy.charminder.other.G;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -31,6 +34,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 	private float fX;
 	private float fY;
 	private boolean bBeingRemoved;
+	private boolean bBableValid;
 
 	@Override
 	protected void onInitialize() {
@@ -43,6 +47,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 		mMainView.setOnClickListener(this);
 		mMainView.setOnTouchListener(this);
 		mIcon = new ImageView(G.context);
+		mIcon.setDrawingCacheEnabled(true);
 		mIcon.setImageResource(R.drawable.charmy);
 		mIcon.setOnClickListener(this);
 		mIcon.setOnTouchListener(this);
@@ -53,6 +58,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 		mIconCenter.setOnTouchListener(this);
 		mMainView.addView(mIconCenter);
 		mBubble = new Bubble();
+		
 	}
 	
 	@Override
@@ -144,7 +150,9 @@ public class Charmy extends WindowBase implements OnTouchListener,
 		if (mBubble.isCreated()) {
 			mBubble.remove();
 		}
-		Babble();
+		if(bBableValid){
+			Babble();
+		}
 	}
 
 	@Override
@@ -157,6 +165,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 			if (mBubble.isCreated()) {
 				mBubble.remove();
 			}
+			bBableValid = true;
 			mMainCircle = new MainCircle();
 			mMainCircle.create();
 			fOldMouseX = event.getRawX();
@@ -176,6 +185,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 			for (int i = 0; i < mMainCircle.mCircleItems.length; i++) {
 				if (mMainCircle.isPointInsideItem(event.getRawX(),
 						event.getRawY(), i)) {
+					bBableValid = false;
 					mMainCircle.Hover(i);
 					mMainCircle.mCircleDescription
 							.setBackgroundColor(C.COLOR_DARKBLUE_TRANSLUCENT);
@@ -197,6 +207,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 			for (int i = 0; i < mMainCircle.mCircleItems.length; i++) {
 				if (mMainCircle.isPointInsideItem(event.getRawX(),
 						event.getRawY(), i)) {
+					bBableValid = false;
 					if (i < G.settings.mCircleSection.length)
 						switch (G.settings.mCircleSection[i]) {
 						case 0: {
@@ -235,7 +246,8 @@ public class Charmy extends WindowBase implements OnTouchListener,
 			}
 			mMainCircle.remove();
 			mMainCircle = null;
-			break;
+			v.performClick();
+			return true;
 		}
 		return false;
 	}

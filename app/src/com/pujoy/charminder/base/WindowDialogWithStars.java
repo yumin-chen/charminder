@@ -129,7 +129,12 @@ public abstract class WindowDialogWithStars extends WindowDialog {
 						}
 					}
 					break;
+				case MotionEvent.ACTION_UP:
+				{
+					v.performClick();
+					return true;
 				}
+				}  
 				return false;
 			}
 		};

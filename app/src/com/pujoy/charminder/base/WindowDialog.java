@@ -49,6 +49,11 @@ public abstract class WindowDialog extends WindowBase {
 	@Override
 	public void create() {
 		super.create();
+		if (mMiddleFiller != null){
+			mMiddleFiller.setLayoutParams(new RelativeLayout.LayoutParams(
+					mLayoutParams.getWidth(), mLayoutParams.getHeight()
+							- mLayoutParams.getWidth()));
+		}
 		addView(mMainView, mLayoutParams);
 		ValueAnimator aUpperCicleY = ObjectAnimator
 				.ofFloat(mUpperCircle, "y", mLayoutParams.getHeight() / 2
@@ -158,21 +163,21 @@ public abstract class WindowDialog extends WindowBase {
 		mUpperCircle = new ImageView(G.context);
 		mLowerCircle = new ImageView(G.context);
 		mMiddleFiller = new ImageView(G.context);
-		mMainView.layout(0, 0, mLayoutParams.getWidth(),
-				mLayoutParams.getHeight());
-		mUpperCircle.setLayoutParams(new LayoutParams(mLayoutParams.getWidth(),
-				mLayoutParams.getWidth() / 2));
 		mMiddleFiller.setY(mLayoutParams.getWidth() / 2);
 		mMiddleFiller.setLayoutParams(new LayoutParams(
 				mLayoutParams.getWidth(), mLayoutParams.getHeight()
 						- mLayoutParams.getWidth()));
+		mMiddleFiller.setImageResource(R.drawable.semi_circle_fill);
+		mMiddleFiller.setScaleType(ScaleType.FIT_XY);
+		mMainView.layout(0, 0, mLayoutParams.getWidth(),
+				mLayoutParams.getHeight());
+		mUpperCircle.setLayoutParams(new LayoutParams(mLayoutParams.getWidth(),
+				mLayoutParams.getWidth() / 2));
 		mLowerCircle.setLayoutParams(new LayoutParams(mLayoutParams.getWidth(),
 				mLayoutParams.getWidth() / 2));
 		mUpperCircle
 				.setImageResource(bFullUpperCircle ? R.drawable.semi_circle_full
 						: R.drawable.semi_circle);
-		mMiddleFiller.setImageResource(R.drawable.semi_circle_fill);
-		mMiddleFiller.setScaleType(ScaleType.FIT_XY);
 		mLowerCircle.setImageResource(R.drawable.semi_circle_bottom);
 		mMainView.addView(mMiddleFiller);
 		mMainView.addView(mUpperCircle);
@@ -187,7 +192,8 @@ public abstract class WindowDialog extends WindowBase {
 					break;
 				case MotionEvent.ACTION_UP:
 					v.setBackgroundResource(R.drawable.small_circle);
-					break;
+			        v.performClick();
+					return true;
 				}
 				return false;
 			}

@@ -26,10 +26,22 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/light_list_catagory_margin_left</item>
+        <item name="android:layout_marginRight">@dimen/light_list_catagory_margin_left</item>
         <item name="android:layout_marginTop">4.5dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/dark_blue_l</item>
         <item name="android:textSize">14sp</item>
+    </style>
+    
+    <style name="Charminder.LightListViewItemText" parent="@style/Charminder">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/light_list_item_height</item>
+        <item name="android:layout_marginLeft">@dimen/light_list_catagory_margin_left</item>
+        <item name="android:layout_marginRight">4dp</item>
+        <item name="android:layout_marginTop">4.5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Charminder.LightListViewItem" parent="@style/Charminder">

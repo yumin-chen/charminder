@@ -7,12 +7,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class Settings {
+	// Settings Data
 	public boolean bPersistentNotification;
 	public boolean bAutoDeleteExpiredReminder;
 	public int iBubbleTimeOut;
 	public double dCircleAngle;
 	public PrioritySetting[] mPrioritySetting = new PrioritySetting[C.NUM_CIRCLE_ITEMS];
 	public byte[] mCircleSection;
+	public boolean bSkipFloatingWindowCheck;
+	
 
 	public Settings() {
 		SharedPreferences sp = G.context.getSharedPreferences("Settings",
@@ -23,6 +26,8 @@ public class Settings {
 				"bPersistentNotification", true);
 		bAutoDeleteExpiredReminder = sp.getBoolean(
 				"bAutoDeleteExpiredReminder", false);
+		bSkipFloatingWindowCheck = sp.getBoolean(
+				"bSkipFloatingWindowCheck", false);
 		iBubbleTimeOut = sp.getInt("iBubbleTimeOut", 5);
 		dCircleAngle = Double.longBitsToDouble(sp.getLong("dCircleAngle", 0));
 		mPrioritySetting[0] = new PrioritySetting(sp.getString(
@@ -47,6 +52,8 @@ public class Settings {
 				bPersistentNotification);
 		editor.putBoolean("bAutoDeleteExpiredReminder",
 				bAutoDeleteExpiredReminder);
+		editor.putBoolean("bSkipFloatingWindowCheck",
+				bSkipFloatingWindowCheck);
 		editor.putLong("dCircleAngle", Double.doubleToLongBits(dCircleAngle));
 		editor.putInt("iBubbleTimeOut", iBubbleTimeOut);
 		editor.putString("mPrioritySetting1",

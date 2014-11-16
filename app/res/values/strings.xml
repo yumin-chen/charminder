@@ -78,5 +78,21 @@
     <string name="edit_note_prompt">Note</string>
     <string name="edit_time_picker_prompt">Select a time</string>
     <string name="edit_repeat_picker_prompt">Repetition</string>
-
+	<string name="error_no_voice_recognition_service_title">Error</string>
+	<string name="error_no_voice_recognition_service">No voice recognition service found on your device. You need to have Google Voice Search installed first. Do you want to go to the app store?</string>
+	<string name="error_no_voice_recognition_service_install">Install</string>
+    <string name="no_floating_window_activity">Permission</string>
+    <string name="no_floating_window_activity_content">Due to system restriction, the floating wheel isn\'t shown, which is the main feature of this app. Please grant the permission with the help of this guide so that this app can run properly.</string>
+    <string name="no_floating_window_activity_step0">To grant Floating Window permission:</string>
+    <string name="no_floating_window_activity_step1">Step 1:\n\n Open App Info by going to Settings - Installed apps - Charminder\n</string>
+    <string name="no_floating_window_activity_button">Or click here to open App Info</string>
+    <string name="no_floating_window_activity_step2">Step 2:\n\n Scrool down to the bottom and click Manage permissions\n</string>
+    <string name="no_floating_window_activity_step3">Final:\n\n Turn on popup windows\n</string>
+    <string name="no_floating_window_activity_finish">Already granted. Don\'t show this again</string>
+	<string name="about_website">Pujoy.com</string>
+	<string name="about_check_for_update">Check for update</string>
+	<string name="about_feedback">Feedback</string>
+	<string name="about_rate">Rate this app</string>
+	<string name="about_copyright">Copyright © 2014 Pujoy.com\nAll Rights Reserved.</string>
+	<string name="about_update_already_latest">You\'re already running the latest version</string>
 </resources>

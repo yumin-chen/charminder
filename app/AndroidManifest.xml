@@ -10,7 +10,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="21" />
 
     <application
         android:allowBackup="true"
@@ -49,10 +49,22 @@
             android:launchMode="singleTask" >
         </activity>
         <activity
+            android:name="com.pujoy.charminder.activities.NoFloatingWindowActivity"
+            android:exported="true"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.pujoy.charminder.activities.AboutActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pujoy.charminder.activities.SettingsActivity" />
+        </activity>
+        <activity
             android:name="com.pujoy.charminder.activities.PrioritySettingActivity"
             android:exported="true"
-            android:launchMode="singleTask"
-            android:parentActivityName="com.pujoy.charminder.activities.SettingsActivity" >
+            android:launchMode="singleTask">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pujoy.charminder.activities.SettingsActivity" />
@@ -61,8 +73,7 @@
         <activity
             android:name="com.pujoy.charminder.activities.CircleLayoutSettingActivity"
             android:exported="true"
-            android:launchMode="singleTask"
-            android:parentActivityName="com.pujoy.charminder.activities.SettingsActivity" >
+            android:launchMode="singleTask">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pujoy.charminder.activities.SettingsActivity" />

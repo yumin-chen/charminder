@@ -153,6 +153,9 @@ public class MainCircle extends WindowBase {
 	}
 
 	public void Hover(int i) {
+		if (G.mCharmy.mBubble.isCreated()){
+			G.mCharmy.mBubble.remove();
+		}
 		if (iHoveringItem != i + 1) {
 			iHoveringItem = i + 1;
 		} else {

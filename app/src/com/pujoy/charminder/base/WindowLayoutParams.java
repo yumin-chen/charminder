@@ -16,7 +16,7 @@ public class WindowLayoutParams extends WindowManager.LayoutParams {
 	}
 
 	public WindowLayoutParams(WindowLayoutParams params) {
-		// Clone
+		// Clone and reverse its x, y and width height
 		super();
 		type = WindowManager.LayoutParams.TYPE_PHONE;
 		format = android.graphics.PixelFormat.RGBA_8888;

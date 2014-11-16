@@ -17,6 +17,7 @@ public class PopDialog extends WindowDialog {
 	FunctionWrapper mOnOkListener;
 	FunctionWrapper mOnCancelListener;
 	TextView mTitle;
+	String sContent;
 	TextView mContent;
 
 	public PopDialog() {
@@ -26,6 +27,7 @@ public class PopDialog extends WindowDialog {
 	public PopDialog(String content) {
 		super();
 		checkInitialization();
+		sContent = content;
 		mContent.setText(content);
 		mTitle.setText(G.context.getResources().getString(
 				R.string.popDialog_defualtTitle));
@@ -35,6 +37,7 @@ public class PopDialog extends WindowDialog {
 		super();
 		checkInitialization();
 		mTitle.setText(title);
+		sContent = content;
 		mContent.setText(content);
 	}
 
@@ -42,6 +45,7 @@ public class PopDialog extends WindowDialog {
 		super();
 		checkInitialization();
 		mTitle.setText(title);
+		sContent = content;
 		mContent.setText(content);
 		mOnOkListener = onOK;
 	}
@@ -53,6 +57,7 @@ public class PopDialog extends WindowDialog {
 		mOnOkListener = onOK;
 		mOnCancelListener = onCancel;
 		mTitle.setText(title);
+		sContent = content;
 		mContent.setText(content);
 	}
 
@@ -63,6 +68,7 @@ public class PopDialog extends WindowDialog {
 
 	public void setContent(String content) {
 		checkInitialization();
+		sContent = content;
 		mContent.setText(content);
 	}
 
@@ -130,7 +136,27 @@ public class PopDialog extends WindowDialog {
 	protected void onUpdateLayout() {
 		super.onUpdateLayout();
 		mLayoutParams.setWidth((int) dpToPx(256));
-		mLayoutParams.setHeight((int) dpToPx(256));
+		int c = 0;
+		if (sContent != null){
+			if (G.getLanguage() == 0){
+					c = sContent.length() - 72;
+					if(c < 0)
+					{
+						c = 0;
+					}
+				
+				c = ((c + 23) / 24);
+			}else{
+				c = sContent.length() - 12*3;
+				if(c < 0)
+				{
+					c = 0;
+				}
+			
+			c = ((c + 11) / 12);
+			}
+		}
+		mLayoutParams.setHeight((int) dpToPx(256 + c * 18));
 		mLayoutParams.x = (getScreenWidth() - mLayoutParams.getWidth()) / 2;
 		mLayoutParams.y = (getScreenHeight() - mLayoutParams.getHeight()) / 2;
 		mLayoutParams.alpha = 0.95f;

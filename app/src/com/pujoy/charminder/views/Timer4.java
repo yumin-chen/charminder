@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -23,7 +24,9 @@ import android.widget.TextView;
 import com.pujoy.charminder.R;
 import com.pujoy.charminder.base.WindowDialogWithStars;
 import com.pujoy.charminder.data.Reminder;
+import com.pujoy.charminder.helper.FunctionWrapper;
 import com.pujoy.charminder.helper.Helper;
+import com.pujoy.charminder.helper.PopDialog;
 import com.pujoy.charminder.other.C;
 import com.pujoy.charminder.other.G;
 import com.pujoy.charminder.other.Log;
@@ -49,6 +52,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 	private ParseResult mParseResult;
 	private String sSpeechInput;
 	private int iOldErrorInfo;
+	private long lRecordingTime;
 
 	@Override
 	protected void onInitialize() {
@@ -165,7 +169,8 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 					break;
 				case MotionEvent.ACTION_UP:
 					mEditIcon.setImageResource(R.drawable.sr_edit_button);
-					break;
+					v.performClick();
+					return true;
 				}
 				return false;
 			}
@@ -192,7 +197,8 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 					break;
 				case MotionEvent.ACTION_UP:
 					mRerecordIcon.setImageResource(R.drawable.sr_record_button);
-					break;
+					v.performClick();
+					return true;
 				}
 				return false;
 			}
@@ -313,6 +319,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 
 	@Override
 	protected void onCreate() {
+		onEndOfSpeechRecognizing();
 		ValueAnimator aTitleIconY = ObjectAnimator.ofFloat(mTitleIcon, "y",
 				mLayoutParams.getHeight() / 2 - mLayoutParams.getWidth() / 2
 						- dpToPx(4), -dpToPx(4));
@@ -335,6 +342,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 		mSpeechPrompt.setText(G.context
 				.getString(R.string.speech_recognition_speak_now));
 		mParseResult = null;
+		lRecordingTime = 0;
 	}
 
 	private void onEndOfSpeechRecognizing() {
@@ -344,6 +352,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 		mSpeechPrompt.setText(G.context
 				.getString(R.string.speech_recognition_speak_end));
 		mParseResult = null;
+		lRecordingTime = 0;
 	}
 
 	private void displayResult(String speechText, ParseResult result) {
@@ -508,6 +517,29 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 	}
 
 	public void startRecording() {
+		if (lRecordingTime != 0 && System.currentTimeMillis() - lRecordingTime > 1000){
+			PopDialog dialog = new PopDialog(G.context.getResources().getString(
+					R.string.error_no_voice_recognition_service),
+					G.context.getResources().getString(R.string.error_no_voice_recognition_service_title),
+					new FunctionWrapper() {
+						@Override
+						public void function() {
+				        	try {
+				        	    G.context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.voicesearch")));
+				        	} catch (android.content.ActivityNotFoundException anfe) {
+				        		try {
+				        			G.context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.google.android.voicesearch")));	
+				        		} catch (android.content.ActivityNotFoundException anfe2){
+				        			
+				        		}
+				        	}
+						}
+					});
+			dialog.setOkText(G.context.getResources().getString(R.string.error_no_voice_recognition_service_install));
+			dialog.setCancelText(G.context.getResources().getString(R.string.cancel));
+			dialog.create();
+			lRecordingTime = 0;
+		}
 		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
 				RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -515,6 +547,7 @@ public class Timer4 extends WindowDialogWithStars implements OnClickListener {
 		intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
 				"com.pujoy.charminder");
 		mSpeechRecognizer.startListening(intent);
+		lRecordingTime = System.currentTimeMillis();
 	}
 
 	@Override
