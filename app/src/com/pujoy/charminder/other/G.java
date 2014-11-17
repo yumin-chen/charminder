@@ -1,3 +1,7 @@
+/*
+**  Class G
+**  src/com/pujoy/charminder/other/G.java
+*/
 package com.pujoy.charminder.other;
 
 import android.content.Context;

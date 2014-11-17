@@ -1,3 +1,7 @@
+/*
+**  Class ReminderItem
+**  src/com/pujoy/charminder/activities/layout/ReminderItem.java
+*/
 package com.pujoy.charminder.activities.layout;
 
 import java.util.Calendar;

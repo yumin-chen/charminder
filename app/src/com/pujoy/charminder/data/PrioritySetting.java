@@ -1,3 +1,7 @@
+/*
+**  Class PrioritySetting
+**  src/com/pujoy/charminder/data/PrioritySetting.java
+*/
 package com.pujoy.charminder.data;
 
 public class PrioritySetting {

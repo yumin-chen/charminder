@@ -1,3 +1,7 @@
+/*
+**  Class MainActivity
+**  src/com/pujoy/charminder/activities/MainActivity.java
+*/
 package com.pujoy.charminder.activities;
 
 import com.pujoy.charminder.R;

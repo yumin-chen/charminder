@@ -1,3 +1,7 @@
+/*
+**  Class Helper
+**  src/com/pujoy/charminder/helper/Helper.java
+*/
 package com.pujoy.charminder.helper;
 
 import com.pujoy.charminder.views.FloatingText;

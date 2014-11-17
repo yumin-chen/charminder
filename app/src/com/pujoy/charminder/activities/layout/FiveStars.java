@@ -1,3 +1,7 @@
+/*
+**  Class FiveStars
+**  src/com/pujoy/charminder/activities/layout/FiveStars.java
+*/
 package com.pujoy.charminder.activities.layout;
 
 import com.pujoy.charminder.R;

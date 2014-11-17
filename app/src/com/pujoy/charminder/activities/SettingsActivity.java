@@ -1,3 +1,7 @@
+/*
+**  Class SettingsActivity
+**  src/com/pujoy/charminder/activities/SettingsActivity.java
+*/
 package com.pujoy.charminder.activities;
 
 import com.pujoy.charminder.R;

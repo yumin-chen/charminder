@@ -1,3 +1,7 @@
+/*
+**  Class NoFloatingWindowActivity
+**  src/com/pujoy/charminder/activities/NoFloatingWindowActivity.java
+*/
 package com.pujoy.charminder.activities;
 
 

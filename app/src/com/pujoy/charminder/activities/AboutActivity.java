@@ -1,3 +1,7 @@
+/*
+**  Class AboutActivity
+**  src/com/pujoy/charminder/activities/AboutActivity.java
+*/
 package com.pujoy.charminder.activities;
 
 

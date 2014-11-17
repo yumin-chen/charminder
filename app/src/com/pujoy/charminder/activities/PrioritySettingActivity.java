@@ -1,3 +1,7 @@
+/*
+**  Class PrioritySettingActivity
+**  src/com/pujoy/charminder/activities/PrioritySettingActivity.java
+*/
 package com.pujoy.charminder.activities;
 
 import com.pujoy.charminder.R;

@@ -1,3 +1,7 @@
+/*
+**  Class C
+**  src/com/pujoy/charminder/other/C.java
+*/
 package com.pujoy.charminder.other;
 
 import android.graphics.Color;

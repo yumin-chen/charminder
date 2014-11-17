@@ -1,3 +1,7 @@
+/*
+**  Class Settings
+**  src/com/pujoy/charminder/data/Settings.java
+*/
 package com.pujoy.charminder.data;
 
 import com.pujoy.charminder.other.C;

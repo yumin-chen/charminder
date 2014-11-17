@@ -1,3 +1,7 @@
+/*
+**  Class FloatingText
+**  src/com/pujoy/charminder/view/FloatingText.java
+*/
 package com.pujoy.charminder.views;
 
 import android.util.TypedValue;

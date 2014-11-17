@@ -1,3 +1,7 @@
+/*
+**  Class Bubble
+**  src/com/pujoy/charminder/view/Bubble.java
+*/
 package com.pujoy.charminder.views;
 
 import com.pujoy.charminder.R;

@@ -1,3 +1,7 @@
+/*
+**  Class ActivityWrapper
+**  src/com/pujoy/charminder/activities/layout/ActivityWrapper.java
+*/
 package com.pujoy.charminder.activities.layout;
 
 import com.pujoy.charminder.R;

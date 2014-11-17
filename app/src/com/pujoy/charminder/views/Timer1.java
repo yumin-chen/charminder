@@ -1,3 +1,7 @@
+/*
+**  Class Timer1
+**  src/com/pujoy/charminder/view/Timer1.java
+*/
 package com.pujoy.charminder.views;
 
 import java.util.Calendar;

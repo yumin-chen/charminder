@@ -1,3 +1,7 @@
+/*
+**  Class TimerThread
+**  src/com/pujoy/charminder/other/TimerThread.java
+*/
 package com.pujoy.charminder.other;
 
 import java.util.Calendar;

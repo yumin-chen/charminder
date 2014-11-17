@@ -1,3 +1,7 @@
+/*
+**  Class ReminderList
+**  src/com/pujoy/charminder/data/ReminderList.java
+*/
 package com.pujoy.charminder.data;
 
 import java.util.ArrayList;

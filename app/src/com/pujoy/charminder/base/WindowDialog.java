@@ -1,3 +1,7 @@
+/*
+**  Class WindowDialog
+**  src/com/pujoy/charminder/base/WindowDialog.java
+*/
 package com.pujoy.charminder.base;
 
 import android.animation.Animator;

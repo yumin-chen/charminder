@@ -1,3 +1,7 @@
+/*
+**  Class Charmy
+**  src/com/pujoy/charminder/view/Charmy.java
+*/
 package com.pujoy.charminder.views;
 
 import java.util.Random;

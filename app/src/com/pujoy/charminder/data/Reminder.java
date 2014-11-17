@@ -1,3 +1,7 @@
+/*
+**  Class Reminder
+**  src/com/pujoy/charminder/data/Reminder.java
+*/
 package com.pujoy.charminder.data;
 
 import java.util.Calendar;

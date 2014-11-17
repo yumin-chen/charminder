@@ -1,3 +1,7 @@
+/*
+**  Class ViewBase
+**  src/com/pujoy/charminder/base/ViewBase.java
+*/
 package com.pujoy.charminder.base;
 
 import com.pujoy.charminder.other.G;

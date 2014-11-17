@@ -1,3 +1,7 @@
+/*
+**  Class WakeUpScreen
+**  src/com/pujoy/charminder/activities/WakeUpScreen.java
+*/
 package com.pujoy.charminder.activities;
 
 

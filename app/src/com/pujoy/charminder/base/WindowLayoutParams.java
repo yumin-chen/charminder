@@ -1,3 +1,7 @@
+/*
+**  Class WindowLayoutParams
+**  src/com/pujoy/charminder/base/WindowLayoutParams.java
+*/
 package com.pujoy.charminder.base;
 
 import android.view.Gravity;

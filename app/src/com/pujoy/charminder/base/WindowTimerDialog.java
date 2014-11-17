@@ -1,3 +1,7 @@
+/*
+**  Class WindowTimerDialog
+**  src/com/pujoy/charminder/base/WindowTimerDialog.java
+*/
 package com.pujoy.charminder.base;
 
 import android.animation.ObjectAnimator;

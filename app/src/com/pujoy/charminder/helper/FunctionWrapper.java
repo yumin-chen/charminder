@@ -1,3 +1,7 @@
+/*
+**  Class FunctionWrapper
+**  src/com/pujoy/charminder/helper/FunctionWrapper.java
+*/
 package com.pujoy.charminder.helper;
 
 // This is used to pass a function as a parameter (or a variable)

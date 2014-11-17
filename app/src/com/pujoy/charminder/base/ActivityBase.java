@@ -1,3 +1,7 @@
+/*
+**  Class ActivityBase
+**  src/com/pujoy/charminder/base/ActivityBase.java
+*/
 package com.pujoy.charminder.base;
 
 import com.pujoy.charminder.other.G;

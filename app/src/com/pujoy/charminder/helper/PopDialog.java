@@ -1,3 +1,7 @@
+/*
+**  Class PopDialog
+**  src/com/pujoy/charminder/helper/PopDialog.java
+*/
 package com.pujoy.charminder.helper;
 
 import com.pujoy.charminder.R;

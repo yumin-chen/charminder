@@ -1,3 +1,7 @@
+/*
+**  Class Log
+**  src/com/pujoy/charminder/other/Log.java
+*/
 package com.pujoy.charminder.other;
 
 import java.io.FileOutputStream;

@@ -1,3 +1,7 @@
+/*
+**  Class WindowBase
+**  src/com/pujoy/charminder/base/WindowBase.java
+*/
 package com.pujoy.charminder.base;
 
 import com.pujoy.charminder.other.Log;

@@ -1,3 +1,7 @@
+/*
+**  Class ReminderListActivity
+**  src/com/pujoy/charminder/activities/ReminderListActivity.java
+*/
 package com.pujoy.charminder.activities;
 
 import android.app.Activity;
@@ -63,7 +67,5 @@ OnClickListener {
 	@Override
 	public void onClick(View v) {
 	}
-
-
 
 }

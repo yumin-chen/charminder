@@ -1,3 +1,7 @@
+/*
+**  Class SpeechParser
+**  src/com/pujoy/charminder/other/SpeechParser.java
+*/
 package com.pujoy.charminder.other;
 
 import java.util.ArrayList;

@@ -1,3 +1,7 @@
+/*
+**  Class ReminderEditorActivity
+**  src/com/pujoy/charminder/activities/ReminderEditorActivity.java
+*/
 package com.pujoy.charminder.activities;
 
 

@@ -1,3 +1,7 @@
+/*
+**  Class MainCircle
+**  src/com/pujoy/charminder/view/MainCircle.java
+*/
 package com.pujoy.charminder.views;
 
 import com.pujoy.charminder.R;

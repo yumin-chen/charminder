@@ -1,3 +1,7 @@
+/*
+**  Class WindowDialogWithStars
+**  src/com/pujoy/charminder/base/WindowDialogWithStars.java
+*/
 package com.pujoy.charminder.base;
 
 import com.pujoy.charminder.R;

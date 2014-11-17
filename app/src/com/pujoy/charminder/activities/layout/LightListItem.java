@@ -1,3 +1,7 @@
+/*
+**  Class LightListItem
+**  src/com/pujoy/charminder/activities/layout/LightListItem.java
+*/
 package com.pujoy.charminder.activities.layout;
 
 import com.pujoy.charminder.R;
