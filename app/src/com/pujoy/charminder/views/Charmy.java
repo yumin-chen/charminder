@@ -16,18 +16,15 @@ import com.pujoy.charminder.other.G;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.graphics.Point;
-import android.graphics.Rect;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-public class Charmy extends WindowBase implements OnTouchListener,
-		OnClickListener {
+public class Charmy extends WindowBase{
 	RelativeLayout mMainView;
 	ImageView mIcon;
 	ImageView mIconCenter;
@@ -38,7 +35,6 @@ public class Charmy extends WindowBase implements OnTouchListener,
 	private float fX;
 	private float fY;
 	private boolean bBeingRemoved;
-	private boolean bBableValid;
 
 	@Override
 	protected void onInitialize() {
@@ -48,18 +44,28 @@ public class Charmy extends WindowBase implements OnTouchListener,
 		mLayoutParams.setY((int) (getScreenHeight() * 0.75 - mLayoutParams
 				.getHeight()));
 		mMainView = new RelativeLayout(G.context);
-		mMainView.setOnClickListener(this);
-		mMainView.setOnTouchListener(this);
+		final GestureDetector gestureDetector = new GestureDetector(G.context, new CharmyGestureListener());
+		mMainView.setOnTouchListener(new OnTouchListener(){
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (bBeingRemoved)
+					return false;
+				if(event.getAction() == MotionEvent.ACTION_UP)
+				{
+					G.mTimerThread.moveIconToCorner();
+					v.performClick();
+				}
+				return gestureDetector.onTouchEvent(event);
+			}
+			
+		});
 		mIcon = new ImageView(G.context);
 		mIcon.setDrawingCacheEnabled(true);
 		mIcon.setImageResource(R.drawable.charmy);
-		mIcon.setOnClickListener(this);
-		mIcon.setOnTouchListener(this);
 		mMainView.addView(mIcon);
 		mIconCenter = new ImageView(G.context);
 		mIconCenter.setImageResource(R.drawable.charmy_center);
-		mIconCenter.setOnClickListener(this);
-		mIconCenter.setOnTouchListener(this);
 		mMainView.addView(mIconCenter);
 		mBubble = new Bubble();
 		
@@ -147,116 +153,7 @@ public class Charmy extends WindowBase implements OnTouchListener,
 		mBubble.update();
 	}
 
-	@Override
-	public void onClick(View v) {
-		if (bBeingRemoved)
-			return;
-		if (mBubble.isCreated()) {
-			mBubble.remove();
-		}
-		if(bBableValid){
-			Babble();
-		}
-	}
-
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		if (bBeingRemoved)
-			return false;
-
-		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN:
-			if (mBubble.isCreated()) {
-				mBubble.remove();
-			}
-			bBableValid = true;
-			mMainCircle = new MainCircle();
-			mMainCircle.create();
-			fOldMouseX = event.getRawX();
-			fOldMouseY = event.getRawY();
-			fX = mLayoutParams.getX();
-			fY = mLayoutParams.getY();
-			break;
-		case MotionEvent.ACTION_MOVE:
-			fX += event.getRawX() - fOldMouseX;
-			fY += event.getRawY() - fOldMouseY;
-			mLayoutParams.setX((int) (fX));
-			mLayoutParams.setY((int) (fY));
-			fOldMouseX = event.getRawX();
-			fOldMouseY = event.getRawY();
-			onUpdateLayout();
-			update();
-			for (int i = 0; i < mMainCircle.mCircleItems.length; i++) {
-				if (mMainCircle.isPointInsideItem(event.getRawX(),
-						event.getRawY(), i)) {
-					bBableValid = false;
-					mMainCircle.Hover(i);
-					mMainCircle.mCircleDescription
-							.setBackgroundColor(C.COLOR_DARKBLUE_TRANSLUCENT);
-					break;
-				} else {
-					if (i == mMainCircle.mCircleItems.length - 1) {
-						mMainCircle.mCircleDescription.setText("");
-						mMainCircle.mCircleDescription
-								.setBackgroundColor(C.COLOR_TRANSPARENT);
-						mMainCircle.updateOldHoverItem();
-						mMainCircle.iHoveringItem = 0;
-					}
-
-				}
-			}
-			break;
-		case MotionEvent.ACTION_UP:
-			G.mTimerThread.moveIconToCorner();
-			for (int i = 0; i < mMainCircle.mCircleItems.length; i++) {
-				if (mMainCircle.isPointInsideItem(event.getRawX(),
-						event.getRawY(), i)) {
-					bBableValid = false;
-					if (i < G.settings.mCircleSection.length)
-						switch (G.settings.mCircleSection[i]) {
-						case 0: {
-							Timer1 timer1 = new Timer1();
-							timer1.create();
-							break;
-						}
-						case 1: {
-							Timer2 timer2 = new Timer2();
-							timer2.create();
-							break;
-						}
-						case 2: {
-							Timer3 timer3 = new Timer3();
-							timer3.create();
-							break;
-						}
-						case 3: {
-							Timer4 timer4 = new Timer4();
-							timer4.create();
-							break;
-						}
-						case 4:
-							G.goToActivity(SettingsActivity.class);
-							break;
-						case 5:
-							G.goToActivity(ReminderListActivity.class);
-							break;
-						case 6: {
-							G.exit();
-							break;
-						}
-						}
-					break;
-				}
-			}
-			mMainCircle.remove();
-			mMainCircle = null;
-			v.performClick();
-			return true;
-		}
-		return false;
-	}
-
-	public void Babble() {
+	public void babble() {
 		String[] babble_text = G.context.getResources().getStringArray(
 				R.array.babble_bubble);
 		Random r = new Random();
@@ -310,5 +207,67 @@ public class Charmy extends WindowBase implements OnTouchListener,
 			update();
 		}
 		return r;
+	}
+	
+	class CharmyGestureListener implements OnGestureListener{
+		@Override
+		public boolean onDown(MotionEvent e) {
+			if (mBubble.isCreated()) {
+				mBubble.remove();
+			}
+			fOldMouseX = e.getRawX();
+			fOldMouseY = e.getRawY();
+			fX = mLayoutParams.getX();
+			fY = mLayoutParams.getY();
+			return true;
+		}
+
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+				float velocityY) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void onLongPress(MotionEvent e) {
+			babble();
+			
+		}
+
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+				float distanceY) {
+			fX += e2.getRawX() - fOldMouseX;
+			fY += e2.getRawY() - fOldMouseY;
+			mLayoutParams.setX((int) (fX));
+			mLayoutParams.setY((int) (fY));
+			fOldMouseX = e2.getRawX();
+			fOldMouseY = e2.getRawY();
+			onUpdateLayout();
+			update();
+			return false;
+		}
+
+		@Override
+		public void onShowPress(MotionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public boolean onSingleTapUp(MotionEvent e) {
+			if (mBubble.isCreated()) {
+				mBubble.remove();
+			}
+			if (mMainCircle == null || !mMainCircle.isCreated())
+			{
+			mMainCircle = new MainCircle();
+			mMainCircle.create();
+			}else{
+				babble();
+			}
+			return true;
+		}
 	}
 }

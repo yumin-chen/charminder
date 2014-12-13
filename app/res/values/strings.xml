@@ -41,7 +41,7 @@
     <string name="setting_catagory_general">General Settings</string>
     <string name="setting_catagory_priority">Priority Settings</string>
     <string name="setting_catagory_other">Other</string>
-    <string name="setting_circle_interface">Circle panel layout</string>
+    <string name="setting_circle_interface">Wheel layout</string>
     <string name="setting_forenoti">Show persistent notification</string>
     <string name="setting_autodelete">Auto delete expired reminders</string>
     <string name="setting_bubbletime">Bubble disapear time</string>
@@ -59,7 +59,7 @@
     <string name="priority_wake_screen">Wake screen</string>
     <string name="priority_vibrate">Vibrate</string>
     <string name="priority_sound">Sound</string>
-    <string name="circle_layout_setting_title">Circle Panel Layout</string>
+    <string name="circle_layout_setting_title">Wheel Layout</string>
     <string name="circle_layout_setting_prompt">Long press and drag to move each tile</string>
     <string name="circle_layout_setting_not_used">Not used tiles</string>
     <string name="circle_layout_setting_cannot_remove_settings_icon">You can\'t remove settings</string>
@@ -95,4 +95,5 @@
 	<string name="about_rate">Rate this app</string>
 	<string name="about_copyright">Copyright © 2014 Pujoy.com\nAll Rights Reserved.</string>
 	<string name="about_update_already_latest">You\'re already running the latest version</string>
+	<string name="maincircle_help">You can run your finger through the main wheel and see each tile, or you can long press the tile and read the detailed description of it.</string>
 </resources>

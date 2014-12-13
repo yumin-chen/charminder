@@ -93,4 +93,5 @@
 	<string name="about_rate">五星好评</string>
 	<string name="about_copyright">Copyright © 2014 Pujoy.com\n扑游娱乐 版权所有</string>
 	<string name="about_update_already_latest">已是最新版</string>
+	<string name="maincircle_help">用手指滑过各个板块可快速浏览板块名称，也可长按板块图标获取详细的说明。</string>
 </resources>
