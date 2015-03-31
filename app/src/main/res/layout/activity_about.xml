@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.CharmySoft.charminder.activities.layout.ActivityWrapper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:charmy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    charmy:parent_activity="com.CharmySoft.charminder.activities.SettingsActivity"
+    charmy:title_text="@string/app_name" >
+    
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_launcher"
+        android:contentDescription="@string/none"
+         />
+
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:id="@+id/about_version"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"/>
+    
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/about_website"
+        style="@style/Charminder.LightListViewItem.Top"
+        listitem:text="@string/about_website" >
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+ <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/about_check_for_update"
+        style="@style/Charminder.LightListViewItem.Middle"
+        listitem:text="@string/about_check_for_update" >
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+   <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/about_check_feedback"
+        style="@style/Charminder.LightListViewItem.Middle"
+        listitem:text="@string/about_feedback" >
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/about_rate"
+        style="@style/Charminder.LightListViewItem.Bottom"
+        listitem:text="@string/about_rate" >
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+    
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:text="@string/about_copyright"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"/>
+    
+</com.CharmySoft.charminder.activities.layout.ActivityWrapper>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="light_list_item_height">48.0dp</dimen>
+    <dimen name="light_list_catagory_margin_left">8.0dp</dimen>
+    <dimen name="circle_item_size">60.0dp</dimen>
+    <dimen name="big_circle_size">240.0dp</dimen>
+
+</resources>

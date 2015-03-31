@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.CharmySoft.charminder.activities.layout.ActivityWrapper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:charmy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    charmy:parent_activity="com.CharmySoft.charminder.activities.SettingsActivity"
+    charmy:title_text="@string/priority_setting_title" >
+
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:text="@string/priority_setting_prompt" />
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/priority_bubble_layout"
+        style="@style/Charminder.LightListViewItem.Top"
+        listitem:text="@string/priority_bubble" >
+
+        <include
+            android:id="@+id/priority_bubble_switch"
+            layout="@layout/item_switch" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/priority_notification_center_layout"
+        style="@style/Charminder.LightListViewItem.Middle"
+        listitem:text="@string/priority_notification_center" >
+
+        <include
+            android:id="@+id/priority_notification_center_switch"
+            layout="@layout/item_switch" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/priority_wake_screen_layout"
+        style="@style/Charminder.LightListViewItem.Middle"
+        listitem:text="@string/priority_wake_screen" >
+
+        <include
+            android:id="@+id/priority_wake_screen_switch"
+            layout="@layout/item_switch" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/priority_vibrate_layout"
+        style="@style/Charminder.LightListViewItem.Middle"
+        listitem:text="@string/priority_vibrate" >
+
+        <include
+            android:id="@+id/priority_vibrate_switch"
+            layout="@layout/item_switch" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/priority_sound_layout"
+        style="@style/Charminder.LightListViewItem.Bottom"
+        listitem:text="@string/priority_sound" >
+
+        <include
+            android:id="@+id/priority_sound_switch"
+            layout="@layout/item_switch" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+</com.CharmySoft.charminder.activities.layout.ActivityWrapper>

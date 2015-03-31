@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.CharmySoft.charminder.activities.layout.ActivityWrapper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:charmy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    charmy:parent_activity="com.CharmySoft.charminder.activities.SettingsActivity"
+    charmy:title_text="@string/circle_layout_setting_title" >
+
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/circle_layout_setting_prompt" />
+
+    <RelativeLayout
+        android:id="@+id/circle_layout_setting_layout"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circle_bg" >
+    </RelativeLayout>
+
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/circle_layout_setting_not_used" />
+
+    <RelativeLayout
+        android:id="@+id/circle_layout_setting_not_used_layout"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/dark_back"
+        android:minHeight="80dp" >
+    </RelativeLayout>
+
+</com.CharmySoft.charminder.activities.layout.ActivityWrapper>

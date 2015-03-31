@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.CharmySoft.charminder.activities.layout.ActivityWrapper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:charmy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    charmy:title_text="@string/no_floating_window_activity" >
+<TextView
+        style="@style/Charminder.LightListViewText"
+        android:text="@string/no_floating_window_activity_step0" />
+
+    <RelativeLayout
+        style="@style/Charminder.LightListViewItem.Top">
+        <TextView 
+        style="@style/Charminder.LightListViewItemText"
+  	    android:layout_height="wrap_content"
+        android:text="@string/no_floating_window_activity_step1"/>
+   </RelativeLayout>
+   
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/no_floating_window_button"
+        style="@style/Charminder.LightListViewItem.Bottom"
+        listitem:text="@string/no_floating_window_activity_button" >
+
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+   
+    <RelativeLayout
+        android:id="@+id/no_floating_window_activity_step2"
+        style="@style/Charminder.LightListViewItem.Single">
+        <TextView 
+        style="@style/Charminder.LightListViewItemText"
+    android:layout_height="wrap_content"
+        android:text="@string/no_floating_window_activity_step2"/>
+   </RelativeLayout>
+   
+    <RelativeLayout
+        style="@style/Charminder.LightListViewItem.Single">
+        <TextView 
+        style="@style/Charminder.LightListViewItemText"
+    android:layout_height="wrap_content"
+        android:text="@string/no_floating_window_activity_step3"/>
+   </RelativeLayout>
+   
+        <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/no_floating_window_finish"
+        style="@style/Charminder.LightListViewItem.Single"
+        listitem:text="@string/no_floating_window_activity_finish" >
+
+        <include
+            android:id="@+id/no_floating_window_finish_switch"
+            layout="@layout/item_switch" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+</com.CharmySoft.charminder.activities.layout.ActivityWrapper>

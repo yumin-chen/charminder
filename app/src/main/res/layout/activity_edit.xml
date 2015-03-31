@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/acvitity_scroll_view"
+    android:background="@drawable/light_back" >
+
+    <LinearLayout
+        android:id="@+id/acvitity_main_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="@string/none"
+            android:src="@drawable/title_icon" />
+
+        <TextView
+            android:id="@+id/edit_title_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/edit_title_prompt"
+            android:textSize="16sp"
+            android:textColor="@color/dark_blue" />
+
+        <EditText
+            android:id="@+id/edit_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="16dp"
+            android:inputType="text"
+ 		    android:textColor="@color/dark_blue" >
+        </EditText>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="@string/none"
+            android:src="@drawable/calendar" />
+
+        <TextView
+            android:id="@+id/edit_time_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/edit_time_prompt"
+            android:textSize="16sp"
+            android:textColor="@color/dark_blue" />
+
+        <EditText
+            android:id="@+id/edit_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="16dp"
+            android:inputType="text"
+ 		    android:textColor="@color/dark_blue">
+        </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_priority_layout"
+        android:orientation="horizontal" >
+		<include layout="@layout/fragment_edit_priority_prompt"/>
+		
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="@string/none"
+            android:src="@drawable/repeat" />
+
+        <TextView
+            android:id="@+id/edit_repeat_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/edit_repeat_prompt"
+            android:textSize="16sp"
+            android:textColor="@color/dark_blue" />
+
+        <EditText
+            android:id="@+id/edit_repeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="16dp"
+            android:inputType="text"
+ 		    android:textColor="@color/dark_blue">
+        </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="@string/none"
+            android:src="@drawable/location" />
+
+        <TextView
+            android:id="@+id/edit_location_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/edit_location_prompt"
+            android:textSize="16sp"
+            android:textColor="@color/dark_blue" />
+
+        <EditText
+            android:id="@+id/edit_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="16dp"
+            android:inputType="text"
+ 		    android:textColor="@color/dark_blue">
+        </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="@string/none"
+            android:src="@drawable/content" />
+
+        <TextView
+            android:id="@+id/edit_note_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/edit_note_prompt"
+            android:textSize="16sp"
+            android:textColor="@color/dark_blue" />
+
+        <EditText
+            android:id="@+id/edit_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="16dp"
+            android:inputType="textMultiLine"
+ 		    android:textColor="@color/dark_blue">
+        </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:weightSum="1.0"
+        android:orientation="horizontal" >
+        <View 
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"/>
+        <com.CharmySoft.charminder.activities.layout.DarkButton
+        xmlns:charmy="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/edit_ok"
+        android:layout_width="0dp"
+        android:layout_weight="0.35"
+        android:layout_height="32dp"
+        charmy:text="@string/ok"/>
+        <View 
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"/>
+        <com.CharmySoft.charminder.activities.layout.DarkButton 
+        xmlns:charmy="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/edit_cancel"
+        android:layout_width="0dp"
+        android:layout_weight="0.35"
+        android:layout_height="32dp"
+        charmy:text="@string/cancel"/>
+    </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.CharmySoft.charminder.activities.layout.ActivityWrapper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:charmy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    charmy:title_text="@string/settings_title" >
+
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:text="@string/setting_catagory_general" />
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_circle_interface_layout"
+        style="@style/Charminder.LightListViewItem.Single"
+        listitem:text="@string/setting_circle_interface" >
+
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_forenoti_layout"
+        style="@style/Charminder.LightListViewItem.Top"
+        listitem:text="@string/setting_forenoti" >
+
+        <include
+            android:id="@+id/setting_forenoti_switch"
+            layout="@layout/item_switch" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+    
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_autodelete_layout"
+        style="@style/Charminder.LightListViewItem.Middle"
+        listitem:text="@string/setting_autodelete" >
+
+        <include
+            android:id="@+id/setting_autodelete_switch"
+            layout="@layout/item_switch" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_bubbletime_layout"
+        style="@style/Charminder.LightListViewItem.Bottom"
+        listitem:text="@string/setting_bubbletime" >
+
+        <TextView
+            android:id="@+id/setting_bubbletime_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/unit_second"
+            android:textColor="@color/dark_blue"
+            android:textSize="16sp" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:text="@string/setting_catagory_priority" />
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_level1_layout"
+        style="@style/Charminder.LightListViewItem.Top" >
+
+        <com.CharmySoft.charminder.activities.layout.FiveStars
+            xmlns:fivestars="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+            style="@style/Charminder.LightListViewItem.Stars"
+            fivestars:number="1" />
+
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_level2_layout"
+        style="@style/Charminder.LightListViewItem.Middle" >
+
+        <com.CharmySoft.charminder.activities.layout.FiveStars
+            xmlns:fivestars="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+            style="@style/Charminder.LightListViewItem.Stars"
+            fivestars:number="2" />
+
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_level3_layout"
+        style="@style/Charminder.LightListViewItem.Middle" >
+
+        <com.CharmySoft.charminder.activities.layout.FiveStars
+            xmlns:fivestars="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+            style="@style/Charminder.LightListViewItem.Stars"
+            fivestars:number="3" />
+
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_level4_layout"
+        style="@style/Charminder.LightListViewItem.Middle" >
+
+        <com.CharmySoft.charminder.activities.layout.FiveStars
+            xmlns:fivestars="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+            style="@style/Charminder.LightListViewItem.Stars"
+            fivestars:number="4" />
+
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_level5_layout"
+        style="@style/Charminder.LightListViewItem.Bottom" >
+
+        <com.CharmySoft.charminder.activities.layout.FiveStars
+            xmlns:fivestars="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+            style="@style/Charminder.LightListViewItem.Stars"
+            fivestars:number="5" />
+
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <TextView
+        style="@style/Charminder.LightListViewText"
+        android:text="@string/setting_catagory_other" />
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_about_layout"
+        style="@style/Charminder.LightListViewItem.Single"
+        listitem:text="@string/setting_about" >
+
+        <include layout="@layout/item_light_list_item_arrow" />
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+    <com.CharmySoft.charminder.activities.layout.LightListItem
+        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
+        android:id="@+id/setting_exit_layout"
+        style="@style/Charminder.LightListViewItem.Single"
+        listitem:text="@string/setting_exit" >
+    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
+</com.CharmySoft.charminder.activities.layout.ActivityWrapper>
