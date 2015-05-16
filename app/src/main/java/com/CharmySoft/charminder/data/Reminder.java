@@ -36,6 +36,27 @@ public class Reminder {
 		iType = type_of_reminder;
 	}
 	public void Notify(){
+        if(!bValidity || mTimeToRemind.compareTo(Calendar.getInstance()) > 0)
+            return;
+
+        if(iRepeat != 0)
+        // If it repeats, discard old notifications.
+        {
+            Calendar ttr = (Calendar)mTimeToRemind.clone();
+            Calendar now = Calendar.getInstance();
+            int count = -1;
+            while(ttr.compareTo(now) <= 0) {
+                updateRepeat(iRepeat, ttr);
+                count++;
+            }
+            for(int i = 0; i < count; i ++){
+                updateRepeat(iRepeat, mTimeToRemind);
+            }
+            // 想了一想，觉得旧的重复的提醒应该直接仍掉。
+            updateRepeat(iRepeat, mTimeToRemind);
+            return;
+        }
+
 		if(G.settings.mPrioritySetting[iPriority - 1].bVibrate){
 			Vibrator v = (Vibrator)G.context.getSystemService(Context.VIBRATOR_SERVICE);
 			long[] pattern = {0, 100, 100, 100, 100};
@@ -56,27 +77,31 @@ public class Reminder {
 		if(G.settings.mPrioritySetting[iPriority - 1].bNotification){
 			NotificationController.pushReminder(this);
 		}
-		switch(iRepeat){
-		case 0:// Never
-			bValidity = false;
-			break;
-		case 1:// Hourly
-			mTimeToRemind.add(Calendar.HOUR, 1);
-			break;
-		case 2:// Daily
-			mTimeToRemind.add(Calendar.DAY_OF_MONTH, 1);
-			break;
-		case 3:// Weekly
-			mTimeToRemind.add(Calendar.WEEK_OF_MONTH, 1);
-			break;
-		case 4:// Monthly
-			mTimeToRemind.add(Calendar.MONTH, 1);
-			break;
-		case 5:// Yearly
-			mTimeToRemind.add(Calendar.YEAR, 1);
-			break;
-		}
+        updateRepeat(iRepeat, mTimeToRemind);
 	}
+
+    public void updateRepeat(int repeat, Calendar timeToRemind) {
+        switch(repeat){
+            case 0:// Never
+                bValidity = false;
+                break;
+            case 1:// Hourly
+                timeToRemind.add(Calendar.HOUR, 1);
+                break;
+            case 2:// Daily
+                timeToRemind.add(Calendar.DAY_OF_MONTH, 1);
+                break;
+            case 3:// Weekly
+                timeToRemind.add(Calendar.WEEK_OF_MONTH, 1);
+                break;
+            case 4:// Monthly
+                timeToRemind.add(Calendar.MONTH, 1);
+                break;
+            case 5:// Yearly
+                timeToRemind.add(Calendar.YEAR, 1);
+                break;
+        }
+    }
 	
 	public static String formatNotificationText(Reminder rem) {
 		String[] bubble = G.context.getResources().getStringArray(
