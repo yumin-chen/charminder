@@ -28,25 +28,14 @@
         style="@style/Charminder.LightListViewItem.Top"
         listitem:text="@string/about_website" >
     </com.CharmySoft.charminder.activities.layout.LightListItem>
- <com.CharmySoft.charminder.activities.layout.LightListItem
-        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
-        android:id="@+id/about_check_for_update"
-        style="@style/Charminder.LightListViewItem.Middle"
-        listitem:text="@string/about_check_for_update" >
-    </com.CharmySoft.charminder.activities.layout.LightListItem>
-   <com.CharmySoft.charminder.activities.layout.LightListItem
-        xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
-        android:id="@+id/about_check_feedback"
-        style="@style/Charminder.LightListViewItem.Middle"
-        listitem:text="@string/about_feedback" >
-    </com.CharmySoft.charminder.activities.layout.LightListItem>
+
     <com.CharmySoft.charminder.activities.layout.LightListItem
         xmlns:listitem="http://schemas.android.com/apk/res/com.CharmySoft.charminder"
         android:id="@+id/about_rate"
         style="@style/Charminder.LightListViewItem.Bottom"
         listitem:text="@string/about_rate" >
     </com.CharmySoft.charminder.activities.layout.LightListItem>
-    
+
     <TextView
         style="@style/Charminder.LightListViewText"
         android:text="@string/about_copyright"

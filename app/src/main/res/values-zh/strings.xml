@@ -89,10 +89,7 @@
     <string name="no_floating_window_activity_step3">完成：\n\n 找到 显示悬浮窗 一项，允许该权限即可\n</string>
     <string name="no_floating_window_activity_finish">已设置权限，不再显示此向导</string>
 	<string name="about_website">访问主页</string>
-	<string name="about_check_for_update">检查更新</string>
-	<string name="about_feedback">建议反馈</string>
 	<string name="about_rate">五星好评</string>
 	<string name="about_copyright">Copyright © 2014 CharmySoft.com\n尘泯网络 版权所有</string>
-	<string name="about_update_already_latest">已是最新版</string>
 	<string name="maincircle_help">用手指滑过各个板块可快速浏览板块名称，也可长按板块图标获取详细的说明。</string>
 </resources>

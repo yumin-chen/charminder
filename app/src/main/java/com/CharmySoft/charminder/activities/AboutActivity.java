@@ -48,9 +48,18 @@ public class AboutActivity extends ActivityBase implements OnClickListener{
 			startActivity(browserIntent);
 			break;
 		}
-		case R.id.about_check_for_update:
+		case R.id.about_rate:
 		{
-			Helper.pushText(getString(R.string.about_update_already_latest));
+            Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            try {
+                startActivity(goToMarket);
+            } catch (Exception e) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
+                } catch (Exception ex) {
+                }
+            }
 			break;
 		}
 		}

@@ -90,10 +90,7 @@
     <string name="no_floating_window_activity_step3">Final:\n\n Turn on popup windows\n</string>
     <string name="no_floating_window_activity_finish">Already granted. Don\'t show this again</string>
 	<string name="about_website">CharmySoft.com</string>
-	<string name="about_check_for_update">Check for update</string>
-	<string name="about_feedback">Feedback</string>
 	<string name="about_rate">Rate this app</string>
 	<string name="about_copyright">Copyright © 2014 CharmySoft.com\nAll Rights Reserved.</string>
-	<string name="about_update_already_latest">You\'re already running the latest version</string>
 	<string name="maincircle_help">You can run your finger through the main wheel and see each tile, or you can long press the tile and read the detailed description of it.</string>
 </resources>
